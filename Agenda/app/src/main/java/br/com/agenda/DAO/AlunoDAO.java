@@ -39,4 +39,11 @@ public class AlunoDAO {
     public List<Aluno> getAlunos() {
         return new ArrayList<>(alunos);
     } //Boa prática mandar cópia de algo que seja importante
+
+    public void remove(Aluno aluno) {
+        Aluno alunoDevolvido = buscaAlunoPeloId(aluno);
+        if (alunoDevolvido != null) {
+            alunos.remove(alunoDevolvido);
+        }
+    }
 }
