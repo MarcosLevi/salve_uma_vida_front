@@ -2,7 +2,6 @@ package br.com.agenda.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,8 +35,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR);
         configuraFabNovoAluno();
         configuraLista();
-        dao.salva(new Aluno("Alex", "985654565", "marcos@gmail.com"));
-        dao.salva(new Aluno("Joao", "985654565", "marcos@gmail.com"));
+//        dao.salva(new Aluno("Alex", "985654565", "marcos@gmail.com"));
+//        dao.salva(new Aluno("Joao", "985654565", "marcos@gmail.com"));
+
     }
 
     @Override
