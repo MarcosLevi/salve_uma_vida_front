@@ -61,13 +61,17 @@ public class ListaAlunosAdapter extends BaseAdapter {
                 .inflate(R.layout.item_aluno, viewGroup, false);
     }
 
-    private void clear() {
-        alunos.clear();
-    }
+// --Commented out by Inspection START (30/06/2020 16:08):
+//    private void clear() {
+//        alunos.clear();
+//    }
+// --Commented out by Inspection STOP (30/06/2020 16:08)
 
-    private void addAll(List<Aluno> alunos) {
-        this.alunos.addAll(alunos);
-    }
+// --Commented out by Inspection START (30/06/2020 16:07):
+//    private void addAll(List<Aluno> alunos) {
+//        this.alunos.addAll(alunos);
+//    }
+// --Commented out by Inspection STOP (30/06/2020 16:07)
 
     public void  atualiza(List<Aluno> alunos){
         this.alunos.clear();

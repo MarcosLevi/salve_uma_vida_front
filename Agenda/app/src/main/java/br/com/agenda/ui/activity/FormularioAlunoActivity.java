@@ -108,7 +108,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             campoEmail.setError("Email inválido");//adciona erro no componente;
         }
 
-        if (aluno.getTelefone().isEmpty() || aluno.getTelefone().length() != 9) {
+        if (aluno.getTelefone().length() != 9) {
             //verifica se as senhas sao iguais
             validado = false;
             campoTelefone.setError("Telefone inválido");//add erro no componente

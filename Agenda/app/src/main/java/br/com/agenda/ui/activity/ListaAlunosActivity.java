@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -14,19 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import br.com.agenda.DAO.AlunoDAO;
 import br.com.agenda.R;
 import br.com.agenda.model.Aluno;
-import br.com.agenda.ui.adapter.ListaAlunosAdapter;
+import br.com.agenda.ui.ListaAlunosView;
 
 import static br.com.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Lista de alunos";
-
-    private final AlunoDAO dao = new AlunoDAO();
-    private ListaAlunosAdapter adapter;
+    private final ListaAlunosView listaAlunosView = new ListaAlunosView(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +36,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        atualizaAlunos();
+        listaAlunosView.atualizaAlunos();
     }
 
     //Menu de contexto é ativado quando você dá um clique longo
@@ -57,16 +53,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         //é necessário verificar o item escolhido no menu de contexto, pois podem ter várias opções e é necessário que apenas uma tenha o comportamento desejado
         if (itemId == R.id.activity_lista_alunos_menu_remover) {
-            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-            Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
-            removeAlunoDaListView(alunoEscolhido);
+            listaAlunosView.confirmaRemocao(item);
         }
         return super.onContextItemSelected(item);
 
-    }
-
-    private void atualizaAlunos() {
-        adapter.atualiza(dao.getAlunos());
     }
 
     private void configuraFabNovoAluno() {
@@ -80,14 +70,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void configuraLista() {
         ListView listaDeAlunos = findViewById(R.id.activity_lista_alunos_listview);
-        configuraAdapter(listaDeAlunos);
+        listaAlunosView.configuraAdapter(listaDeAlunos);
         configuraListenerDeCliquePorItem(listaDeAlunos);
         registerForContextMenu(listaDeAlunos);
-    }
-
-    private void removeAlunoDaListView(Aluno aluno) {
-        dao.remove(aluno);
-        adapter.remove(aluno);
     }
 
     private void configuraListenerDeCliquePorItem(ListView listaDeAlunos) {
@@ -102,11 +87,5 @@ public class ListaAlunosActivity extends AppCompatActivity {
         Intent vaiParaFormularioActivity = new Intent(ListaAlunosActivity.this, FormularioAlunoActivity.class);
         vaiParaFormularioActivity.putExtra(CHAVE_ALUNO, aluno); //Tranferencia de informações entre activitys, a classe precisa ser Serializable
         startActivity(vaiParaFormularioActivity);
-    }
-
-    //Serve para para configurar o layout a ser apresentado em cada item da listview
-    private void configuraAdapter(ListView listaDeAlunos) {
-        adapter = new ListaAlunosAdapter(this);
-        listaDeAlunos.setAdapter(adapter);
     }
 }
