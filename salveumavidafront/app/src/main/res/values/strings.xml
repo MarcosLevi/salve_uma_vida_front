@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">salve-uma-vida-front</string>
+    <string name="content_description_imageButton_cardEdita">Edita a campanha atual</string>
+    <string name="content_description_imageButton_cardAddItem">Adiciona item na campanha atual</string>
+    <string name="content_description_imageButton_cardFinalizaCampanha">Finaliza a campanha atual, não permitindo adicionar mais itens a partir do card</string>
+    <string name="text_cardDescricao">Estamos precisando de ração o mais rápido possível! Por favor nos ajudem.</string>
+    <string name="text_cardTitulo">Campanha da Ração</string>
+    <string name="text_cardTimeStamp">Anunciado em 26/06/2020</string>
+    <string name="content_description_imageView_cardImagemCampanha">Imagem que representa a campanha atual</string>
 </resources>
