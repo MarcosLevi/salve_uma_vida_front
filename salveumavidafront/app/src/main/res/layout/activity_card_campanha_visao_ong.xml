@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_weight="1"
-        android:background="white"
+        android:background="@android:color/white"
         android:contentDescription="@string/content_description_imageButton_cardEdita"
         android:src="@drawable/ic_action_ong_editar"
         app:layout_constraintEnd_toStartOf="@+id/cardAddItem"
@@ -27,7 +27,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_weight="1"
-        android:background="white"
+        android:background="@android:color/white"
         android:contentDescription="@string/content_description_imageButton_cardAddItem"
         android:src="@drawable/ic_action_ong_add_item"
         app:layout_constraintEnd_toStartOf="@+id/cardFinalizaCampanha"
@@ -40,7 +40,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_weight="1"
-        android:background="white"
+        android:background="@android:color/white"
         android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
         android:scaleX="1"
         android:scaleY="1"
@@ -99,8 +99,8 @@
         android:layout_marginTop="20dp"
         android:contentDescription="@string/content_description_imageView_cardImagemCampanha"
         android:scaleType="centerInside"
+        android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
