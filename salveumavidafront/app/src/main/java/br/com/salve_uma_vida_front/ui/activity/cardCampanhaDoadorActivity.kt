@@ -1,15 +1,18 @@
 package br.com.salve_uma_vida_front.ui.activity
 
 import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import br.com.salve_uma_vida_front.R
 
 class cardCampanhaDoadorActivity : AppCompatActivity() {
@@ -42,7 +45,7 @@ class cardCampanhaDoadorActivity : AppCompatActivity() {
         var textViewQuantidadeDeItens = findViewById<View>(R.id.cardQuantidadeItens) as TextView
         if (this.quantidadeDeItens == 1) {
             textViewQuantidadeDeItens.text = "1 item"
-        }else if (this.quantidadeDeItens > 1){
+        } else if (this.quantidadeDeItens > 1) {
             textViewQuantidadeDeItens.text = quantidadeDeItens.toString() + " itens"
         }
     }
@@ -62,8 +65,8 @@ class cardCampanhaDoadorActivity : AppCompatActivity() {
             ConstraintLayout.LayoutParams.MATCH_CONSTRAINT,
             ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
-        configProgressBar.marginStart = 20.toDp(this)
-        configProgressBar.marginEnd = 20.toDp(this)
+        configProgressBar.marginEnd = 10.toDp(this)
+        configProgressBar.marginStart = 10.toDp(this)
         val configConstraintLayout = ConstraintLayout.LayoutParams(
             ConstraintLayout.LayoutParams.MATCH_PARENT,
             ConstraintLayout.LayoutParams.MATCH_PARENT
@@ -72,19 +75,32 @@ class cardCampanhaDoadorActivity : AppCompatActivity() {
 
         val textViewValorAtualProgressBar = TextView(this)
         textViewValorAtualProgressBar.text = atual.toString()
-        textViewValorAtualProgressBar.layoutParams = wrapContentNos2Campos();
+        textViewValorAtualProgressBar.layoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
         textViewValorAtualProgressBar.id = idAtual
+        textViewValorAtualProgressBar.setTextColor(ContextCompat.getColor(this, R.color.black))
 
         val textViewTitulo = TextView(this)
         textViewTitulo.text = titulo
-        textViewTitulo.layoutParams = wrapContentNos2Campos()
+        textViewTitulo.layoutParams = ConstraintLayout.LayoutParams(
+            100.toDp(this),
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
         textViewTitulo.id = idTitulo
+        textViewTitulo.setTextColor(ContextCompat.getColor(this, R.color.black))
 
 
         val textViewMaxValorProgressBar = TextView(this)
         textViewMaxValorProgressBar.text = maximo.toString()
-        textViewMaxValorProgressBar.layoutParams = wrapContentNos2Campos()
+        textViewMaxValorProgressBar.layoutParams = ConstraintLayout.LayoutParams(
+            50.toDp(this),
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
         textViewMaxValorProgressBar.id = idMaxValor
+        textViewMaxValorProgressBar.textAlignment = View.TEXT_ALIGNMENT_VIEW_END
+        textViewMaxValorProgressBar.setTextColor(ContextCompat.getColor(this, R.color.black))
 
 
         val progressBar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal)
@@ -97,67 +113,32 @@ class cardCampanhaDoadorActivity : AppCompatActivity() {
         item.layoutParams = configConstraintLayout
         item.id = idItem
 
-        item.addView(textViewValorAtualProgressBar)
         item.addView(textViewTitulo)
         item.addView(progressBar)
         item.addView(textViewMaxValorProgressBar)
+        item.addView(textViewValorAtualProgressBar)
 
         val constraintSet = ConstraintSet()
         //Copy all the previous constraints present in the constraint layout.
         constraintSet.clone(item)
         //Valor atual
-        constraintSet.connect(
-            idAtual,
-            ConstraintSet.TOP,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.TOP,
-            0
-        )
-        constraintSet.connect(idAtual, ConstraintSet.START, idProgressBar, ConstraintSet.START, 0)
-        constraintSet.connect(idAtual, ConstraintSet.END, idProgressBar, ConstraintSet.END, 0)
+        constraintSet.connect(idAtual, ConstraintSet.START, idTitulo, ConstraintSet.END, 0)
+        constraintSet.connect(idAtual, ConstraintSet.END, idMaxValor, ConstraintSet.START, 0)
+        constraintSet.connect(idAtual, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        constraintSet.connect(idAtual, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         //Titulo
-        constraintSet.connect(
-            idTitulo,
-            ConstraintSet.START,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.START,
-            0
-        )
-        constraintSet.connect(idTitulo, ConstraintSet.TOP, idAtual, ConstraintSet.BOTTOM, 0)
-        constraintSet.connect(
-            idTitulo,
-            ConstraintSet.BOTTOM,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.BOTTOM,
-            0
-        )
+        constraintSet.connect(idTitulo, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
+        constraintSet.connect(idTitulo, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        constraintSet.connect(idTitulo, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
 //        //MaxValor
-        constraintSet.connect(
-            idMaxValor,
-            ConstraintSet.END,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.END,
-            0
-        )
-        constraintSet.connect(idMaxValor, ConstraintSet.TOP, idAtual, ConstraintSet.BOTTOM, 0)
-        constraintSet.connect(
-            idMaxValor,
-            ConstraintSet.BOTTOM,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.BOTTOM,
-            0
-        )
+        constraintSet.connect(idMaxValor, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
+        constraintSet.connect(idMaxValor, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        constraintSet.connect(idMaxValor, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
 //        //ProgressBar
         constraintSet.connect(idProgressBar, ConstraintSet.START, idTitulo, ConstraintSet.END)
         constraintSet.connect(idProgressBar, ConstraintSet.END, idMaxValor, ConstraintSet.START)
-        constraintSet.connect(idProgressBar, ConstraintSet.TOP, idAtual, ConstraintSet.BOTTOM, 0)
-        constraintSet.connect(
-            idProgressBar,
-            ConstraintSet.BOTTOM,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.BOTTOM,
-            0
-        )
+        constraintSet.connect(idProgressBar, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        constraintSet.connect(idProgressBar, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
 
         constraintSet.applyTo(item)
 

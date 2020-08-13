@@ -9,7 +9,7 @@
     <string name="content_description_imageView_cardImagemCampanha">Imagem que representa a campanha atual</string>
     <string name="text_cardQuantidadeItens">0 Itens</string>
     <string name="content_description_imageButton_cardFavoritar">Botao que favorita a campanha</string>
-    <string name="text_cardItemTitulo">Ração (Kg)</string>
-    <string name="text_cardItemValorAutalProgressBar">50</string>
-    <string name="text_cardItemMaxValorProgressBar">80</string>
+    <string name="text_cardItemTitulo">Coleira (Quantidade)</string>
+    <string name="text_cardItemValorAutalProgressBar">450</string>
+    <string name="text_cardItemMaxValorProgressBar">500</string>
 </resources>
