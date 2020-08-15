@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardCampanhaVisaoDoadorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.activity.cardCampanhaOngActivity">
 
     <ImageButton
@@ -26,10 +26,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_weight="1"
         android:text="@string/text_cardDescricao"
         android:textColor="#000000"
-        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardImagemCampanha" />
@@ -41,8 +39,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
-        android:layout_weight="0"
-        android:gravity="center_vertical"
         android:text="@string/text_cardTitulo"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -66,12 +62,11 @@
 
     <ImageView
         android:id="@+id/cardImagemCampanha"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/content_description_imageView_cardImagemCampanha"
-        android:scaleType="centerInside"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -111,7 +106,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_cardItemTitulo"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_conversion_absoluteHeight="19dp"
@@ -121,16 +115,14 @@
                 android:id="@+id/cardItemProgressBar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="16dp"
                 android:indeterminate="false"
                 android:max="500"
                 android:progress="450"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cardItemMaxValorProgressBar"
-                app:layout_constraintStart_toEndOf="@+id/cardItemTitulo"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardItemTitulo" />
 
             <TextView
                 android:id="@+id/cardItemValorAtualProgressBar"
@@ -138,19 +130,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_cardItemValorAutalProgressBar"
                 android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cardItemMaxValorProgressBar"
-                app:layout_constraintStart_toEndOf="@+id/cardItemTitulo"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cardItemMaxValorProgressBar"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:text="@string/text_cardItemMaxValorProgressBar"
-                android:textAlignment="viewEnd"
-                android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
