@@ -2,67 +2,44 @@ package br.com.salve_uma_vida_front.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.models.itemCardDoador
+import br.com.salve_uma_vida_front.adapters.ItemAdapter
+import br.com.salve_uma_vida_front.models.ItemCardDoador
 
 //open class cardCampanhaDoadorActivity() {
 class cardCampanhaDoadorActivity() : AppCompatActivity() {
     var quantidadeDeItens = 0
+    lateinit var mRecyclerView: RecyclerView
 
+    lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
+    lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.card_campanha_visao_ong)
         setContentView(R.layout.card_campanha_visao_doador)
-        var listaItens = findViewById<View>(R.id.cardCampanhaDoadorItens) as LinearLayout
-        adicionaItensNaListaView(listaItens)
-    }
-
-    private fun adicionaItensNaListaView(listaItens: LinearLayout) {
-        listaItens.addView(
-            itemCardDoador(
-                "Ração",
-                "Kg",
-                90,
-                50,
-                this
-            )
+        var teste: List<ItemCardDoador> = mutableListOf(
+            ItemCardDoador("Ração", "Kg", 100, 30),
+            ItemCardDoador("Leite", "L", 90, 60),
+            ItemCardDoador("Coleira", "Unidades", 500, 450),
+            ItemCardDoador("Água", "L", 600, 30),
+            ItemCardDoador("Sabão", "L", 200, 20)
         )
-        quantidadeDeItens++
-        listaItens.addView(
-            itemCardDoador(
-                "Coleira",
-                "Unidades",
-                100,
-                25,
-                this
-            )
-        )
-        quantidadeDeItens++
-        listaItens.addView(
-            itemCardDoador(
-                "Água",
-                "L",
-                250,
-                200,
-                this
-            )
-        )
-        quantidadeDeItens++
-        listaItens.addView(
-            itemCardDoador(
-                "Sabão",
-                "L",
-                100,
-                10,
-                this
-            )
-        )
-        quantidadeDeItens++
+        quantidadeDeItens=teste.size
         atualizaCampoQuantidadeDeItens()
+//        var listaItens = findViewById<LinearLayout>(R.id.cardCampanhaDoadorItens)
+//        adicionaItensNaListaView(listaItens)
+
+        mRecyclerView = findViewById(R.id.itensCampanha)
+        mRecyclerView.setHasFixedSize(true)
+        mLayoutManager = LinearLayoutManager(this)
+        mAdapter = ItemAdapter(teste)
+
+        mRecyclerView.layoutManager = mLayoutManager
+        mRecyclerView.adapter = mAdapter
     }
 
     fun atualizaCampoQuantidadeDeItens() {
