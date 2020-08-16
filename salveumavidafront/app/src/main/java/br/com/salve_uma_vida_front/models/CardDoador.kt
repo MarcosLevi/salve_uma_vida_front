@@ -3,7 +3,7 @@ package br.com.salve_uma_vida_front.models
 class CardDoador {
     var titulo: String
     val timeStamp: String
-    var descricao: Int
+    var descricao: String
     var listaDeItens: List<ItemCardDoador>
     var quantidadeDeItens: Int
     var imagem: String
@@ -11,7 +11,7 @@ class CardDoador {
     constructor(
         titulo: String,
         timeStamp: String,
-        descricao: Int,
+        descricao: String,
         listaDeItens: List<ItemCardDoador>,
         imagem: String
     ) {
