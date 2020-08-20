@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.models
+package br.com.salve_uma_vida_front.doador.models
 
 class CardDoador {
     var titulo: String

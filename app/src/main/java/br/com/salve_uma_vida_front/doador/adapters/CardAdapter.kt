@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.adapters
+package br.com.salve_uma_vida_front.doador.adapters
 
 import android.content.Context
 import android.content.res.Resources
@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.models.CardDoador
+import br.com.salve_uma_vida_front.doador.models.CardDoador
 import com.squareup.picasso.Picasso
 
-class CardAdapter(var listaCards: List<CardDoador>, var context: Context) :
+class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     lateinit var mRecyclerView: RecyclerView
@@ -47,7 +48,10 @@ class CardAdapter(var listaCards: List<CardDoador>, var context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         var view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_campanha_visao_doador, parent, false)
-        var viewHolder = CardAdapter.CardViewHolder(view)
+        var viewHolder =
+            CardViewHolder(
+                view
+            )
         return viewHolder
     }
 
@@ -58,8 +62,7 @@ class CardAdapter(var listaCards: List<CardDoador>, var context: Context) :
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         var currentItem: CardDoador = listaCards.get(position)
 
-        //mudar pra pegar imagem pra url
-
+        //seta imagem
         Picasso.get()
             .load(currentItem.imagem)
             .resize(110.dp, 110.dp)
@@ -69,9 +72,10 @@ class CardAdapter(var listaCards: List<CardDoador>, var context: Context) :
             .into(holder.imagemCampanha);
 
 
-//        holder.imagemCampanha.setImageResource(R.drawable.ic_launcher_foreground)
 //        fazer função que salve esse cara
-//        holder.buttonFavoritar
+        holder.buttonFavoritar.setOnClickListener{
+            clickFavoritar(currentItem)
+        }
         holder.textViewTitulo.text = currentItem.titulo
         holder.textViewTimeStamp.text = currentItem.timeStamp
         holder.textViewDescricao.text = currentItem.descricao
@@ -79,10 +83,16 @@ class CardAdapter(var listaCards: List<CardDoador>, var context: Context) :
 
         mRecyclerView = holder.itensCampanha
         mRecyclerView.setHasFixedSize(true)
-        mLayoutManager = LinearLayoutManager(context)
-        mAdapter = ItemAdapter(currentItem.listaDeItens)
+        mLayoutManager = LinearLayoutManager(contexto)
+        mAdapter =
+            ItemAdapter(currentItem.listaDeItens)
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
+    }
+
+    private fun clickFavoritar(currentItem: CardDoador) {
+        Toast.makeText(contexto, "You clicked me ${currentItem.descricao}", Toast.LENGTH_SHORT)
+            .show()
     }
 
     fun quantidadeDeItensString(quantidade: Int): String {

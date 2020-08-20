@@ -9,15 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.cardCampanhaDoadorActivity">
+        <activity android:name=".doador.activity.campanhasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.cardCampanhaOngActivity">
-        </activity>
-        <activity android:name=".ui.activity.campanhaDoadorActivity">
+        <activity android:name=".ongs.activity.campanhasActivity">
         </activity>
     </application>
 

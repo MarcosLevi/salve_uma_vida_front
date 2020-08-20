@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.adapters
+package br.com.salve_uma_vida_front.doador.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.models.ItemCardDoador
+import br.com.salve_uma_vida_front.doador.models.ItemCardDoador
 
 class ItemAdapter(var listaItens: List<ItemCardDoador>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     class ItemViewHolder : RecyclerView.ViewHolder {
@@ -27,7 +27,10 @@ class ItemAdapter(var listaItens: List<ItemCardDoador>) : RecyclerView.Adapter<I
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         var view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_card_campanha_visao_doador, parent, false)
-        var viewHolder = ItemViewHolder(view)
+        var viewHolder =
+            ItemViewHolder(
+                view
+            )
         return viewHolder
     }
 
