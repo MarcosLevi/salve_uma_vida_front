@@ -13,4 +13,5 @@
     <string name="text_cardItemValorAutalProgressBar">Arrecadado X / Y UN</string>
     <string name="text_cardItemMaxValorProgressBar">500</string>
     <string name="hint_activity_campanha_visao_doador_pesquisa">Procurar por Nome, Descrição ou Itens</string>
+    <string name="contentDescription_campanhasPesquisar">Botão pesquisar da activity que mostra as campanhas</string>
 </resources>

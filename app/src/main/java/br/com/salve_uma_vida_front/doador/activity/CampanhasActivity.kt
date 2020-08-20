@@ -1,18 +1,23 @@
 package br.com.salve_uma_vida_front.doador.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
-import android.widget.TextView
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.doador.adapters.CardAdapter
-import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
 import br.com.salve_uma_vida_front.doador.models.CardDoador
 import br.com.salve_uma_vida_front.doador.models.ItemCardDoador
 
 //open class cardCampanhaDoadorActivity() {
-class campanhasActivity() : AppCompatActivity() {
+class CampanhasActivity() : AppCompatActivity() {
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
@@ -20,7 +25,15 @@ class campanhasActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_campanha_visao_doador)
-        var itensPrimeiroCard: List<ItemCardDoador> = mutableListOf(
+        val campoDePesquisa = findViewById<EditText>(R.id.activity_campanha_visao_doador_pesquisa)
+        val botaoPesquisar = findViewById<ImageButton>(R.id.campanhasPesquisar)
+        botaoPesquisar.setOnClickListener{
+            acaoPesquisarCampanhas(campoDePesquisa)
+        }
+    }
+
+    private fun mostraCards() {
+        val itensPrimeiroCard: List<ItemCardDoador> = mutableListOf(
             ItemCardDoador(
                 "Ração",
                 "Kg",
@@ -52,16 +65,23 @@ class campanhasActivity() : AppCompatActivity() {
                 20
             )
         )
-        var itensSegundoCard: List<ItemCardDoador> = mutableListOf(
+
+        val itensSegundoCard: List<ItemCardDoador> = mutableListOf(
             ItemCardDoador(
                 "Dinheiros",
                 "R$",
                 10000,
                 2000
+            ),
+            ItemCardDoador(
+                "Dólares",
+                "R$",
+                10000,
+                20
             )
         )
 
-        var itensTerceiroCard: List<ItemCardDoador> = mutableListOf(
+        val itensTerceiroCard: List<ItemCardDoador> = mutableListOf(
             ItemCardDoador(
                 "Ração",
                 "Kg",
@@ -94,7 +114,7 @@ class campanhasActivity() : AppCompatActivity() {
             )
         )
 
-        var listaCards: List<CardDoador> = mutableListOf(
+        val listaCards: List<CardDoador> = mutableListOf(
             CardDoador(
                 "Ajude o abrigo São José",
                 "Anunciado em 26/06/2020",
@@ -127,5 +147,16 @@ class campanhasActivity() : AppCompatActivity() {
         )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
+    }
+
+    private fun acaoPesquisarCampanhas(campoDePesquisa: EditText) {
+        this.hideKeyboard(campoDePesquisa)
+        Toast.makeText(this, campoDePesquisa.text, Toast.LENGTH_SHORT).show()
+        mostraCards()
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

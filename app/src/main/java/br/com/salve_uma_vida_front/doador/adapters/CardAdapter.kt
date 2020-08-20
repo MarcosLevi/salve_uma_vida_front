@@ -46,9 +46,9 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        var view: View = LayoutInflater.from(parent.context)
+        val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_campanha_visao_doador, parent, false)
-        var viewHolder =
+        val viewHolder =
             CardViewHolder(
                 view
             )
@@ -60,7 +60,7 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        var currentItem: CardDoador = listaCards.get(position)
+        val currentItem: CardDoador = listaCards.get(position)
 
         //seta imagem
         Picasso.get()
@@ -69,11 +69,11 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
             .error(R.drawable.ic_launcher_foreground)
-            .into(holder.imagemCampanha);
+            .into(holder.imagemCampanha)
 
 
 //        fazer função que salve esse cara
-        holder.buttonFavoritar.setOnClickListener{
+        holder.buttonFavoritar.setOnClickListener {
             clickFavoritar(currentItem)
         }
         holder.textViewTitulo.text = currentItem.titulo
@@ -84,8 +84,7 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
         mRecyclerView = holder.itensCampanha
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(contexto)
-        mAdapter =
-            ItemAdapter(currentItem.listaDeItens)
+        mAdapter = ItemAdapter(currentItem.listaDeItens)
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
     }
@@ -103,6 +102,7 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
         }
         return "0 itens"
     }
+
     val Int.dp: Int
         get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 }
