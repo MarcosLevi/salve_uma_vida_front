@@ -1,10 +1,10 @@
-package br.com.salve_uma_vida_front.ongs.activity
+package br.com.salve_uma_vida_front.ongs.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.salve_uma_vida_front.R
 
-class campanhasActivity : AppCompatActivity() {
+class CampanhasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card_campanha_visao_ong)

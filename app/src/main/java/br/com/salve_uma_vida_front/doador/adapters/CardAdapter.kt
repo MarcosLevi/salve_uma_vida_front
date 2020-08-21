@@ -37,10 +37,10 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
             imagemCampanha = cardView.findViewById(R.id.cardImagemCampanha)
             buttonFavoritar = cardView.findViewById(R.id.cardFavoritar)
             textViewTitulo = cardView.findViewById(R.id.cardTitulo)
-            textViewTimeStamp = cardView.findViewById(R.id.cardTimeStamp)
+            textViewTimeStamp = cardView.findViewById(R.id.cardDataCampanha)
             textViewDescricao = cardView.findViewById(R.id.cardDescricao)
             textViewQuantidadeItens = cardView.findViewById(R.id.cardQuantidadeItens)
-            itensCampanha = cardView.findViewById(R.id.itensCampanha)
+            itensCampanha = cardView.findViewById(R.id.itensCampanhaDoador)
         }
 
     }
@@ -67,8 +67,8 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
             .load(currentItem.imagem)
             .resize(110.dp, 110.dp)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .error(R.drawable.ic_launcher_foreground)
+            .placeholder(R.drawable.ic_dafault_photo)
+            .error(R.drawable.ic_error)
             .into(holder.imagemCampanha)
 
 

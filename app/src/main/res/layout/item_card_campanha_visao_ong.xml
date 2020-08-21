@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCardOng"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <ImageButton
+        android:id="@+id/itemOngEdita"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:contentDescription="@string/content_description_imageButton_cardEdita"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_action_ong_editar"
+        app:layout_constraintBottom_toBottomOf="@+id/itemOngProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemOngTitulo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_cardItemTitulo"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/itemOngProgressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="10dp"
+        android:indeterminate="false"
+        app:layout_constraintEnd_toStartOf="@+id/itemOngEdita"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemOngTitulo" />
+
+    <TextView
+        android:id="@+id/itemOngProgresso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/text_cardItemValorAutalProgressBar"
+        android:textAlignment="viewEnd"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/itemOngProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/itemOngProgressBar"
+        app:layout_constraintStart_toEndOf="@+id/itemOngTitulo"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

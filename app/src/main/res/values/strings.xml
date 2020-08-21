@@ -1,4 +1,9 @@
 <resources>
+    <string-array name="unidades_medida">
+        <item>Kilos</item>
+        <item>Litros</item>
+        <item>Unidades</item>
+    </string-array>
     <string name="app_name">salve-uma-vida-front</string>
     <string name="content_description_imageButton_cardEdita">Edita a campanha atual</string>
     <string name="content_description_imageButton_cardAddItem">Adiciona item na campanha atual</string>
@@ -14,4 +19,9 @@
     <string name="text_cardItemMaxValorProgressBar">500</string>
     <string name="hint_activity_campanha_visao_doador_pesquisa">Procurar por Nome, Descrição ou Itens</string>
     <string name="contentDescription_campanhasPesquisar">Botão pesquisar da activity que mostra as campanhas</string>
+    <string name="hintCadastroCampanhaEditTextQuantidadeItem">Digite o nome do Item</string>
+    <string name="textCadastroCampanhaLabelQuantidade">Quantidade:</string>
+    <string name="textCadastroCampanhaLabelUnidade">Unidade:</string>
+    <string name="textCadastroCampanhaLabelNome">Nome:</string>
+    <string name="hintCadastroCampanhaEditTextNomeItem">Digite o nome do Item</string>
 </resources>

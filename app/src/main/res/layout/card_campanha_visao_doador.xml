@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="5dp"
-    tools:context=".ongs.activity.campanhasActivity">
+    tools:context=".ongs.activities.CampanhasActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,12 +40,13 @@
 
         <ImageView
             android:id="@+id/cardImagemCampanha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:contentDescription="@string/content_description_imageView_cardImagemCampanha"
-            android:src="@drawable/ic_launcher_foreground"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_dafault_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +66,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/cardTimeStamp"
+            android:id="@+id/cardDataCampanha"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -89,7 +90,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cardDescricao" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/itensCampanha"
+            android:id="@+id/itensCampanhaDoador"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

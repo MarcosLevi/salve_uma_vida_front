@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cadastroCampanhaItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/cadastroCampanhaSubmitNovoItem"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
+        android:scaleType="fitXY"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/ic_action_ong_finalizar_campanha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaEditTextQuantidadeItem" />
+
+    <EditText
+        android:id="@+id/cadastroCampanhaEditTextQuantidadeItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:hint="@string/hintCadastroCampanhaEditTextQuantidadeItem"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaLabelQuantidade"
+        app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaSpinnerUnidadesMedida" />
+
+    <TextView
+        android:id="@+id/cadastroCampanhaLabelQuantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/textCadastroCampanhaLabelQuantidade"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cadastroCampanhaEditTextQuantidadeItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cadastroCampanhaEditTextQuantidadeItem" />
+
+    <TextView
+        android:id="@+id/cadastroCampanhaLabelUnidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/textCadastroCampanhaLabelUnidade"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cadastroCampanhaSpinnerUnidadesMedida"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cadastroCampanhaSpinnerUnidadesMedida" />
+
+    <TextView
+        android:id="@+id/cadastroCampanhaLabelNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/textCadastroCampanhaLabelNome"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cadastroCampanhaEditTextNomeItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cadastroCampanhaEditTextNomeItem" />
+
+    <EditText
+        android:id="@+id/cadastroCampanhaEditTextNomeItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:ems="10"
+        android:hint="@string/hintCadastroCampanhaEditTextNomeItem"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaLabelNome"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/cadastroCampanhaSpinnerUnidadesMedida"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:entries="@array/unidades_medida"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaLabelUnidade"
+        app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaEditTextNomeItem" />
+</androidx.constraintlayout.widget.ConstraintLayout>

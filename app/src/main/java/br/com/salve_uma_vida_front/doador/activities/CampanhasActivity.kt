@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.doador.activity
+package br.com.salve_uma_vida_front.doador.activities
 
 import android.app.Activity
 import android.content.Context
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.doador.adapters.CardAdapter
 import br.com.salve_uma_vida_front.doador.models.CardDoador
-import br.com.salve_uma_vida_front.doador.models.ItemCardDoador
+import br.com.salve_uma_vida_front.both.models.ItemCard
 
 //open class cardCampanhaDoadorActivity() {
 class CampanhasActivity() : AppCompatActivity() {
@@ -33,32 +33,32 @@ class CampanhasActivity() : AppCompatActivity() {
     }
 
     private fun mostraCards() {
-        val itensPrimeiroCard: List<ItemCardDoador> = mutableListOf(
-            ItemCardDoador(
+        val itensPrimeiroCard: List<ItemCard> = mutableListOf(
+            ItemCard(
                 "Ração",
                 "Kg",
                 100,
                 30
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Leite",
                 "L",
                 90,
                 60
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Coleira",
                 "Unidades",
                 500,
                 450
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Água",
                 "L",
                 600,
                 30
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Sabão",
                 "L",
                 200,
@@ -66,14 +66,14 @@ class CampanhasActivity() : AppCompatActivity() {
             )
         )
 
-        val itensSegundoCard: List<ItemCardDoador> = mutableListOf(
-            ItemCardDoador(
+        val itensSegundoCard: List<ItemCard> = mutableListOf(
+            ItemCard(
                 "Dinheiros",
                 "R$",
                 10000,
                 2000
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Dólares",
                 "R$",
                 10000,
@@ -81,32 +81,32 @@ class CampanhasActivity() : AppCompatActivity() {
             )
         )
 
-        val itensTerceiroCard: List<ItemCardDoador> = mutableListOf(
-            ItemCardDoador(
+        val itensTerceiroCard: List<ItemCard> = mutableListOf(
+            ItemCard(
                 "Ração",
                 "Kg",
                 100,
                 30
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Leite",
                 "L",
                 90,
                 60
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Coleira",
                 "Unidades",
                 500,
                 450
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Água",
                 "L",
                 600,
                 30
             ),
-            ItemCardDoador(
+            ItemCard(
                 "Sabão",
                 "L",
                 200,

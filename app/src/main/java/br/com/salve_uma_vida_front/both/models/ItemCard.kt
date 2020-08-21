@@ -1,6 +1,6 @@
-package br.com.salve_uma_vida_front.doador.models
+package br.com.salve_uma_vida_front.both.models
 
-class ItemCardDoador(
+class ItemCard(
     var titulo: String,
     val unidadeMedida: String,
     var quantidadeMaxima: Int,
