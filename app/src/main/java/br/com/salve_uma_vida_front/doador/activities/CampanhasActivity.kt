@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.both.hideKeyboard
 import br.com.salve_uma_vida_front.doador.adapters.CardAdapter
 import br.com.salve_uma_vida_front.doador.models.CardDoador
 import br.com.salve_uma_vida_front.both.models.ItemCard
@@ -153,10 +154,5 @@ class CampanhasActivity() : AppCompatActivity() {
         this.hideKeyboard(campoDePesquisa)
         Toast.makeText(this, campoDePesquisa.text, Toast.LENGTH_SHORT).show()
         mostraCards()
-    }
-
-    fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

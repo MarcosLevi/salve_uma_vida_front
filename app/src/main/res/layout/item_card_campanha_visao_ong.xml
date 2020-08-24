@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemCardOng"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,13 +11,14 @@
         android:id="@+id/itemOngEdita"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
         android:layout_weight="1"
         android:background="@android:color/white"
         android:contentDescription="@string/content_description_imageButton_cardEdita"
         android:scaleType="fitXY"
         android:src="@drawable/ic_action_ong_editar"
         app:layout_constraintBottom_toBottomOf="@+id/itemOngProgressBar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/itemOngExclui"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -33,7 +35,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="16dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:indeterminate="false"
         app:layout_constraintEnd_toStartOf="@+id/itemOngEdita"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,4 +53,16 @@
         app:layout_constraintEnd_toEndOf="@+id/itemOngProgressBar"
         app:layout_constraintStart_toEndOf="@+id/itemOngTitulo"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/itemOngExclui"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#FFFFFF"
+        android:contentDescription="@string/contentDescriptionItemOngExclui"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/itemOngProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close" />
 </androidx.constraintlayout.widget.ConstraintLayout>

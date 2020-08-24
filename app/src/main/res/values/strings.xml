@@ -1,8 +1,8 @@
 <resources>
     <string-array name="unidades_medida">
-        <item>Kilos</item>
-        <item>Litros</item>
-        <item>Unidades</item>
+        <item>Kg</item>
+        <item>L</item>
+        <item>Un</item>
     </string-array>
     <string name="app_name">salve-uma-vida-front</string>
     <string name="content_description_imageButton_cardEdita">Edita a campanha atual</string>
@@ -24,4 +24,5 @@
     <string name="textCadastroCampanhaLabelUnidade">Unidade:</string>
     <string name="textCadastroCampanhaLabelNome">Nome:</string>
     <string name="hintCadastroCampanhaEditTextNomeItem">Digite o nome do Item</string>
+    <string name="contentDescriptionItemOngExclui">Exclui item da campanha</string>
 </resources>

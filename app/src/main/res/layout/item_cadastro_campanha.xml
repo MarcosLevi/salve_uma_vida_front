@@ -7,6 +7,16 @@
     android:layout_height="wrap_content">
 
     <ImageButton
+        android:id="@+id/cadastroCampanhaClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close" />
+
+    <ImageButton
         android:id="@+id/cadastroCampanhaSubmitNovoItem"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -84,7 +94,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaLabelNome"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaClose" />
 
     <Spinner
         android:id="@+id/cadastroCampanhaSpinnerUnidadesMedida"
