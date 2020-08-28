@@ -25,4 +25,6 @@
     <string name="textCadastroCampanhaLabelNome">Nome:</string>
     <string name="hintCadastroCampanhaEditTextNomeItem">Digite o nome do Item</string>
     <string name="contentDescriptionItemOngExclui">Exclui item da campanha</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

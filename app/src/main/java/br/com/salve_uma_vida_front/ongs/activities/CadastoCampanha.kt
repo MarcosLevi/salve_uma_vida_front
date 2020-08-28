@@ -65,9 +65,9 @@ class CadastoCampanha : AppCompatActivity() {
                 500,
                 0
             ))
-            mAdapter = ItemAdapter(itensCard)
-            mRecyclerView.adapter = mAdapter
-            atualizaQuantidadeDeItens()
+//            mAdapter = ItemAdapter(itensCard)
+//            mRecyclerView.adapter = mAdapter
+//            atualizaQuantidadeDeItens()
         }
         val finalizaCampanha = findViewById<ImageButton>(R.id.cadastroCampanhaFinalizar)
         finalizaCampanha.setOnClickListener {
@@ -104,13 +104,13 @@ class CadastoCampanha : AppCompatActivity() {
     }
 
     private fun mostraItens() {
-        atualizaQuantidadeDeItens()
-
-        mRecyclerView = findViewById(R.id.cadastroCampanhaitensCampanhaOng)
-        mRecyclerView.setHasFixedSize(true)
-        mLayoutManager = LinearLayoutManager(this)
-        mAdapter = ItemAdapter(itensCard)
-        mRecyclerView.layoutManager = mLayoutManager
-        mRecyclerView.adapter = mAdapter
+//        atualizaQuantidadeDeItens()
+//
+//        mRecyclerView = findViewById(R.id.cadastroCampanhaitensCampanhaOng)
+//        mRecyclerView.setHasFixedSize(true)
+//        mLayoutManager = LinearLayoutManager(this)
+//        mAdapter = ItemAdapter(itensCard)
+//        mRecyclerView.layoutManager = mLayoutManager
+//        mRecyclerView.adapter = mAdapter
     }
 }

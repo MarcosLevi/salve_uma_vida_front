@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CadastroFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/cadastroCampanhaData"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:ems="10"
+                android:enabled="false"
+                android:focusable="false"
+                android:hint="Data da campanha"
+                android:inputType="date"
+                app:layout_constraintEnd_toStartOf="@+id/cadatroCampanhaPickDate"
+                app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaImagem"
+                app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaTitulo" />
+
+            <EditText
+                android:id="@+id/cadastroCampanhaDescricao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:ems="10"
+                android:hint="Digite uma descricao para a campanha"
+                android:inputType="textMultiLine"
+                android:maxHeight="150dp"
+                android:scrollbars="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaImagem" />
+
+            <EditText
+                android:id="@+id/cadastroCampanhaTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:ems="10"
+                android:hint="Digite o titulo da campanha"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaImagem"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/cadatroCampanhaPickDate"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="#FFFFFF"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/cadastroCampanhaData"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cadastroCampanhaData"
+                app:srcCompat="@drawable/ic_pick_date" />
+
+            <ImageButton
+                android:id="@+id/cadastroCampanhaFinalizar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
+                android:scaleType="fitXY"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:src="@drawable/ic_action_ong_finalizar_campanha"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cadastroCampanhaitensCampanhaOng"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/cadastroCampanhaAdicionaItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaQuantidadeDeItens"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageButton
+                android:id="@+id/cadastroCampanhaAdicionaItem"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:contentDescription="@string/content_description_imageButton_cardAddItem"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_action_ong_add_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cadastroCampanhaFinalizar" />
+
+            <TextView
+                android:id="@+id/cadastroCampanhaQuantidadeDeItens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/text_cardQuantidadeItens"
+                android:textColor="#03A9F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cadastroCampanhaDescricao" />
+
+            <ImageView
+                android:id="@+id/cadastroCampanhaImagem"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_dafault_photo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>
