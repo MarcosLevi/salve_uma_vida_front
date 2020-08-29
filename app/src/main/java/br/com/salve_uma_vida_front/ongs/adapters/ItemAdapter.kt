@@ -7,13 +7,13 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.models.ItemCard
-import br.com.salve_uma_vida_front.databinding.ItemCardCampanhaVisaoOngBinding
+import br.com.salve_uma_vida_front.databinding.ItemCardCampanhaOngCadastroBinding
 
 
 class ItemAdapter(var listaItens: MutableList<ItemCard>, val listener: ItemListener) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(
-        private val binding: ItemCardCampanhaVisaoOngBinding,
+        private val binding: ItemCardCampanhaOngCadastroBinding,
         private val listener: ItemListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun configuraHolder(currentItem: ItemCard) {
@@ -28,7 +28,7 @@ class ItemAdapter(var listaItens: MutableList<ItemCard>, val listener: ItemListe
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = ItemCardCampanhaVisaoOngBinding.inflate(
+        val view = ItemCardCampanhaOngCadastroBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

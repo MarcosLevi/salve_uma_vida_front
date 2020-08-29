@@ -43,7 +43,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_action_doador_pesquisar"
+                app:srcCompat="@drawable/ic_baseline_search_24"
                 android:contentDescription="@string/contentDescription_campanhasPesquisar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

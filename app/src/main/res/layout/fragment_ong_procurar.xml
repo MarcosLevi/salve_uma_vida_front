@@ -7,7 +7,7 @@
         android:id="@+id/searchCampanhas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ongs.fragments.ProcurarFragment">
+        tools:context=".both.fragments.ProcurarFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_action_doador_pesquisar" />
+                        app:srcCompat="@drawable/ic_baseline_search_24" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>

@@ -31,4 +31,14 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="fechar_a_tela_de_adicao_de_itens">Fechar a tela de adição de itens</string>
+    <string name="mensagens">Mensagens</string>
+    <string name="procurar">Procurar</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="campanhas">Campanhas</string>
+    <string name="data_da_campanha">Data da campanha</string>
+    <string name="digite_uma_descricao_para_a_campanha">Digite uma descricao para a campanha</string>
+    <string name="digite_o_titulo_da_campanha">Digite o titulo da campanha</string>
+    <string name="selecione_uma_data">Selecione uma data</string>
+    <string name="imagem_da_campanha">Imagem da campanha</string>
 </resources>

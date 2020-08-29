@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +21,7 @@
                 android:ems="10"
                 android:enabled="false"
                 android:focusable="false"
-                android:hint="Data da campanha"
+                android:hint="@string/data_da_campanha"
                 android:inputType="date"
                 app:layout_constraintEnd_toStartOf="@+id/cadatroCampanhaPickDate"
                 app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaImagem"
@@ -36,7 +35,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:ems="10"
-                android:hint="Digite uma descricao para a campanha"
+                android:hint="@string/digite_uma_descricao_para_a_campanha"
                 android:inputType="textMultiLine"
                 android:maxHeight="150dp"
                 android:scrollbars="vertical"
@@ -52,7 +51,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:ems="10"
-                android:hint="Digite o titulo da campanha"
+                android:hint="@string/digite_o_titulo_da_campanha"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cadastroCampanhaImagem"
@@ -68,7 +67,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/cadastroCampanhaData"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/cadastroCampanhaData"
-                app:srcCompat="@drawable/ic_pick_date" />
+                app:srcCompat="@drawable/ic_baseline_date_range_24"
+                android:contentDescription="@string/selecione_uma_data" />
 
             <ImageButton
                 android:id="@+id/cadastroCampanhaFinalizar"
@@ -82,7 +82,7 @@
                 android:scaleType="fitXY"
                 android:scaleX="1"
                 android:scaleY="1"
-                android:src="@drawable/ic_action_ong_finalizar_campanha"
+                android:src="@drawable/ic_baseline_done_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -110,7 +110,7 @@
                 android:background="@android:color/white"
                 android:contentDescription="@string/content_description_imageButton_cardAddItem"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_action_ong_add_item"
+                android:src="@drawable/ic_baseline_add_box_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cadastroCampanhaFinalizar" />
 
@@ -134,7 +134,8 @@
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_dafault_photo" />
+                app:srcCompat="@drawable/ic_dafault_photo"
+                android:contentDescription="@string/imagem_da_campanha" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

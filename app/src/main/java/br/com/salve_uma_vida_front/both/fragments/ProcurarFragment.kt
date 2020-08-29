@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.ongs.fragments
+package br.com.salve_uma_vida_front.both.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.both.hideKeyboard
 import br.com.salve_uma_vida_front.both.models.ItemCard
 import br.com.salve_uma_vida_front.databinding.FragmentOngProcurarBinding
-import br.com.salve_uma_vida_front.doador.adapters.CardAdapter
-import br.com.salve_uma_vida_front.doador.models.CardDoador
+import br.com.salve_uma_vida_front.both.adapters.CardAdapter
+import br.com.salve_uma_vida_front.both.models.CardPesquisa
 
 class ProcurarFragment : Fragment(),View.OnClickListener {
     var navController: NavController? = null
@@ -26,7 +26,7 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
     lateinit var binding: FragmentOngProcurarBinding
 
 
-    val itensPrimeiroCard: List<ItemCard> = mutableListOf(
+    val itensPrimeiroCard: MutableList<ItemCard> = mutableListOf(
         ItemCard(
             "Ração",
             "Kg",
@@ -59,7 +59,7 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
         )
     )
 
-    val itensSegundoCard: List<ItemCard> = mutableListOf(
+    val itensSegundoCard: MutableList<ItemCard> = mutableListOf(
         ItemCard(
             "Dinheiros",
             "R$",
@@ -74,7 +74,7 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
         )
     )
 
-    val itensTerceiroCard: List<ItemCard> = mutableListOf(
+    val itensTerceiroCard: MutableList<ItemCard> = mutableListOf(
         ItemCard(
             "Ração",
             "Kg",
@@ -107,7 +107,7 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
         )
     )
 
-    val listaCards: MutableList<CardDoador> = mutableListOf()
+    val listaCards: MutableList<CardPesquisa> = mutableListOf()
 
 
     override fun onCreateView(
@@ -151,28 +151,34 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
     }
 
     private fun mostraCards(text: Editable) {
-        //mostra os cards especificos
-        listaCards.add(CardDoador(
-            "Ajude o abrigo São José",
-            "Anunciado em 26/06/2020",
-            "Estamos precisando de ração o mais rápido possível! Por favor nos ajudem.",
-            itensPrimeiroCard,
-            "https://jornalzo.com.br/media/k2/items/cache/cb9c495b17bc28a44ffb50c55572ed63_XL.jpg?t=20141103_151946"
-        ))
-        listaCards.add(CardDoador(
-            "Me ajuda aí o caralho, nunca te pedi nada",
-            "Anunciado em 24/06/2020",
-            "Quero comprar um playstation 5, me ajudem a fazer isso aí o porra",
-            itensSegundoCard,
-            "https://www.showmetech.com.br/wp-content/uploads//2020/08/143354-games-feature-sony-playstation-5-release-date-rumours-and-everything-you-need-to-know-about-ps5-image1-cvz3adase9-1024x683.jpg"
-        ))
-        listaCards.add(CardDoador(
-            "Ajude o abrigo Seu Cuck Feliz",
-            "Anunciado em 66/66/6666",
-            "Se essa merda tá funcionando vai aparecer algo aqui.",
-            itensTerceiroCard,
-            "https://cinema10.com.br/upload/filmes/filmes_14167_MV5BYjdkZjQ3NTctY2E0Ni00Njc4LTlmZWItZDlkMmZhNTRiOGQxXkEyXkFqcGdeQXVyMjIwNTg2ODA@._V1_SY1000_CR0,0,666,1000_AL_.jpg"
-        ))
+        //mostra os cards especificos usando o text
+        listaCards.add(
+            CardPesquisa(
+                "Ajude o abrigo São José",
+                "Anunciado em 26/06/2020",
+                "Estamos precisando de ração o mais rápido possível! Por favor nos ajudem.",
+                itensPrimeiroCard,
+                "https://jornalzo.com.br/media/k2/items/cache/cb9c495b17bc28a44ffb50c55572ed63_XL.jpg?t=20141103_151946"
+            )
+        )
+        listaCards.add(
+            CardPesquisa(
+                "Me ajuda aí o caralho, nunca te pedi nada",
+                "Anunciado em 24/06/2020",
+                "Quero comprar um playstation 5, me ajudem a fazer isso aí o porra",
+                itensSegundoCard,
+                "https://www.showmetech.com.br/wp-content/uploads//2020/08/143354-games-feature-sony-playstation-5-release-date-rumours-and-everything-you-need-to-know-about-ps5-image1-cvz3adase9-1024x683.jpg"
+            )
+        )
+        listaCards.add(
+            CardPesquisa(
+                "Ajude o abrigo Seu Cuck Feliz",
+                "Anunciado em 66/66/6666",
+                "Se essa merda tá funcionando vai aparecer algo aqui.",
+                itensTerceiroCard,
+                "https://cinema10.com.br/upload/filmes/filmes_14167_MV5BYjdkZjQ3NTctY2E0Ni00Njc4LTlmZWItZDlkMmZhNTRiOGQxXkEyXkFqcGdeQXVyMjIwNTg2ODA@._V1_SY1000_CR0,0,666,1000_AL_.jpg"
+            )
+        )
         notificaMudancaAdapter()
     }
 

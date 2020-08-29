@@ -20,8 +20,8 @@
         android:label="fragment_mensagens"
         tools:layout="@layout/fragment_ong_mensagens" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.ProcurarFragment"
+        android:id="@+id/procurarFragment"
+        android:name="br.com.salve_uma_vida_front.both.fragments.ProcurarFragment"
         android:label="fragment_ong_procurar"
         tools:layout="@layout/fragment_ong_procurar" />
 </navigation>
