@@ -14,16 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.both.hideKeyboard
 import br.com.salve_uma_vida_front.both.models.ItemCard
-import br.com.salve_uma_vida_front.databinding.FragmentOngProcurarBinding
 import br.com.salve_uma_vida_front.both.adapters.CardAdapter
 import br.com.salve_uma_vida_front.both.models.CardPesquisa
+import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 
 class ProcurarFragment : Fragment(),View.OnClickListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    lateinit var binding: FragmentOngProcurarBinding
+    lateinit var binding: FragmentBothProcurarBinding
 
 
     val itensPrimeiroCard: MutableList<ItemCard> = mutableListOf(
@@ -115,7 +115,7 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentOngProcurarBinding.inflate(inflater, container, false)
+        binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
         return binding.root
     }
 

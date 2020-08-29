@@ -6,25 +6,25 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view_ong"
+        android:id="@+id/nav_view_doador"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/corTelaPrincipal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu_ong" />
+        app:menu="@menu/bottom_nav_menu_doador" />
 
     <fragment
-        android:id="@+id/nav_host_fragment_ong"
+        android:id="@+id/nav_host_fragment_doador"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view_ong"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view_doador"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph_ong" />
+        app:navGraph="@navigation/nav_graph_doador" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

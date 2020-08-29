@@ -17,8 +17,8 @@
         android:title="@string/favoritos" />
 
     <item
-        android:id="@+id/ongCampanhasFragment"
-        android:icon="@drawable/ic_outline_calendar_today_24"
-        android:title="@string/campanhas" />
+        android:id="@+id/doadorMapaFragment"
+        android:icon="@drawable/ic_outline_map_24"
+        android:title="@string/mapa" />
 
 </menu>

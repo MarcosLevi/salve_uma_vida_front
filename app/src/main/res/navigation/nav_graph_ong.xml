@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/procurarFragment">
+    app:startDestination="@id/bothProcurarFragment">
     <fragment
-        android:id="@+id/campanhasFragment"
+        android:id="@+id/ongCampanhasFragment"
         android:name="br.com.salve_uma_vida_front.ongs.fragments.CampanhasFragment"
-        android:label="fragment_campanhas"
+        android:label="Minhas Campanhas"
         tools:layout="@layout/fragment_ong_campanhas" />
     <fragment
-        android:id="@+id/favoritosFragment"
+        android:id="@+id/bothFavoritosFragment"
         android:name="br.com.salve_uma_vida_front.ongs.fragments.FavoritosFragment"
-        android:label="fragment_favoritos"
-        tools:layout="@layout/fragment_ong_favoritos" />
+        android:label="Favoritos"
+        tools:layout="@layout/fragment_both_favoritos" />
     <fragment
-        android:id="@+id/mensagensFragment"
+        android:id="@+id/bothMensagensFragment"
         android:name="br.com.salve_uma_vida_front.ongs.fragments.MensagensFragment"
-        android:label="fragment_mensagens"
-        tools:layout="@layout/fragment_ong_mensagens" />
+        android:label="Mensagens"
+        tools:layout="@layout/fragment_both_mensagens" />
     <fragment
-        android:id="@+id/procurarFragment"
+        android:id="@+id/bothProcurarFragment"
         android:name="br.com.salve_uma_vida_front.both.fragments.ProcurarFragment"
-        android:label="fragment_ong_procurar"
-        tools:layout="@layout/fragment_ong_procurar" />
+        android:label="Procurar Campanhas"
+        tools:layout="@layout/fragment_both_procurar" />
 </navigation>
