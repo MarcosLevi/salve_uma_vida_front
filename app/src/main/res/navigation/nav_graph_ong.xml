@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mensagensFragment">
+    app:startDestination="@id/procurarFragment">
     <fragment
         android:id="@+id/campanhasFragment"
         android:name="br.com.salve_uma_vida_front.ongs.fragments.CampanhasFragment"
