@@ -11,21 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity android:name=".doador.activities.CampanhasActivity">-->
-
-<!--            &lt;!&ndash; <intent-filter> &ndash;&gt;-->
-<!--            &lt;!&ndash; <action android:name="android.intent.action.MAIN"/> &ndash;&gt;-->
-<!--            &lt;!&ndash; <category android:name="android.intent.category.LAUNCHER"/> &ndash;&gt;-->
-<!--            &lt;!&ndash; </intent-filter> &ndash;&gt;-->
-<!--        </activity>-->
-<!--        <activity android:name=".ongs.activities.CadastoCampanha">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
+        <!-- <activity android:name=".doador.activities.CampanhasActivity"> -->
+        <!-- &lt;!&ndash; <intent-filter> &ndash;&gt; -->
+        <!-- &lt;!&ndash; <action android:name="android.intent.action.MAIN"/> &ndash;&gt; -->
+        <!-- &lt;!&ndash; <category android:name="android.intent.category.LAUNCHER"/> &ndash;&gt; -->
+        <!-- &lt;!&ndash; </intent-filter> &ndash;&gt; -->
+        <!-- </activity> -->
+        <!-- <activity android:name=".ongs.activities.CadastoCampanha"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ongs.activities.OngMainActivity"/>
+        <activity android:name=".doador.activities.DoadorMainActivity"/>
     </application>
 
 </manifest>

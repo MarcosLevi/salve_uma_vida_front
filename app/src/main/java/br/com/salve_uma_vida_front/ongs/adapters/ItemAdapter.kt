@@ -40,10 +40,6 @@ class ItemAdapter(var listaItens: MutableList<ItemCard>, val listener: ItemListe
         return listaItens.size
     }
 
-    fun mudouAlgoNoAdapter() {
-        notifyDataSetChanged()
-    }
-
     interface ItemListener {
         fun onEditaClicked(itemCard: ItemCard)
         fun onRemoveClicked(itemCard: ItemCard)

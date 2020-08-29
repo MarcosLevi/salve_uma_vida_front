@@ -47,7 +47,7 @@ class CardAdapter(var listaCards: List<CardDoador>, var contexto: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_campanha_visao_doador, parent, false)
+            .inflate(R.layout.card_campanha, parent, false)
         val viewHolder =
             CardViewHolder(
                 view

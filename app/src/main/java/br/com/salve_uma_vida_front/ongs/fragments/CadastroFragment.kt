@@ -1,9 +1,8 @@
-package br.com.salve_uma_vida_front
+package br.com.salve_uma_vida_front.ongs.fragments
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.models.ItemCard
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroBinding
 import br.com.salve_uma_vida_front.ongs.adapters.ItemAdapter
