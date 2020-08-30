@@ -70,13 +70,19 @@ private var listaCards: MutableList<CardPesquisa> = mutableListOf(
     CardPesquisa(
         "Ajude o abrigo São Castro",
         "Ocorrerá em 24/02/2021",
-        "Estamos precisando de toda a sua ajuda para manter a estrutura do abrigo!",
+        "Estamos precisando de toda a sua ajuda para manter a necessidades do abrigo!",
         mutableListOf(
             ItemCard(
-                "Dinheiro",
-                "R$",
-                10000,
-                2000
+                "Ração",
+                "Kg",
+                100,
+                30
+            ),
+            ItemCard(
+                "Leite",
+                "L",
+                90,
+                60
             )
         ),
         "https://s2.glbimg.com/cV_HpgcrpfWCvwfAnmvTUPN5Zyc=/0x0:1920x1080/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/1/E/xFaPoJSOqGgrTxNbKHrA/crise-abrigo-animais-06-05-2019.mov-snapshot-01.14-2019.05.07-10.58.16-.jpg"
@@ -84,13 +90,13 @@ private var listaCards: MutableList<CardPesquisa> = mutableListOf(
     CardPesquisa(
         "Ajude o abrigo São Lázaro",
         "Ocorrerá em 12/10/2020",
-        "Estamos precisando de toda a sua ajuda para manter a estrutura do abrigo!",
+        "Estamos precisando de toda a sua ajuda para manter o abrigo!",
         mutableListOf(
             ItemCard(
-                "Dinheiro",
-                "R$",
-                20000,
-                1000
+                "Ração",
+                "Kg",
+                600,
+                30
             )
         ),
         "https://scontent-for1-1.xx.fbcdn.net/v/t1.0-9/60441261_2947994721892555_4719557158608306176_o.jpg?_nc_cat=101&_nc_sid=09cbfe&_nc_eui2=AeHKE-p7aHv7ffI3yFrPfahbzi0y2E7q7erOLTLYTurt6vCnvjCMckJTjzC52NSTx-46zxnbauCr7QxTmCOvqd3a&_nc_ohc=H4-ExhLGCPEAX_nQpRJ&_nc_ht=scontent-for1-1.xx&oh=eb9d05416e15c06be6b41b55ec226d52&oe=5F6FF9E4"
