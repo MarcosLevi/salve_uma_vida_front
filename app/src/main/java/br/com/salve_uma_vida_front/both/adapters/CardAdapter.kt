@@ -39,7 +39,7 @@ class CardAdapter(var listaCards: List<CardPesquisa>, var contexto: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_campanha, parent, false)
+            .inflate(R.layout.card_campanha_final, parent, false)
         val viewHolder =
             CardViewHolder(
                 view

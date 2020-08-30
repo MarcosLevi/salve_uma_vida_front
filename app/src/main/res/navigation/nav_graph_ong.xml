@@ -8,7 +8,11 @@
         android:id="@+id/ongCampanhasFragment"
         android:name="br.com.salve_uma_vida_front.ongs.fragments.CampanhasFragment"
         android:label="Minhas Campanhas"
-        tools:layout="@layout/fragment_ong_campanhas" />
+        tools:layout="@layout/fragment_ong_campanhas" >
+        <action
+            android:id="@+id/action_ongCampanhasFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bothFavoritosFragment"
         android:name="br.com.salve_uma_vida_front.ongs.fragments.FavoritosFragment"
@@ -24,4 +28,12 @@
         android:name="br.com.salve_uma_vida_front.both.fragments.ProcurarFragment"
         android:label="Procurar Campanhas"
         tools:layout="@layout/fragment_both_procurar" />
+    <fragment
+        android:id="@+id/cadastroFragment"
+        android:name="br.com.salve_uma_vida_front.ongs.fragments.CadastroFragment"
+        android:label="Nova Campanha" >
+        <action
+            android:id="@+id/action_cadastroFragment_to_ongCampanhasFragment"
+            app:destination="@id/ongCampanhasFragment" />
+    </fragment>
 </navigation>

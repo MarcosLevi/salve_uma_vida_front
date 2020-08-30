@@ -15,100 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.both.hideKeyboard
 import br.com.salve_uma_vida_front.both.models.ItemCard
 import br.com.salve_uma_vida_front.both.adapters.CardAdapter
-import br.com.salve_uma_vida_front.both.models.CardPesquisa
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
+import br.com.salve_uma_vida_front.repository.addCardNaLista
+import br.com.salve_uma_vida_front.repository.getListaCards
 
-class ProcurarFragment : Fragment(),View.OnClickListener {
+class ProcurarFragment : Fragment(), View.OnClickListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentBothProcurarBinding
-
-
-    val itensPrimeiroCard: MutableList<ItemCard> = mutableListOf(
-        ItemCard(
-            "Ração",
-            "Kg",
-            100,
-            30
-        ),
-        ItemCard(
-            "Leite",
-            "L",
-            90,
-            60
-        ),
-        ItemCard(
-            "Coleira",
-            "Unidades",
-            500,
-            450
-        ),
-        ItemCard(
-            "Água",
-            "L",
-            600,
-            30
-        ),
-        ItemCard(
-            "Sabão",
-            "L",
-            200,
-            20
-        )
-    )
-
-    val itensSegundoCard: MutableList<ItemCard> = mutableListOf(
-        ItemCard(
-            "Dinheiros",
-            "R$",
-            10000,
-            2000
-        ),
-        ItemCard(
-            "Dólares",
-            "R$",
-            10000,
-            20
-        )
-    )
-
-    val itensTerceiroCard: MutableList<ItemCard> = mutableListOf(
-        ItemCard(
-            "Ração",
-            "Kg",
-            100,
-            30
-        ),
-        ItemCard(
-            "Leite",
-            "L",
-            90,
-            60
-        ),
-        ItemCard(
-            "Coleira",
-            "Unidades",
-            500,
-            450
-        ),
-        ItemCard(
-            "Água",
-            "L",
-            600,
-            30
-        ),
-        ItemCard(
-            "Sabão",
-            "L",
-            200,
-            20
-        )
-    )
-
-    val listaCards: MutableList<CardPesquisa> = mutableListOf()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -124,10 +40,9 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
         navController = Navigation.findNavController(view)
 
         configuraRecyclerView()
-
         val campoDePesquisa = binding.activityCampanhaVisaoDoadorPesquisa
         val botaoPesquisar = binding.campanhasPesquisar
-        botaoPesquisar.setOnClickListener{
+        botaoPesquisar.setOnClickListener {
             acaoPesquisarCampanhas(campoDePesquisa)
         }
     }
@@ -137,7 +52,7 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
         mAdapter = CardAdapter(
-            listaCards,
+            getListaCards(),
             requireContext()
         )
         mRecyclerView.layoutManager = mLayoutManager
@@ -152,32 +67,106 @@ class ProcurarFragment : Fragment(),View.OnClickListener {
 
     private fun mostraCards(text: Editable) {
         //mostra os cards especificos usando o text
-        listaCards.add(
-            CardPesquisa(
-                "Ajude o abrigo São José",
-                "Anunciado em 26/06/2020",
-                "Estamos precisando de ração o mais rápido possível! Por favor nos ajudem.",
-                itensPrimeiroCard,
-                "https://jornalzo.com.br/media/k2/items/cache/cb9c495b17bc28a44ffb50c55572ed63_XL.jpg?t=20141103_151946"
+        val itensPrimeiroCard: MutableList<ItemCard> = mutableListOf(
+            ItemCard(
+                "Ração",
+                "Kg",
+                100,
+                30
+            ),
+            ItemCard(
+                "Leite",
+                "L",
+                90,
+                60
+            ),
+            ItemCard(
+                "Coleira",
+                "Unidades",
+                500,
+                450
+            ),
+            ItemCard(
+                "Água",
+                "L",
+                600,
+                30
+            ),
+            ItemCard(
+                "Sabão",
+                "L",
+                200,
+                20
             )
         )
-        listaCards.add(
-            CardPesquisa(
-                "Me ajuda aí o caralho, nunca te pedi nada",
-                "Anunciado em 24/06/2020",
-                "Quero comprar um playstation 5, me ajudem a fazer isso aí o porra",
-                itensSegundoCard,
-                "https://www.showmetech.com.br/wp-content/uploads//2020/08/143354-games-feature-sony-playstation-5-release-date-rumours-and-everything-you-need-to-know-about-ps5-image1-cvz3adase9-1024x683.jpg"
+
+        val itensSegundoCard: MutableList<ItemCard> = mutableListOf(
+            ItemCard(
+                "Dinheiros",
+                "R$",
+                10000,
+                2000
+            ),
+            ItemCard(
+                "Dólares",
+                "R$",
+                10000,
+                20
             )
         )
-        listaCards.add(
-            CardPesquisa(
-                "Ajude o abrigo Seu Cuck Feliz",
-                "Anunciado em 66/66/6666",
-                "Se essa merda tá funcionando vai aparecer algo aqui.",
-                itensTerceiroCard,
-                "https://cinema10.com.br/upload/filmes/filmes_14167_MV5BYjdkZjQ3NTctY2E0Ni00Njc4LTlmZWItZDlkMmZhNTRiOGQxXkEyXkFqcGdeQXVyMjIwNTg2ODA@._V1_SY1000_CR0,0,666,1000_AL_.jpg"
+
+        val itensTerceiroCard: MutableList<ItemCard> = mutableListOf(
+            ItemCard(
+                "Ração",
+                "Kg",
+                100,
+                30
+            ),
+            ItemCard(
+                "Leite",
+                "L",
+                90,
+                60
+            ),
+            ItemCard(
+                "Coleira",
+                "Unidades",
+                500,
+                450
+            ),
+            ItemCard(
+                "Água",
+                "L",
+                600,
+                30
+            ),
+            ItemCard(
+                "Sabão",
+                "L",
+                200,
+                20
             )
+        )
+        addCardNaLista(
+            "Ajude o abrigo São José",
+            "Ocorrerá em 26/06/2020",
+            "Estamos precisando de ração o mais rápido possível! Por favor nos ajudem.",
+            itensPrimeiroCard,
+            "https://jornalzo.com.br/media/k2/items/cache/cb9c495b17bc28a44ffb50c55572ed63_XL.jpg?t=20141103_151946"
+        )
+        addCardNaLista(
+            "Ajude o abrigo São Camilo",
+            "Ocorrerá em 24/02/2021",
+            "Estamos precisando de toda a sua ajuda!",
+            itensSegundoCard,
+            "https://www.showmetech.com.br/wp-content/uploads//2020/08/143354-games-feature-sony-playstation-5-release-date-rumours-and-everything-you-need-to-know-about-ps5-image1-cvz3adase9-1024x683.jpg"
+        )
+        addCardNaLista(
+            "Ajude o abrigo São Fernando",
+            "Ocorrerá em 22/06/2022",
+            "Por favor nos ajudem",
+            itensTerceiroCard,
+            "https://cinema10.com.br/upload/filmes/filmes_14167_MV5BYjdkZjQ3NTctY2E0Ni00Njc4LTlmZWItZDlkMmZhNTRiOGQxXkEyXkFqcGdeQXVyMjIwNTg2ODA@._V1_SY1000_CR0,0,666,1000_AL_.jpg"
         )
         notificaMudancaAdapter()
     }
