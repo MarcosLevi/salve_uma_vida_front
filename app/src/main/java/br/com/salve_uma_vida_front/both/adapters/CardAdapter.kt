@@ -5,10 +5,7 @@ import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +13,15 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
 import br.com.salve_uma_vida_front.both.models.CardPesquisa
 import com.squareup.picasso.Picasso
+import java.util.*
 
-class CardAdapter(var listaCards: List<CardPesquisa>, var contexto: Context) :
-    RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Context) :
+    RecyclerView.Adapter<CardAdapter.CardViewHolder>(), Filterable {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
+    var listaCardsAll: MutableList<CardPesquisa> = listaCards.toMutableList()
 
 
     class CardViewHolder(cardView: View) : RecyclerView.ViewHolder(cardView) {
@@ -84,15 +83,24 @@ class CardAdapter(var listaCards: List<CardPesquisa>, var contexto: Context) :
 
     private fun clickFavoritar(currentItem: CardPesquisa, buttonFavoritar: ImageButton) {
         currentItem.favorito = !currentItem.favorito
-        if (currentItem.favorito){
+        if (currentItem.favorito) {
             Toast.makeText(contexto, "Ficou favorito", Toast.LENGTH_SHORT)
                 .show()
-            buttonFavoritar.setImageDrawable(ContextCompat.getDrawable(contexto,R.drawable.ic_baseline_star_24))
-        }
-        else{
+            buttonFavoritar.setImageDrawable(
+                ContextCompat.getDrawable(
+                    contexto,
+                    R.drawable.ic_baseline_star_24
+                )
+            )
+        } else {
             Toast.makeText(contexto, "Não é mais favorito", Toast.LENGTH_SHORT)
                 .show()
-            buttonFavoritar.setImageDrawable(ContextCompat.getDrawable(contexto,R.drawable.ic_baseline_star_border_24))
+            buttonFavoritar.setImageDrawable(
+                ContextCompat.getDrawable(
+                    contexto,
+                    R.drawable.ic_baseline_star_border_24
+                )
+            )
         }
 
     }
@@ -108,4 +116,50 @@ class CardAdapter(var listaCards: List<CardPesquisa>, var contexto: Context) :
 
     val Int.dp: Int
         get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence?): FilterResults {
+
+                var filteredList: MutableList<CardPesquisa> = mutableListOf()
+                if (charSequence.toString().isEmpty()) {
+                    filteredList = listaCardsAll.toMutableList()
+                } else {
+                    for (card in listaCardsAll) {
+                        if (card.titulo.toLowerCase(Locale.getDefault()).contains(charSequence.toString().toLowerCase(Locale.getDefault()))) {
+                            filteredList.add(card)
+                        } else if (card.descricao.toLowerCase(Locale.getDefault()).contains(charSequence.toString().toLowerCase(Locale.getDefault()))) {
+                            filteredList.add(card)
+                        } else {
+                            for (item in card.listaDeItens) {
+                                if (item.titulo.toLowerCase(Locale.getDefault()).contains(charSequence.toString().toLowerCase(Locale.getDefault()))
+                                ) {
+                                    filteredList.add(card)
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = filteredList
+
+                return filterResults
+            }
+
+            override fun publishResults(
+                charSequence: CharSequence?,
+                filterResults: FilterResults?
+            ) {
+                listaCards.clear()
+                listaCards.addAll(filterResults!!.values as Collection<CardPesquisa>)
+                notifyDataSetChanged()
+            }
+
+        }
+    }
+
+
 }
