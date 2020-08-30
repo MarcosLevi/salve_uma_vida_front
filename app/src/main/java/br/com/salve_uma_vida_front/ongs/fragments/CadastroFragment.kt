@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.salve_uma_vida_front.repository.addCardNaLista
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.models.ItemCard
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroBinding
@@ -79,22 +80,12 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapter.ItemListe
         val adicionaItem = binding.cadastroCampanhaAdicionaItem
         adicionaItem.setOnClickListener {
             Toast.makeText(view.context, "Clicou no adiciona Item", Toast.LENGTH_SHORT).show()
-//            itensCard.add(
-//                ItemCard(
-//                    "Teste",
-//                    "Un",
-//                    500,
-//                    0
-//                )
-//            )
             val teste = ItemCard()
             showPopUp(teste, false)
         }
 
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
-        finalizaCampanha.setOnClickListener {
-            Toast.makeText(view.context, "Clicou no finalizar campanha", Toast.LENGTH_SHORT).show()
-        }
+        finalizaCampanha.setOnClickListener (this)
 
         val dataCampanha = binding.cadastroCampanhaData
 
@@ -143,7 +134,19 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapter.ItemListe
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-//            R.id.cadastroCampanhaAdicionaItem -> navController!!.navigate(R.id.action_itemCadastroFragment_to_cadastroFragment)
+            R.id.cadastroCampanhaFinalizar -> {
+                Toast.makeText(requireContext(), "Clicou no finalizar campanha", Toast.LENGTH_SHORT).show()
+                //salva no banco
+                addCardNaLista(
+                    binding.cadastroCampanhaTitulo.text.toString(),
+                    binding.cadastroCampanhaData.text.toString(),
+                    binding.cadastroCampanhaDescricao.text.toString(),
+                    itensCard,
+                    //colocar a url dps
+                    "https://www.showmetech.com.br/wp-content/uploads//2020/08/143354-games-feature-sony-playstation-5-release-date-rumours-and-everything-you-need-to-know-about-ps5-image1-cvz3adase9-1024x683.jpg"
+                )
+                navController!!.navigate(R.id.action_cadastroFragment_to_ongCampanhasFragment)
+            }
         }
     }
 
@@ -199,7 +202,7 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapter.ItemListe
             currentItem.titulo = campoTitulo.text.toString()
             currentItem.unidadeMedida = campoUnidade.selectedItem.toString()
             currentItem.quantidadeMaxima = campoQuantidade.text.toString().toInt()
-            if(!editable){
+            if (!editable) {
                 itensCard.add(currentItem)
                 atualizaQuantidadeDeItens()
             }
