@@ -74,6 +74,8 @@ var listaCampanhas: MutableList<Campanha> = mutableListOf(
 
 val listaOngs: MutableList<Ong> = mutableListOf(ong1,ong2)
 
+val listaFavoritos: MutableList<Campanha> = mutableListOf()
+
 //salva no banco
 fun addCampanhaNaOng(
     nomeOng: String,
@@ -93,6 +95,21 @@ fun addCampanhaNaOng(
 //get do banco
 fun getListaTodosCards(): MutableList<Campanha> {
     return listaCampanhas
+}
+
+fun pegaTodosOsFavoritos(){
+    for (campanha in listaCampanhas){
+        if (campanha.favorito)
+            listaFavoritos.add(campanha)
+    }
+}
+
+fun addFavorito(campanha: Campanha){
+    listaFavoritos.add(campanha)
+}
+
+fun removeFavorito(campanha: Campanha){
+    listaFavoritos.remove(campanha)
 }
 
 //fun getListaComFiltro(filtro: String): MutableList<CardPesquisa> {
