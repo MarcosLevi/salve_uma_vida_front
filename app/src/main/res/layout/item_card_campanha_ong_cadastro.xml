@@ -10,7 +10,7 @@
 
         <variable
             name="itemCard"
-            type="br.com.salve_uma_vida_front.both.models.ItemCard" />
+            type="br.com.salve_uma_vida_front.both.models.ItemCampanha" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

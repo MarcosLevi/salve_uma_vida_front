@@ -14,33 +14,19 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 app:cardCornerRadius="5dp">
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <SearchView
+                    android:id="@+id/campanhasSearchView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/ongCampanhasFragmentBoxPesquisa"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:ems="10"
-                        android:hint="@string/hint_activity_campanha_visao_doador_pesquisa"
-                        android:inputType="textPersonName"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"/>
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -48,10 +34,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
