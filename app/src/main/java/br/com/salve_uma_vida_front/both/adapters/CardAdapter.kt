@@ -10,18 +10,19 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.both.DateToString
+import br.com.salve_uma_vida_front.both.models.Campanha
 import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
-import br.com.salve_uma_vida_front.both.models.CardPesquisa
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Context) :
+class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>(), Filterable {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    var listaCardsAll: MutableList<CardPesquisa> = listaCards.toMutableList()
+    var listaCardsAll: MutableList<Campanha> = listaCards
 
 
     class CardViewHolder(cardView: View) : RecyclerView.ViewHolder(cardView) {
@@ -51,11 +52,11 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val currentItem: CardPesquisa = listaCards.get(position)
+        val currentItem: Campanha = listaCards.get(position)
 
         //seta imagem
         Picasso.get()
-            .load(currentItem.imagem)
+            .load(currentItem.imagemCampanha)
             .resize(110.dp, 110.dp)
             .centerCrop()
             .placeholder(R.drawable.ic_dafault_photo)
@@ -67,8 +68,9 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
         holder.buttonFavoritar.setOnClickListener {
             clickFavoritar(currentItem, holder.buttonFavoritar)
         }
+        ajustaIconeFavorito(currentItem, holder.buttonFavoritar)
         holder.textViewTitulo.text = currentItem.titulo
-        holder.textViewTimeStamp.text = currentItem.timeStamp
+        holder.textViewTimeStamp.text = DateToString(currentItem.timeStamp)
         holder.textViewDescricao.text = currentItem.descricao
         holder.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.quantidadeDeItens)
 
@@ -81,11 +83,16 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
         mRecyclerView.adapter = mAdapter
     }
 
-    private fun clickFavoritar(currentItem: CardPesquisa, buttonFavoritar: ImageButton) {
+    private fun clickFavoritar(currentItem: Campanha, buttonFavoritar: ImageButton) {
         currentItem.favorito = !currentItem.favorito
+        ajustaIconeFavorito(currentItem, buttonFavoritar)
+    }
+
+    private fun ajustaIconeFavorito(
+        currentItem: Campanha,
+        buttonFavoritar: ImageButton
+    ) {
         if (currentItem.favorito) {
-            Toast.makeText(contexto, "Ficou favorito", Toast.LENGTH_SHORT)
-                .show()
             buttonFavoritar.setImageDrawable(
                 ContextCompat.getDrawable(
                     contexto,
@@ -93,8 +100,6 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
                 )
             )
         } else {
-            Toast.makeText(contexto, "Não é mais favorito", Toast.LENGTH_SHORT)
-                .show()
             buttonFavoritar.setImageDrawable(
                 ContextCompat.getDrawable(
                     contexto,
@@ -102,7 +107,6 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
                 )
             )
         }
-
     }
 
     fun quantidadeDeItensString(quantidade: Int): String {
@@ -121,24 +125,32 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
 
-                var filteredList: MutableList<CardPesquisa> = mutableListOf()
+                var filteredList: MutableList<Campanha> = mutableListOf()
                 if (charSequence.toString().isEmpty()) {
                     filteredList = listaCardsAll.toMutableList()
                 } else {
-                    for (card in listaCardsAll) {
-                        if (card.titulo.toLowerCase(Locale.getDefault()).contains(charSequence.toString().toLowerCase(Locale.getDefault()))) {
-                            filteredList.add(card)
-                        } else if (card.descricao.toLowerCase(Locale.getDefault()).contains(charSequence.toString().toLowerCase(Locale.getDefault()))) {
-                            filteredList.add(card)
+                    for (campanha in listaCardsAll) {
+
+                        if (campanha.titulo.toLowerCase(Locale.getDefault())
+                                .contains(charSequence.toString().toLowerCase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(campanha)
+                        } else if (campanha.descricao.toLowerCase(Locale.getDefault())
+                                .contains(charSequence.toString().toLowerCase(Locale.getDefault()))
+                        ) {
+                            filteredList.add(campanha)
                         } else {
-                            for (item in card.listaDeItens) {
-                                if (item.titulo.toLowerCase(Locale.getDefault()).contains(charSequence.toString().toLowerCase(Locale.getDefault()))
+                            for (item in campanha.listaDeItens) {
+                                if (item.titulo.toLowerCase(Locale.getDefault()).contains(
+                                        charSequence.toString().toLowerCase(Locale.getDefault())
+                                    )
                                 ) {
-                                    filteredList.add(card)
+                                    filteredList.add(campanha)
                                 }
 
                             }
                         }
+
 
                     }
                 }
@@ -154,7 +166,7 @@ class CardAdapter(var listaCards: MutableList<CardPesquisa>, var contexto: Conte
                 filterResults: FilterResults?
             ) {
                 listaCards.clear()
-                listaCards.addAll(filterResults!!.values as Collection<CardPesquisa>)
+                listaCards.addAll(filterResults!!.values as Collection<Campanha>)
                 notifyDataSetChanged()
             }
 

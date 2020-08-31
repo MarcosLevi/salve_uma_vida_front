@@ -1,6 +1,6 @@
 package br.com.salve_uma_vida_front.both.models
 
-class ItemCard(
+class ItemCampanha(
     var titulo: String = "",
     var unidadeMedida: String = "",
     var quantidadeMaxima: Int = 0,

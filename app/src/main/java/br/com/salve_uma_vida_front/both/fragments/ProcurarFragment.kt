@@ -1,23 +1,18 @@
 package br.com.salve_uma_vida_front.both.fragments
 
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.both.hideKeyboard
 import br.com.salve_uma_vida_front.both.adapters.CardAdapter
-import br.com.salve_uma_vida_front.both.models.CardPesquisa
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
-import br.com.salve_uma_vida_front.repository.getListaTodosOsCards
+import br.com.salve_uma_vida_front.repository.getListaTodosCards
 
 class ProcurarFragment : Fragment(), View.OnClickListener {
     var navController: NavController? = null
@@ -25,8 +20,6 @@ class ProcurarFragment : Fragment(), View.OnClickListener {
     lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentBothProcurarBinding
-
-    var listaComFiltro: MutableList<CardPesquisa> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +56,7 @@ class ProcurarFragment : Fragment(), View.OnClickListener {
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
         mAdapter = CardAdapter(
-            getListaTodosOsCards(),
+            getListaTodosCards(),
             requireContext()
         )
         mRecyclerView.layoutManager = mLayoutManager

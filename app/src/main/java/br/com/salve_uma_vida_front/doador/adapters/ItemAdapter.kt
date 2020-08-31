@@ -7,9 +7,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.both.models.ItemCard
+import br.com.salve_uma_vida_front.both.models.ItemCampanha
 
-class ItemAdapter(var listaItens: List<ItemCard>) :
+class ItemAdapter(var listaItens: List<ItemCampanha>) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var titulo: TextView = itemView.findViewById(R.id.itemDoadorTitulo)
@@ -28,7 +28,7 @@ class ItemAdapter(var listaItens: List<ItemCard>) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem: ItemCard = listaItens.get(position)
+        val currentItem: ItemCampanha = listaItens.get(position)
 
         holder.titulo.text = currentItem.titulo
         holder.progresso.text =

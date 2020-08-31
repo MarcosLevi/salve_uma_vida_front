@@ -1,22 +1,18 @@
 package br.com.salve_uma_vida_front.ongs.adapters
 
-import android.app.Dialog
 import android.view.*
-import android.widget.*
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.both.models.ItemCard
+import br.com.salve_uma_vida_front.both.models.ItemCampanha
 import br.com.salve_uma_vida_front.databinding.ItemCardCampanhaOngCadastroBinding
 
 
-class ItemAdapter(var listaItens: MutableList<ItemCard>, val listener: ItemListener) :
+class ItemAdapter(var listaItens: MutableList<ItemCampanha>, val listener: ItemListener) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(
         private val binding: ItemCardCampanhaOngCadastroBinding,
         private val listener: ItemListener
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun configuraHolder(currentItem: ItemCard) {
+        fun configuraHolder(currentItem: ItemCampanha) {
             binding.itemOngTitulo.text = currentItem.titulo
             binding.itemOngProgresso.text =
                 "Arrecadado ${currentItem.quantidadeAtual} / ${currentItem.quantidadeMaxima} ${currentItem.unidadeMedida}"
@@ -41,12 +37,12 @@ class ItemAdapter(var listaItens: MutableList<ItemCard>, val listener: ItemListe
     }
 
     interface ItemListener {
-        fun onEditaClicked(itemCard: ItemCard)
-        fun onRemoveClicked(itemCard: ItemCard)
+        fun onEditaClicked(itemCampanha: ItemCampanha)
+        fun onRemoveClicked(itemCampanha: ItemCampanha)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem: ItemCard = listaItens.get(position)
+        val currentItem: ItemCampanha = listaItens.get(position)
         holder.configuraHolder(currentItem)
     }
 }

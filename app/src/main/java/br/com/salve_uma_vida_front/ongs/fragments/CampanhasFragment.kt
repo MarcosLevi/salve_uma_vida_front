@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.repository.getListaTodosOsCards
+import br.com.salve_uma_vida_front.repository.getListaTodosCards
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.adapters.CardAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
@@ -57,7 +57,7 @@ class CampanhasFragment : Fragment(), View.OnClickListener {
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
         mAdapter = CardAdapter(
-            getListaTodosOsCards(),
+            getListaTodosCards(),
             requireContext()
         )
         mRecyclerView.layoutManager = mLayoutManager
