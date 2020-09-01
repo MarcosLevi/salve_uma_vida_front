@@ -18,6 +18,7 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.DateToString
 import br.com.salve_uma_vida_front.both.NewCalendar
 import br.com.salve_uma_vida_front.both.StringToDate
+import br.com.salve_uma_vida_front.both.models.DialogEditaItem
 import br.com.salve_uma_vida_front.both.models.ItemCampanha
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroBinding
 import br.com.salve_uma_vida_front.ongs.adapters.ItemAdapter
@@ -83,7 +84,7 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapter.ItemListe
         adicionaItem.setOnClickListener {
             Toast.makeText(view.context, "Clicou no adiciona Item", Toast.LENGTH_SHORT).show()
             val teste = ItemCampanha()
-            showPopUp(teste, false)
+            DialogEditaItem(requireContext(),teste,itensCampanha,mAdapter,binding.cadastroCampanhaQuantidadeDeItens,false)
         }
 
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
@@ -154,70 +155,13 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapter.ItemListe
     }
 
     override fun onEditaClicked(itemCampanha: ItemCampanha) {
-        Toast.makeText(
-            requireContext(),
-            "Apertou no editar2 do ${itemCampanha.titulo}",
-            Toast.LENGTH_SHORT
-        ).show()
-        showPopUp(itemCampanha)
+        DialogEditaItem(requireContext(),itemCampanha,itensCampanha,mAdapter,binding.cadastroCampanhaQuantidadeDeItens)
     }
 
     override fun onRemoveClicked(itemCampanha: ItemCampanha) {
-        Toast.makeText(
-            requireContext(),
-            "Apertou no excluir2 do ${itemCampanha.titulo}",
-            Toast.LENGTH_SHORT
-        ).show()
         itensCampanha.remove(itemCampanha)
         notificaMudancaAdapter()
         atualizaQuantidadeDeItens()
-    }
-
-    fun showPopUp(currentItem: ItemCampanha, editable: Boolean = true) {
-        val myDialog = Dialog(requireContext())
-        myDialog.setContentView(R.layout.item_cadastro_campanha)
-
-        val campoTitulo = myDialog.findViewById<EditText>(R.id.cadastroCampanhaEditTextNomeItem)
-        campoTitulo.setText(currentItem.titulo)
-
-        val campoQuantidade =
-            myDialog.findViewById<EditText>(R.id.cadastroCampanhaEditTextQuantidadeItem)
-        campoQuantidade.setText("${currentItem.quantidadeMaxima}")
-
-        val campoUnidade =
-            myDialog.findViewById<Spinner>(R.id.cadastroCampanhaSpinnerUnidadesMedida)
-        val adapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.unidades_medida,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        campoUnidade.setAdapter(adapter)
-        val spinnerPosition = adapter.getPosition(currentItem.unidadeMedida)
-        campoUnidade.setSelection(spinnerPosition)
-
-        val close = myDialog.findViewById<ImageButton>(R.id.cadastroCampanhaClose)
-        close.setOnClickListener {
-            myDialog.dismiss()
-        }
-        val finaliza = myDialog.findViewById<ImageButton>(R.id.cadastroCampanhaSubmitNovoItem)
-        finaliza.setOnClickListener {
-            currentItem.titulo = campoTitulo.text.toString()
-            currentItem.unidadeMedida = campoUnidade.selectedItem.toString()
-            currentItem.quantidadeMaxima = campoQuantidade.text.toString().toInt()
-            if (!editable) {
-                itensCampanha.add(currentItem)
-                atualizaQuantidadeDeItens()
-            }
-            myDialog.dismiss()
-            notificaMudancaAdapter()
-        }
-        myDialog.show()
-
-        val layoutParams = WindowManager.LayoutParams()
-        layoutParams.copyFrom(myDialog.window!!.attributes)
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-        myDialog.window!!.attributes = layoutParams
     }
 
     private fun notificaMudancaAdapter() {
