@@ -7,6 +7,7 @@ class Ong(
     var imagemPrincipal: String,
     var galeriaDeImagens: MutableList<String>,
     var endereco: String,
-    var telefone: String
+    var telefone: String,
+    var listaCampanhas: MutableList<Campanha>
 ) {
 }

@@ -4,14 +4,21 @@ import java.time.LocalDate
 import java.util.*
 
 class Campanha(
-    ong:Ong,
+    var ong: Ong,
     var titulo: String = "",
     val timeStamp: Calendar,
     var descricao: String = "",
     var listaDeItens: MutableList<ItemCampanha>,
     var favorito: Boolean = false
 ) {
-    var quantidadeDeItens: Int = listaDeItens.size
-    var imagemCampanha: String = ong.imagemPrincipal
+
+    var quantidadeDeItens: Int
+    var imagemCampanha: String
+
+    init {
+        ong.listaCampanhas.add(this)
+        this.quantidadeDeItens = listaDeItens.size
+        this.imagemCampanha = ong.imagemPrincipal
+    }
 
 }
