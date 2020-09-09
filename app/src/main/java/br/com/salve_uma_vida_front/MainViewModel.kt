@@ -1,7 +1,10 @@
 package br.com.salve_uma_vida_front
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.salve_uma_vida_front.both.models.UserType
 import br.com.salve_uma_vida_front.dto.AuthorizationResponseDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
 import br.com.salve_uma_vida_front.repository.LoginRepository
@@ -11,6 +14,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
+
+    private val _navigate = MutableLiveData<UserType>()
+    val navigate: LiveData<UserType> = _navigate
 
     fun doLogin(username: String, password: String) {
         val callback = LoginRepository().login(username, password)
@@ -31,7 +37,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun loginOk(response: AuthorizationResponseDto) {
-        Log.d("MainViewModel", "Login OK. ${response.token}")
+        _navigate.value = response.userType
     }
 
     fun loginError() {
