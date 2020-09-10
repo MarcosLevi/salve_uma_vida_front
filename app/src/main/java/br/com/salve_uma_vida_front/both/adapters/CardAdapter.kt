@@ -27,13 +27,13 @@ class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) 
 
     class CardViewHolder(cardView: View) : RecyclerView.ViewHolder(cardView) {
 
-        var imagemCampanha: ImageView = cardView.findViewById(R.id.cardImagemCampanha)
-        var buttonFavoritar: ImageButton = cardView.findViewById(R.id.cardFavoritar)
-        var textViewTitulo: TextView = cardView.findViewById(R.id.cardTitulo)
-        var textViewTimeStamp: TextView = cardView.findViewById(R.id.cardDataCampanha)
-        var textViewDescricao: TextView = cardView.findViewById(R.id.cardDescricao)
+        var imagemCampanha: ImageView = cardView.findViewById(R.id.cardCampanhaImagem)
+        var buttonFavoritar: ImageButton = cardView.findViewById(R.id.cardCampanhaFavoritar)
+        var textViewTitulo: TextView = cardView.findViewById(R.id.cardCampanhaTitulo)
+        var textViewTimeStamp: TextView = cardView.findViewById(R.id.cardCampanhaData)
+        var textViewDescricao: TextView = cardView.findViewById(R.id.cardCampanhaDescricao)
         var textViewQuantidadeItens: TextView = cardView.findViewById(R.id.cardQuantidadeItens)
-        var itensCampanha: RecyclerView = cardView.findViewById(R.id.itensCampanhaDoador)
+        var itensCampanha: RecyclerView = cardView.findViewById(R.id.cardCampanhaItens)
 
     }
 

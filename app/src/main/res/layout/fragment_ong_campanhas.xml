@@ -6,6 +6,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backgroundFragments"
         tools:context=".ongs.fragments.CampanhasFragment">
 
         <LinearLayout
@@ -26,7 +27,7 @@
                     android:id="@+id/campanhasSearchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layoutDirection="rtl"/>
+                    android:layoutDirection="rtl" />
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -49,7 +50,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="#CC03A9F4"
+            android:backgroundTint="@color/corFabCampanhas"
             android:src="@drawable/ic_baseline_add_24" />
 
     </FrameLayout>
