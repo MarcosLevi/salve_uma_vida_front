@@ -3,7 +3,6 @@ package br.com.salve_uma_vida_front.both.adapters
 import android.content.Context
 import android.content.res.Resources
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -12,37 +11,41 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.DateToString
 import br.com.salve_uma_vida_front.both.models.Campanha
+import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
+import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
 import com.squareup.picasso.Picasso
 import java.util.*
 
 class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) :
-    RecyclerView.Adapter<CardAdapter.CardViewHolder>(), Filterable {
+    RecyclerView.Adapter<CardAdapter.CardCampanhaViewHolder>(), Filterable {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     var listaCardsAll: MutableList<Campanha> = listaCards
+    lateinit var bindingCampanha: CardCampanhaFinalBinding
+//    lateinit var bindingEvento: CardEventoFinalBinding
 
 
-    class CardViewHolder(cardView: View) : RecyclerView.ViewHolder(cardView) {
+    class CardCampanhaViewHolder(binding: CardCampanhaFinalBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        var imagemCampanha: ImageView = cardView.findViewById(R.id.cardCampanhaImagem)
-        var buttonFavoritar: ImageButton = cardView.findViewById(R.id.cardCampanhaFavoritar)
-        var textViewTitulo: TextView = cardView.findViewById(R.id.cardCampanhaTitulo)
-        var textViewTimeStamp: TextView = cardView.findViewById(R.id.cardCampanhaData)
-        var textViewDescricao: TextView = cardView.findViewById(R.id.cardCampanhaDescricao)
-        var textViewQuantidadeItens: TextView = cardView.findViewById(R.id.cardQuantidadeItens)
-        var itensCampanha: RecyclerView = cardView.findViewById(R.id.cardCampanhaItens)
+        var imagemCampanha: ImageView = binding.cardCampanhaImagem
+        var buttonFavoritar: ImageButton = binding.cardCampanhaFavoritar
+        var textViewTitulo: TextView = binding.cardCampanhaTitulo
+        var textViewTimeStamp: TextView = binding.cardCampanhaData
+        var textViewDescricao: TextView = binding.cardCampanhaDescricao
+        var textViewQuantidadeItens: TextView = binding.cardQuantidadeItens
+        var itensCampanha: RecyclerView = binding.cardCampanhaItens
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_campanha_final, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardCampanhaViewHolder {
+        bindingCampanha = CardCampanhaFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+//        bindingEvento = CardEventoFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         val viewHolder =
-            CardViewHolder(
-                view
+            CardCampanhaViewHolder(
+                bindingCampanha
             )
         return viewHolder
     }
@@ -51,7 +54,7 @@ class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) 
         return listaCards.size
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CardCampanhaViewHolder, position: Int) {
         val currentItem: Campanha = listaCards.get(position)
 
         //seta imagem
