@@ -17,7 +17,7 @@ import br.com.salve_uma_vida_front.repository.getListaTodosCards
 class ProcurarFragment : Fragment(), View.OnClickListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardViewHolder>
+    lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardCampanhaViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentBothProcurarBinding
 
