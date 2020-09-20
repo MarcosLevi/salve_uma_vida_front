@@ -2,27 +2,45 @@ package br.com.salve_uma_vida_front
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import br.com.salve_uma_vida_front.both.models.UserType
+import br.com.salve_uma_vida_front.databinding.ActivityMainBinding
 import br.com.salve_uma_vida_front.doador.activities.DoadorMainActivity
 import br.com.salve_uma_vida_front.ongs.activities.OngMainActivity
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: MainViewModel
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val buttonOng = findViewById<Button>(R.id.mainButtonOngs)
-        val buttonDoador = findViewById<Button>(R.id.mainButtonDoador)
-        buttonOng.setOnClickListener {
-            val myIntent = Intent(this@MainActivity, OngMainActivity::class.java)
-            startActivity(myIntent)
-        }
-        buttonDoador.setOnClickListener {
-            val myIntent = Intent(this@MainActivity, DoadorMainActivity::class.java)
-            startActivity(myIntent)
-        }
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        //Fazer esquema de login e tals
+        binding.loginButton.setOnClickListener {
+            val username = binding.usernameText.text.toString()
+            val password = binding.passwordText.text.toString()
+            viewModel.doLogin(username, password)
+//            val myIntent = Intent(this@MainActivity, OngMainActivity::class.java)
+//            startActivity(myIntent)
+        }
+//        binding.signupButton.setOnClickListener {
+//            val myIntent = Intent(this@MainActivity, DoadorMainActivity::class.java)
+//            startActivity(myIntent)
+//        }
+
+        viewModel.navigate.observe(this, Observer {
+            when (it) {
+                UserType.COMMON -> startActivity(Intent(this@MainActivity, DoadorMainActivity::class.java))
+                else -> startActivity(Intent(this@MainActivity, OngMainActivity::class.java))
+            }
+        })
     }
 }
