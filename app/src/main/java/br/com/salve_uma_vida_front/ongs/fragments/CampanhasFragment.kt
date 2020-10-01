@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.repository.getListaTodosCards
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.adapters.CardAdapter
+import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 
 class CampanhasFragment : Fragment(), View.OnClickListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var mAdapter: RecyclerView.Adapter<CardAdapter.CardCampanhaViewHolder>
+    lateinit var mAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
 
@@ -35,19 +36,6 @@ class CampanhasFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         configuraRecyclerView()
-        val campoDePesquisa = binding.campanhasSearchView
-        campoDePesquisa.queryHint = "Procurar por Nome, Descrição ou Itens"
-        campoDePesquisa.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(newText: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                (mAdapter as CardAdapter).filter.filter(newText)
-                return false
-            }
-
-        })
         val ongCampanhasFragmentFab = binding.ongCampanhasFragmentFab
         ongCampanhasFragmentFab.setOnClickListener(this)
     }

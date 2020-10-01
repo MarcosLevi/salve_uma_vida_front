@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.DateToString
 import br.com.salve_uma_vida_front.both.models.Campanha
+import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
 import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
@@ -18,7 +19,7 @@ import com.squareup.picasso.Picasso
 import java.util.*
 
 class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) :
-    RecyclerView.Adapter<CardAdapter.CardCampanhaViewHolder>(), Filterable {
+    RecyclerView.Adapter<CardCampanhaViewHolder>() {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
@@ -26,19 +27,6 @@ class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) 
     var listaCardsAll: MutableList<Campanha> = listaCards
     lateinit var bindingCampanha: CardCampanhaFinalBinding
 //    lateinit var bindingEvento: CardEventoFinalBinding
-
-
-    class CardCampanhaViewHolder(binding: CardCampanhaFinalBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        var imagemCampanha: ImageView = binding.cardCampanhaImagem
-        var buttonFavoritar: ImageButton = binding.cardCampanhaFavoritar
-        var textViewTitulo: TextView = binding.cardCampanhaTitulo
-        var textViewTimeStamp: TextView = binding.cardCampanhaData
-        var textViewDescricao: TextView = binding.cardCampanhaDescricao
-        var textViewQuantidadeItens: TextView = binding.cardQuantidadeItens
-        var itensCampanha: RecyclerView = binding.cardCampanhaItens
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardCampanhaViewHolder {
         bindingCampanha = CardCampanhaFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -123,58 +111,5 @@ class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) 
 
     val Int.dp: Int
         get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence?): FilterResults {
-
-                var filteredList: MutableList<Campanha> = mutableListOf()
-                if (charSequence.toString().isEmpty()) {
-                    filteredList = listaCardsAll.toMutableList()
-                } else {
-                    for (campanha in listaCardsAll) {
-
-                        if (campanha.titulo.toLowerCase(Locale.getDefault())
-                                .contains(charSequence.toString().toLowerCase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(campanha)
-                        } else if (campanha.descricao.toLowerCase(Locale.getDefault())
-                                .contains(charSequence.toString().toLowerCase(Locale.getDefault()))
-                        ) {
-                            filteredList.add(campanha)
-                        } else {
-                            for (item in campanha.listaDeItens) {
-                                if (item.titulo.toLowerCase(Locale.getDefault()).contains(
-                                        charSequence.toString().toLowerCase(Locale.getDefault())
-                                    )
-                                ) {
-                                    filteredList.add(campanha)
-                                }
-
-                            }
-                        }
-
-
-                    }
-                }
-
-                val filterResults = FilterResults()
-                filterResults.values = filteredList
-
-                return filterResults
-            }
-
-            override fun publishResults(
-                charSequence: CharSequence?,
-                filterResults: FilterResults?
-            ) {
-                listaCards.clear()
-                listaCards.addAll(filterResults!!.values as Collection<Campanha>)
-                notifyDataSetChanged()
-            }
-
-        }
-    }
-
 
 }
