@@ -7,13 +7,19 @@ data class EventoDto(
     @SerializedName("id")
     var id: Int,
     @SerializedName("title")
-    var titulo: String = "",
+    var titulo: String,
     @SerializedName("address")
     var endereco: String,
     @SerializedName("addressLatitude")
     var latitude: Float,
     @SerializedName("addressLongitude")
-    var longitude: Float
+    var longitude: Float,
+    @SerializedName("image")
+    var imagem: String,
+    @SerializedName("description")
+    var descricao: String,
+    @SerializedName("date")
+    var data:String
 
 //    var listaIdParticipantes: List<Int>,
 //    val data: Calendar,

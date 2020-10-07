@@ -12,5 +12,7 @@
     <color name="corEventos">#00FFA8</color>
     <color name="backgroundFragments">#004080</color>
     <color name="corFabCampanhas">#00C840</color>
+    <color name="corBotaoCancelar">#E91E63</color>
+    <color name="corBotaoFltrar">#43A047</color>
 
 </resources>

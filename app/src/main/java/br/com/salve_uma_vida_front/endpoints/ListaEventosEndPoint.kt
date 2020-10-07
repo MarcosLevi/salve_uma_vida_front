@@ -5,13 +5,11 @@ import br.com.salve_uma_vida_front.dto.AuthorizationResponseDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ListaEventosEndPoint {
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJleHAiOjE2MDE1NzU0MzksImlhdCI6MTYwMTU3MTgzOX0.3Mt4fpzqCCN67mg3gsOTn8VaKJxjVqTpODMfe6UId_Pr9OXMJyZ5wQuTm3l9jxTD2104BJfP6aP_4utNvMHJGw")
-    @GET("/event/4")
-    fun getEventos(): Call<ResponseDto<EventoDto>>
+    //precisa persistir o token
+    @Headers("Authorization: Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0ZUBnbWFpbC5jb20iLCJleHAiOjE2MDIwODE3OTUsImlhdCI6MTYwMjA3ODE5NX0.DvH0wbXPM45gMIIf7T4dkuFauoYKrN3pyZ3INlhHCDjlJ31cLYLD3I6OpJd9uoe8BwlnhYd2-fOqk89ORIB1oA"}")
+    @GET("/event/{id}")
+    fun getEvento(@Path("id") id: Int): Call<ResponseDto<EventoDto>>
 }
