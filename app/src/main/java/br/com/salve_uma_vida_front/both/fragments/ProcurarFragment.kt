@@ -44,7 +44,7 @@ class ProcurarFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         configuraRecyclerView()
-//        carregaEventos()
+//        carregaEvento()
         setHasOptionsMenu(true)
     }
 
@@ -60,7 +60,7 @@ class ProcurarFragment : Fragment(){
         mRecyclerView.adapter = mAdapter
     }
 
-    private fun carregaEventos() {
+    private fun carregaEvento() {
         viewModel.getEvento(6)
         viewModel.listaEventos.observe(viewLifecycleOwner, Observer {
 

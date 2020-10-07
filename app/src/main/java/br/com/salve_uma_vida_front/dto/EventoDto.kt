@@ -20,8 +20,4 @@ data class EventoDto(
     var descricao: String,
     @SerializedName("date")
     var data:String
-
-//    var listaIdParticipantes: List<Int>,
-//    val data: Calendar,
-//    var descricao: String = ""
 )

@@ -50,31 +50,4 @@ class ProcurarFragmentViewModel : ViewModel() {
         //nova lista de elementos
         var teste = filtro
     }
-//
-//    fun doLogin(username: String, password: String) {
-//        val callback = LoginRepository().login(username, password)
-//        callback.enqueue(object: Callback<ResponseDto<AuthorizationResponseDto>> {
-//            override fun onFailure(call: Call<ResponseDto<AuthorizationResponseDto>>, t: Throwable) {
-//                Log.d("MainViewModel", "Requisição falhou")
-//            }
-//
-//            override fun onResponse(call: Call<ResponseDto<AuthorizationResponseDto>>, response: Response<ResponseDto<AuthorizationResponseDto>>) {
-//                val code = response.code()
-//                when (code) {
-//                    NetworkUtil.RESPONSE_OK -> loginOk(response.body()?.data as AuthorizationResponseDto)
-//                    else -> loginError()
-//                }
-//            }
-//
-//        })
-//    }
-//
-//    fun loginOk(response: AuthorizationResponseDto) {
-//        _navigate.value = response.userType
-//    }
-//
-//    fun loginError() {
-//
-//    }
-
 }
