@@ -3,10 +3,7 @@ package br.com.salve_uma_vida_front.both.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,20 +12,24 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.both.adapters.CardAdapter
+import br.com.salve_uma_vida_front.both.adapters.CardCampanhaAdapter
+import br.com.salve_uma_vida_front.both.adapters.CardEventoAdapter
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
+import br.com.salve_uma_vida_front.both.viewholders.CardEventoViewHolder
 import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
+import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.repository.getListaTodosCards
-import kotlin.math.log
 
 class ProcurarFragment : Fragment(){
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var mAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
+    lateinit var campanhaAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
+    lateinit var eventoAdapter: RecyclerView.Adapter<CardEventoViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentBothProcurarBinding
     private lateinit var viewModel: ProcurarFragmentViewModel
+    private val listaEventos: MutableList<EventoDto> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +45,7 @@ class ProcurarFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         configuraRecyclerView()
-//        carregaEvento()
+        carregaEvento()
         setHasOptionsMenu(true)
     }
 
@@ -52,18 +53,24 @@ class ProcurarFragment : Fragment(){
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-        mAdapter = CardAdapter(
+        campanhaAdapter = CardCampanhaAdapter(
             getListaTodosCards(),
             requireContext()
         )
         mRecyclerView.layoutManager = mLayoutManager
-        mRecyclerView.adapter = mAdapter
+        mRecyclerView.adapter = campanhaAdapter
     }
 
     private fun carregaEvento() {
         viewModel.getEvento(6)
-        viewModel.listaEventos.observe(viewLifecycleOwner, Observer {
-            val it = it
+        viewModel.evento.observe(viewLifecycleOwner, Observer {
+            val evento = it
+            listaEventos.add(it)
+            eventoAdapter = CardEventoAdapter(
+                listaEventos,
+                requireContext()
+            )
+            mRecyclerView.adapter = eventoAdapter
         })
     }
 

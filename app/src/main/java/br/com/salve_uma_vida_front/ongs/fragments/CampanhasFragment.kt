@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.repository.getListaTodosCards
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.both.adapters.CardAdapter
+import br.com.salve_uma_vida_front.both.adapters.CardCampanhaAdapter
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 
@@ -44,7 +43,7 @@ class CampanhasFragment : Fragment(), View.OnClickListener {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-        mAdapter = CardAdapter(
+        mAdapter = CardCampanhaAdapter(
             getListaTodosCards(),
             requireContext()
         )

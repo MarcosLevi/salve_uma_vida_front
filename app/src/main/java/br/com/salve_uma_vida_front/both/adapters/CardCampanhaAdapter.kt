@@ -18,7 +18,7 @@ import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
 import com.squareup.picasso.Picasso
 import java.util.*
 
-class CardAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) :
+class CardCampanhaAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) :
     RecyclerView.Adapter<CardCampanhaViewHolder>() {
 
     lateinit var mRecyclerView: RecyclerView

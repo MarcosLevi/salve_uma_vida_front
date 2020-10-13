@@ -7,8 +7,8 @@ import retrofit2.Call
 
 class EventoRepository {
 
-    fun getEvento(id: Int): Call<ResponseDto<EventoDto>> {
+    fun getEvento(id: Int, token: String): Call<ResponseDto<EventoDto>> {
         var endpoint = NetworkUtil.getRetrofitInstance().create(ListaEventosEndPoint::class.java)
-        return endpoint.getEvento(id)
+        return endpoint.getEvento(id, token)
     }
 }

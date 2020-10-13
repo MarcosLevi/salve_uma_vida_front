@@ -1,7 +1,9 @@
 package br.com.salve_uma_vida_front.both.viewmodels
 
+import android.app.Application
 import android.util.Log
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,17 +12,23 @@ import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
 import br.com.salve_uma_vida_front.repository.EventoRepository
+import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProcurarFragmentViewModel : ViewModel() {
+class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _listaEventos = MutableLiveData<EventoDto>()
-    val listaEventos: LiveData<EventoDto> = _listaEventos
+    private val context = getApplication<Application>().applicationContext
+    private val myPreferences = MyPreferences(context)
+    private val token = "Bearer " + myPreferences.getToken()
+    private val _listaEventos = MutableLiveData<MutableList<EventoDto>>()
+    val listaEventos: LiveData<MutableList<EventoDto>> = _listaEventos
+    private val _evento = MutableLiveData<EventoDto>()
+    val evento: LiveData<EventoDto> = _evento
 
     fun getEvento(id: Int) {
-        val callback = EventoRepository().getEvento(id)
+        val callback = EventoRepository().getEvento(id, token)
         callback.enqueue(object : Callback<ResponseDto<EventoDto>> {
             override fun onFailure(call: Call<ResponseDto<EventoDto>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")
@@ -30,8 +38,9 @@ class ProcurarFragmentViewModel : ViewModel() {
                 call: Call<ResponseDto<EventoDto>>,
                 response: Response<ResponseDto<EventoDto>>
             ) {
-                val teste = response
-                _listaEventos.value = response.body()!!.data
+                val evento = response.body()!!.data
+                _evento.value = evento
+
             }
 
         })
@@ -41,12 +50,12 @@ class ProcurarFragmentViewModel : ViewModel() {
 
         var dialog = DialogFiltros()
         if (fragmentManager != null) {
-            dialog.show(fragmentManager,"FiltroDialog")
+            dialog.show(fragmentManager, "FiltroDialog")
         }
 
     }
 
-    fun filtrar(filtro: FiltroPesquisaDto){
+    fun filtrar(filtro: FiltroPesquisaDto) {
         //nova lista de elementos
         var teste = filtro
     }
