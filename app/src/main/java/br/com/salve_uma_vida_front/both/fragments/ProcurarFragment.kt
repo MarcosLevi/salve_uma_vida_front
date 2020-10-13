@@ -63,7 +63,7 @@ class ProcurarFragment : Fragment(){
     private fun carregaEvento() {
         viewModel.getEvento(6)
         viewModel.listaEventos.observe(viewLifecycleOwner, Observer {
-
+            val it = it
         })
     }
 

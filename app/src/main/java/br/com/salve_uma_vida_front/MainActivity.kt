@@ -11,6 +11,7 @@ import br.com.salve_uma_vida_front.both.models.UserType
 import br.com.salve_uma_vida_front.databinding.ActivityMainBinding
 import br.com.salve_uma_vida_front.doador.activities.DoadorMainActivity
 import br.com.salve_uma_vida_front.ongs.activities.OngMainActivity
+import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
 
         binding.loginButton.setOnClickListener {
             val username = binding.usernameText.text.toString()

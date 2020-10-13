@@ -1,6 +1,8 @@
 package br.com.salve_uma_vida_front
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +11,15 @@ import br.com.salve_uma_vida_front.dto.AuthorizationResponseDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
 import br.com.salve_uma_vida_front.repository.LoginRepository
 import br.com.salve_uma_vida_front.repository.NetworkUtil
+import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val context = getApplication<Application>().applicationContext
+    private val myPreferences = MyPreferences(context)
     private val _navigate = MutableLiveData<UserType>()
     val navigate: LiveData<UserType> = _navigate
 
@@ -37,6 +42,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun loginOk(response: AuthorizationResponseDto) {
+        myPreferences.setToken(response.token)
         _navigate.value = response.userType
     }
 
