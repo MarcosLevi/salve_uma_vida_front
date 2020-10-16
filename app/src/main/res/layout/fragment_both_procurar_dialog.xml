@@ -8,7 +8,7 @@
         android:layout_height="wrap_content">
 
         <RadioGroup
-            android:id="@+id/radioGroupTIpo"
+            android:id="@+id/radio_group_tipo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -41,7 +41,7 @@
             android:text="Distância: "
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroupTIpo" />
+            app:layout_constraintTop_toBottomOf="@+id/radio_group_tipo" />
 
         <TextView
             android:id="@+id/textViewMaximo"

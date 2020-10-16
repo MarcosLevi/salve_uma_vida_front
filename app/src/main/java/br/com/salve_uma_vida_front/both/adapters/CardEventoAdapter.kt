@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.both.FormatStringToDate
 import br.com.salve_uma_vida_front.both.viewholders.CardEventoViewHolder
 import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
@@ -53,7 +54,7 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
         ajustaIconeFavorito(currentItem, holder.buttonFavoritar)
         holder.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
-        holder.textViewTimeStamp.text = currentItem.data
+        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewDescricao.text = currentItem.descricao
     }
 

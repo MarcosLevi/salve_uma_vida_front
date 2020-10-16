@@ -58,7 +58,7 @@ class DialogFiltros : DialogFragment() {
 
     private fun configuraBotaoFiltrar() {
         binding.buttonFiltrar.setOnClickListener {
-            val selectedId = binding.radioGroupTIpo.checkedRadioButtonId
+            val selectedId = binding.radioGroupTipo.checkedRadioButtonId
             var radio = binding.root.findViewById<RadioButton>(selectedId)
             val tipoFiltro = radio.text.toString()
             val distancia = binding.seekBarDistancia.progress

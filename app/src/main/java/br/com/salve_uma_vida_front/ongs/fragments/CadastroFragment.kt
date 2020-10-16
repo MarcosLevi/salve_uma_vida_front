@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.repository.addCampanhaNaOng
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.DateToString
 import br.com.salve_uma_vida_front.both.NewCalendar
@@ -140,14 +139,14 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapter.ItemListe
                 Toast.makeText(requireContext(), "Clicou no finalizar campanha", Toast.LENGTH_SHORT).show()
                 //salva no banco
                 val diaMesAno = StringToDate(binding.cadastroCampanhaData.text.toString())
-                addCampanhaNaOng(
-                    //Quando fazer login da ong, aqui vai o nome dela
-                    "São Camilo",
-                    binding.cadastroCampanhaTitulo.text.toString(),
-                    NewCalendar(diaMesAno.get(0),diaMesAno.get(1),diaMesAno.get(2)),
-                    binding.cadastroCampanhaDescricao.text.toString(),
-                    itensCampanha
-                )
+//                addCampanhaNaOng(
+//                    //Quando fazer login da ong, aqui vai o nome dela
+//                    "São Camilo",
+//                    binding.cadastroCampanhaTitulo.text.toString(),
+//                    NewCalendar(diaMesAno.get(0),diaMesAno.get(1),diaMesAno.get(2)),
+//                    binding.cadastroCampanhaDescricao.text.toString(),
+//                    itensCampanha
+//                )
                 notificaMudancaAdapter()
                 navController!!.navigate(R.id.action_cadastroFragment_to_ongCampanhasFragment)
             }

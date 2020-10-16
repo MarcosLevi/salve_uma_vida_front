@@ -10,21 +10,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.DateToString
-import br.com.salve_uma_vida_front.both.models.Campanha
+import br.com.salve_uma_vida_front.both.FormatStringToDate
+import br.com.salve_uma_vida_front.both.StringToDate
+import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
-import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.doador.adapters.ItemAdapter
 import com.squareup.picasso.Picasso
-import java.util.*
 
-class CardCampanhaAdapter(var listaCards: MutableList<Campanha>, var contexto: Context) :
+class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto: Context) :
     RecyclerView.Adapter<CardCampanhaViewHolder>() {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    var listaCardsAll: MutableList<Campanha> = listaCards
+    var listaCardsAll: MutableList<CampanhaDto> = listaCards
     lateinit var bindingCampanha: CardCampanhaFinalBinding
 //    lateinit var bindingEvento: CardEventoFinalBinding
 
@@ -43,16 +43,16 @@ class CardCampanhaAdapter(var listaCards: MutableList<Campanha>, var contexto: C
     }
 
     override fun onBindViewHolder(holder: CardCampanhaViewHolder, position: Int) {
-        val currentItem: Campanha = listaCards.get(position)
+        val currentItem: CampanhaDto = listaCards.get(position)
 
         //seta imagem
-        Picasso.get()
-            .load(currentItem.imagemCampanha)
-            .resize(110.dp, 110.dp)
-            .centerCrop()
-            .placeholder(R.drawable.ic_dafault_photo)
-            .error(R.drawable.ic_baseline_report_problem_24)
-            .into(holder.imagemCampanha)
+//        Picasso.get()
+//            .load(currentItem.imagemCampanha)
+//            .resize(110.dp, 110.dp)
+//            .centerCrop()
+//            .placeholder(R.drawable.ic_dafault_photo)
+//            .error(R.drawable.ic_baseline_report_problem_24)
+//            .into(holder.imagemCampanha)
 
 
 //        fazer função que salve esse cara
@@ -61,26 +61,26 @@ class CardCampanhaAdapter(var listaCards: MutableList<Campanha>, var contexto: C
         }
         ajustaIconeFavorito(currentItem, holder.buttonFavoritar)
         holder.textViewTitulo.text = currentItem.titulo
-        holder.textViewTimeStamp.text = DateToString(currentItem.timeStamp)
+        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewDescricao.text = currentItem.descricao
-        holder.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.quantidadeDeItens)
+        holder.textViewQuantidadeItens.text = quantidadeDeItensString(5) //quantidadeDeItensString(currentItem.quantidadeDeItens)
 
         mRecyclerView = holder.itensCampanha
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(contexto)
         mAdapter =
-            ItemAdapter(currentItem.listaDeItens)
+            ItemAdapter(currentItem.itens)
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
     }
 
-    private fun clickFavoritar(currentItem: Campanha, buttonFavoritar: ImageButton) {
+    private fun clickFavoritar(currentItem: CampanhaDto, buttonFavoritar: ImageButton) {
         currentItem.favorito = !currentItem.favorito
         ajustaIconeFavorito(currentItem, buttonFavoritar)
     }
 
     private fun ajustaIconeFavorito(
-        currentItem: Campanha,
+        currentItem: CampanhaDto,
         buttonFavoritar: ImageButton
     ) {
         if (currentItem.favorito) {
