@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.both.viewmodels
+package br.com.salve_uma_vida_front.ongs.viewmodel
 
 import android.app.Application
 import android.util.Log
@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class CampanhasViewModel(application: Application) : AndroidViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
     private val myPreferences = MyPreferences(context)
@@ -51,7 +51,7 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
         })
     }
 
-    fun getCampanhaUserLogado() {
+    fun getCampanhasUserLogado() {
         val callback = CampanhaRepository().getCampanhasUserLogado(token)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {

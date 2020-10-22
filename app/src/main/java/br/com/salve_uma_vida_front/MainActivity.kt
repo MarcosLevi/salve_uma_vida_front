@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 //            val myIntent = Intent(this@MainActivity, OngMainActivity::class.java)
 //            startActivity(myIntent)
         }
+        binding.signupButton.setOnClickListener{
+            startActivity(Intent(this@MainActivity, ActivityCadastroUser::class.java))
+
+        }
 //        binding.signupButton.setOnClickListener {
 //            val myIntent = Intent(this@MainActivity, DoadorMainActivity::class.java)
 //            startActivity(myIntent)

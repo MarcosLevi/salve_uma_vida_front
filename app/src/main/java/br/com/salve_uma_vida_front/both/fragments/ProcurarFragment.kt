@@ -66,7 +66,7 @@ class ProcurarFragment : Fragment() {
     }
 
     private fun carregaEvento() {
-        viewModel.getEvento(6)
+        viewModel.getEvento(1)
         viewModel.evento.observe(viewLifecycleOwner, Observer {
             val evento = it
             listaEventos.add(it)
@@ -79,7 +79,7 @@ class ProcurarFragment : Fragment() {
     }
 
     private fun carregaCampanha() {
-        viewModel.getCampanhaUserLogado(7)
+        viewModel.getCampanhaUserLogado()
         viewModel.campanha.observe(viewLifecycleOwner, Observer {
             val campanha = it
             listaCampanhas.addAll(it)

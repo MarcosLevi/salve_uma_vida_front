@@ -1,25 +1,37 @@
 package br.com.salve_uma_vida_front.ongs.fragments
 
 import android.os.Bundle
+import android.util.Log
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.Variaveis
 import br.com.salve_uma_vida_front.both.adapters.CardCampanhaAdapter
+import br.com.salve_uma_vida_front.both.adapters.CardEventoAdapter
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
+import br.com.salve_uma_vida_front.both.viewholders.CardEventoViewHolder
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
+import br.com.salve_uma_vida_front.dto.CampanhaDto
+import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.ongs.viewmodel.CampanhasViewModel
 
-class CampanhasFragment : Fragment(), View.OnClickListener {
+class CampanhasFragment : Fragment() {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var mAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
+    lateinit var campanhaAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
+    lateinit var eventoAdapter: RecyclerView.Adapter<CardEventoViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
+    private lateinit var viewModel: CampanhasViewModel
+    private val listaEventos: MutableList<EventoDto> = mutableListOf()
+    private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +39,7 @@ class CampanhasFragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentOngCampanhasBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
         return binding.root
     }
 
@@ -34,25 +47,98 @@ class CampanhasFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         configuraRecyclerView()
-        val ongCampanhasFragmentFab = binding.ongCampanhasFragmentFab
-        ongCampanhasFragmentFab.setOnClickListener(this)
+        carregaCampanha()
+//        carregaEvento()
+        mudaAdapter()
+        setHasOptionsMenu(true)
     }
 
     private fun configuraRecyclerView() {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-//        mAdapter = CardCampanhaAdapter(
+//        campanhaAdapter = CardCampanhaAdapter(
 //            getListaTodosCards(),
 //            requireContext()
 //        )
         mRecyclerView.layoutManager = mLayoutManager
-//        mRecyclerView.adapter = mAdapter
+//        mRecyclerView.adapter = campanhaAdapter
     }
 
-    override fun onClick(p0: View?) {
-        when (p0!!.id) {
-            R.id.ongCampanhasFragmentFab -> navController!!.navigate(R.id.action_ongCampanhasFragment_to_cadastroFragment)
+    private fun carregaEvento() {
+        viewModel.getEvento(1)
+        viewModel.evento.observe(viewLifecycleOwner, Observer {
+            val evento = it
+            listaEventos.add(it)
+            eventoAdapter = CardEventoAdapter(
+                listaEventos,
+                requireContext()
+            )
+            mRecyclerView.adapter = eventoAdapter
+        })
+    }
+
+    private fun carregaCampanha() {
+        viewModel.getCampanhasUserLogado()
+        viewModel.campanha.observe(viewLifecycleOwner, Observer {
+            val campanha = it
+            listaCampanhas.addAll(it)
+            campanhaAdapter = CardCampanhaAdapter(
+                listaCampanhas,
+                requireContext()
+            )
+            mRecyclerView.adapter = campanhaAdapter
+        })
+    }
+
+    private fun mudaAdapter() {
+        viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
+            val it1 = it
+            if (it.equals(Variaveis().CAMPANHAS)) {
+                campanhaAdapter = CardCampanhaAdapter(
+                    listaCampanhas,
+                    requireContext()
+                )
+                mRecyclerView.adapter = campanhaAdapter
+            } else if (it.equals(Variaveis().EVENTOS)) {
+                eventoAdapter = CardEventoAdapter(
+                    listaEventos,
+                    requireContext()
+                )
+                mRecyclerView.adapter = eventoAdapter
+            }
+
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
+        var procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
+        var searchView = procurar.actionView as SearchView
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                Log.d("onQueryTextSubmit", p0!!)
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                Log.d("onQueryTextChange", p0!!)
+                return false
+            }
+
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.bothProcurarFragmentFiltros -> {
+                viewModel.createDialog(fragmentManager)
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 }
+

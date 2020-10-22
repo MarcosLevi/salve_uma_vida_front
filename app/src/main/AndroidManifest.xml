@@ -33,6 +33,7 @@
         </activity>
         <activity android:name=".ongs.activities.OngMainActivity"/>
         <activity android:name=".doador.activities.DoadorMainActivity"/>
+        <activity android:name=".ActivityCadastroUser"/>
     </application>
 
 </manifest>

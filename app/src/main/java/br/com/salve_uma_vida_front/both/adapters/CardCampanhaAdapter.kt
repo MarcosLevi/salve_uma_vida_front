@@ -63,7 +63,7 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
         holder.textViewTitulo.text = currentItem.titulo
         holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewDescricao.text = currentItem.descricao
-        holder.textViewQuantidadeItens.text = quantidadeDeItensString(5) //quantidadeDeItensString(currentItem.quantidadeDeItens)
+        holder.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
 
         mRecyclerView = holder.itensCampanha
         mRecyclerView.setHasFixedSize(true)
