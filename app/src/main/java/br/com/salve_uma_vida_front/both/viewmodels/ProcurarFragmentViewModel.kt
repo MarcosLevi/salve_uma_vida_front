@@ -27,8 +27,10 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
     val listaEventos: LiveData<MutableList<EventoDto>> = _listaEventos
     private val _evento = MutableLiveData<EventoDto>()
     val evento: LiveData<EventoDto> = _evento
-    private val _campanha = MutableLiveData<List<CampanhaDto>>()
-    val campanha: LiveData<List<CampanhaDto>> = _campanha
+    private val _minhasCampanhas = MutableLiveData<List<CampanhaDto>>()
+    val minhasCampanhas: LiveData<List<CampanhaDto>> = _minhasCampanhas
+    private val _campanhas = MutableLiveData<List<CampanhaDto>>()
+    val campanhas: LiveData<List<CampanhaDto>> = _campanhas
     private val _campanhaOuEvento = MutableLiveData<String>()
     val campanhaOuEvento: LiveData<String> = _campanhaOuEvento
 
@@ -51,7 +53,7 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
         })
     }
 
-    fun getCampanhaUserLogado() {
+    fun getCampanhasUserLogado() {
         val callback = CampanhaRepository().getCampanhasUserLogado(token)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
@@ -62,8 +64,27 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
                 call: Call<ResponseDto<List<CampanhaDto>>>,
                 response: Response<ResponseDto<List<CampanhaDto>>>
             ) {
-                val campanha = response.body()!!.data
-                _campanha.value = campanha
+                val campanha = response.body()?.data
+                _minhasCampanhas.value = campanha
+
+            }
+
+        })
+    }
+
+    fun getCampanhas(title: String = "", itemDescription: String = "") {
+        val callback = CampanhaRepository().getCampanhas(token, title, itemDescription)
+        callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
+            override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<List<CampanhaDto>>>,
+                response: Response<ResponseDto<List<CampanhaDto>>>
+            ) {
+                val campanhas = response.body()?.data
+                _campanhas.value = campanhas
 
             }
 
@@ -72,7 +93,7 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
 
     fun createDialog(fragmentManager: FragmentManager?) {
 
-        var dialog = DialogFiltros()
+        var dialog = DialogFiltros(this)
         if (fragmentManager != null) {
             dialog.show(fragmentManager, "FiltroDialog")
         }

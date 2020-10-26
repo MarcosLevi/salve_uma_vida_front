@@ -21,6 +21,7 @@ import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
+import kotlinx.android.synthetic.main.fragment_both_procurar_dialog.*
 
 class ProcurarFragment : Fragment() {
     var navController: NavController? = null
@@ -47,9 +48,10 @@ class ProcurarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         configuraRecyclerView()
-        carregaCampanha()
+        configuraObservers()
+        carregaCampanhas()
 //        carregaEvento()
-        mudaAdapter()
+//        mudaAdapter()
         setHasOptionsMenu(true)
     }
 
@@ -57,18 +59,36 @@ class ProcurarFragment : Fragment() {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-//        campanhaAdapter = CardCampanhaAdapter(
-//            getListaTodosCards(),
-//            requireContext()
-//        )
+        campanhaAdapter = CardCampanhaAdapter(
+            listaCampanhas,
+            requireContext()
+        )
         mRecyclerView.layoutManager = mLayoutManager
-//        mRecyclerView.adapter = campanhaAdapter
+        mRecyclerView.adapter = campanhaAdapter
     }
 
     private fun carregaEvento() {
         viewModel.getEvento(1)
+    }
+
+    private fun carregaMinhasCampanhas() {
+        viewModel.getCampanhasUserLogado()
+    }
+
+    private fun configuraObservers() {
+        viewModel.minhasCampanhas.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                listaCampanhas.addAll(it)
+            }
+            campanhaAdapter = CardCampanhaAdapter(
+                listaCampanhas,
+                requireContext()
+            )
+            mRecyclerView.adapter = campanhaAdapter
+        })
         viewModel.evento.observe(viewLifecycleOwner, Observer {
             val evento = it
+            listaEventos.clear()
             listaEventos.add(it)
             eventoAdapter = CardEventoAdapter(
                 listaEventos,
@@ -76,39 +96,30 @@ class ProcurarFragment : Fragment() {
             )
             mRecyclerView.adapter = eventoAdapter
         })
-    }
-
-    private fun carregaCampanha() {
-        viewModel.getCampanhaUserLogado()
-        viewModel.campanha.observe(viewLifecycleOwner, Observer {
-            val campanha = it
-            listaCampanhas.addAll(it)
+        viewModel.campanhas.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                listaCampanhas.clear()
+                listaCampanhas.addAll(it)
+            }
             campanhaAdapter = CardCampanhaAdapter(
                 listaCampanhas,
                 requireContext()
             )
             mRecyclerView.adapter = campanhaAdapter
         })
-    }
-
-    private fun mudaAdapter() {
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
             val it1 = it
             if (it.equals(Variaveis().CAMPANHAS)) {
-                campanhaAdapter = CardCampanhaAdapter(
-                    listaCampanhas,
-                    requireContext()
-                )
-                mRecyclerView.adapter = campanhaAdapter
+                carregaCampanhas()
             }else if(it.equals(Variaveis().EVENTOS)){
-                eventoAdapter = CardEventoAdapter(
-                    listaEventos,
-                    requireContext()
-                )
-                mRecyclerView.adapter = eventoAdapter
+                carregaEvento()
             }
 
         })
+    }
+
+    private fun carregaCampanhas() {
+        viewModel.getCampanhas()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

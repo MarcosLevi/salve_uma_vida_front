@@ -12,10 +12,10 @@ import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarDialogBinding
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 
-class DialogFiltros : DialogFragment() {
+class DialogFiltros(procurarFragmentViewModel: ProcurarFragmentViewModel) : DialogFragment() {
 
     lateinit var binding: FragmentBothProcurarDialogBinding
-    private lateinit var viewModel: ProcurarFragmentViewModel
+    private var viewModel = procurarFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +23,6 @@ class DialogFiltros : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBothProcurarDialogBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProviders.of(this).get(ProcurarFragmentViewModel::class.java)
         return binding.root
     }
 

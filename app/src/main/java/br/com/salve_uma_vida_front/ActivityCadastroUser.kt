@@ -29,8 +29,15 @@ class ActivityCadastroUser : AppCompatActivity() {
                 binding.endereco.visibility = View.INVISIBLE
             }
 
+        }
+        binding.userFoto.setOnClickListener{
 
         }
 
+    }
+
+    private fun getRadioSelected(): RadioButton? {
+        val selectedId = binding.radioGroupTipo.checkedRadioButtonId
+        return binding.root.findViewById(selectedId)
     }
 }

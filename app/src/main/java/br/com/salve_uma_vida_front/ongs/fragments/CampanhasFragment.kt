@@ -17,10 +17,10 @@ import br.com.salve_uma_vida_front.both.adapters.CardCampanhaAdapter
 import br.com.salve_uma_vida_front.both.adapters.CardEventoAdapter
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.both.viewholders.CardEventoViewHolder
+import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.ongs.viewmodel.CampanhasViewModel
 
 class CampanhasFragment : Fragment() {
     var navController: NavController? = null
@@ -29,7 +29,7 @@ class CampanhasFragment : Fragment() {
     lateinit var eventoAdapter: RecyclerView.Adapter<CardEventoViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
-    private lateinit var viewModel: CampanhasViewModel
+    private lateinit var viewModel: ProcurarFragmentViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
 
@@ -39,7 +39,7 @@ class CampanhasFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentOngCampanhasBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ProcurarFragmentViewModel::class.java)
         return binding.root
     }
 
@@ -80,7 +80,7 @@ class CampanhasFragment : Fragment() {
 
     private fun carregaCampanha() {
         viewModel.getCampanhasUserLogado()
-        viewModel.campanha.observe(viewLifecycleOwner, Observer {
+        viewModel.minhasCampanhas.observe(viewLifecycleOwner, Observer {
             val campanha = it
             listaCampanhas.addAll(it)
             campanhaAdapter = CardCampanhaAdapter(

@@ -9,7 +9,18 @@ import retrofit2.http.*
 interface ListaCampanhasEndPoint {
     //precisa persistir o token
     @GET("/event/{id}")
-    fun getCampanhaId(@Path("id") id: Int, @Header("Authorization") token: String): Call<ResponseDto<CampanhaDto>>
+    fun getCampanhaId(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<ResponseDto<CampanhaDto>>
+
     @GET("/campaigns")
     fun getCampanhasUserLogado(@Header("Authorization") token: String): Call<ResponseDto<List<CampanhaDto>>>
+
+    @GET("/campaign/search")
+    fun getCampanhas(
+        @Header("Authorization") token: String,
+        @Query("title") title: String,
+        @Query("itemDescription") itemDescription: String
+    ): Call<ResponseDto<List<CampanhaDto>>>
 }
