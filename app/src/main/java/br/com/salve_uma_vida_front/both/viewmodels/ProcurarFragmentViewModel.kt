@@ -27,6 +27,8 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
     val listaEventos: LiveData<MutableList<EventoDto>> = _listaEventos
     private val _evento = MutableLiveData<EventoDto>()
     val evento: LiveData<EventoDto> = _evento
+    private val _eventos = MutableLiveData<List<EventoDto>>()
+    val eventos: LiveData<List<EventoDto>> = _eventos
     private val _minhasCampanhas = MutableLiveData<List<CampanhaDto>>()
     val minhasCampanhas: LiveData<List<CampanhaDto>> = _minhasCampanhas
     private val _campanhas = MutableLiveData<List<CampanhaDto>>()
@@ -47,6 +49,25 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
             ) {
                 val evento = response.body()!!.data
                 _evento.value = evento
+
+            }
+
+        })
+    }
+
+    fun getEventos(parametro: String) {
+        val callback = EventoRepository().getEventos(token, parametro)
+        callback.enqueue(object : Callback<ResponseDto<List<EventoDto>>> {
+            override fun onFailure(call: Call<ResponseDto<List<EventoDto>>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<List<EventoDto>>>,
+                response: Response<ResponseDto<List<EventoDto>>>
+            ) {
+                val eventos = response.body()?.data
+                _eventos.value = eventos
 
             }
 

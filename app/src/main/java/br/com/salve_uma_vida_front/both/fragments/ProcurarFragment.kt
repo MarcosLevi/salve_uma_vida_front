@@ -31,6 +31,7 @@ class ProcurarFragment : Fragment() {
     private lateinit var viewModel: ProcurarFragmentViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
+    private var filtroAtual: String = Variaveis().CAMPANHAS
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +49,6 @@ class ProcurarFragment : Fragment() {
         configuraRecyclerView()
         configuraObservers()
         carregaCampanhas()
-//        carregaEvento()
-//        mudaAdapter()
         setHasOptionsMenu(true)
     }
 
@@ -65,35 +64,7 @@ class ProcurarFragment : Fragment() {
         mRecyclerView.adapter = campanhaAdapter
     }
 
-    private fun carregaEvento() {
-        viewModel.getEvento(1)
-    }
-
-    private fun carregaMinhasCampanhas() {
-        viewModel.getCampanhasUserLogado()
-    }
-
     private fun configuraObservers() {
-        viewModel.minhasCampanhas.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                listaCampanhas.addAll(it)
-            }
-            campanhaAdapter = CardCampanhaAdapter(
-                listaCampanhas,
-                requireContext()
-            )
-            mRecyclerView.adapter = campanhaAdapter
-        })
-        viewModel.evento.observe(viewLifecycleOwner, Observer {
-            val evento = it
-            listaEventos.clear()
-            listaEventos.add(it)
-            eventoAdapter = CardEventoAdapter(
-                listaEventos,
-                requireContext()
-            )
-            mRecyclerView.adapter = eventoAdapter
-        })
         viewModel.campanhas.observe(viewLifecycleOwner, Observer {
             listaCampanhas.clear()
             if (it != null) {
@@ -105,12 +76,23 @@ class ProcurarFragment : Fragment() {
             )
             mRecyclerView.adapter = campanhaAdapter
         })
+        viewModel.eventos.observe(viewLifecycleOwner, Observer {
+            listaEventos.clear()
+            if (it != null) {
+                listaEventos.addAll(it)
+            }
+            eventoAdapter = CardEventoAdapter(
+                listaEventos,
+                requireContext()
+            )
+            mRecyclerView.adapter = eventoAdapter
+        })
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
-            val it1 = it
-            if (it.equals(Variaveis().CAMPANHAS)) {
+            filtroAtual = it
+            if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
                 carregaCampanhas()
-            }else if(it.equals(Variaveis().EVENTOS)){
-                carregaEvento()
+            } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
+                carregaEventos()
             }
 
         })
@@ -120,20 +102,27 @@ class ProcurarFragment : Fragment() {
         viewModel.getCampanhas(parametro)
     }
 
+    private fun carregaEventos(parametro: String = "") {
+        viewModel.getEventos(parametro)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
         var procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
         var searchView = procurar.actionView as SearchView
 
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
-                carregaCampanhas(textoDeBusca);
+                if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
+                    carregaCampanhas(textoDeBusca);
+                } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
+                    carregaEventos(textoDeBusca)
+                }
                 return true
             }
 
             override fun onQueryTextChange(novoTexto: String): Boolean {
-                if(novoTexto == ""){
+                if (novoTexto == "") {
                     this.onQueryTextSubmit("");
                 }
                 return true
