@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.FormatStringToDate
+import br.com.salve_uma_vida_front.both.dp
 import br.com.salve_uma_vida_front.both.viewholders.CardEventoViewHolder
 import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
@@ -83,8 +84,5 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
             )
         }
     }
-
-    val Int.dp: Int
-        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
 }

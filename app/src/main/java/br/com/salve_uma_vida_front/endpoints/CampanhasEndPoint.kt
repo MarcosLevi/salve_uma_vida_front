@@ -6,9 +6,9 @@ import br.com.salve_uma_vida_front.dto.ResponseDto
 import retrofit2.Call
 import retrofit2.http.*
 
-interface ListaCampanhasEndPoint {
-    //precisa persistir o token
-    @GET("/event/{id}")
+interface CampanhasEndPoint {
+    //Ainda não tem
+    @GET("/campaign/{id}")
     fun getCampanhaId(
         @Header("Authorization") token: String,
         @Path("id") id: Int

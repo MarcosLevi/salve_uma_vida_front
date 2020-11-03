@@ -4,6 +4,3 @@ class Variaveis {
     val CAMPANHAS="Campanhas"
     val EVENTOS = "Eventos"
 }
-
-enum class TipoUser{
-}
