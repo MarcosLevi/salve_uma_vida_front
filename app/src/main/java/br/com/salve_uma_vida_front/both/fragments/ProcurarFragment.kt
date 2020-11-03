@@ -1,7 +1,6 @@
 package br.com.salve_uma_vida_front.both.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -21,7 +20,6 @@ import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
-import kotlinx.android.synthetic.main.fragment_both_procurar_dialog.*
 
 class ProcurarFragment : Fragment() {
     var navController: NavController? = null
@@ -97,8 +95,8 @@ class ProcurarFragment : Fragment() {
             mRecyclerView.adapter = eventoAdapter
         })
         viewModel.campanhas.observe(viewLifecycleOwner, Observer {
+            listaCampanhas.clear()
             if (it != null) {
-                listaCampanhas.clear()
                 listaCampanhas.addAll(it)
             }
             campanhaAdapter = CardCampanhaAdapter(
@@ -118,8 +116,8 @@ class ProcurarFragment : Fragment() {
         })
     }
 
-    private fun carregaCampanhas() {
-        viewModel.getCampanhas()
+    private fun carregaCampanhas(parametro: String = "") {
+        viewModel.getCampanhas(parametro)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -129,14 +127,16 @@ class ProcurarFragment : Fragment() {
 
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                Log.d("onQueryTextSubmit", p0!!)
-                return false
+            override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
+                carregaCampanhas(textoDeBusca);
+                return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                Log.d("onQueryTextChange", p0!!)
-                return false
+            override fun onQueryTextChange(novoTexto: String): Boolean {
+                if(novoTexto == ""){
+                    this.onQueryTextSubmit("");
+                }
+                return true
             }
 
         })

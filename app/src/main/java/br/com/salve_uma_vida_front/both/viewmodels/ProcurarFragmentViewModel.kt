@@ -72,8 +72,8 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
         })
     }
 
-    fun getCampanhas(title: String = "", itemDescription: String = "") {
-        val callback = CampanhaRepository().getCampanhas(token, title, itemDescription)
+    fun getCampanhas(parametro: String) {
+        val callback = CampanhaRepository().getCampanhas(token, parametro)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")

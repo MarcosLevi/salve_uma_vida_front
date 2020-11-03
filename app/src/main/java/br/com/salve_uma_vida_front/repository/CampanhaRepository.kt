@@ -19,10 +19,9 @@ class CampanhaRepository {
 
     fun getCampanhas(
         token: String,
-        title: String,
-        itemDescription: String
+        parametro: String
     ): Call<ResponseDto<List<CampanhaDto>>> {
         var endpoint = NetworkUtil.getRetrofitInstance().create(ListaCampanhasEndPoint::class.java)
-        return endpoint.getCampanhas(token, title, itemDescription)
+        return endpoint.getCampanhas(token, parametro)
     }
 }

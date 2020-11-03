@@ -45,14 +45,14 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
     override fun onBindViewHolder(holder: CardCampanhaViewHolder, position: Int) {
         val currentItem: CampanhaDto = listaCards.get(position)
 
-        //seta imagem
-//        Picasso.get()
-//            .load(currentItem.imagemCampanha)
-//            .resize(110.dp, 110.dp)
-//            .centerCrop()
-//            .placeholder(R.drawable.ic_dafault_photo)
-//            .error(R.drawable.ic_baseline_report_problem_24)
-//            .into(holder.imagemCampanha)
+//        seta imagem
+        Picasso.get()
+            .load(currentItem.userImage)
+            .resize(110.dp, 110.dp)
+            .centerCrop()
+            .placeholder(R.drawable.ic_dafault_photo)
+            .error(R.drawable.ic_baseline_report_problem_24)
+            .into(holder.imagemCampanha)
 
 
 //        fazer função que salve esse cara

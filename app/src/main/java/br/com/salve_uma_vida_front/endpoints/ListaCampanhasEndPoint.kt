@@ -20,7 +20,6 @@ interface ListaCampanhasEndPoint {
     @GET("/campaign/search")
     fun getCampanhas(
         @Header("Authorization") token: String,
-        @Query("title") title: String,
-        @Query("itemDescription") itemDescription: String
+        @Query("param") parametro: String
     ): Call<ResponseDto<List<CampanhaDto>>>
 }
