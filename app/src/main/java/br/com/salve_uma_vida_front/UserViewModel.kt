@@ -31,7 +31,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val callback = UserRepository().login(username, password)
         callback.enqueue(object: Callback<ResponseDto<AuthorizationResponseDto>> {
             override fun onFailure(call: Call<ResponseDto<AuthorizationResponseDto>>, t: Throwable) {
-                Log.d("MainViewModel", "Requisição falhou")
+                Log.d("UserViewModel", "Requisição falhou")
             }
 
             override fun onResponse(call: Call<ResponseDto<AuthorizationResponseDto>>, response: Response<ResponseDto<AuthorizationResponseDto>>) {
@@ -50,17 +50,17 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         email: String,
         password: String,
         detail: String,
-        address: String,
         type: String,
         image: String,
-        addressLatitude: Float,
-        addressLongitude: Float
+        address: String="",
+        addressLatitude: Float = 0.0F,
+        addressLongitude: Float = 0.0F
     ) {
         var user = UserDto(name,email,password,detail,address,addressLatitude,addressLongitude,type,image)
         val callback = UserRepository().signup(user)
         callback.enqueue(object : Callback<ResponseDto<UserResponseDto>>{
             override fun onFailure(call: Call<ResponseDto<UserResponseDto>>, t: Throwable) {
-                Log.d("MainViewModel", "Requisição falhou")
+                Log.d("UserViewModel", "Requisição falhou")
             }
 
             override fun onResponse(
@@ -84,9 +84,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun cadastroOk() {
+        Log.d("UserViewModel", "Requisição com sucesso")
         _cadastro.value = Responses.SUCESS
     }
     fun cadastroNotOk() {
+        Log.d("UserViewModel", "Requisição falhou")
         _cadastro.value = Responses.FAILED
     }
 

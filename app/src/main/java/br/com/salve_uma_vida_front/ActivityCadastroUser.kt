@@ -1,29 +1,34 @@
 package br.com.salve_uma_vida_front
 
-import android.location.Geocoder
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import br.com.salve_uma_vida_front.both.AdressToLatLong
 import br.com.salve_uma_vida_front.both.dp
+import br.com.salve_uma_vida_front.both.models.Responses
+import br.com.salve_uma_vida_front.both.models.UserType
 import br.com.salve_uma_vida_front.databinding.ActivityCadastroUserBinding
-import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 import com.squareup.picasso.Picasso
-import java.util.*
+
 
 class ActivityCadastroUser : AppCompatActivity() {
 
     private lateinit var binding: ActivityCadastroUserBinding
+    private lateinit var viewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastroUserBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 //        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        configuraObservers()
         binding.radioGroupTipo.setOnCheckedChangeListener { group, selectedId ->
 
             val radio = binding.root.findViewById<RadioButton>(selectedId)
@@ -66,16 +71,46 @@ class ActivityCadastroUser : AppCompatActivity() {
         }
         binding.criar.setOnClickListener {
             if (validade()) {
+                val nome = binding.nome.text.toString()
+                val detalhes = binding.detalhes.text.toString()
+                val email = binding.email.text.toString()
+                val senha = binding.senha.text.toString()
+                val imagem = binding.imagem.text.toString()
+                val tipo =
+                    if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
                 if (getRadioSelected() == binding.UserOng) {
-                    var adressToLatLong =
-                        AdressToLatLong(getEnderecoFormatado(), applicationContext)
-                    var latitude = adressToLatLong.get(0)
-                    var longitude = adressToLatLong.get(1)
+                    val endereco: String
+                    endereco = getEnderecoFormatado()
+                    val adressToLatLong =
+                        AdressToLatLong(endereco, applicationContext)
+                    val latitude = adressToLatLong.get(0)
+                    val longitude = adressToLatLong.get(1)
+                    viewModel.signup(
+                        nome,
+                        email,
+                        senha,
+                        detalhes,
+                        tipo,
+                        imagem,
+                        endereco,
+                        latitude,
+                        longitude
+                    )
+                } else {
+                    viewModel.signup(nome, email, senha, detalhes, tipo, imagem)
                 }
             }
 
 
         }
+    }
+
+    private fun configuraObservers() {
+        viewModel.cadastro.observe(this, Observer {
+            if (it==Responses.SUCESS) {
+                startActivity(Intent(this@ActivityCadastroUser, MainActivity::class.java))
+            }
+        })
     }
 
     private fun getEnderecoFormatado(): String {

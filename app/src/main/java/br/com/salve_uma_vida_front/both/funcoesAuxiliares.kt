@@ -37,17 +37,17 @@ fun FormatStringToDate(string: String): String{
     return "Ocorrerá em "+formatter.format(date)
 }
 
-fun AdressToLatLong(adress: String, applicationContext: Context): MutableList<Double> {
+fun AdressToLatLong(adress: String, applicationContext: Context): MutableList<Float> {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
     var fromLocationName = geocoder.getFromLocationName(adress, 1)
-    var latitude = fromLocationName[0].latitude
-    var longitude = fromLocationName[0].longitude
+    var latitude = fromLocationName[0].latitude.toFloat()
+    var longitude = fromLocationName[0].longitude.toFloat()
     return mutableListOf(latitude,longitude)
 }
 
-fun LatLongToAdress(latitude: Double,longitude:Double, applicationContext: Context): String {
+fun LatLongToAdress(latitude: Float,longitude:Float, applicationContext: Context): String {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
-    var fromLocation = geocoder.getFromLocation(latitude, longitude, 1)
+    var fromLocation = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
     return fromLocation[0].getAddressLine(0)
 }
 
