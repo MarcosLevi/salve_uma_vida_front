@@ -12,7 +12,7 @@ class NetworkUtil {
 
         fun getRetrofitInstance(): Retrofit {
             return Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080")
+                .baseUrl("https://calm-basin-56722.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }

@@ -2,9 +2,11 @@ package br.com.salve_uma_vida_front.both
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 fun Context.hideKeyboard(view: View) {
@@ -27,3 +29,12 @@ fun StringToDate(string: String): MutableList<Int> {
     val diaMesAno = string.split("/")
     return mutableListOf<Int>(diaMesAno.get(0).toInt(), diaMesAno.get(1).toInt(), diaMesAno.get(2).toInt())
 }
+
+fun FormatStringToDate(string: String): String{
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
+    val date = dateFormat.parse(string)
+    val formatter = SimpleDateFormat("dd/MMM/yyyy");
+    return "Ocorrerá em "+formatter.format(date)
+}
+val Int.dp: Int
+    get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()

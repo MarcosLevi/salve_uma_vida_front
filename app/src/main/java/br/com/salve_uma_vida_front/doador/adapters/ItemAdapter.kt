@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.models.ItemCampanha
+import br.com.salve_uma_vida_front.dto.CampanhaItemDto
 
-class ItemAdapter(var listaItens: List<ItemCampanha>) :
+class ItemAdapter(var listaItens: List<CampanhaItemDto>) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var titulo: TextView = itemView.findViewById(R.id.itemDoadorTitulo)
@@ -28,12 +29,12 @@ class ItemAdapter(var listaItens: List<ItemCampanha>) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem: ItemCampanha = listaItens.get(position)
+        val currentItem: CampanhaItemDto = listaItens.get(position)
 
-        holder.titulo.text = currentItem.titulo
+        holder.titulo.text = currentItem.descricao
         holder.progresso.text =
-            "Arrecadado ${currentItem.quantidadeAtual} / ${currentItem.quantidadeMaxima} ${currentItem.unidadeMedida}"
-        holder.progressBar.max = currentItem.quantidadeMaxima
-        holder.progressBar.progress = currentItem.quantidadeAtual
+            "Arrecadado ${currentItem.progresso} / ${currentItem.maximo} ${currentItem.unidade}"
+        holder.progressBar.max = currentItem.maximo.toInt()
+        holder.progressBar.progress = currentItem.progresso.toInt()
     }
 }

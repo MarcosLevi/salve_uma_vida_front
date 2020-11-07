@@ -1,6 +1,6 @@
 package br.com.salve_uma_vida_front.both.models
 
-import java.nio.file.attribute.GroupPrincipal
+import br.com.salve_uma_vida_front.dto.CampanhaDto
 
 class Ong(
     var nomeDaOng: String,
@@ -8,6 +8,6 @@ class Ong(
     var galeriaDeImagens: MutableList<String>,
     var endereco: String,
     var telefone: String,
-    var listaCampanhas: MutableList<Campanha>
+    var listaCampanhaDtos: MutableList<CampanhaDto>
 ) {
 }
