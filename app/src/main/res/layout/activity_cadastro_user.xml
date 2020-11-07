@@ -69,23 +69,112 @@
                     app:layout_constraintTop_toTopOf="@+id/email" />
 
                 <TextView
-                    android:id="@+id/labelEndereco"
+                    android:id="@+id/labelRua"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Endereço"
+                    android:text="Rua"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="@+id/endereco"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/rua"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/endereco" />
+                    app:layout_constraintTop_toTopOf="@+id/rua" />
+
+                <EditText
+                    android:id="@+id/rua"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite sua rua/avenida"
+                    android:inputType="textPersonName"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/senha"
+                    app:layout_constraintStart_toStartOf="@+id/senha"
+                    app:layout_constraintTop_toBottomOf="@+id/senha" />
+
+                <TextView
+                    android:id="@+id/labelCidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Cidade"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/cidade"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/cidade" />
+
+                <EditText
+                    android:id="@+id/cidade"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite sua Cidade"
+                    android:inputType="textPersonName"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/senha"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/senha"
+                    app:layout_constraintTop_toBottomOf="@+id/rua" />
+
+                <TextView
+                    android:id="@+id/labelEstado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Estado"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/estado"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/estado" />
+
+                <EditText
+                    android:id="@+id/estado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite seu Estado"
+                    android:inputType="textPersonName"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/senha"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/senha"
+                    app:layout_constraintTop_toBottomOf="@+id/cidade" />
+
+                <TextView
+                    android:id="@+id/labelNumero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Numero"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/numero"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/numero" />
+
+                <EditText
+                    android:id="@+id/numero"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite o numero da instituição"
+                    android:inputType="textPersonName"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/senha"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/senha"
+                    app:layout_constraintTop_toBottomOf="@+id/estado" />
 
                 <EditText
                     android:id="@+id/senha"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Digite sua senha"
                     android:inputType="textPassword"
@@ -97,7 +186,6 @@
                     android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Digite seu e-mail"
                     android:inputType="textPersonName"
@@ -158,24 +246,10 @@
                     app:srcCompat="@drawable/ic_dafault_photo" />
 
                 <EditText
-                    android:id="@+id/endereco"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:hint="Digite seu endereço"
-                    android:inputType="textPersonName"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="@+id/senha"
-                    app:layout_constraintStart_toStartOf="@+id/senha"
-                    app:layout_constraintTop_toBottomOf="@+id/senha" />
-
-                <EditText
                     android:id="@+id/nome"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint="Digite seu nome"
@@ -214,7 +288,6 @@
                     android:id="@+id/detalhes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Detalhes sobre o usuário"
                     android:inputType="textLongMessage"
@@ -223,14 +296,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/nome" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/criar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:text="Criar"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/endereco" />
+                    app:layout_constraintTop_toBottomOf="@+id/numero" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
