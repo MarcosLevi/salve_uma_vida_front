@@ -14,9 +14,10 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.Variaveis
 import br.com.salve_uma_vida_front.both.adapters.CardCampanhaAdapter
 import br.com.salve_uma_vida_front.both.adapters.CardEventoAdapter
+import br.com.salve_uma_vida_front.both.models.LoadingDialog
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.both.viewholders.CardEventoViewHolder
-import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
+import br.com.salve_uma_vida_front.both.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
@@ -28,7 +29,7 @@ class ProcurarFragment : Fragment() {
     lateinit var eventoAdapter: RecyclerView.Adapter<CardEventoViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentBothProcurarBinding
-    private lateinit var viewModel: ProcurarFragmentViewModel
+    private lateinit var viewModel: CampanhasEEventosViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
     private var filtroAtual: String = Variaveis().CAMPANHAS
@@ -39,7 +40,7 @@ class ProcurarFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProviders.of(this).get(ProcurarFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(CampanhasEEventosViewModel::class.java)
         return binding.root
     }
 
@@ -50,6 +51,18 @@ class ProcurarFragment : Fragment() {
         configuraObservers()
         carregaCampanhas()
         setHasOptionsMenu(true)
+    }
+
+    fun startLoading(){
+        val loadingDialog = LoadingDialog()
+        loadingDialog.show(parentFragmentManager,"Loading")
+    }
+
+    fun closeLoading(){
+        val transaction = parentFragmentManager.beginTransaction()
+        val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog
+        loadingDialog.dismiss()
+        transaction.remove(loadingDialog)
     }
 
     private fun configuraRecyclerView() {
@@ -66,6 +79,7 @@ class ProcurarFragment : Fragment() {
 
     private fun configuraObservers() {
         viewModel.campanhas.observe(viewLifecycleOwner, Observer {
+            closeLoading()
             listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
@@ -77,6 +91,7 @@ class ProcurarFragment : Fragment() {
             mRecyclerView.adapter = campanhaAdapter
         })
         viewModel.eventos.observe(viewLifecycleOwner, Observer {
+            closeLoading()
             listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
@@ -94,22 +109,23 @@ class ProcurarFragment : Fragment() {
             } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
                 carregaEventos()
             }
-
         })
     }
 
     private fun carregaCampanhas(parametro: String = "") {
+        startLoading()
         viewModel.getCampanhas(parametro)
     }
 
     private fun carregaEventos(parametro: String = "") {
+        startLoading()
         viewModel.getEventos(parametro)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
-        var procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
-        var searchView = procurar.actionView as SearchView
+        val procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
+        val searchView = procurar.actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {

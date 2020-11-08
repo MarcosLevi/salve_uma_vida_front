@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.SeekBar
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProviders
-import br.com.salve_uma_vida_front.both.viewmodels.ProcurarFragmentViewModel
+import br.com.salve_uma_vida_front.both.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarDialogBinding
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 
-class DialogFiltros(procurarFragmentViewModel: ProcurarFragmentViewModel) : DialogFragment() {
+class DialogFiltros(procurarFragmentViewModel: CampanhasEEventosViewModel) : DialogFragment() {
 
     lateinit var binding: FragmentBothProcurarDialogBinding
     private var viewModel = procurarFragmentViewModel

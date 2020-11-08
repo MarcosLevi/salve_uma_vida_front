@@ -18,21 +18,30 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
     private val myPreferences = MyPreferences(context)
     private val token = "Bearer " + myPreferences.getToken()
+
     private val _listaEventos = MutableLiveData<MutableList<EventoDto>>()
     val listaEventos: LiveData<MutableList<EventoDto>> = _listaEventos
+
     private val _evento = MutableLiveData<EventoDto>()
     val evento: LiveData<EventoDto> = _evento
+
     private val _eventos = MutableLiveData<List<EventoDto>>()
     val eventos: LiveData<List<EventoDto>> = _eventos
+
+    private val _meusEventos = MutableLiveData<List<EventoDto>>()
+    val meusEventos: LiveData<List<EventoDto>> = _meusEventos
+
     private val _minhasCampanhas = MutableLiveData<List<CampanhaDto>>()
     val minhasCampanhas: LiveData<List<CampanhaDto>> = _minhasCampanhas
+
     private val _campanhas = MutableLiveData<List<CampanhaDto>>()
     val campanhas: LiveData<List<CampanhaDto>> = _campanhas
+
     private val _campanhaOuEvento = MutableLiveData<String>()
     val campanhaOuEvento: LiveData<String> = _campanhaOuEvento
 
@@ -93,6 +102,25 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
         })
     }
 
+    fun getEventosUserLogado() {
+        val callback = EventoRepository().getEventos(token, "")
+        callback.enqueue(object : Callback<ResponseDto<List<EventoDto>>> {
+            override fun onFailure(call: Call<ResponseDto<List<EventoDto>>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<List<EventoDto>>>,
+                response: Response<ResponseDto<List<EventoDto>>>
+            ) {
+                val eventos = response.body()?.data
+                _meusEventos.value = eventos
+
+            }
+
+        })
+    }
+
     fun getCampanhas(parametro: String) {
         val callback = CampanhaRepository().getCampanhas(token, parametro)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
@@ -124,7 +152,6 @@ class ProcurarFragmentViewModel(application: Application) : AndroidViewModel(app
     fun filtrar(filtro: FiltroPesquisaDto) {
         //nova lista de elementos
         //fazer a filtragem
-        var teste = filtro
         _campanhaOuEvento.value = filtro.tipoFiltro
     }
 }

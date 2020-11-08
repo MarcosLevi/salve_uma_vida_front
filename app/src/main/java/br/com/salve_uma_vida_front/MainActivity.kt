@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import br.com.salve_uma_vida_front.both.models.LoadingDialog
 import br.com.salve_uma_vida_front.both.models.UserType
 import br.com.salve_uma_vida_front.databinding.ActivityMainBinding
 import br.com.salve_uma_vida_front.doador.activities.DoadorMainActivity
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             val username = binding.usernameText.text.toString()
             val password = binding.passwordText.text.toString()
             viewModel.doLogin(username, password)
+            startLoading()
 //            val myIntent = Intent(this@MainActivity, OngMainActivity::class.java)
 //            startActivity(myIntent)
         }
@@ -41,10 +43,23 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         viewModel.navigate.observe(this, Observer {
+            closeLoading()
             when (it) {
                 UserType.COMMON -> startActivity(Intent(this@MainActivity, DoadorMainActivity::class.java))
                 else -> startActivity(Intent(this@MainActivity, OngMainActivity::class.java))
             }
         })
+    }
+
+    fun startLoading(){
+        val loadingDialog = LoadingDialog()
+        loadingDialog.show(supportFragmentManager,"Loading")
+    }
+
+    fun closeLoading(){
+        val transaction = supportFragmentManager.beginTransaction()
+        val loadingDialog = supportFragmentManager.findFragmentByTag("Loading") as LoadingDialog
+        loadingDialog.dismiss()
+        transaction.remove(loadingDialog)
     }
 }
