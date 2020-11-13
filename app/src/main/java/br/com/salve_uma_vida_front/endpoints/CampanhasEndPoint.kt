@@ -15,7 +15,10 @@ interface CampanhasEndPoint {
     ): Call<ResponseDto<CampanhaDto>>
 
     @GET("/campaigns")
-    fun getCampanhasUserLogado(@Header("Authorization") token: String): Call<ResponseDto<List<CampanhaDto>>>
+    fun getCampanhasUserLogado(
+        @Header("Authorization") token: String,
+        @Query("param") parametro: String
+    ): Call<ResponseDto<List<CampanhaDto>>>
 
     @GET("/campaign/search")
     fun getCampanhas(

@@ -114,14 +114,14 @@ class CampanhasFragment : Fragment() {
         })
     }
 
-    private fun carregaCampanhasUserLogado() {
+    private fun carregaCampanhasUserLogado(parametro:String="") {
         startLoading()
-        viewModel.getCampanhasUserLogado()
+        viewModel.getCampanhasUserLogado(parametro)
     }
 
-    private fun carregaEventosUserLogado() {
+    private fun carregaEventosUserLogado(parametro:String="") {
         startLoading()
-        viewModel.getEventosUserLogado()
+        viewModel.getEventosUserLogado(parametro)
     }
 
 
@@ -136,10 +136,10 @@ class CampanhasFragment : Fragment() {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
                 if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
 //                    carregaCampanhasUserLogado(textoDeBusca);
-                    carregaCampanhasUserLogado();
+                    carregaCampanhasUserLogado(textoDeBusca)
                 } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
 //                    carregaEventosUserLogado(textoDeBusca)
-                    carregaEventosUserLogado()
+                    carregaEventosUserLogado(textoDeBusca)
                 }
                 return true
             }

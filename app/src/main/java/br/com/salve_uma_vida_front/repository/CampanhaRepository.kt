@@ -12,9 +12,9 @@ class CampanhaRepository {
         return endpoint.getCampanhaId(token, id)
     }
 
-    fun getCampanhasUserLogado(token: String): Call<ResponseDto<List<CampanhaDto>>> {
+    fun getCampanhasUserLogado(token: String,parametro: String): Call<ResponseDto<List<CampanhaDto>>> {
         var endpoint = NetworkUtil.getRetrofitInstance().create(CampanhasEndPoint::class.java)
-        return endpoint.getCampanhasUserLogado(token)
+        return endpoint.getCampanhasUserLogado(token,parametro)
     }
 
     fun getCampanhas(

@@ -45,8 +45,8 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
     private val _campanhaOuEvento = MutableLiveData<String>()
     val campanhaOuEvento: LiveData<String> = _campanhaOuEvento
 
-    fun getEvento(id: Int) {
-        val callback = EventoRepository().getEvento(id, token)
+    fun getEventoId(id: Int) {
+        val callback = EventoRepository().getEventoId(id, token)
         callback.enqueue(object : Callback<ResponseDto<EventoDto>> {
             override fun onFailure(call: Call<ResponseDto<EventoDto>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")
@@ -83,8 +83,8 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
         })
     }
 
-    fun getCampanhasUserLogado() {
-        val callback = CampanhaRepository().getCampanhasUserLogado(token)
+    fun getCampanhasUserLogado(parametro: String) {
+        val callback = CampanhaRepository().getCampanhasUserLogado(token,parametro)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")
@@ -102,8 +102,8 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
         })
     }
 
-    fun getEventosUserLogado() {
-        val callback = EventoRepository().getEventos(token, "")
+    fun getEventosUserLogado(parametro: String) {
+        val callback = EventoRepository().getEventosUserLogado(token,parametro)
         callback.enqueue(object : Callback<ResponseDto<List<EventoDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<EventoDto>>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")

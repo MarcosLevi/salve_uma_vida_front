@@ -9,7 +9,16 @@ import retrofit2.http.*
 interface EventosEndPoint {
     //precisa persistir o token
     @GET("/event/{id}")
-    fun getEvento(@Path("id") id: Int, @Header("Authorization") token: String): Call<ResponseDto<EventoDto>>
+    fun getEventoId(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<ResponseDto<EventoDto>>
+
+    @GET("/events")
+    fun getEventosUserLogado(
+        @Header("Authorization") token: String,
+        @Query("param") parametro: String
+    ): Call<ResponseDto<List<EventoDto>>>
 
     @GET("/event/search")
     fun getEventos(
