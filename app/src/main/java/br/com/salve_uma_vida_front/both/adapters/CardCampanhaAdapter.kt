@@ -2,6 +2,7 @@ package br.com.salve_uma_vida_front.both.adapters
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.*
@@ -12,6 +13,7 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.both.DateToString
 import br.com.salve_uma_vida_front.both.FormatStringToDate
 import br.com.salve_uma_vida_front.both.StringToDate
+import br.com.salve_uma_vida_front.both.dp
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.both.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
@@ -24,9 +26,7 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerView.Adapter<ItemAdapter.ItemViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    var listaCardsAll: MutableList<CampanhaDto> = listaCards
     lateinit var bindingCampanha: CardCampanhaFinalBinding
-//    lateinit var bindingEvento: CardEventoFinalBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardCampanhaViewHolder {
         bindingCampanha = CardCampanhaFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -64,6 +64,9 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
         holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewDescricao.text = currentItem.descricao
         holder.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
+        holder.itemView.setOnClickListener{
+            Log.d("CardCampanhaViewHolder", currentItem.toString())
+        }
 
         mRecyclerView = holder.itensCampanha
         mRecyclerView.setHasFixedSize(true)
@@ -108,8 +111,5 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
         }
         return "0 itens"
     }
-
-    val Int.dp: Int
-        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
 }

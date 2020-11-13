@@ -1,7 +1,7 @@
 package br.com.salve_uma_vida_front.both.adapters
 
 import android.content.Context
-import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -18,12 +18,12 @@ import com.squareup.picasso.Picasso
 class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Context) :
     RecyclerView.Adapter<CardEventoViewHolder>() {
 
-    var listaCardsAll: MutableList<EventoDto> = listaCards
     lateinit var bindingEvento: CardEventoFinalBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardEventoViewHolder {
 //        bindingCampanha = CardCampanhaFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        bindingEvento = CardEventoFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        bindingEvento =
+            CardEventoFinalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val viewHolder =
             CardEventoViewHolder(
                 bindingEvento
@@ -57,6 +57,10 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewDescricao.text = currentItem.descricao
+
+        holder.itemView.setOnClickListener{
+            Log.d("CardEventoViewHolder", currentItem.toString())
+        }
     }
 
     private fun clickFavoritar(currentItem: EventoDto, buttonFavoritar: ImageButton) {
