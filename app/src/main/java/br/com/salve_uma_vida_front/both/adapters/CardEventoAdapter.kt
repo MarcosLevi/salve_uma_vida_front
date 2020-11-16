@@ -48,11 +48,6 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
             .into(holder.imagemEvento)
 
 
-//        fazer função que salve esse cara
-        holder.buttonFavoritar.setOnClickListener {
-            clickFavoritar(currentItem, holder.buttonFavoritar)
-        }
-        ajustaIconeFavorito(currentItem, holder.buttonFavoritar)
         holder.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
@@ -60,32 +55,6 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
 
         holder.itemView.setOnClickListener{
             Log.d("CardEventoViewHolder", currentItem.toString())
-        }
-    }
-
-    private fun clickFavoritar(currentItem: EventoDto, buttonFavoritar: ImageButton) {
-        currentItem.favorito = !currentItem.favorito
-        ajustaIconeFavorito(currentItem, buttonFavoritar)
-    }
-
-    private fun ajustaIconeFavorito(
-        currentItem: EventoDto,
-        buttonFavoritar: ImageButton
-    ) {
-        if (currentItem.favorito) {
-            buttonFavoritar.setImageDrawable(
-                ContextCompat.getDrawable(
-                    contexto,
-                    R.drawable.ic_baseline_star_24
-                )
-            )
-        } else {
-            buttonFavoritar.setImageDrawable(
-                ContextCompat.getDrawable(
-                    contexto,
-                    R.drawable.ic_baseline_star_border_24
-                )
-            )
         }
     }
 

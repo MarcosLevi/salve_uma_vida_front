@@ -16,6 +16,5 @@ data class CampanhaDto(
     @SerializedName("items")
     var itens: List<CampanhaItemDto>,
     @SerializedName("userImage")
-    var userImage: String,
-    var favorito: Boolean
+    var userImage: String
 )

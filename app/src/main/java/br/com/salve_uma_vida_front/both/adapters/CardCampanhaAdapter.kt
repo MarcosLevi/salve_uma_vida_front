@@ -56,10 +56,6 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
 
 
 //        fazer função que salve esse cara
-        holder.buttonFavoritar.setOnClickListener {
-            clickFavoritar(currentItem, holder.buttonFavoritar)
-        }
-        ajustaIconeFavorito(currentItem, holder.buttonFavoritar)
         holder.textViewTitulo.text = currentItem.titulo
         holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holder.textViewDescricao.text = currentItem.descricao
@@ -75,32 +71,6 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
             ItemAdapter(currentItem.itens)
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
-    }
-
-    private fun clickFavoritar(currentItem: CampanhaDto, buttonFavoritar: ImageButton) {
-        currentItem.favorito = !currentItem.favorito
-        ajustaIconeFavorito(currentItem, buttonFavoritar)
-    }
-
-    private fun ajustaIconeFavorito(
-        currentItem: CampanhaDto,
-        buttonFavoritar: ImageButton
-    ) {
-        if (currentItem.favorito) {
-            buttonFavoritar.setImageDrawable(
-                ContextCompat.getDrawable(
-                    contexto,
-                    R.drawable.ic_baseline_star_24
-                )
-            )
-        } else {
-            buttonFavoritar.setImageDrawable(
-                ContextCompat.getDrawable(
-                    contexto,
-                    R.drawable.ic_baseline_star_border_24
-                )
-            )
-        }
     }
 
     fun quantidadeDeItensString(quantidade: Int): String {
