@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.ongs.fragments
+package br.com.salve_uma_vida_front.both.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

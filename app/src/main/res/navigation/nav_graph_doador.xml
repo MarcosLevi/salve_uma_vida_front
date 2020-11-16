@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_both_favoritos" />
     <fragment
         android:id="@+id/bothMensagensFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.MensagensFragment"
+        android:name="br.com.salve_uma_vida_front.both.fragments.MensagensFragment"
         android:label="Mensagens"
         tools:layout="@layout/fragment_both_mensagens" />
     <fragment

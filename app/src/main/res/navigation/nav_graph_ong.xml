@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_both_favoritos" />
     <fragment
         android:id="@+id/bothMensagensFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.MensagensFragment"
+        android:name="br.com.salve_uma_vida_front.both.fragments.MensagensFragment"
         android:label="Mensagens"
         tools:layout="@layout/fragment_both_mensagens" />
     <fragment
@@ -36,4 +36,8 @@
             android:id="@+id/action_cadastroFragment_to_ongCampanhasFragment"
             app:destination="@id/ongCampanhasFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bothUserLogadoFragment"
+        android:name="br.com.salve_uma_vida_front.both.fragments.UserLogadoFragment"
+        android:label="Perfil" />
 </navigation>

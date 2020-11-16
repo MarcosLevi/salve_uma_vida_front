@@ -20,5 +20,9 @@
         android:id="@+id/ongCampanhasFragment"
         android:icon="@drawable/ic_outline_calendar_today_24"
         android:title="@string/campanhas" />
+    <item
+        android:id="@+id/bothUserLogadoFragment"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/perfil" />
 
 </menu>
