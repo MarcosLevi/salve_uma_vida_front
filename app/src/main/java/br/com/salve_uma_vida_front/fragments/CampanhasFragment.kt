@@ -2,6 +2,8 @@ package br.com.salve_uma_vida_front.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,6 +37,13 @@ class CampanhasFragment : Fragment() {
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
     private var filtroAtual: String = Variaveis().CAMPANHAS
 
+    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
+    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
+    private val fromBotton: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_botton_anim) }
+    private val toBotton: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
+
+    private var clicked = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +60,67 @@ class CampanhasFragment : Fragment() {
         configuraRecyclerView()
         configuraObservers()
         carregaCampanhasUserLogado()
+        configuraFabs()
         setHasOptionsMenu(true)
+    }
+
+    private fun configuraFabs() {
+        binding.ongCampanhasFragmentAdd.setOnClickListener {
+            onAddButtonClicked()
+        }
+        binding.ongCampanhasFragmentFabAddCampanha.setOnClickListener {
+
+        }
+        binding.ongCampanhasFragmentFabAddEvento.setOnClickListener {
+
+        }
+    }
+
+    private fun onAddButtonClicked() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        setClickable(clicked)
+        clicked = !clicked
+    }
+
+    private fun setAnimation(clicked: Boolean) {
+        if (!clicked){
+            binding.ongCampanhasFragmentFabAddEvento.startAnimation(fromBotton)
+            binding.ongCampanhasFragmentFabAddCampanha.startAnimation(fromBotton)
+            binding.ongCampanhasFragmentLabelCampanha.startAnimation(fromBotton)
+            binding.ongCampanhasFragmentLabelEvento.startAnimation(fromBotton)
+            binding.ongCampanhasFragmentAdd.startAnimation(rotateOpen)
+        }else{
+            binding.ongCampanhasFragmentFabAddEvento.startAnimation(toBotton)
+            binding.ongCampanhasFragmentFabAddCampanha.startAnimation(toBotton)
+            binding.ongCampanhasFragmentLabelCampanha.startAnimation(toBotton)
+            binding.ongCampanhasFragmentLabelEvento.startAnimation(toBotton)
+            binding.ongCampanhasFragmentAdd.startAnimation(rotateClose)
+        }
+    }
+
+    private fun setVisibility(clicked: Boolean) {
+        if (!clicked){
+            binding.ongCampanhasFragmentFabAddEvento.visibility = View.VISIBLE
+            binding.ongCampanhasFragmentFabAddCampanha.visibility = View.VISIBLE
+            binding.ongCampanhasFragmentLabelCampanha.visibility = View.VISIBLE
+            binding.ongCampanhasFragmentLabelEvento.visibility = View.VISIBLE
+        }else{
+            binding.ongCampanhasFragmentFabAddEvento.visibility = View.INVISIBLE
+            binding.ongCampanhasFragmentFabAddCampanha.visibility = View.INVISIBLE
+            binding.ongCampanhasFragmentLabelCampanha.visibility = View.INVISIBLE
+            binding.ongCampanhasFragmentLabelEvento.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setClickable(clicked: Boolean) {
+        if (!clicked){
+            binding.ongCampanhasFragmentFabAddEvento.isClickable = true
+            binding.ongCampanhasFragmentFabAddCampanha.isClickable = true
+        }else{
+            binding.ongCampanhasFragmentFabAddEvento.isClickable = false
+            binding.ongCampanhasFragmentFabAddCampanha.isClickable = false
+        }
     }
 
     fun startLoading(){

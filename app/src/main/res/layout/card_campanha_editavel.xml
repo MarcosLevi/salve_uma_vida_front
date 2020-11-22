@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/corOngs"
+        android:backgroundTint="@color/corCampanhas"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/corOngs"
+                android:background="@color/corCampanhas"
                 android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
                 android:src="@drawable/ic_baseline_edit_24"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/corOngs"
+                android:background="@color/corCampanhas"
                 android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
                 android:src="@drawable/ic_baseline_done_24"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +62,7 @@
                 android:layout_height="110dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/corOngs"
+                android:backgroundTint="@color/corCampanhas"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:layout_constraintStart_toStartOf="parent"
