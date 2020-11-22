@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<layout>
     <data>
 
         <variable
             name="listener"
-            type="br.com.salve_uma_vida_front.ongs.adapters.ItemAdapter.ItemListener" />
+            type="br.com.salve_uma_vida_front.adapters.ItemAdapterOng.ItemListener" />
 
         <variable
             name="itemCard"
-            type="br.com.salve_uma_vida_front.both.models.ItemCampanha" />
+            type="br.com.salve_uma_vida_front.models.ItemCampanha" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/itemCardOng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

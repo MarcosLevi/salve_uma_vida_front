@@ -6,21 +6,21 @@
     app:startDestination="@id/bothProcurarFragment">
     <fragment
         android:id="@+id/bothFavoritosFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.FavoritosFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.FavoritosFragment"
         android:label="Favoritos"
         tools:layout="@layout/fragment_both_favoritos" />
     <fragment
         android:id="@+id/bothMensagensFragment"
-        android:name="br.com.salve_uma_vida_front.both.fragments.MensagensFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.MensagensFragment"
         android:label="Mensagens"
         tools:layout="@layout/fragment_both_mensagens" />
     <fragment
         android:id="@+id/bothProcurarFragment"
-        android:name="br.com.salve_uma_vida_front.both.fragments.ProcurarFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"
         android:label="Procurar Campanhas" />
     <fragment
         android:id="@+id/doadorMapaFragment"
-        android:name="br.com.salve_uma_vida_front.doador.fragments.MapaFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.MapaFragment"
         android:label="Mapa"
         tools:layout="@layout/fragment_doador_mapa" />
 </navigation>

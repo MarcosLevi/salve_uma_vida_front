@@ -24,16 +24,16 @@
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
         <!-- </activity> -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ongs.activities.OngMainActivity"/>
-        <activity android:name=".doador.activities.DoadorMainActivity"/>
-        <activity android:name=".ActivityCadastroUser"/>
+        <activity android:name="br.com.salve_uma_vida_front.activities.OngMainActivity"/>
+        <activity android:name=".activities.DoadorMainActivity"/>
+        <activity android:name=".activities.ActivityCadastroUser"/>
     </application>
 
 </manifest>

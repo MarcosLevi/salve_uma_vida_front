@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroundFragments"
-        tools:context=".ongs.fragments.CampanhasFragment">
+        tools:context=".fragments.CampanhasFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

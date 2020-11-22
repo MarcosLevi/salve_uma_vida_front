@@ -6,7 +6,7 @@
     app:startDestination="@id/bothProcurarFragment">
     <fragment
         android:id="@+id/ongCampanhasFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.CampanhasFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.CampanhasFragment"
         android:label="Minhas Campanhas"
         tools:layout="@layout/fragment_ong_campanhas" >
         <action
@@ -15,22 +15,22 @@
     </fragment>
     <fragment
         android:id="@+id/bothFavoritosFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.FavoritosFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.FavoritosFragment"
         android:label="Favoritos"
         tools:layout="@layout/fragment_both_favoritos" />
     <fragment
         android:id="@+id/bothMensagensFragment"
-        android:name="br.com.salve_uma_vida_front.both.fragments.MensagensFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.MensagensFragment"
         android:label="Mensagens"
         tools:layout="@layout/fragment_both_mensagens" />
     <fragment
         android:id="@+id/bothProcurarFragment"
-        android:name="br.com.salve_uma_vida_front.both.fragments.ProcurarFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"
         android:label="Procurar Campanhas"
         tools:layout="@layout/fragment_both_procurar" />
     <fragment
         android:id="@+id/cadastroFragment"
-        android:name="br.com.salve_uma_vida_front.ongs.fragments.CadastroFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.CadastroFragment"
         android:label="Nova Campanha" >
         <action
             android:id="@+id/action_cadastroFragment_to_ongCampanhasFragment"
@@ -38,6 +38,6 @@
     </fragment>
     <fragment
         android:id="@+id/bothUserLogadoFragment"
-        android:name="br.com.salve_uma_vida_front.both.fragments.UserLogadoFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.UserLogadoFragment"
         android:label="Perfil" />
 </navigation>
