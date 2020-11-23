@@ -21,6 +21,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.hideKeyboard
 
 class ProcurarFragment : Fragment() {
     var navController: NavController? = null
@@ -80,7 +81,6 @@ class ProcurarFragment : Fragment() {
 
     private fun configuraObservers() {
         viewModel.campanhas.observe(viewLifecycleOwner, Observer {
-            closeLoading()
             listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
@@ -91,9 +91,10 @@ class ProcurarFragment : Fragment() {
                     requireContext()
                 )
             mRecyclerView.adapter = campanhaAdapter
+            closeLoading()
+            view?.hideKeyboard()
         })
         viewModel.eventos.observe(viewLifecycleOwner, Observer {
-            closeLoading()
             listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
@@ -104,6 +105,8 @@ class ProcurarFragment : Fragment() {
                     requireContext()
                 )
             mRecyclerView.adapter = eventoAdapter
+            closeLoading()
+            view?.hideKeyboard()
         })
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
             filtroAtual = it
@@ -129,6 +132,10 @@ class ProcurarFragment : Fragment() {
         inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
         val procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
         val searchView = procurar.actionView as SearchView
+        searchView.isIconified = false
+        procurar.setOnMenuItemClickListener {
+            searchView.requestFocusFromTouch()
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {

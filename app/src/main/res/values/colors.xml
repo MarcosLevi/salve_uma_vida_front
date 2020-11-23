@@ -7,13 +7,14 @@
     <color name="white">#FFFFFF</color>
     <color name="sombra">#652C2C</color>
     <color name="ciano">#03A9F4</color>
-    <color name="corTelaPrincipal">#0096FF</color>
-    <color name="corFabNeutro">#ffbc40</color>
-    <color name="corCampanhas">#0e4bef</color>
-    <color name="corFabAddCampanhas">#4877f4</color>
-    <color name="corEventos">#993399</color>
-    <color name="corFabAddEventos">#bf40bf</color>
-    <color name="backgroundFragments">#004080</color>
+
+    <color name="background">#82B8D9</color>
+    <color name="corNeutra">#0096FF</color>
+    <color name="corCampanhas">#0078cc</color>
+    <color name="corFabAddCampanhas">#0060a3</color>
+    <color name="corEventos">#bf40bf</color>
+    <color name="corFabAddEventos">#993399</color>
+
     <color name="corBotaoCancelar">#E91E63</color>
     <color name="corBotaoFltrar">#43A047</color>
 

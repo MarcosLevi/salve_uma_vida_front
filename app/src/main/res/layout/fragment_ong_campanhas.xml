@@ -6,7 +6,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundFragments"
+        android:background="@color/background"
         tools:context=".fragments.CampanhasFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/corFabNeutro"
+                android:backgroundTint="@color/corNeutra"
                 android:src="@drawable/ic_baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Evento"
-                android:textColor="@color/corFabNeutro"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="invisible"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Campanha"
-                android:textColor="@color/corFabNeutro"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="invisible"
