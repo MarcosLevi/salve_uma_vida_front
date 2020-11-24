@@ -19,6 +19,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/userLogadoGallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/userLogadofoto"
                     android:layout_width="110dp"
@@ -28,7 +39,7 @@
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userLogadoGallery"
                     app:srcCompat="@drawable/ic_dafault_photo" />
 
                 <TextView

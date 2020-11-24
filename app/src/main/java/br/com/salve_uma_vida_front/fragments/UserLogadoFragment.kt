@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.adapters.GalleryAdapter
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 import br.com.salve_uma_vida_front.hideKeyboard
 import br.com.salve_uma_vida_front.models.LoadingDialog
@@ -21,6 +22,14 @@ class UserLogadoFragment : Fragment() {
     lateinit var binding: FragmentPerfilUserLogadoBinding
     private lateinit var viewModel: UserViewModel
     private lateinit var myMenu: Menu
+
+    private val imageUrls = mutableListOf(
+        "https://istoe.com.br/wp-content/uploads/sites/17/2020/08/cachorro.jpg",
+        "https://www.selecoes.com.br/wp-content/uploads/2018/08/brinquedos-para-cachorro-760x450.jpg",
+        "https://super.abril.com.br/wp-content/uploads/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png",
+        "https://saude.abril.com.br/wp-content/uploads/2018/12/cachorro-livro.png",
+        "https://s2.glbimg.com/slaVZgTF5Nz8RWqGrHRJf0H1PMQ=/0x0:800x450/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/U/e/NTegqdSe6SoBAoQDjKZA/cachorro.jpg"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +46,9 @@ class UserLogadoFragment : Fragment() {
         navController = Navigation.findNavController(view)
         setHasOptionsMenu(true)
         configuraObservers()
+        var viewPager = binding.userLogadoGallery
+        var viewPagerAdapter = GalleryAdapter(view.context,imageUrls)
+        viewPager.adapter = viewPagerAdapter
     }
 
     fun startLoading() {
@@ -64,12 +76,24 @@ class UserLogadoFragment : Fragment() {
         val constraintLayout = binding.constraint
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)
-        constraintSet.connect(binding.userLogadoLabelDetalhes.id,ConstraintSet.TOP,binding.userLogadoNomeEditText.id,ConstraintSet.BOTTOM,0)
-        constraintSet.connect(binding.userLogadoLabelEndereco.id,ConstraintSet.TOP,binding.userLogadoDetalhesEditText.id,ConstraintSet.BOTTOM,0)
+        constraintSet.connect(
+            binding.userLogadoLabelDetalhes.id,
+            ConstraintSet.TOP,
+            binding.userLogadoNomeEditText.id,
+            ConstraintSet.BOTTOM,
+            0
+        )
+        constraintSet.connect(
+            binding.userLogadoLabelEndereco.id,
+            ConstraintSet.TOP,
+            binding.userLogadoDetalhesEditText.id,
+            ConstraintSet.BOTTOM,
+            0
+        )
         constraintSet.applyTo(constraintLayout)
     }
 
-    fun atualizar(){
+    fun atualizar() {
         startLoading()
         viewModel.atualizar()
     }
@@ -77,7 +101,7 @@ class UserLogadoFragment : Fragment() {
     private fun configuraObservers() {
         viewModel.atualiza.observe(viewLifecycleOwner, Observer {
             closeLoading()
-            when(it){
+            when (it) {
                 Responses.SUCESS -> {
                     ajusteConstraintsNormal()
                 }
@@ -101,8 +125,20 @@ class UserLogadoFragment : Fragment() {
         val constraintLayout = binding.constraint
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)
-        constraintSet.connect(binding.userLogadoLabelDetalhes.id,ConstraintSet.TOP,binding.userLogadoNome.id,ConstraintSet.BOTTOM,0)
-        constraintSet.connect(binding.userLogadoLabelEndereco.id,ConstraintSet.TOP,binding.userLogadoDetalhes.id,ConstraintSet.BOTTOM,0)
+        constraintSet.connect(
+            binding.userLogadoLabelDetalhes.id,
+            ConstraintSet.TOP,
+            binding.userLogadoNome.id,
+            ConstraintSet.BOTTOM,
+            0
+        )
+        constraintSet.connect(
+            binding.userLogadoLabelEndereco.id,
+            ConstraintSet.TOP,
+            binding.userLogadoDetalhes.id,
+            ConstraintSet.BOTTOM,
+            0
+        )
         constraintSet.applyTo(constraintLayout)
         view?.hideKeyboard()
     }
