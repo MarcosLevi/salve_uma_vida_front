@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/fragmentGalleryClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            app:layout_constraintEnd_toEndOf="@+id/viewPager"
-            app:layout_constraintTop_toTopOf="@+id/viewPager"
+            app:layout_constraintEnd_toEndOf="@+id/fragmentGalleryViewPager"
+            app:layout_constraintTop_toTopOf="@+id/fragmentGalleryViewPager"
             app:srcCompat="@drawable/ic_baseline_close_24" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/fragmentGalleryViewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

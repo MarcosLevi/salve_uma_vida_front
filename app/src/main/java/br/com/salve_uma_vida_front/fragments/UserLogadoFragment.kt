@@ -10,17 +10,18 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.GalleryAdapter
-import br.com.salve_uma_vida_front.viewmodels.UserViewModel
+import br.com.salve_uma_vida_front.databinding.FragmentPerfilUserLogadoBinding
 import br.com.salve_uma_vida_front.hideKeyboard
 import br.com.salve_uma_vida_front.models.LoadingDialog
 import br.com.salve_uma_vida_front.models.Responses
-import br.com.salve_uma_vida_front.databinding.FragmentPerfilUserLogadoBinding
+import br.com.salve_uma_vida_front.models.ScaleType
+import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 
 
 class UserLogadoFragment : Fragment() {
     var navController: NavController? = null
     lateinit var binding: FragmentPerfilUserLogadoBinding
-    private lateinit var viewModel: UserViewModel
+    private lateinit var userViewModel: UserViewModel
     private lateinit var myMenu: Menu
 
     private val imageUrls = mutableListOf(
@@ -37,7 +38,7 @@ class UserLogadoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPerfilUserLogadoBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         return binding.root
     }
 
@@ -46,8 +47,12 @@ class UserLogadoFragment : Fragment() {
         navController = Navigation.findNavController(view)
         setHasOptionsMenu(true)
         configuraObservers()
+        configuraViewPager(view)
+    }
+
+    private fun configuraViewPager(view: View) {
         var viewPager = binding.userLogadoGallery
-        var viewPagerAdapter = GalleryAdapter(view.context,imageUrls)
+        var viewPagerAdapter = GalleryAdapter(view.context, imageUrls,parentFragmentManager,ScaleType.CROPPED)
         viewPager.adapter = viewPagerAdapter
     }
 
@@ -95,11 +100,11 @@ class UserLogadoFragment : Fragment() {
 
     fun atualizar() {
         startLoading()
-        viewModel.atualizar()
+        userViewModel.atualizar()
     }
 
     private fun configuraObservers() {
-        viewModel.atualiza.observe(viewLifecycleOwner, Observer {
+        userViewModel.atualiza.observe(viewLifecycleOwner, Observer {
             closeLoading()
             when (it) {
                 Responses.SUCESS -> {
