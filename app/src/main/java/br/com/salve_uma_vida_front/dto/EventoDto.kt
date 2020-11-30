@@ -19,6 +19,5 @@ data class EventoDto(
     @SerializedName("description")
     var descricao: String,
     @SerializedName("date")
-    var data:String,
-    var favorito: Boolean
+    var data:String
 )
