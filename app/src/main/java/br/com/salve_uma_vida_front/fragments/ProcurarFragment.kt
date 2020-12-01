@@ -61,9 +61,9 @@ class ProcurarFragment : Fragment() {
 
     fun closeLoading(){
         val transaction = parentFragmentManager.beginTransaction()
-        val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog
-        loadingDialog.dismiss()
-        transaction.remove(loadingDialog)
+        val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
+        loadingDialog?.dismiss()
+        transaction.remove(loadingDialog!!)
     }
 
     private fun configuraRecyclerView() {
