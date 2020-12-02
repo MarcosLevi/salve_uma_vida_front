@@ -12,12 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.models.Variaveis
-import br.com.salve_uma_vida_front.adapters.CardCampanhaAdapter
-import br.com.salve_uma_vida_front.adapters.CardEventoAdapter
+import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
+import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
 import br.com.salve_uma_vida_front.closeLoading
-import br.com.salve_uma_vida_front.models.LoadingDialog
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaViewHolder
-import br.com.salve_uma_vida_front.viewholders.CardEventoViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
@@ -28,8 +27,8 @@ import br.com.salve_uma_vida_front.startLoading
 class ProcurarFragment : Fragment() {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var campanhaAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
-    lateinit var eventoAdapter: RecyclerView.Adapter<CardEventoViewHolder>
+    lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
+    lateinit var eventoFinalAdapter: RecyclerView.Adapter<CardEventoFinalViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentBothProcurarBinding
     private lateinit var viewModel: CampanhasEEventosViewModel
@@ -60,13 +59,13 @@ class ProcurarFragment : Fragment() {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-        campanhaAdapter =
-            CardCampanhaAdapter(
+        campanhaFinalAdapter =
+            CardCampanhaFinalAdapter(
                 listaCampanhas,
                 requireContext()
             )
         mRecyclerView.layoutManager = mLayoutManager
-        mRecyclerView.adapter = campanhaAdapter
+        mRecyclerView.adapter = campanhaFinalAdapter
     }
 
     private fun configuraObservers() {
@@ -75,12 +74,12 @@ class ProcurarFragment : Fragment() {
             if (it != null) {
                 listaCampanhas.addAll(it)
             }
-            campanhaAdapter =
-                CardCampanhaAdapter(
+            campanhaFinalAdapter =
+                CardCampanhaFinalAdapter(
                     listaCampanhas,
                     requireContext()
                 )
-            mRecyclerView.adapter = campanhaAdapter
+            mRecyclerView.adapter = campanhaFinalAdapter
             closeLoading(parentFragmentManager)
             view?.hideKeyboard()
         })
@@ -89,12 +88,12 @@ class ProcurarFragment : Fragment() {
             if (it != null) {
                 listaEventos.addAll(it)
             }
-            eventoAdapter =
-                CardEventoAdapter(
+            eventoFinalAdapter =
+                CardEventoFinalAdapter(
                     listaEventos,
                     requireContext()
                 )
-            mRecyclerView.adapter = eventoAdapter
+            mRecyclerView.adapter = eventoFinalAdapter
             closeLoading(parentFragmentManager)
             view?.hideKeyboard()
         })

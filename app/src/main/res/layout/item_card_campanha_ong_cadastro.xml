@@ -26,7 +26,7 @@
             android:background="@android:color/white"
             android:contentDescription="@string/content_description_imageButton_cardEdita"
             android:onClick="@{() -> listener.onEditaClicked(itemCard)}"
-            android:src="@drawable/ic_baseline_edit_24"
+            android:src="@drawable/ic_baseline_edit_30"
             app:layout_constraintBottom_toBottomOf="@+id/itemOngProgressBar"
             app:layout_constraintEnd_toStartOf="@+id/itemOngExclui"
             app:layout_constraintTop_toTopOf="parent" />

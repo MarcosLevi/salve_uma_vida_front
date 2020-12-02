@@ -10,23 +10,23 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.FormatStringToDate
 import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.dto.CampanhaDto
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
 import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
 import com.squareup.picasso.Picasso
 
-class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto: Context) :
-    RecyclerView.Adapter<CardCampanhaViewHolder>() {
+class CardCampanhaFinalAdapter(var listaCards: MutableList<CampanhaDto>, var contexto: Context) :
+    RecyclerView.Adapter<CardCampanhaFinalViewHolder>() {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapterDoador: RecyclerView.Adapter<ItemAdapterDoador.ItemViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var bindingCampanha: CardCampanhaFinalBinding
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardCampanhaViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardCampanhaFinalViewHolder {
         bindingCampanha = CardCampanhaFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 //        bindingEvento = CardEventoFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         val viewHolder =
-            CardCampanhaViewHolder(
+            CardCampanhaFinalViewHolder(
                 bindingCampanha
             )
         return viewHolder
@@ -36,7 +36,7 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
         return listaCards.size
     }
 
-    override fun onBindViewHolder(holder: CardCampanhaViewHolder, position: Int) {
+    override fun onBindViewHolder(holderFinal: CardCampanhaFinalViewHolder, position: Int) {
         val currentItem: CampanhaDto = listaCards.get(position)
 
 //        seta imagem
@@ -46,20 +46,20 @@ class CardCampanhaAdapter(var listaCards: MutableList<CampanhaDto>, var contexto
             .centerCrop()
             .placeholder(R.drawable.ic_dafault_photo)
             .error(R.drawable.ic_baseline_report_problem_24)
-            .into(holder.imagemCampanha)
+            .into(holderFinal.imagemCampanha)
 
 
 //        fazer função que salve esse cara
-        holder.textViewTitulo.text = currentItem.titulo
-        holder.textViewTimeStamp.text =
+        holderFinal.textViewTitulo.text = currentItem.titulo
+        holderFinal.textViewTimeStamp.text =
             FormatStringToDate(currentItem.data)
-        holder.textViewDescricao.text = currentItem.descricao
-        holder.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
-        holder.itemView.setOnClickListener{
+        holderFinal.textViewDescricao.text = currentItem.descricao
+        holderFinal.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
+        holderFinal.itemView.setOnClickListener{
             Log.d("CardCampanhaViewHolder", currentItem.toString())
         }
 
-        mRecyclerView = holder.itensCampanha
+        mRecyclerView = holderFinal.itensCampanha
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(contexto)
         mAdapterDoador =

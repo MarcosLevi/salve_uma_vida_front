@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.FormatStringToDate
 import br.com.salve_uma_vida_front.dp
-import br.com.salve_uma_vida_front.viewholders.CardEventoViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
 import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
 import com.squareup.picasso.Picasso
 
-class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Context) :
-    RecyclerView.Adapter<CardEventoViewHolder>() {
+class CardEventoFinalAdapter(var listaCards: MutableList<EventoDto>, var contexto: Context) :
+    RecyclerView.Adapter<CardEventoFinalViewHolder>() {
 
     lateinit var bindingEvento: CardEventoFinalBinding
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardEventoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardEventoFinalViewHolder {
 //        bindingCampanha = CardCampanhaFinalBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         bindingEvento =
             CardEventoFinalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val viewHolder =
-            CardEventoViewHolder(
+            CardEventoFinalViewHolder(
                 bindingEvento
             )
         return viewHolder
@@ -33,7 +33,7 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
         return listaCards.size
     }
 
-    override fun onBindViewHolder(holder: CardEventoViewHolder, position: Int) {
+    override fun onBindViewHolder(holderFinal: CardEventoFinalViewHolder, position: Int) {
         val currentItem: EventoDto = listaCards.get(position)
 
         //seta imagem
@@ -43,16 +43,16 @@ class CardEventoAdapter(var listaCards: MutableList<EventoDto>, var contexto: Co
             .centerCrop()
             .placeholder(R.drawable.ic_dafault_photo)
             .error(R.drawable.ic_baseline_report_problem_24)
-            .into(holder.imagemEvento)
+            .into(holderFinal.imagemEvento)
 
 
-        holder.textViewTitulo.text = currentItem.titulo
+        holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
-        holder.textViewTimeStamp.text =
+        holderFinal.textViewTimeStamp.text =
             FormatStringToDate(currentItem.data)
-        holder.textViewDescricao.text = currentItem.descricao
+        holderFinal.textViewDescricao.text = currentItem.descricao
 
-        holder.itemView.setOnClickListener{
+        holderFinal.itemView.setOnClickListener{
             Log.d("CardEventoViewHolder", currentItem.toString())
         }
     }

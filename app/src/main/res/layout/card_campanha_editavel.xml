@@ -22,9 +22,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/corCampanhas"
+                android:background="@null"
                 android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
-                android:src="@drawable/ic_baseline_edit_24"
+                android:src="@drawable/ic_baseline_edit_30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cardCampanhaConfirmar"
                 app:layout_constraintTop_toBottomOf="@+id/cardCampanhaDescricao" />
@@ -34,13 +34,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                android:background="@color/corCampanhas"
+                android:background="@null"
                 android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
-                android:src="@drawable/ic_baseline_done_24"
+                android:src="@drawable/ic_baseline_done_30"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardCampanhaArquivar"
                 app:layout_constraintTop_toBottomOf="@+id/cardCampanhaDescricao" />
 
             <TextView
@@ -55,6 +55,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <ImageButton
+                android:id="@+id/cardCampanhaArquivar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaDescricao"
+                app:srcCompat="@drawable/ic_baseline_arquivar_30" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"

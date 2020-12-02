@@ -42,4 +42,5 @@
     <string name="imagem_da_campanha">Imagem da campanha</string>
     <string name="mapa">Mapa</string>
     <string name="perfil">Perfil</string>
+    <string name="arquiva_campanha_fazendo_com_que_fique_em_estado_de_finalizada">Arquiva campanha, fazendo com que fique em estado de finalizada</string>
 </resources>

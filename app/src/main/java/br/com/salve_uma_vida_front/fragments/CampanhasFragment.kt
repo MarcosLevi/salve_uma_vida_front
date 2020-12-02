@@ -14,24 +14,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.models.Variaveis
-import br.com.salve_uma_vida_front.adapters.CardCampanhaAdapter
-import br.com.salve_uma_vida_front.adapters.CardEventoAdapter
+import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
+import br.com.salve_uma_vida_front.adapters.CardEventoEditavelAdapter
 import br.com.salve_uma_vida_front.closeLoading
-import br.com.salve_uma_vida_front.models.LoadingDialog
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaViewHolder
-import br.com.salve_uma_vida_front.viewholders.CardEventoViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.startLoading
+import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 
 
 class CampanhasFragment : Fragment() {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var campanhaAdapter: RecyclerView.Adapter<CardCampanhaViewHolder>
-    lateinit var eventoAdapter: RecyclerView.Adapter<CardEventoViewHolder>
+    lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
+    lateinit var eventoEditavelAdapter: RecyclerView.Adapter<CardEventoEditavelViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
     private lateinit var viewModel: CampanhasEEventosViewModel
@@ -129,13 +129,13 @@ class CampanhasFragment : Fragment() {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-        campanhaAdapter =
-            CardCampanhaAdapter(
+        campanhaFinalAdapter =
+            CardCampanhaFinalAdapter(
                 listaCampanhas,
                 requireContext()
             )
         mRecyclerView.layoutManager = mLayoutManager
-        mRecyclerView.adapter = campanhaAdapter
+        mRecyclerView.adapter = campanhaFinalAdapter
     }
 
     private fun configuraObservers() {
@@ -145,12 +145,12 @@ class CampanhasFragment : Fragment() {
             if (it != null) {
                 listaCampanhas.addAll(it)
             }
-            campanhaAdapter =
-                CardCampanhaAdapter(
+            campanhaFinalAdapter =
+                CardCampanhaFinalAdapter(
                     listaCampanhas,
                     requireContext()
                 )
-            mRecyclerView.adapter = campanhaAdapter
+            mRecyclerView.adapter = campanhaFinalAdapter
         })
         viewModel.meusEventos.observe(viewLifecycleOwner, Observer {
             closeLoading(parentFragmentManager)
@@ -158,12 +158,12 @@ class CampanhasFragment : Fragment() {
             if (it != null) {
                 listaEventos.addAll(it)
             }
-            eventoAdapter =
-                CardEventoAdapter(
+            eventoEditavelAdapter =
+                CardEventoEditavelAdapter(
                     listaEventos,
                     requireContext()
                 )
-            mRecyclerView.adapter = eventoAdapter
+            mRecyclerView.adapter = eventoEditavelAdapter
         })
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
             filtroAtual = it

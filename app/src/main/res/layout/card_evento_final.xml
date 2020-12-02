@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardEventoFInal"
+        android:id="@+id/cardEventoFinal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/cardEventoImagem"
+                    android:id="@+id/cardEventoFinalImagem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/content_description_imageView_cardImagemCampanha"
@@ -37,7 +37,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/cardEventoDescricao"
+                android:id="@+id/cardEventoFinalDescricao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
             <TextView
-                android:id="@+id/cardEventoTitulo"
+                android:id="@+id/cardEventoFinalTitulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -67,15 +67,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/cardEventoData"
+                android:id="@+id/cardEventoFinalData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Ocorrerá em 23/03/2020"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/cardEventoTitulo"
-                app:layout_constraintStart_toStartOf="@+id/cardEventoTitulo"
-                app:layout_constraintTop_toBottomOf="@+id/cardEventoTitulo" />
+                app:layout_constraintEnd_toEndOf="@+id/cardEventoFinalTitulo"
+                app:layout_constraintStart_toStartOf="@+id/cardEventoFinalTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/cardEventoFinalTitulo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
