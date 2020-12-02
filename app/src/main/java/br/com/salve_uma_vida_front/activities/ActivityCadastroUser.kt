@@ -16,10 +16,12 @@ import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.UserType
 import br.com.salve_uma_vida_front.databinding.ActivityCadastroUserBinding
+import br.com.salve_uma_vida_front.dto.UserDto
+import br.com.salve_uma_vida_front.models.UrlDialog
 import com.squareup.picasso.Picasso
 
 
-class ActivityCadastroUser : AppCompatActivity() {
+class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
 
     private lateinit var binding: ActivityCadastroUserBinding
     private lateinit var viewModel: UserViewModel
@@ -31,6 +33,69 @@ class ActivityCadastroUser : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 //        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         configuraObservers()
+        configuraRadioGroup()
+
+        configuraListenerUserFoto()
+
+        configuraBotaoCriar()
+    }
+
+    private fun configuraBotaoCriar() {
+        binding.criar.setOnClickListener {
+            if (validade()) {
+                val nome = binding.nome.text.toString()
+                val detalhes = binding.detalhes.text.toString()
+                val email = binding.email.text.toString()
+                val senha = binding.senha.text.toString()
+                val imagem = binding.urlImagem.toString()
+                val tipo =
+                    if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
+                if (getRadioSelected() == binding.UserOng) {
+                    val endereco: String = getEnderecoFormatado()
+                    val (latitude, longitude) = retornaLatitudeLongitude(endereco)
+                    signup(nome, email, senha, detalhes, tipo, imagem, endereco, latitude, longitude)
+                } else {
+                    signup(nome, email, senha, detalhes, tipo, imagem)
+                }
+            }
+
+
+        }
+    }
+
+    private fun signup(
+        name: String,
+        email: String,
+        password: String,
+        detail: String,
+        type: String,
+        image: String,
+        address: String="",
+        addressLatitude: Float = 0.0F,
+        addressLongitude: Float = 0.0F
+    ) {
+        viewModel.signup(name, email, password, detail, type, image, address, addressLatitude, addressLongitude)
+    }
+
+    private fun retornaLatitudeLongitude(endereco: String): Pair<Float, Float> {
+        val adressToLatLong =
+            AdressToLatLong(
+                endereco,
+                applicationContext
+            )
+        val latitude = adressToLatLong.get(0)
+        val longitude = adressToLatLong.get(1)
+        return Pair(latitude, longitude)
+    }
+
+    private fun configuraListenerUserFoto() {
+        binding.userFoto.setOnClickListener {
+            val urlDialog = UrlDialog()
+            urlDialog.show(supportFragmentManager, "Url Dialog")
+        }
+    }
+
+    private fun configuraRadioGroup() {
         binding.radioGroupTipo.setOnCheckedChangeListener { group, selectedId ->
 
             val radio = binding.root.findViewById<RadioButton>(selectedId)
@@ -59,55 +124,6 @@ class ActivityCadastroUser : AppCompatActivity() {
             }
 
         }
-        binding.imagem.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                Picasso.get()
-                    .load(binding.imagem.text.toString())
-                    .resize(110.dp, 110.dp)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_dafault_photo)
-                    .error(R.drawable.ic_baseline_report_problem_24)
-                    .into(binding.userFoto)
-            }
-
-        }
-        binding.criar.setOnClickListener {
-            if (validade()) {
-                val nome = binding.nome.text.toString()
-                val detalhes = binding.detalhes.text.toString()
-                val email = binding.email.text.toString()
-                val senha = binding.senha.text.toString()
-                val imagem = binding.imagem.text.toString()
-                val tipo =
-                    if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
-                if (getRadioSelected() == binding.UserOng) {
-                    val endereco: String
-                    endereco = getEnderecoFormatado()
-                    val adressToLatLong =
-                        AdressToLatLong(
-                            endereco,
-                            applicationContext
-                        )
-                    val latitude = adressToLatLong.get(0)
-                    val longitude = adressToLatLong.get(1)
-                    viewModel.signup(
-                        nome,
-                        email,
-                        senha,
-                        detalhes,
-                        tipo,
-                        imagem,
-                        endereco,
-                        latitude,
-                        longitude
-                    )
-                } else {
-                    viewModel.signup(nome, email, senha, detalhes, tipo, imagem)
-                }
-            }
-
-
-        }
     }
 
     private fun configuraObservers() {
@@ -128,10 +144,10 @@ class ActivityCadastroUser : AppCompatActivity() {
     }
 
     private fun validade(): Boolean {
-        if (TextUtils.isEmpty(binding.imagem.text)) {
-            binding.imagem.setError("Imagem é necessária para fazer o cadastro")
-            return false
-        }
+//        if (TextUtils.isEmpty(binding.urlImagem.text)) {
+//            binding.urlImagem.setError("Imagem é necessária para fazer o cadastro")
+//            return false
+//        }
         if (TextUtils.isEmpty(binding.nome.text)) {
             binding.nome.setError("Nome é necessário para fazer o cadastro")
             return false
@@ -167,6 +183,17 @@ class ActivityCadastroUser : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun passaUrl(url: String) {
+        Picasso.get()
+            .load(url)
+            .resize(110.dp, 110.dp)
+            .centerCrop()
+            .placeholder(R.drawable.ic_dafault_photo)
+            .error(R.drawable.ic_baseline_report_problem_24)
+            .into(binding.userFoto)
+        binding.urlImagem.text = url
     }
 
 

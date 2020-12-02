@@ -13,8 +13,10 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -36,13 +38,13 @@
                     android:id="@+id/labelTipoUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="Tipo de usuário"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imagem" />
+                    app:layout_constraintTop_toBottomOf="@+id/urlImagem" />
 
                 <TextView
                     android:id="@+id/labelNome"
@@ -258,31 +260,17 @@
                     app:layout_constraintStart_toEndOf="@+id/labelNome"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroupTipo" />
 
-                <EditText
-                    android:id="@+id/imagem"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:ems="10"
-                    android:hint="Digite o link da imagem"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/labelImage"
-                    app:layout_constraintTop_toBottomOf="@+id/userFoto" />
-
                 <TextView
-                    android:id="@+id/labelImage"
+                    android:id="@+id/urlImagem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Imagem"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imagem"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imagem" />
+                    app:layout_constraintTop_toBottomOf="@+id/userFoto" />
 
                 <EditText
                     android:id="@+id/detalhes"
