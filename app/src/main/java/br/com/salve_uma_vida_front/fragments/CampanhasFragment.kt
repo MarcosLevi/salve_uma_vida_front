@@ -13,24 +13,23 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.models.Variaveis
-import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
+import br.com.salve_uma_vida_front.adapters.CardCampanhaEditavelAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoEditavelAdapter
 import br.com.salve_uma_vida_front.closeLoading
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
-import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
-import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.models.Variaveis
 import br.com.salve_uma_vida_front.startLoading
+import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
+import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 
 
 class CampanhasFragment : Fragment() {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
+    lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaEditavelViewHolder>
     lateinit var eventoEditavelAdapter: RecyclerView.Adapter<CardEventoEditavelViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
@@ -39,10 +38,30 @@ class CampanhasFragment : Fragment() {
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
     private var filtroAtual: String = Variaveis().CAMPANHAS
 
-    private val rotateOpen: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_open_anim) }
-    private val rotateClose: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.rotate_close_anim) }
-    private val fromBotton: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.from_botton_anim) }
-    private val toBotton: Animation by lazy { AnimationUtils.loadAnimation(context,R.anim.to_bottom_anim) }
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.rotate_open_anim
+        )
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.rotate_close_anim
+        )
+    }
+    private val fromBotton: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.from_botton_anim
+        )
+    }
+    private val toBotton: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            context,
+            R.anim.to_bottom_anim
+        )
+    }
 
     private var clicked = false
 
@@ -86,13 +105,13 @@ class CampanhasFragment : Fragment() {
     }
 
     private fun setAnimation(clicked: Boolean) {
-        if (!clicked){
+        if (!clicked) {
             binding.ongCampanhasFragmentFabAddEvento.startAnimation(fromBotton)
             binding.ongCampanhasFragmentFabAddCampanha.startAnimation(fromBotton)
             binding.ongCampanhasFragmentLabelCampanha.startAnimation(fromBotton)
             binding.ongCampanhasFragmentLabelEvento.startAnimation(fromBotton)
             binding.ongCampanhasFragmentAdd.startAnimation(rotateOpen)
-        }else{
+        } else {
             binding.ongCampanhasFragmentFabAddEvento.startAnimation(toBotton)
             binding.ongCampanhasFragmentFabAddCampanha.startAnimation(toBotton)
             binding.ongCampanhasFragmentLabelCampanha.startAnimation(toBotton)
@@ -102,12 +121,12 @@ class CampanhasFragment : Fragment() {
     }
 
     private fun setVisibility(clicked: Boolean) {
-        if (!clicked){
+        if (!clicked) {
             binding.ongCampanhasFragmentFabAddEvento.visibility = View.VISIBLE
             binding.ongCampanhasFragmentFabAddCampanha.visibility = View.VISIBLE
             binding.ongCampanhasFragmentLabelCampanha.visibility = View.VISIBLE
             binding.ongCampanhasFragmentLabelEvento.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.ongCampanhasFragmentFabAddEvento.visibility = View.INVISIBLE
             binding.ongCampanhasFragmentFabAddCampanha.visibility = View.INVISIBLE
             binding.ongCampanhasFragmentLabelCampanha.visibility = View.INVISIBLE
@@ -116,10 +135,10 @@ class CampanhasFragment : Fragment() {
     }
 
     private fun setClickable(clicked: Boolean) {
-        if (!clicked){
+        if (!clicked) {
             binding.ongCampanhasFragmentFabAddEvento.isClickable = true
             binding.ongCampanhasFragmentFabAddCampanha.isClickable = true
-        }else{
+        } else {
             binding.ongCampanhasFragmentFabAddEvento.isClickable = false
             binding.ongCampanhasFragmentFabAddCampanha.isClickable = false
         }
@@ -130,7 +149,7 @@ class CampanhasFragment : Fragment() {
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
         campanhaFinalAdapter =
-            CardCampanhaFinalAdapter(
+            CardCampanhaEditavelAdapter(
                 listaCampanhas,
                 requireContext()
             )
@@ -146,7 +165,7 @@ class CampanhasFragment : Fragment() {
                 listaCampanhas.addAll(it)
             }
             campanhaFinalAdapter =
-                CardCampanhaFinalAdapter(
+                CardCampanhaEditavelAdapter(
                     listaCampanhas,
                     requireContext()
                 )
@@ -176,16 +195,15 @@ class CampanhasFragment : Fragment() {
         })
     }
 
-    private fun carregaCampanhasUserLogado(parametro:String="") {
+    private fun carregaCampanhasUserLogado(parametro: String = "") {
         startLoading(parentFragmentManager)
         viewModel.getCampanhasUserLogado(parametro)
     }
 
-    private fun carregaEventosUserLogado(parametro:String="") {
+    private fun carregaEventosUserLogado(parametro: String = "") {
         startLoading(parentFragmentManager)
         viewModel.getEventosUserLogado(parametro)
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

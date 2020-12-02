@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardCampanhaFInal"
+        android:id="@+id/cardCampanhaFinal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/cardCampanhaDescricao"
+                android:id="@+id/cardCampanhaFinalDescricao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/cardCampanhaImagem"
+                    android:id="@+id/cardCampanhaFinalImagem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/content_description_imageView_cardImagemCampanha"
@@ -50,7 +50,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/cardCampanhaTitulo"
+                android:id="@+id/cardCampanhaFinalTitulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -65,18 +65,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/cardCampanhaData"
+                android:id="@+id/cardCampanhaFinalData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/text_cardTimeStamp"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaTitulo"
-                app:layout_constraintStart_toStartOf="@+id/cardCampanhaTitulo"
-                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaTitulo" />
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaFinalTitulo"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaFinalTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaFinalTitulo" />
 
             <TextView
-                android:id="@+id/cardQuantidadeItens"
+                android:id="@+id/cardCampanhaFinalQuantidadeItens"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -84,10 +84,10 @@
                 android:text="@string/text_cardQuantidadeItens"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaDescricao" />
+                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaFinalDescricao" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cardCampanhaItens"
+                android:id="@+id/cardCampanhaFinalItens"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -98,7 +98,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardQuantidadeItens" />
+                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaFinalQuantidadeItens" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

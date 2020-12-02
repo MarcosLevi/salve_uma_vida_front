@@ -7,11 +7,11 @@ import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
 
 class CardCampanhaFinalViewHolder(binding: CardCampanhaFinalBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    var imagemCampanha: ImageView = binding.cardCampanhaImagem
-    var textViewTitulo: TextView = binding.cardCampanhaTitulo
-    var textViewTimeStamp: TextView = binding.cardCampanhaData
-    var textViewDescricao: TextView = binding.cardCampanhaDescricao
-    var textViewQuantidadeItens: TextView = binding.cardQuantidadeItens
-    var itensCampanha: RecyclerView = binding.cardCampanhaItens
+    var imagemCampanha: ImageView = binding.cardCampanhaFinalImagem
+    var textViewTitulo: TextView = binding.cardCampanhaFinalTitulo
+    var textViewTimeStamp: TextView = binding.cardCampanhaFinalData
+    var textViewDescricao: TextView = binding.cardCampanhaFinalDescricao
+    var textViewQuantidadeItens: TextView = binding.cardCampanhaFinalQuantidadeItens
+    var itensCampanha: RecyclerView = binding.cardCampanhaFinalItens
 
 }
