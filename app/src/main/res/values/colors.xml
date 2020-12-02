@@ -18,4 +18,6 @@
     <color name="corBotaoCancelar">#E91E63</color>
     <color name="corBotaoFltrar">#43A047</color>
 
+    <color name="corDefaultButton">#80000000</color>
+
 </resources>
