@@ -14,6 +14,7 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.models.Variaveis
 import br.com.salve_uma_vida_front.adapters.CardCampanhaAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoAdapter
+import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.models.LoadingDialog
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoViewHolder
@@ -22,6 +23,7 @@ import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.hideKeyboard
+import br.com.salve_uma_vida_front.startLoading
 
 class ProcurarFragment : Fragment() {
     var navController: NavController? = null
@@ -54,18 +56,6 @@ class ProcurarFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    fun startLoading(){
-        val loadingDialog = LoadingDialog()
-        loadingDialog.show(parentFragmentManager,"Loading")
-    }
-
-    fun closeLoading(){
-        val transaction = parentFragmentManager.beginTransaction()
-        val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
-        loadingDialog?.dismiss()
-        transaction.remove(loadingDialog!!)
-    }
-
     private fun configuraRecyclerView() {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
@@ -91,7 +81,7 @@ class ProcurarFragment : Fragment() {
                     requireContext()
                 )
             mRecyclerView.adapter = campanhaAdapter
-            closeLoading()
+            closeLoading(parentFragmentManager)
             view?.hideKeyboard()
         })
         viewModel.eventos.observe(viewLifecycleOwner, Observer {
@@ -105,7 +95,7 @@ class ProcurarFragment : Fragment() {
                     requireContext()
                 )
             mRecyclerView.adapter = eventoAdapter
-            closeLoading()
+            closeLoading(parentFragmentManager)
             view?.hideKeyboard()
         })
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
@@ -119,12 +109,12 @@ class ProcurarFragment : Fragment() {
     }
 
     private fun carregaCampanhas(parametro: String = "") {
-        startLoading()
+        startLoading(parentFragmentManager)
         viewModel.getCampanhas(parametro)
     }
 
     private fun carregaEventos(parametro: String = "") {
-        startLoading()
+        startLoading(parentFragmentManager)
         viewModel.getEventos(parametro)
     }
 

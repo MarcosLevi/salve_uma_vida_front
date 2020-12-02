@@ -6,6 +6,8 @@ import android.content.res.Resources
 import android.location.Geocoder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.FragmentManager
+import br.com.salve_uma_vida_front.models.LoadingDialog
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,4 +59,16 @@ val Int.dp: Int
 fun View.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
+fun startLoading(parentFragmentManager: FragmentManager) {
+    val loadingDialog = LoadingDialog()
+    loadingDialog.show(parentFragmentManager,"Loading")
+}
+
+fun closeLoading(parentFragmentManager: FragmentManager){
+    val transaction = parentFragmentManager.beginTransaction()
+    val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
+    loadingDialog?.dismiss()
+    transaction.remove(loadingDialog!!)
 }

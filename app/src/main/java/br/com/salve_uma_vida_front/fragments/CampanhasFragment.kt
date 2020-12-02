@@ -16,6 +16,7 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.models.Variaveis
 import br.com.salve_uma_vida_front.adapters.CardCampanhaAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoAdapter
+import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.models.LoadingDialog
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoViewHolder
@@ -23,6 +24,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.startLoading
 
 
 class CampanhasFragment : Fragment() {
@@ -123,18 +125,6 @@ class CampanhasFragment : Fragment() {
         }
     }
 
-    fun startLoading(){
-        val loadingDialog = LoadingDialog()
-        loadingDialog.show(parentFragmentManager,"Loading")
-    }
-
-    fun closeLoading(){
-        val transaction = parentFragmentManager.beginTransaction()
-        val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog
-        loadingDialog.dismiss()
-        transaction.remove(loadingDialog)
-    }
-
     private fun configuraRecyclerView() {
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
@@ -150,7 +140,7 @@ class CampanhasFragment : Fragment() {
 
     private fun configuraObservers() {
         viewModel.minhasCampanhas.observe(viewLifecycleOwner, Observer {
-            closeLoading()
+            closeLoading(parentFragmentManager)
             listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
@@ -163,7 +153,7 @@ class CampanhasFragment : Fragment() {
             mRecyclerView.adapter = campanhaAdapter
         })
         viewModel.meusEventos.observe(viewLifecycleOwner, Observer {
-            closeLoading()
+            closeLoading(parentFragmentManager)
             listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
@@ -187,12 +177,12 @@ class CampanhasFragment : Fragment() {
     }
 
     private fun carregaCampanhasUserLogado(parametro:String="") {
-        startLoading()
+        startLoading(parentFragmentManager)
         viewModel.getCampanhasUserLogado(parametro)
     }
 
     private fun carregaEventosUserLogado(parametro:String="") {
-        startLoading()
+        startLoading(parentFragmentManager)
         viewModel.getEventosUserLogado(parametro)
     }
 

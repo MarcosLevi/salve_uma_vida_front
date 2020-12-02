@@ -10,11 +10,13 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.GalleryAdapter
+import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilUserLogadoBinding
 import br.com.salve_uma_vida_front.hideKeyboard
 import br.com.salve_uma_vida_front.models.LoadingDialog
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.ScaleType
+import br.com.salve_uma_vida_front.startLoading
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 
 
@@ -56,18 +58,6 @@ class UserLogadoFragment : Fragment() {
         viewPager.adapter = viewPagerAdapter
     }
 
-    fun startLoading() {
-        val loadingDialog = LoadingDialog()
-        loadingDialog.show(parentFragmentManager, "Loading")
-    }
-
-    fun closeLoading() {
-        val transaction = parentFragmentManager.beginTransaction()
-        val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog
-        loadingDialog.dismiss()
-        transaction.remove(loadingDialog)
-    }
-
     fun ajusteConstraintsEdita() {
         binding.userLogadoNome.visibility = View.GONE
         binding.userLogadoDetalhes.visibility = View.GONE
@@ -99,13 +89,13 @@ class UserLogadoFragment : Fragment() {
     }
 
     fun atualizar() {
-        startLoading()
+        startLoading(parentFragmentManager)
         userViewModel.atualizar()
     }
 
     private fun configuraObservers() {
         userViewModel.atualiza.observe(viewLifecycleOwner, Observer {
-            closeLoading()
+            closeLoading(parentFragmentManager)
             when (it) {
                 Responses.SUCESS -> {
                     ajusteConstraintsNormal()
