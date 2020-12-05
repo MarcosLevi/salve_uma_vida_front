@@ -3,6 +3,7 @@ package br.com.salve_uma_vida_front.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -53,6 +54,9 @@ class ProcurarFragment : Fragment() {
         configuraObservers()
         carregaCampanhas()
         setHasOptionsMenu(true)
+        val toolbar = activity?.findViewById<Toolbar>(R.id.ongToolbar)
+        toolbar?.menu?.clear()
+        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
     }
 
     private fun configuraRecyclerView() {
@@ -117,35 +121,35 @@ class ProcurarFragment : Fragment() {
         viewModel.getEventos(parametro)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
-        val procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
-        val searchView = procurar.actionView as SearchView
-        searchView.isIconified = false
-        procurar.setOnMenuItemClickListener {
-            searchView.requestFocusFromTouch()
-        }
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
-                if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
-                    carregaCampanhas(textoDeBusca);
-                } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
-                    carregaEventos(textoDeBusca)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(novoTexto: String): Boolean {
-                if (novoTexto == "") {
-                    this.onQueryTextSubmit("");
-                }
-                return true
-            }
-
-        })
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
+//        val procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
+//        val searchView = procurar.actionView as SearchView
+//        searchView.isIconified = false
+//        procurar.setOnMenuItemClickListener {
+//            searchView.requestFocusFromTouch()
+//        }
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
+//                if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
+//                    carregaCampanhas(textoDeBusca);
+//                } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
+//                    carregaEventos(textoDeBusca)
+//                }
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(novoTexto: String): Boolean {
+//                if (novoTexto == "") {
+//                    this.onQueryTextSubmit("");
+//                }
+//                return true
+//            }
+//
+//        })
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

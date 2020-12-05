@@ -20,7 +20,6 @@ import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.models.Variaveis
-import br.com.salve_uma_vida_front.startLoading
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
@@ -90,7 +89,7 @@ class CampanhasFragment : Fragment() {
             onAddButtonClicked()
         }
         binding.ongCampanhasFragmentFabAddCampanha.setOnClickListener {
-
+            navController!!.navigate(R.id.action_ongCampanhasFragment_to_cadastroCampanhaFragment)
         }
         binding.ongCampanhasFragmentFabAddEvento.setOnClickListener {
 
@@ -196,12 +195,10 @@ class CampanhasFragment : Fragment() {
     }
 
     private fun carregaCampanhasUserLogado(parametro: String = "") {
-        startLoading(parentFragmentManager)
         viewModel.getCampanhasUserLogado(parametro)
     }
 
     private fun carregaEventosUserLogado(parametro: String = "") {
-        startLoading(parentFragmentManager)
         viewModel.getEventosUserLogado(parametro)
     }
 

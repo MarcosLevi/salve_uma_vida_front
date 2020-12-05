@@ -4,9 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <FrameLayout
+        android:id="@+id/cadastroCampanhaFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.CadastroFragment">
+        android:background="@color/background"
+        tools:context=".fragments.CadastroCampanhaFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -63,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:background="#FFFFFF"
+                android:background="@null"
                 android:contentDescription="@string/selecione_uma_data"
                 android:tint="@color/corDefaultButton"
                 app:layout_constraintBottom_toBottomOf="@+id/cadastroCampanhaData"
@@ -83,7 +85,7 @@
                 android:scaleX="1"
                 android:scaleY="1"
                 android:src="@drawable/ic_baseline_done_30"
-                android:tint="@color/corDefaultButton"
+                android:tint="@color/corBotaoConfirmar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -108,7 +110,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@android:color/white"
+                android:background="@null"
                 android:contentDescription="@string/content_description_imageButton_cardAddItem"
                 android:src="@drawable/ic_baseline_add_box_24"
                 android:tint="@color/corDefaultButton"
@@ -132,11 +134,11 @@
                 android:layout_height="110dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:contentDescription="@string/imagem_da_campanha"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_dafault_photo"
-                android:contentDescription="@string/imagem_da_campanha" />
+                app:srcCompat="@drawable/ic_dafault_photo" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

@@ -62,13 +62,13 @@ fun View.hideKeyboard() {
 }
 
 fun startLoading(parentFragmentManager: FragmentManager) {
-    val loadingDialog = LoadingDialog()
-    loadingDialog.show(parentFragmentManager,"Loading")
+//    val loadingDialog = LoadingDialog()
+//    loadingDialog.show(parentFragmentManager,"Loading")
 }
 
 fun closeLoading(parentFragmentManager: FragmentManager){
-    val transaction = parentFragmentManager.beginTransaction()
-    val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
-    loadingDialog?.dismiss()
-    transaction.remove(loadingDialog!!)
+//    val transaction = parentFragmentManager.beginTransaction()
+//    val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
+//    loadingDialog?.dismiss()
+//    transaction.remove(loadingDialog!!)
 }

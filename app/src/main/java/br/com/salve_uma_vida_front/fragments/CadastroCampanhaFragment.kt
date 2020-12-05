@@ -16,14 +16,14 @@ import br.com.salve_uma_vida_front.DateToString
 import br.com.salve_uma_vida_front.StringToDate
 import br.com.salve_uma_vida_front.models.DialogEditaItem
 import br.com.salve_uma_vida_front.models.ItemCampanha
-import br.com.salve_uma_vida_front.databinding.FragmentCadastroBinding
 import br.com.salve_uma_vida_front.adapters.ItemAdapterOng
+import br.com.salve_uma_vida_front.databinding.FragmentCadastroCampanhaBinding
 import java.util.*
 
-class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapterOng.ItemListener {
+class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener {
     var navController: NavController? = null
 
-    lateinit var binding: FragmentCadastroBinding
+    lateinit var binding: FragmentCadastroCampanhaBinding
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapterOng: RecyclerView.Adapter<ItemAdapterOng.ItemViewHolder>
@@ -61,9 +61,11 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapterOng.ItemLi
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCadastroBinding.inflate(inflater, container, false)
+        binding = FragmentCadastroCampanhaBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,7 +86,7 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapterOng.ItemLi
         }
 
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
-        finalizaCampanha.setOnClickListener (this)
+        finalizaCampanha.setOnClickListener {  }
 
         val dataCampanha = binding.cadastroCampanhaData
 
@@ -137,26 +139,26 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapterOng.ItemLi
         }
     }
 
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.cadastroCampanhaFinalizar -> {
-                Toast.makeText(requireContext(), "Clicou no finalizar campanha", Toast.LENGTH_SHORT).show()
-                //salva no banco
-                val diaMesAno =
-                    StringToDate(binding.cadastroCampanhaData.text.toString())
-//                addCampanhaNaOng(
-//                    //Quando fazer login da ong, aqui vai o nome dela
-//                    "São Camilo",
-//                    binding.cadastroCampanhaTitulo.text.toString(),
-//                    NewCalendar(diaMesAno.get(0),diaMesAno.get(1),diaMesAno.get(2)),
-//                    binding.cadastroCampanhaDescricao.text.toString(),
-//                    itensCampanha
-//                )
-                notificaMudancaAdapter()
-                navController!!.navigate(R.id.action_cadastroFragment_to_ongCampanhasFragment)
-            }
-        }
-    }
+//    override fun onClick(v: View?) {
+//        when (v!!.id) {
+//            R.id.cadastroCampanhaFinalizar -> {
+//                Toast.makeText(requireContext(), "Clicou no finalizar campanha", Toast.LENGTH_SHORT).show()
+//                //salva no banco
+//                val diaMesAno =
+//                    StringToDate(binding.cadastroCampanhaData.text.toString())
+////                addCampanhaNaOng(
+////                    //Quando fazer login da ong, aqui vai o nome dela
+////                    "São Camilo",
+////                    binding.cadastroCampanhaTitulo.text.toString(),
+////                    NewCalendar(diaMesAno.get(0),diaMesAno.get(1),diaMesAno.get(2)),
+////                    binding.cadastroCampanhaDescricao.text.toString(),
+////                    itensCampanha
+////                )
+//                notificaMudancaAdapter()
+//                navController!!.navigate(R.id.action_cadastroCampanhaFragment_to_ongCampanhasFragment)
+//            }
+//        }
+//    }
 
     override fun onEditaClicked(itemCampanha: ItemCampanha) {
         DialogEditaItem(requireContext(),itemCampanha,itensCampanha,mAdapterOng,binding.cadastroCampanhaQuantidadeDeItens)
@@ -171,4 +173,5 @@ class CadastroFragment : Fragment(), View.OnClickListener, ItemAdapterOng.ItemLi
     private fun notificaMudancaAdapter() {
         mRecyclerView.adapter!!.notifyDataSetChanged()
     }
+
 }
