@@ -8,15 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.GalleryAdapter
-import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilUserLogadoBinding
-import br.com.salve_uma_vida_front.hideKeyboard
 import br.com.salve_uma_vida_front.models.LoadingDialog
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.ScaleType
-import br.com.salve_uma_vida_front.startLoading
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 
 
@@ -50,6 +47,12 @@ class UserLogadoFragment : Fragment() {
         setHasOptionsMenu(true)
         configuraObservers()
         configuraViewPager(view)
+        configuraToolbar()
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
+//        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
     }
 
     private fun configuraViewPager(view: View) {

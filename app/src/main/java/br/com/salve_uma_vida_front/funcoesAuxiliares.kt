@@ -6,8 +6,9 @@ import android.content.res.Resources
 import android.location.Geocoder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import br.com.salve_uma_vida_front.models.LoadingDialog
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -71,4 +72,10 @@ fun closeLoading(parentFragmentManager: FragmentManager){
 //    val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
 //    loadingDialog?.dismiss()
 //    transaction.remove(loadingDialog!!)
+}
+
+fun toolbarVazia(activity: FragmentActivity?): Toolbar? {
+    val toolbar = activity?.findViewById<Toolbar>(R.id.ongToolbar)
+    toolbar?.menu?.clear()
+    return toolbar
 }

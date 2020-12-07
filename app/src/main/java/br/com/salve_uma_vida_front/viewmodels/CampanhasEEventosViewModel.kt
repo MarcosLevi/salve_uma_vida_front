@@ -11,6 +11,7 @@ import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
+import br.com.salve_uma_vida_front.models.SearchType
 import br.com.salve_uma_vida_front.repository.CampanhaRepository
 import br.com.salve_uma_vida_front.repository.EventoRepository
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
@@ -42,8 +43,8 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
     private val _campanhas = MutableLiveData<List<CampanhaDto>>()
     val campanhas: LiveData<List<CampanhaDto>> = _campanhas
 
-    private val _campanhaOuEvento = MutableLiveData<String>()
-    val campanhaOuEvento: LiveData<String> = _campanhaOuEvento
+    private val _campanhaOuEvento = MutableLiveData<SearchType>()
+    val campanhaOuEvento: LiveData<SearchType> = _campanhaOuEvento
 
     fun getEventoId(id: Int) {
         val callback = EventoRepository().getEventoId(id, token)

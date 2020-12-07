@@ -1,8 +1,10 @@
 package br.com.salve_uma_vida_front.fragments
 
 import android.os.Bundle
-import android.view.*
-import android.widget.SearchView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -11,19 +13,17 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.models.Variaveis
+import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
-import br.com.salve_uma_vida_front.closeLoading
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
-import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
-import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.hideKeyboard
-import br.com.salve_uma_vida_front.startLoading
+import br.com.salve_uma_vida_front.models.SearchType
+import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
+import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
+import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
+
 
 class ProcurarFragment : Fragment() {
     var navController: NavController? = null
@@ -35,7 +35,7 @@ class ProcurarFragment : Fragment() {
     private lateinit var viewModel: CampanhasEEventosViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
-    private var filtroAtual: String = Variaveis().CAMPANHAS
+    private var filtroAtual = SearchType.CAMPANHAS
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +54,58 @@ class ProcurarFragment : Fragment() {
         configuraObservers()
         carregaCampanhas()
         setHasOptionsMenu(true)
-        val toolbar = activity?.findViewById<Toolbar>(R.id.ongToolbar)
-        toolbar?.menu?.clear()
+        configuraToolbar()
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
         toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
+        configuraSearchView(toolbar)
+        toolbar?.setOnMenuItemClickListener {
+            val itemMenu = it
+            when(it.itemId){
+                R.id.bothProcurarFragmentPesquisar -> {
+                    val searchView = it.actionView as SearchView
+                    searchView.requestFocusFromTouch()
+                    true
+                }
+
+                R.id.bothProcurarFragmentFiltros ->{
+                    viewModel.createDialog(fragmentManager)
+                    true
+                }
+                else -> {
+                    throw IllegalArgumentException("Item inexistente")
+                }
+            }
+        }
+    }
+
+    private fun configuraSearchView(toolbar: Toolbar?) {
+        val procurar = toolbar?.menu?.findItem(R.id.bothProcurarFragmentPesquisar)
+        val searchView = procurar?.actionView as SearchView
+        searchView.isIconified = false
+        procurar.setOnMenuItemClickListener {
+            searchView.requestFocusFromTouch()
+        }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
+                if (filtroAtual.equals(SearchType.CAMPANHAS)) {
+                    carregaCampanhas(textoDeBusca);
+                } else if (filtroAtual.equals(SearchType.EVENTOS)) {
+                    carregaEventos(textoDeBusca)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(novoTexto: String): Boolean {
+                if (novoTexto == "") {
+                    this.onQueryTextSubmit("");
+                }
+                return true
+            }
+
+        })
     }
 
     private fun configuraRecyclerView() {
@@ -103,9 +152,9 @@ class ProcurarFragment : Fragment() {
         })
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
             filtroAtual = it
-            if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
+            if (filtroAtual.equals(SearchType.CAMPANHAS)) {
                 carregaCampanhas()
-            } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
+            } else if (filtroAtual.equals(SearchType.EVENTOS)) {
                 carregaEventos()
             }
         })
@@ -150,14 +199,5 @@ class ProcurarFragment : Fragment() {
 //        })
 //        super.onCreateOptionsMenu(menu, inflater)
 //    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bothProcurarFragmentFiltros -> {
-                viewModel.createDialog(fragmentManager)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
 }

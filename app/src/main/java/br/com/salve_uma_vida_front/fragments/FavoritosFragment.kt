@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.databinding.FragmentBothFavoritosBinding
 import br.com.salve_uma_vida_front.dto.OngFavoritaDto
+import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardOngFavoritaViewHolder
 
 class FavoritosFragment : Fragment() {
@@ -31,6 +32,12 @@ class FavoritosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
+        configuraToolbar()
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
+//        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
     }
 
     private fun configuraRecyclerView() {

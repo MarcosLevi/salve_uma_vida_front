@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="sombra">#652C2C</color>
@@ -10,6 +7,7 @@
 
     <color name="background">#82B8D9</color>
     <color name="corNeutra">#0096FF</color>
+    <color name="corNeutraDark">#0056ff</color>
     <color name="corCampanhas">#0078cc</color>
     <color name="corFabAddCampanhas">#0060a3</color>
     <color name="corEventos">#bf40bf</color>

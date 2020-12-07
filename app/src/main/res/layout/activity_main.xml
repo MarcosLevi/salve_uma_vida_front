@@ -13,9 +13,9 @@
             android:id="@+id/mainLogoApp"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/ic_dafault_photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/corNeutraDark"
             android:text="Cadastrar"
             app:layout_constraintStart_toStartOf="@+id/passwordText"
             app:layout_constraintTop_toBottomOf="@+id/passwordText" />
@@ -35,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@color/corNeutraDark"
             android:text="Login"
             app:layout_constraintEnd_toEndOf="@+id/passwordText"
             app:layout_constraintTop_toBottomOf="@+id/passwordText" />

@@ -6,7 +6,7 @@
         android:title="Procurar"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="always|collapseActionView"
-        app:actionViewClass="android.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
     <item android:id="@+id/bothProcurarFragmentFiltros"
         android:title="Filtros"

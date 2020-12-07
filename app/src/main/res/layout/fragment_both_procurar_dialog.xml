@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/background">
 
         <RadioGroup
             android:id="@+id/radio_group_tipo"
@@ -22,14 +23,18 @@
                 android:id="@+id/campanhas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/corNeutra"
                 android:checked="true"
-                android:text="Campanhas" />
+                android:text="Campanhas"
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/eventos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Eventos" />
+                android:buttonTint="@color/corNeutra"
+                android:text="Eventos"
+                android:textColor="@color/white" />
         </RadioGroup>
 
         <TextView
@@ -39,6 +44,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="Distância: "
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radio_group_tipo" />
@@ -49,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text=" / 100 Km"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/textViewDistancia"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:text="1"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/textViewDistancia"
             app:layout_constraintEnd_toStartOf="@+id/textViewMaximo"
@@ -74,11 +82,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:max="99"
-            android:progress="0"
+            android:progressBackgroundTint="@color/white"
+            android:progressBackgroundTintMode="src_over"
+            android:progressTint="@color/corNeutra"
+            android:progressTintMode="src_over"
+            android:thumbTint="@color/corNeutra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDistancia" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewDistancia"
+            app:tickMarkTint="@color/white" />
 
         <Button
             android:id="@+id/buttonFiltrar"

@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +20,8 @@ import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.models.Variaveis
+import br.com.salve_uma_vida_front.models.SearchType
+import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
@@ -35,7 +37,7 @@ class CampanhasFragment : Fragment() {
     private lateinit var viewModel: CampanhasEEventosViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
-    private var filtroAtual: String = Variaveis().CAMPANHAS
+    private var filtroAtual: SearchType = SearchType.CAMPANHAS
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -82,6 +84,58 @@ class CampanhasFragment : Fragment() {
         carregaCampanhasUserLogado()
         configuraFabs()
         setHasOptionsMenu(true)
+        configuraToolbar()
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
+        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
+        configuraSearchView(toolbar)
+        toolbar?.setOnMenuItemClickListener {
+            val itemMenu = it
+            when(it.itemId){
+                R.id.bothProcurarFragmentPesquisar -> {
+                    val searchView = it.actionView as SearchView
+                    searchView.requestFocusFromTouch()
+                    true
+                }
+
+                R.id.bothProcurarFragmentFiltros ->{
+                    viewModel.createDialog(fragmentManager)
+                    true
+                }
+                else -> {
+                    throw IllegalArgumentException("Item inexistente")
+                }
+            }
+        }
+    }
+
+    private fun configuraSearchView(toolbar: Toolbar?) {
+        val procurar = toolbar?.menu?.findItem(R.id.bothProcurarFragmentPesquisar)
+        val searchView = procurar?.actionView as androidx.appcompat.widget.SearchView
+        searchView.isIconified = false
+        procurar.setOnMenuItemClickListener {
+            searchView.requestFocusFromTouch()
+        }
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
+                if (filtroAtual.equals(SearchType.CAMPANHAS)) {
+                    carregaCampanhasUserLogado(textoDeBusca)
+                } else if (filtroAtual.equals(SearchType.EVENTOS)) {
+                    carregaEventosUserLogado(textoDeBusca)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(novoTexto: String): Boolean {
+                if (novoTexto == "") {
+                    this.onQueryTextSubmit("");
+                }
+                return true
+            }
+
+        })
     }
 
     private fun configuraFabs() {
@@ -185,9 +239,9 @@ class CampanhasFragment : Fragment() {
         })
         viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
             filtroAtual = it
-            if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
+            if (filtroAtual.equals(SearchType.CAMPANHAS)) {
                 carregaCampanhasUserLogado()
-            } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
+            } else if (filtroAtual.equals(SearchType.EVENTOS)) {
                 carregaEventosUserLogado()
             }
 
@@ -200,45 +254,6 @@ class CampanhasFragment : Fragment() {
 
     private fun carregaEventosUserLogado(parametro: String = "") {
         viewModel.getEventosUserLogado(parametro)
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fragment_both_procurar_menu, menu)
-        var procurar: MenuItem = menu.findItem(R.id.bothProcurarFragmentPesquisar)
-        var searchView = procurar.actionView as SearchView
-
-//Precisa do ajuste
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
-                if (filtroAtual.equals(Variaveis().CAMPANHAS)) {
-//                    carregaCampanhasUserLogado(textoDeBusca);
-                    carregaCampanhasUserLogado(textoDeBusca)
-                } else if (filtroAtual.equals(Variaveis().EVENTOS)) {
-//                    carregaEventosUserLogado(textoDeBusca)
-                    carregaEventosUserLogado(textoDeBusca)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(novoTexto: String): Boolean {
-                if (novoTexto == "") {
-                    this.onQueryTextSubmit("");
-                }
-                return true
-            }
-
-        })
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bothProcurarFragmentFiltros -> {
-                viewModel.createDialog(fragmentManager)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
 

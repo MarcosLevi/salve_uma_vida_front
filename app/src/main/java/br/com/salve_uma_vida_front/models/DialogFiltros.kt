@@ -57,10 +57,15 @@ class DialogFiltros(procurarFragmentViewModel: CampanhasEEventosViewModel) : Dia
     private fun configuraBotaoFiltrar() {
         binding.buttonFiltrar.setOnClickListener {
             val selectedId = binding.radioGroupTipo.checkedRadioButtonId
-            var radio = binding.root.findViewById<RadioButton>(selectedId)
+            val radio = binding.root.findViewById<RadioButton>(selectedId)
             val tipoFiltro = radio.text.toString()
+            val searchType: SearchType
+            if (tipoFiltro.equals("Campanhas"))
+                searchType = SearchType.CAMPANHAS
+            else
+                searchType = SearchType.EVENTOS
             val distancia = binding.seekBarDistancia.progress
-            viewModel.filtrar(FiltroPesquisaDto(tipoFiltro, distancia + 1))
+            viewModel.filtrar(FiltroPesquisaDto(searchType, distancia + 1))
             dismiss()
         }
     }
