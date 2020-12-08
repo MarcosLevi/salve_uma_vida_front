@@ -143,9 +143,11 @@ class CampanhasFragment : Fragment() {
             onAddButtonClicked()
         }
         binding.ongCampanhasFragmentFabAddCampanha.setOnClickListener {
+            clicked = !clicked
             navController!!.navigate(R.id.action_ongCampanhasFragment_to_cadastroCampanhaFragment)
         }
         binding.ongCampanhasFragmentFabAddEvento.setOnClickListener {
+            clicked = !clicked
 
         }
     }
@@ -159,18 +161,26 @@ class CampanhasFragment : Fragment() {
 
     private fun setAnimation(clicked: Boolean) {
         if (!clicked) {
-            binding.ongCampanhasFragmentFabAddEvento.startAnimation(fromBotton)
-            binding.ongCampanhasFragmentFabAddCampanha.startAnimation(fromBotton)
-            binding.ongCampanhasFragmentLabelCampanha.startAnimation(fromBotton)
-            binding.ongCampanhasFragmentLabelEvento.startAnimation(fromBotton)
-            binding.ongCampanhasFragmentAdd.startAnimation(rotateOpen)
+            expandeAdicionar()
         } else {
-            binding.ongCampanhasFragmentFabAddEvento.startAnimation(toBotton)
-            binding.ongCampanhasFragmentFabAddCampanha.startAnimation(toBotton)
-            binding.ongCampanhasFragmentLabelCampanha.startAnimation(toBotton)
-            binding.ongCampanhasFragmentLabelEvento.startAnimation(toBotton)
-            binding.ongCampanhasFragmentAdd.startAnimation(rotateClose)
+            fechaAdicionar()
         }
+    }
+
+    private fun fechaAdicionar() {
+        binding.ongCampanhasFragmentFabAddEvento.startAnimation(toBotton)
+        binding.ongCampanhasFragmentFabAddCampanha.startAnimation(toBotton)
+        binding.ongCampanhasFragmentLabelCampanha.startAnimation(toBotton)
+        binding.ongCampanhasFragmentLabelEvento.startAnimation(toBotton)
+        binding.ongCampanhasFragmentAdd.startAnimation(rotateClose)
+    }
+
+    private fun expandeAdicionar() {
+        binding.ongCampanhasFragmentFabAddEvento.startAnimation(fromBotton)
+        binding.ongCampanhasFragmentFabAddCampanha.startAnimation(fromBotton)
+        binding.ongCampanhasFragmentLabelCampanha.startAnimation(fromBotton)
+        binding.ongCampanhasFragmentLabelEvento.startAnimation(fromBotton)
+        binding.ongCampanhasFragmentAdd.startAnimation(rotateOpen)
     }
 
     private fun setVisibility(clicked: Boolean) {

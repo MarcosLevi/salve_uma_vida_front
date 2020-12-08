@@ -43,4 +43,5 @@
     <string name="mapa">Mapa</string>
     <string name="perfil">Perfil</string>
     <string name="arquiva_campanha_fazendo_com_que_fique_em_estado_de_finalizada">Arquiva campanha, fazendo com que fique em estado de finalizada</string>
+    <string name="digite_a_quantidade_do_item">Digite a quantidade do item</string>
 </resources>

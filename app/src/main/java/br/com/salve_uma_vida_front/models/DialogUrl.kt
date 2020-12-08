@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import br.com.salve_uma_vida_front.databinding.FragmentDialogUrlImagemBinding
 
 
-class UrlDialog : DialogFragment() {
+class DialogUrl : DialogFragment() {
     lateinit var binding: FragmentDialogUrlImagemBinding
     private lateinit var urlListener: DialogUrlListener
 

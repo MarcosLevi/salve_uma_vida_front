@@ -16,12 +16,11 @@ import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.UserType
 import br.com.salve_uma_vida_front.databinding.ActivityCadastroUserBinding
-import br.com.salve_uma_vida_front.dto.UserDto
-import br.com.salve_uma_vida_front.models.UrlDialog
+import br.com.salve_uma_vida_front.models.DialogUrl
 import com.squareup.picasso.Picasso
 
 
-class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
+class ActivityCadastroUser : AppCompatActivity(), DialogUrl.DialogUrlListener {
 
     private lateinit var binding: ActivityCadastroUserBinding
     private lateinit var viewModel: UserViewModel
@@ -42,7 +41,7 @@ class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
 
     private fun configuraBotaoCriar() {
         binding.criar.setOnClickListener {
-            if (validade()) {
+            if (validate()) {
                 val nome = binding.nome.text.toString()
                 val detalhes = binding.detalhes.text.toString()
                 val email = binding.email.text.toString()
@@ -53,7 +52,17 @@ class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
                 if (getRadioSelected() == binding.UserOng) {
                     val endereco: String = getEnderecoFormatado()
                     val (latitude, longitude) = retornaLatitudeLongitude(endereco)
-                    signup(nome, email, senha, detalhes, tipo, imagem, endereco, latitude, longitude)
+                    signup(
+                        nome,
+                        email,
+                        senha,
+                        detalhes,
+                        tipo,
+                        imagem,
+                        endereco,
+                        latitude,
+                        longitude
+                    )
                 } else {
                     signup(nome, email, senha, detalhes, tipo, imagem)
                 }
@@ -70,11 +79,21 @@ class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
         detail: String,
         type: String,
         image: String,
-        address: String="",
+        address: String = "",
         addressLatitude: Float = 0.0F,
         addressLongitude: Float = 0.0F
     ) {
-        viewModel.signup(name, email, password, detail, type, image, address, addressLatitude, addressLongitude)
+        viewModel.signup(
+            name,
+            email,
+            password,
+            detail,
+            type,
+            image,
+            address,
+            addressLatitude,
+            addressLongitude
+        )
     }
 
     private fun retornaLatitudeLongitude(endereco: String): Pair<Float, Float> {
@@ -90,7 +109,7 @@ class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
 
     private fun configuraListenerUserFoto() {
         binding.userFoto.setOnClickListener {
-            val urlDialog = UrlDialog()
+            val urlDialog = DialogUrl()
             urlDialog.show(supportFragmentManager, "Url Dialog")
         }
     }
@@ -128,7 +147,7 @@ class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
 
     private fun configuraObservers() {
         viewModel.cadastro.observe(this, Observer {
-            if (it==Responses.SUCESS) {
+            if (it == Responses.SUCESS) {
                 startActivity(Intent(this@ActivityCadastroUser, MainActivity::class.java))
             }
         })
@@ -143,7 +162,7 @@ class ActivityCadastroUser : AppCompatActivity(),UrlDialog.DialogUrlListener {
         return binding.root.findViewById(selectedId)
     }
 
-    private fun validade(): Boolean {
+    private fun validate(): Boolean {
 //        if (TextUtils.isEmpty(binding.urlImagem.text)) {
 //            binding.urlImagem.setError("Imagem é necessária para fazer o cadastro")
 //            return false

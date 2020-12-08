@@ -6,21 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.DateToString
-import br.com.salve_uma_vida_front.StringToDate
 import br.com.salve_uma_vida_front.models.DialogEditaItem
 import br.com.salve_uma_vida_front.models.ItemCampanha
 import br.com.salve_uma_vida_front.adapters.ItemAdapterOng
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroCampanhaBinding
+import br.com.salve_uma_vida_front.models.DialogEditaItemNew
 import java.util.*
 
-class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener {
+class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogEditaItemNew.DialogEditaItemListener {
     var navController: NavController? = null
 
     lateinit var binding: FragmentCadastroCampanhaBinding
@@ -80,9 +78,8 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener {
 
         val adicionaItem = binding.cadastroCampanhaAdicionaItem
         adicionaItem.setOnClickListener {
-            Toast.makeText(view.context, "Clicou no adiciona Item", Toast.LENGTH_SHORT).show()
-            val teste = ItemCampanha()
-            DialogEditaItem(requireContext(),teste,itensCampanha,mAdapterOng,binding.cadastroCampanhaQuantidadeDeItens,false)
+            val dialogEditaItemNew = DialogEditaItemNew(this)
+            dialogEditaItemNew.show(parentFragmentManager, "Dialog edita item")
         }
 
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
@@ -139,27 +136,6 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener {
         }
     }
 
-//    override fun onClick(v: View?) {
-//        when (v!!.id) {
-//            R.id.cadastroCampanhaFinalizar -> {
-//                Toast.makeText(requireContext(), "Clicou no finalizar campanha", Toast.LENGTH_SHORT).show()
-//                //salva no banco
-//                val diaMesAno =
-//                    StringToDate(binding.cadastroCampanhaData.text.toString())
-////                addCampanhaNaOng(
-////                    //Quando fazer login da ong, aqui vai o nome dela
-////                    "São Camilo",
-////                    binding.cadastroCampanhaTitulo.text.toString(),
-////                    NewCalendar(diaMesAno.get(0),diaMesAno.get(1),diaMesAno.get(2)),
-////                    binding.cadastroCampanhaDescricao.text.toString(),
-////                    itensCampanha
-////                )
-//                notificaMudancaAdapter()
-//                navController!!.navigate(R.id.action_cadastroCampanhaFragment_to_ongCampanhasFragment)
-//            }
-//        }
-//    }
-
     override fun onEditaClicked(itemCampanha: ItemCampanha) {
         DialogEditaItem(requireContext(),itemCampanha,itensCampanha,mAdapterOng,binding.cadastroCampanhaQuantidadeDeItens)
     }
@@ -172,6 +148,11 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener {
 
     private fun notificaMudancaAdapter() {
         mRecyclerView.adapter!!.notifyDataSetChanged()
+    }
+
+    override fun passaItem(item: ItemCampanha) {
+        itensCampanha.add(item)
+        atualizaQuantidadeDeItens()
     }
 
 }

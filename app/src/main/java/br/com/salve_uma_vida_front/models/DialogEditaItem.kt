@@ -37,7 +37,7 @@ class DialogEditaItem(
         quantidadeDeItens: TextView
     ) {
         val myDialog = Dialog(context)
-        myDialog.setContentView(R.layout.item_cadastro_campanha)
+        myDialog.setContentView(R.layout.fragment_cadastro_campanha_item)
 
         val campoTitulo = myDialog.findViewById<EditText>(R.id.cadastroCampanhaEditTextNomeItem)
         campoTitulo.setText(currentItem.titulo)
