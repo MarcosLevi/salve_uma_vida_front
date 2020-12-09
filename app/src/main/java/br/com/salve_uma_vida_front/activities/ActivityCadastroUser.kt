@@ -47,8 +47,7 @@ class ActivityCadastroUser : AppCompatActivity(), DialogUrl.DialogUrlListener {
                 val email = binding.email.text.toString()
                 val senha = binding.senha.text.toString()
                 val imagem = binding.urlImagem.toString()
-                val tipo =
-                    if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
+                val tipo = if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
                 if (getRadioSelected() == binding.UserOng) {
                     val endereco: String = getEnderecoFormatado()
                     val (latitude, longitude) = retornaLatitudeLongitude(endereco)
@@ -109,7 +108,7 @@ class ActivityCadastroUser : AppCompatActivity(), DialogUrl.DialogUrlListener {
 
     private fun configuraListenerUserFoto() {
         binding.userFoto.setOnClickListener {
-            val urlDialog = DialogUrl()
+            val urlDialog = DialogUrl(this)
             urlDialog.show(supportFragmentManager, "Url Dialog")
         }
     }

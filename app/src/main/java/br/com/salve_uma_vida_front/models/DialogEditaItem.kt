@@ -39,15 +39,15 @@ class DialogEditaItem(
         val myDialog = Dialog(context)
         myDialog.setContentView(R.layout.fragment_cadastro_campanha_item)
 
-        val campoTitulo = myDialog.findViewById<EditText>(R.id.cadastroCampanhaEditTextNomeItem)
+        val campoTitulo = myDialog.findViewById<EditText>(R.id.cadastroCampanhaItemNome)
         campoTitulo.setText(currentItem.titulo)
 
         val campoQuantidade =
-            myDialog.findViewById<EditText>(R.id.cadastroCampanhaEditTextQuantidadeItem)
+            myDialog.findViewById<EditText>(R.id.cadastroCampanhaItemQuantidade)
         campoQuantidade.setText("${currentItem.quantidadeMaxima}")
 
         val campoUnidade =
-            myDialog.findViewById<Spinner>(R.id.cadastroCampanhaSpinnerUnidadesMedida)
+            myDialog.findViewById<Spinner>(R.id.cadastroCampanhaItemUnidadesMedida)
         val adapter = ArrayAdapter.createFromResource(
             context,
             R.array.unidades_medida,
@@ -58,11 +58,11 @@ class DialogEditaItem(
         val spinnerPosition = adapter.getPosition(currentItem.unidadeMedida)
         campoUnidade.setSelection(spinnerPosition)
 
-        val close = myDialog.findViewById<ImageButton>(R.id.cadastroCampanhaClose)
+        val close = myDialog.findViewById<ImageButton>(R.id.cadastroCampanhaItemClose)
         close.setOnClickListener {
             myDialog.dismiss()
         }
-        val finaliza = myDialog.findViewById<ImageButton>(R.id.cadastroCampanhaSubmitNovoItem)
+        val finaliza = myDialog.findViewById<ImageButton>(R.id.cadastroCampanhaItemConfirma)
         finaliza.setOnClickListener {
             currentItem.titulo = campoTitulo.text.toString()
             currentItem.unidadeMedida = campoUnidade.selectedItem.toString()

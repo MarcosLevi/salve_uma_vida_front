@@ -2,23 +2,26 @@ package br.com.salve_uma_vida_front.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.DateToString
-import br.com.salve_uma_vida_front.models.DialogEditaItem
-import br.com.salve_uma_vida_front.models.ItemCampanha
+import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.ItemAdapterOng
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroCampanhaBinding
+import br.com.salve_uma_vida_front.models.DialogEditaItem
 import br.com.salve_uma_vida_front.models.DialogEditaItemNew
+import br.com.salve_uma_vida_front.models.ItemCampanha
+import br.com.salve_uma_vida_front.toolbarVazia
 import java.util.*
 
-class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogEditaItemNew.DialogEditaItemListener {
+class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
+    DialogEditaItemNew.DialogEditaItemListener {
     var navController: NavController? = null
 
     lateinit var binding: FragmentCadastroCampanhaBinding
@@ -64,7 +67,6 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
@@ -75,6 +77,15 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
 
         configuraRecyclerView()
 
+        //Pegar imagem do usuário atual
+//        Picasso.get()
+//            .load(currentItem.userImage)
+//            .resize(110.dp, 110.dp)
+//            .centerCrop()
+//            .placeholder(R.drawable.ic_dafault_photo)
+//            .error(R.drawable.ic_baseline_report_problem_24)
+//            .into(binding.cadastroCampanhaImagem)
+
 
         val adicionaItem = binding.cadastroCampanhaAdicionaItem
         adicionaItem.setOnClickListener {
@@ -83,9 +94,11 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
         }
 
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
-        finalizaCampanha.setOnClickListener {  }
+        finalizaCampanha.setOnClickListener { }
 
         val dataCampanha = binding.cadastroCampanhaData
+
+        val labelDataCampanha = binding.cadastroCampanhaLabelData
 
         val escolheData = binding.cadatroCampanhaPickDate
         escolheData.setOnClickListener {
@@ -95,13 +108,13 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
 
             val dpd = DatePickerDialog(
                 view.context,
+                R.style.DialogTheme,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     // Display Selected date in TextView
                     calendar.set(year, monthOfYear, dayOfMonth)
-                    dataCampanha.setText(
-                        DateToString(
-                            calendar
-                        )
+                    labelDataCampanha.visibility = View.VISIBLE
+                    dataCampanha.text = DateToString(
+                        calendar
                     )
                 },
                 ano,
@@ -112,6 +125,13 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
 
         }
 
+        configuraToolbar()
+
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
+//        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
     }
 
     private fun configuraRecyclerView() {
@@ -137,7 +157,13 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
     }
 
     override fun onEditaClicked(itemCampanha: ItemCampanha) {
-        DialogEditaItem(requireContext(),itemCampanha,itensCampanha,mAdapterOng,binding.cadastroCampanhaQuantidadeDeItens)
+        DialogEditaItem(
+            requireContext(),
+            itemCampanha,
+            itensCampanha,
+            mAdapterOng,
+            binding.cadastroCampanhaQuantidadeDeItens
+        )
     }
 
     override fun onRemoveClicked(itemCampanha: ItemCampanha) {
@@ -153,6 +179,7 @@ class CadastroCampanhaFragment : Fragment(),ItemAdapterOng.ItemListener, DialogE
     override fun passaItem(item: ItemCampanha) {
         itensCampanha.add(item)
         atualizaQuantidadeDeItens()
+        notificaMudancaAdapter()
     }
 
 }

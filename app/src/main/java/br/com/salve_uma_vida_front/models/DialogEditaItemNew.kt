@@ -30,12 +30,12 @@ class DialogEditaItemNew(private val editaItemListener: DialogEditaItemListener)
     }
 
     private fun configuraBotaoConfirmar() {
-        binding.cadastroCampanhaSubmitNovoItem.setOnClickListener {
+        binding.cadastroCampanhaItemConfirma.setOnClickListener {
             if (validate()) {
                 val itemCampanha = ItemCampanha()
-                itemCampanha.titulo=binding.cadastroCampanhaEditTextNomeItem.text.toString()
-                itemCampanha.unidadeMedida = binding.cadastroCampanhaSpinnerUnidadesMedida.selectedItem.toString()
-                itemCampanha.quantidadeMaxima = binding.cadastroCampanhaEditTextQuantidadeItem.text.toString().toInt()
+                itemCampanha.titulo=binding.cadastroCampanhaItemNome.text.toString()
+                itemCampanha.unidadeMedida = binding.cadastroCampanhaItemUnidadesMedida.selectedItem.toString()
+                itemCampanha.quantidadeMaxima = binding.cadastroCampanhaItemQuantidade.text.toString().toInt()
                 editaItemListener.passaItem(itemCampanha)
                 dismiss()
             }
@@ -44,19 +44,19 @@ class DialogEditaItemNew(private val editaItemListener: DialogEditaItemListener)
     }
 
     private fun validate(): Boolean {
-        if (TextUtils.isEmpty(binding.cadastroCampanhaEditTextNomeItem.text)) {
-            binding.cadastroCampanhaEditTextNomeItem.setError("É necessário o nome do item para fazer o cadastro")
+        if (TextUtils.isEmpty(binding.cadastroCampanhaItemNome.text)) {
+            binding.cadastroCampanhaItemNome.setError("É necessário o nome do item para fazer o cadastro")
             return false
         }
-        if (TextUtils.isEmpty(binding.cadastroCampanhaEditTextQuantidadeItem.text)) {
-            binding.cadastroCampanhaEditTextQuantidadeItem.setError("É necessária a quantidade do item para fazer o cadastro")
+        if (TextUtils.isEmpty(binding.cadastroCampanhaItemQuantidade.text)) {
+            binding.cadastroCampanhaItemQuantidade.setError("É necessária a quantidade do item para fazer o cadastro")
             return false
         }
         return true
     }
 
     private fun configuraBotaoCancelar() {
-        binding.cadastroCampanhaClose.setOnClickListener {
+        binding.cadastroCampanhaItemClose.setOnClickListener {
             dismiss()
         }
     }

@@ -9,18 +9,8 @@ import androidx.fragment.app.DialogFragment
 import br.com.salve_uma_vida_front.databinding.FragmentDialogUrlImagemBinding
 
 
-class DialogUrl : DialogFragment() {
+class DialogUrl(private val urlListener: DialogUrlListener) : DialogFragment() {
     lateinit var binding: FragmentDialogUrlImagemBinding
-    private lateinit var urlListener: DialogUrlListener
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        try {
-            urlListener = context as DialogUrlListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(context.toString() + "Tem que implementar o listener")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
 
@@ -12,70 +13,91 @@
             type="br.com.salve_uma_vida_front.models.ItemCampanha" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/itemCardOng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/corNeutra"
+        app:cardCornerRadius="8dp">
 
-        <ImageButton
-            android:id="@+id/itemOngEdita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:background="@null"
-            android:contentDescription="@string/content_description_imageButton_cardEdita"
-            android:onClick="@{() -> listener.onEditaClicked(itemCard)}"
-            android:src="@drawable/ic_baseline_edit_30"
-            android:tint="@color/corDefaultButton"
-            app:layout_constraintBottom_toBottomOf="@+id/itemOngProgressBar"
-            app:layout_constraintEnd_toStartOf="@+id/itemOngExclui"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/itemOngTitulo"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/text_cardItemTitulo"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/itemOngExclui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@null"
+                android:contentDescription="@string/contentDescriptionItemOngExclui"
+                android:onClick="@{() -> listener.onRemoveClicked(itemCard)}"
+                android:src="@drawable/ic_baseline_close_24"
+                android:tint="@color/corBotaoCancelar"
+                app:layout_constraintBottom_toBottomOf="@+id/itemOngEdita"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/itemOngEdita" />
 
-        <ProgressBar
-            android:id="@+id/itemOngProgressBar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
-            android:layout_height="16dp"
-            android:layout_marginEnd="20dp"
-            android:indeterminate="false"
-            app:layout_constraintEnd_toStartOf="@+id/itemOngEdita"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemOngTitulo" />
+            <TextView
+                android:id="@+id/itemOngLabelProgresso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Meta atual: "
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/itemOngTitulo" />
 
-        <TextView
-            android:id="@+id/itemOngProgresso"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/text_cardItemValorAutalProgressBar"
-            android:textAlignment="viewEnd"
-            android:textColor="#000000"
-            app:layout_constraintBottom_toTopOf="@+id/itemOngProgressBar"
-            app:layout_constraintEnd_toEndOf="@+id/itemOngProgressBar"
-            app:layout_constraintStart_toEndOf="@+id/itemOngTitulo"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/itemOngProgresso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="0 KG"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/itemOngLabelProgresso"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/itemOngLabelProgresso"
+                app:layout_constraintTop_toTopOf="@+id/itemOngLabelProgresso" />
 
-        <ImageButton
-            android:id="@+id/itemOngExclui"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/contentDescriptionItemOngExclui"
-            android:onClick="@{() -> listener.onRemoveClicked(itemCard)}"
-            android:tint="@color/corBotaoCancelar"
-            app:layout_constraintBottom_toBottomOf="@+id/itemOngProgressBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_close_24" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/itemOngTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Título do item: "
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/itemOngEdita"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/itemOngEdita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@null"
+                android:contentDescription="@string/content_description_imageButton_cardEdita"
+                android:onClick="@{() -> listener.onEditaClicked(itemCard)}"
+                android:src="@drawable/ic_baseline_edit_30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/itemOngExclui"
+                app:layout_constraintTop_toTopOf="@+id/itemOngTitulo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 </layout>

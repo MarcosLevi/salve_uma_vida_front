@@ -14,10 +14,7 @@ class ItemAdapterOng(var listaItens: MutableList<ItemCampanha>, val listener: It
     ) : RecyclerView.ViewHolder(binding.root) {
         fun configuraHolder(currentItem: ItemCampanha) {
             binding.itemOngTitulo.text = currentItem.titulo
-            binding.itemOngProgresso.text =
-                "Arrecadado ${currentItem.quantidadeAtual} / ${currentItem.quantidadeMaxima} ${currentItem.unidadeMedida}"
-            binding.itemOngProgressBar.max = currentItem.quantidadeMaxima
-            binding.itemOngProgressBar.progress = currentItem.quantidadeAtual
+            binding.itemOngProgresso.text = " ${currentItem.quantidadeMaxima} ${currentItem.unidadeMedida}"
             binding.listener = listener
             binding.itemCard = currentItem
         }
