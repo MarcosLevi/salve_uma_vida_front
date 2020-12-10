@@ -1,41 +1,60 @@
 package br.com.salve_uma_vida_front.models
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import br.com.salve_uma_vida_front.databinding.FragmentCadastroCampanhaItemBinding
-import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
+import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.databinding.FragmentCadastroCampanhaItemDialogBinding
+import br.com.salve_uma_vida_front.dto.CampanhaItemDto
 
-class DialogEditaItemNew(private val editaItemListener: DialogEditaItemListener) : DialogFragment() {
 
-    lateinit var binding: FragmentCadastroCampanhaItemBinding
+class DialogEditaItemNew(
+    private val editaItemListener: DialogEditaItemListener,
+    private val itemCampanha: CampanhaItemDto = CampanhaItemDto()
+) : DialogFragment() {
+
+    lateinit var binding: FragmentCadastroCampanhaItemDialogBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCadastroCampanhaItemBinding.inflate(inflater, container, false)
+        binding = FragmentCadastroCampanhaItemDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         configuraBotaoCancelar()
         configuraBotaoConfirmar()
+        setValoresIniciais()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun setValoresIniciais() {
+        binding.cadastroCampanhaItemNome.setText(itemCampanha.descricao)
+        binding.cadastroCampanhaItemQuantidade.setText(itemCampanha.maximo.toString())
+        val unidadesMedida = resources.getStringArray(R.array.unidades_medida)
+        if (itemCampanha.unidade != "") {
+            for (position in unidadesMedida.indices) {
+                if (itemCampanha.unidade == unidadesMedida[position]) {
+                    binding.cadastroCampanhaItemUnidadesMedida.setSelection(position)
+                }
+            }
+        }
     }
 
     private fun configuraBotaoConfirmar() {
         binding.cadastroCampanhaItemConfirma.setOnClickListener {
             if (validate()) {
-                val itemCampanha = ItemCampanha()
-                itemCampanha.titulo=binding.cadastroCampanhaItemNome.text.toString()
-                itemCampanha.unidadeMedida = binding.cadastroCampanhaItemUnidadesMedida.selectedItem.toString()
-                itemCampanha.quantidadeMaxima = binding.cadastroCampanhaItemQuantidade.text.toString().toInt()
+                itemCampanha.descricao = binding.cadastroCampanhaItemNome.text.toString()
+                itemCampanha.unidade =
+                    binding.cadastroCampanhaItemUnidadesMedida.selectedItem.toString()
+                itemCampanha.maximo =
+                    binding.cadastroCampanhaItemQuantidade.text.toString().toFloat()
                 editaItemListener.passaItem(itemCampanha)
                 dismiss()
             }
@@ -57,12 +76,14 @@ class DialogEditaItemNew(private val editaItemListener: DialogEditaItemListener)
 
     private fun configuraBotaoCancelar() {
         binding.cadastroCampanhaItemClose.setOnClickListener {
+            editaItemListener.onClose()
             dismiss()
         }
     }
 
     interface DialogEditaItemListener {
-        fun passaItem(item: ItemCampanha)
+        fun passaItem(item: CampanhaItemDto)
+        fun onClose()
     }
 
 

@@ -27,6 +27,10 @@ fun DateToString(calendar: Calendar): String {
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
     return formatter.format(calendar.time)
 }
+fun DateToStringBanco(calendar: Calendar): String {
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    return formatter.format(calendar.time)
+}
 
 fun StringToDate(string: String): MutableList<Int> {
     val diaMesAno = string.split("/")

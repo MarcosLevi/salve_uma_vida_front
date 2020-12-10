@@ -35,7 +35,7 @@ class ItemAdapterDoador(var listaItens: List<CampanhaItemDto>) :
         holder.titulo.text = currentItem.descricao
         holder.progresso.text =
             "Arrecadado ${currentItem.progresso} / ${currentItem.maximo} ${currentItem.unidade}"
-        holder.progressBar.max = currentItem.maximo.toInt()
+        holder.progressBar.max = currentItem.maximo!!.toInt()
         holder.progressBar.progress = currentItem.progresso.toInt()
     }
 }

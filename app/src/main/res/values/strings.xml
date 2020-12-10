@@ -1,5 +1,5 @@
 <resources>
-    <string-array name="unidades_medida">
+    <string-array name="unidades_medida" >
         <item>Kg</item>
         <item>L</item>
         <item>Un</item>

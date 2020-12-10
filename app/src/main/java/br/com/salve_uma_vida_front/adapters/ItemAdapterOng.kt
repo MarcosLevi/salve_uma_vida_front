@@ -1,35 +1,27 @@
 package br.com.salve_uma_vida_front.adapters
 
-import android.view.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.models.ItemCampanha
 import br.com.salve_uma_vida_front.databinding.ItemCardCampanhaOngCadastroBinding
+import br.com.salve_uma_vida_front.dto.CampanhaItemDto
+import br.com.salve_uma_vida_front.viewholders.itemCadastroCampanhaViewHolder
 
 
-class ItemAdapterOng(var listaItens: MutableList<ItemCampanha>, val listener: ItemListener) :
-    RecyclerView.Adapter<ItemAdapterOng.ItemViewHolder>() {
-    class ItemViewHolder(
-        private val binding: ItemCardCampanhaOngCadastroBinding,
-        private val listener: ItemListener
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun configuraHolder(currentItem: ItemCampanha) {
-            binding.itemOngTitulo.text = currentItem.titulo
-            binding.itemOngProgresso.text = " ${currentItem.quantidadeMaxima} ${currentItem.unidadeMedida}"
-            binding.listener = listener
-            binding.itemCard = currentItem
-        }
-    }
+class ItemAdapterOng(
+    private val editaItemListener: ItemListener,
+    var listaItens: MutableList<CampanhaItemDto>
+) :
+    RecyclerView.Adapter<itemCadastroCampanhaViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): itemCadastroCampanhaViewHolder {
         val view = ItemCardCampanhaOngCadastroBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return ItemViewHolder(
-            view,
-            listener
-        )
+        return itemCadastroCampanhaViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -37,12 +29,19 @@ class ItemAdapterOng(var listaItens: MutableList<ItemCampanha>, val listener: It
     }
 
     interface ItemListener {
-        fun onEditaClicked(itemCampanha: ItemCampanha)
-        fun onRemoveClicked(itemCampanha: ItemCampanha)
+        fun onEditaClicked(itemCampanha: CampanhaItemDto)
+        fun onRemoveClicked(itemCampanha: CampanhaItemDto)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem: ItemCampanha = listaItens.get(position)
-        holder.configuraHolder(currentItem)
+    override fun onBindViewHolder(holderCampanha: itemCadastroCampanhaViewHolder, position: Int) {
+        val currentItem: CampanhaItemDto = listaItens[position]
+        holderCampanha.descricao.text = currentItem.descricao
+        holderCampanha.meta.text = "${currentItem.maximo} ${currentItem.unidade} "
+        holderCampanha.edita.setOnClickListener {
+            editaItemListener.onEditaClicked(currentItem)
+        }
+        holderCampanha.excluir.setOnClickListener {
+            editaItemListener.onRemoveClicked(currentItem)
+        }
     }
 }
