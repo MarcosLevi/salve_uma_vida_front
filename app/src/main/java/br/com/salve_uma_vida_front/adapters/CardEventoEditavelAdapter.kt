@@ -51,7 +51,7 @@ class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, var cont
         holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holderFinal.textViewTimeStamp.text =
-            FormatStringToDate(currentItem.data)
+            FormatStringToDate(currentItem.data!!)
         holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.imageButtonEditar.setOnClickListener{

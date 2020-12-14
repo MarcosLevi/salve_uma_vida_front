@@ -1,5 +1,6 @@
 package br.com.salve_uma_vida_front.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.adressToLatLong
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
-import br.com.salve_uma_vida_front.AdressToLatLong
 import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.UserType
@@ -47,10 +48,14 @@ class ActivityCadastroUser : AppCompatActivity(), DialogUrl.DialogUrlListener {
                 val email = binding.email.text.toString()
                 val senha = binding.senha.text.toString()
                 val imagem = binding.urlImagem.toString()
-                val tipo = if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
+                val tipo =
+                    if (getRadioSelected() == binding.UserComum) UserType.COMMON.toString() else UserType.NGO.toString()
                 if (getRadioSelected() == binding.UserOng) {
                     val endereco: String = getEnderecoFormatado()
-                    val (latitude, longitude) = retornaLatitudeLongitude(endereco)
+                    val (latitude, longitude) = adressToLatLong(
+                        endereco,
+                        applicationContext
+                    )
                     signup(
                         nome,
                         email,
@@ -59,8 +64,8 @@ class ActivityCadastroUser : AppCompatActivity(), DialogUrl.DialogUrlListener {
                         tipo,
                         imagem,
                         endereco,
-                        latitude,
-                        longitude
+                        latitude as Float,
+                        longitude as Float
                     )
                 } else {
                     signup(nome, email, senha, detalhes, tipo, imagem)
@@ -93,17 +98,6 @@ class ActivityCadastroUser : AppCompatActivity(), DialogUrl.DialogUrlListener {
             addressLatitude,
             addressLongitude
         )
-    }
-
-    private fun retornaLatitudeLongitude(endereco: String): Pair<Float, Float> {
-        val adressToLatLong =
-            AdressToLatLong(
-                endereco,
-                applicationContext
-            )
-        val latitude = adressToLatLong.get(0)
-        val longitude = adressToLatLong.get(1)
-        return Pair(latitude, longitude)
     }
 
     private fun configuraListenerUserFoto() {

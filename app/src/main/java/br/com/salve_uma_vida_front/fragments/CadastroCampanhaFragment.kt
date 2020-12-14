@@ -90,7 +90,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 
         val labelDataCampanha = binding.cadastroCampanhaLabelData
 
-        val escolheData = binding.cadatroCampanhaPickDate
+        val escolheData = binding.cadastroCampanhaPickDate
         escolheData.setOnClickListener {
             val dia = calendar.get(Calendar.DAY_OF_MONTH)
             val mes = calendar.get(Calendar.MONTH)
@@ -122,6 +122,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 
     private fun configuraToolbar() {
         val toolbar = toolbarVazia(activity)
+        toolbar?.setBackgroundColor(resources.getColor(R.color.corCampanhas))
 //        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
     }
 

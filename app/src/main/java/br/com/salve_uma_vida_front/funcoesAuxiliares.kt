@@ -27,6 +27,7 @@ fun DateToString(calendar: Calendar): String {
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
     return formatter.format(calendar.time)
 }
+
 fun DateToStringBanco(calendar: Calendar): String {
     val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     return formatter.format(calendar.time)
@@ -34,25 +35,30 @@ fun DateToStringBanco(calendar: Calendar): String {
 
 fun StringToDate(string: String): MutableList<Int> {
     val diaMesAno = string.split("/")
-    return mutableListOf<Int>(diaMesAno.get(0).toInt(), diaMesAno.get(1).toInt(), diaMesAno.get(2).toInt())
+    return mutableListOf<Int>(
+        diaMesAno.get(0).toInt(),
+        diaMesAno.get(1).toInt(),
+        diaMesAno.get(2).toInt()
+    )
 }
 
-fun FormatStringToDate(string: String): String{
+fun FormatStringToDate(string: String): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
     val date = dateFormat.parse(string)
     val formatter = SimpleDateFormat("dd/MMM/yyyy");
-    return "Ocorrerá em "+formatter.format(date)
+    return "Ocorrerá em " + formatter.format(date)
 }
 
-fun AdressToLatLong(adress: String, applicationContext: Context): MutableList<Float> {
+fun adressToLatLong(adress: String, applicationContext: Context): MutableList<Any> {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
-    var fromLocationName = geocoder.getFromLocationName(adress, 1)
-    var latitude = fromLocationName[0].latitude.toFloat()
-    var longitude = fromLocationName[0].longitude.toFloat()
-    return mutableListOf(latitude,longitude)
+    val fromLocationName = geocoder.getFromLocationName(adress, 1)
+    val latitude = fromLocationName[0].latitude.toFloat()
+    val longitude = fromLocationName[0].longitude.toFloat()
+    val endereco = fromLocationName[0].getAddressLine(0)
+    return mutableListOf(latitude, longitude, endereco)
 }
 
-fun LatLongToAdress(latitude: Float,longitude:Float, applicationContext: Context): String {
+fun latLongToAdress(latitude: Float, longitude: Float, applicationContext: Context): String {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
     var fromLocation = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
     return fromLocation[0].getAddressLine(0)
@@ -71,7 +77,7 @@ fun startLoading(parentFragmentManager: FragmentManager) {
 //    loadingDialog.show(parentFragmentManager,"Loading")
 }
 
-fun closeLoading(parentFragmentManager: FragmentManager){
+fun closeLoading(parentFragmentManager: FragmentManager) {
 //    val transaction = parentFragmentManager.beginTransaction()
 //    val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
 //    loadingDialog?.dismiss()
@@ -80,6 +86,7 @@ fun closeLoading(parentFragmentManager: FragmentManager){
 
 fun toolbarVazia(activity: FragmentActivity?): Toolbar? {
     val toolbar = activity?.findViewById<Toolbar>(R.id.ongToolbar)
+    toolbar?.setBackgroundColor(activity.resources.getColor(R.color.corNeutra))
     toolbar?.menu?.clear()
     return toolbar
 }

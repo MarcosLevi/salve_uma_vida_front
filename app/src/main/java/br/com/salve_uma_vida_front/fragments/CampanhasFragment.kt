@@ -148,6 +148,7 @@ class CampanhasFragment : Fragment() {
         }
         binding.ongCampanhasFragmentFabAddEvento.setOnClickListener {
             clicked = !clicked
+            navController!!.navigate(R.id.action_ongCampanhasFragment_to_cadastroEventoFragment)
 
         }
     }

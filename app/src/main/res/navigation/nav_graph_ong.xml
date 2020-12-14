@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_ongCampanhasFragment_to_cadastroCampanhaFragment"
             app:destination="@id/cadastroCampanhaFragment" />
+        <action
+            android:id="@+id/action_ongCampanhasFragment_to_cadastroEventoFragment"
+            app:destination="@id/cadastroEventoFragment" />
     </fragment>
     <fragment
         android:id="@+id/bothFavoritosFragment"
@@ -40,4 +43,12 @@
         android:id="@+id/bothUserLogadoFragment"
         android:name="br.com.salve_uma_vida_front.fragments.UserLogadoFragment"
         android:label="Perfil" />
+    <fragment
+        android:id="@+id/cadastroEventoFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.CadastroEventoFragment"
+        android:label="Novo Evento">
+        <action
+            android:id="@+id/action_cadastroEventoFragment_to_ongCampanhasFragment"
+            app:destination="@id/ongCampanhasFragment" />
+    </fragment>
 </navigation>
