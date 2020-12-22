@@ -30,7 +30,13 @@
         android:id="@+id/bothProcurarFragment"
         android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"
         android:label="Procurar Campanhas"
-        tools:layout="@layout/fragment_both_procurar" />
+        tools:layout="@layout/fragment_both_procurar" >
+        <argument
+            android:name="filtro"
+            app:argType="br.com.salve_uma_vida_front.dto.FiltroPesquisaDto"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/cadastroCampanhaFragment"
         android:name="br.com.salve_uma_vida_front.fragments.CadastroCampanhaFragment"

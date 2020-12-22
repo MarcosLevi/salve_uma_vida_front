@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.SeekBar
 import androidx.fragment.app.DialogFragment
-import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarDialogBinding
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 
-class DialogFiltros(procurarFragmentViewModel: CampanhasEEventosViewModel) : DialogFragment() {
+class DialogFiltros(private val dialogFiltroListener: DialogFiltroListener) : DialogFragment() {
 
     lateinit var binding: FragmentBothProcurarDialogBinding
-    private var viewModel = procurarFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +43,7 @@ class DialogFiltros(procurarFragmentViewModel: CampanhasEEventosViewModel) : Dia
         binding.seekBarDistancia.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.textViewFiltroKilometro.setText((progress + 1).toString())
+                binding.textViewFiltroKilometro.text = (progress + 1).toString()
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -60,18 +61,22 @@ class DialogFiltros(procurarFragmentViewModel: CampanhasEEventosViewModel) : Dia
             val radio = binding.root.findViewById<RadioButton>(selectedId)
             val tipoFiltro = radio.text.toString()
             val searchType: SearchType
-            if (tipoFiltro.equals("Campanhas"))
-                searchType = SearchType.CAMPANHAS
+            searchType = if (tipoFiltro == "Campanhas")
+                SearchType.CAMPANHAS
             else
-                searchType = SearchType.EVENTOS
+                SearchType.EVENTOS
             val distancia = binding.seekBarDistancia.progress
-            viewModel.filtrar(FiltroPesquisaDto(searchType, distancia + 1))
+            dialogFiltroListener.passaFiltro(FiltroPesquisaDto(searchType, distancia + 1))
             dismiss()
         }
     }
 
+    interface DialogFiltroListener{
+        fun passaFiltro(filtro: FiltroPesquisaDto)
+    }
+
     override fun onStart() {
-        dialog!!.getWindow()!!
+        dialog!!.window!!
             .setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         super.onStart()
     }

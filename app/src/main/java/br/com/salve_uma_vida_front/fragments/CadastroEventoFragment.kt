@@ -1,31 +1,31 @@
 package br.com.salve_uma_vida_front.fragments
 
 import android.app.DatePickerDialog
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.salve_uma_vida_front.*
-import br.com.salve_uma_vida_front.adapters.ItemAdapterOng
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroEventoBinding
-import br.com.salve_uma_vida_front.dto.CampanhaItemDto
 import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.models.DialogEditaItemNew
 import br.com.salve_uma_vida_front.models.DialogUrl
+import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 import com.squareup.picasso.Picasso
 import java.util.*
+
 
 class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
     var navController: NavController? = null
 
     lateinit var binding: FragmentCadastroEventoBinding
     private var evento = EventoDto()
+    private lateinit var viewModel: EventosViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +33,7 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCadastroEventoBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProviders.of(this).get(EventosViewModel::class.java)
         return binding.root
     }
 
@@ -59,7 +60,7 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
             evento.latitude = latitude as Float
             evento.longitude = longitude as Float
             evento.endereco = endereco as String
-//            viewModel.cadastraEvento()
+            novoEvento()
         }
 
         val data = binding.cadastroEventoData
@@ -95,6 +96,15 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
         configuraToolbar()
         configuraListenerUserFoto()
 
+        viewModel.novoEvento.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context,it,Toast.LENGTH_SHORT)
+            navController!!.navigate(CadastroEventoFragmentDirections.actionCadastroEventoFragmentToOngCampanhasFragment())
+        })
+
+    }
+
+    private fun novoEvento() {
+        viewModel.novoEvento(evento)
     }
 
     private fun configuraListenerUserFoto() {

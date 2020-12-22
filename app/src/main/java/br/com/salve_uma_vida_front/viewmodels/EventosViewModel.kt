@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(application) {
+class EventosViewModel(application: Application) : AndroidViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
     private val myPreferences = MyPreferences(context)
@@ -37,14 +37,9 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
     private val _meusEventos = MutableLiveData<List<EventoDto>>()
     val meusEventos: LiveData<List<EventoDto>> = _meusEventos
 
-    private val _minhasCampanhas = MutableLiveData<List<CampanhaDto>>()
-    val minhasCampanhas: LiveData<List<CampanhaDto>> = _minhasCampanhas
+    private val _novoEvento = MutableLiveData<String>()
+    val novoEvento: LiveData<String> = _novoEvento
 
-    private val _campanhas = MutableLiveData<List<CampanhaDto>>()
-    val campanhas: LiveData<List<CampanhaDto>> = _campanhas
-
-    private val _campanhaOuEvento = MutableLiveData<SearchType>()
-    val campanhaOuEvento: LiveData<SearchType> = _campanhaOuEvento
 
     fun getEventoId(id: Int) {
         val callback = EventoRepository().getEventoId(id, token)
@@ -84,27 +79,8 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
         })
     }
 
-    fun getCampanhasUserLogado(parametro: String) {
-        val callback = CampanhaRepository().getCampanhasUserLogado(token,parametro)
-        callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
-            override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
-                Log.d("SearchViewModel", "Requisição falhou")
-            }
-
-            override fun onResponse(
-                call: Call<ResponseDto<List<CampanhaDto>>>,
-                response: Response<ResponseDto<List<CampanhaDto>>>
-            ) {
-                val campanha = response.body()?.data
-                _minhasCampanhas.value = campanha
-
-            }
-
-        })
-    }
-
     fun getEventosUserLogado(parametro: String) {
-        val callback = EventoRepository().getEventosUserLogado(token,parametro)
+        val callback = EventoRepository().getEventosUserLogado(token, parametro)
         callback.enqueue(object : Callback<ResponseDto<List<EventoDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<EventoDto>>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")
@@ -122,37 +98,21 @@ class CampanhasEEventosViewModel(application: Application) : AndroidViewModel(ap
         })
     }
 
-    fun getCampanhas(parametro: String) {
-        val callback = CampanhaRepository().getCampanhas(token, parametro)
-        callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
-            override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
+    fun novoEvento(evento: EventoDto) {
+        val callback = EventoRepository().novoEvento(token, evento)
+        callback.enqueue(object : Callback<ResponseDto<String>> {
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")
             }
 
             override fun onResponse(
-                call: Call<ResponseDto<List<CampanhaDto>>>,
-                response: Response<ResponseDto<List<CampanhaDto>>>
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
             ) {
-                val campanhas = response.body()?.data
-                _campanhas.value = campanhas
-
+                val eventos = response.body()?.data
+                _novoEvento.value = eventos
             }
 
         })
-    }
-
-    fun createDialog(fragmentManager: FragmentManager?) {
-
-        var dialog = DialogFiltros(this)
-        if (fragmentManager != null) {
-            dialog.show(fragmentManager, "FiltroDialog")
-        }
-
-    }
-
-    fun filtrar(filtro: FiltroPesquisaDto) {
-        //nova lista de elementos
-        //fazer a filtragem
-        _campanhaOuEvento.value = filtro.tipoFiltro
     }
 }

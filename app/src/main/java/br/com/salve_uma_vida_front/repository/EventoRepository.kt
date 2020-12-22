@@ -24,4 +24,9 @@ class EventoRepository {
         var endpoint = NetworkUtil.getRetrofitInstance().create(EventosEndPoint::class.java)
         return endpoint.getEventosUserLogado(token, parametro)
     }
+
+    fun novoEvento(token: String, evento: EventoDto): Call<ResponseDto<String>> {
+        var endpoint = NetworkUtil.getRetrofitInstance().create(EventosEndPoint::class.java)
+        return endpoint.novoEvento(token, evento)
+    }
 }

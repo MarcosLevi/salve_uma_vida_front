@@ -11,7 +11,6 @@ import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.GalleryAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilUserLogadoBinding
-import br.com.salve_uma_vida_front.models.LoadingDialog
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.ScaleType
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
@@ -92,13 +91,13 @@ class UserLogadoFragment : Fragment() {
     }
 
     fun atualizar() {
-        startLoading(parentFragmentManager)
+        startLoading(activity,R.id.ongLoading)
         userViewModel.atualizar()
     }
 
     private fun configuraObservers() {
         userViewModel.atualiza.observe(viewLifecycleOwner, Observer {
-            closeLoading(parentFragmentManager)
+            closeLoading(activity,R.id.ongLoading)
             when (it) {
                 Responses.SUCESS -> {
                     ajusteConstraintsNormal()

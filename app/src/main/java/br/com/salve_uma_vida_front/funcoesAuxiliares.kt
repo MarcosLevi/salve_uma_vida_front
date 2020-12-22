@@ -5,10 +5,11 @@ import android.content.Context
 import android.content.res.Resources
 import android.location.Geocoder
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,16 +73,16 @@ fun View.hideKeyboard() {
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun startLoading(parentFragmentManager: FragmentManager) {
-//    val loadingDialog = LoadingDialog()
-//    loadingDialog.show(parentFragmentManager,"Loading")
+fun startLoading(activity: FragmentActivity?, id: Int) {
+    activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    val progressBar = activity?.findViewById<ProgressBar>(id)
+    progressBar?.visibility = View.VISIBLE
 }
 
-fun closeLoading(parentFragmentManager: FragmentManager) {
-//    val transaction = parentFragmentManager.beginTransaction()
-//    val loadingDialog = parentFragmentManager.findFragmentByTag("Loading") as LoadingDialog?
-//    loadingDialog?.dismiss()
-//    transaction.remove(loadingDialog!!)
+fun closeLoading(activity: FragmentActivity?, id: Int) {
+    activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    val progressBar = activity?.findViewById<ProgressBar>(id)
+    progressBar?.visibility = View.GONE
 }
 
 fun toolbarVazia(activity: FragmentActivity?): Toolbar? {

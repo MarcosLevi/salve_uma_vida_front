@@ -20,24 +20,29 @@ import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
+import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
+import br.com.salve_uma_vida_front.startLoading
 import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
-import br.com.salve_uma_vida_front.viewmodels.CampanhasEEventosViewModel
+import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
+import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class CampanhasFragment : Fragment() {
+class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaEditavelViewHolder>
     lateinit var eventoEditavelAdapter: RecyclerView.Adapter<CardEventoEditavelViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
-    private lateinit var viewModel: CampanhasEEventosViewModel
+    private lateinit var viewModelCampanha: CampanhasViewModel
+    private lateinit var viewModelEvento: EventosViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
-    private var filtroAtual: SearchType = SearchType.CAMPANHAS
+    private var filtroAtual: FiltroPesquisaDto = FiltroPesquisaDto()
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -72,7 +77,8 @@ class CampanhasFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentOngCampanhasBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProviders.of(this).get(CampanhasEEventosViewModel::class.java)
+        viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
+        viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
         return binding.root
     }
 
@@ -81,10 +87,17 @@ class CampanhasFragment : Fragment() {
         navController = Navigation.findNavController(view)
         configuraRecyclerView()
         configuraObservers()
-        carregaCampanhasUserLogado()
+        carregaDados()
         configuraFabs()
         setHasOptionsMenu(true)
         configuraToolbar()
+    }
+
+    private fun openDialog() {
+
+        val dialog = DialogFiltros(this)
+        dialog.show(childFragmentManager, "FiltroDialog")
+
     }
 
     private fun configuraToolbar() {
@@ -93,15 +106,15 @@ class CampanhasFragment : Fragment() {
         configuraSearchView(toolbar)
         toolbar?.setOnMenuItemClickListener {
             val itemMenu = it
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.bothProcurarFragmentPesquisar -> {
                     val searchView = it.actionView as SearchView
                     searchView.requestFocusFromTouch()
                     true
                 }
 
-                R.id.bothProcurarFragmentFiltros ->{
-                    viewModel.createDialog(fragmentManager)
+                R.id.bothProcurarFragmentFiltros -> {
+                    openDialog()
                     true
                 }
                 else -> {
@@ -114,28 +127,22 @@ class CampanhasFragment : Fragment() {
     private fun configuraSearchView(toolbar: Toolbar?) {
         val procurar = toolbar?.menu?.findItem(R.id.bothProcurarFragmentPesquisar)
         val searchView = procurar?.actionView as androidx.appcompat.widget.SearchView
-        searchView.isIconified = false
-        procurar.setOnMenuItemClickListener {
-            searchView.requestFocusFromTouch()
-        }
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
-                if (filtroAtual.equals(SearchType.CAMPANHAS)) {
-                    carregaCampanhasUserLogado(textoDeBusca)
-                } else if (filtroAtual.equals(SearchType.EVENTOS)) {
-                    carregaEventosUserLogado(textoDeBusca)
-                }
+                carregaDados(textoDeBusca)
                 return true
             }
 
             override fun onQueryTextChange(novoTexto: String): Boolean {
-                if (novoTexto == "") {
-                    this.onQueryTextSubmit("");
-                }
                 return true
             }
 
         })
+
+        searchView.setOnCloseListener {
+            carregaDados()
+            false
+        }
     }
 
     private fun configuraFabs() {
@@ -222,8 +229,8 @@ class CampanhasFragment : Fragment() {
     }
 
     private fun configuraObservers() {
-        viewModel.minhasCampanhas.observe(viewLifecycleOwner, Observer {
-            closeLoading(parentFragmentManager)
+        viewModelCampanha.minhasCampanhas.observe(viewLifecycleOwner, Observer {
+            closeLoading(activity, R.id.ongLoading)
             listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
@@ -235,8 +242,8 @@ class CampanhasFragment : Fragment() {
                 )
             mRecyclerView.adapter = campanhaFinalAdapter
         })
-        viewModel.meusEventos.observe(viewLifecycleOwner, Observer {
-            closeLoading(parentFragmentManager)
+        viewModelEvento.meusEventos.observe(viewLifecycleOwner, Observer {
+            closeLoading(activity, R.id.ongLoading)
             listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
@@ -248,23 +255,28 @@ class CampanhasFragment : Fragment() {
                 )
             mRecyclerView.adapter = eventoEditavelAdapter
         })
-        viewModel.campanhaOuEvento.observe(viewLifecycleOwner, Observer {
-            filtroAtual = it
-            if (filtroAtual.equals(SearchType.CAMPANHAS)) {
-                carregaCampanhasUserLogado()
-            } else if (filtroAtual.equals(SearchType.EVENTOS)) {
-                carregaEventosUserLogado()
-            }
-
-        })
     }
 
-    private fun carregaCampanhasUserLogado(parametro: String = "") {
-        viewModel.getCampanhasUserLogado(parametro)
+    private fun carregaCampanhasUserLogado(parametro: String) {
+        viewModelCampanha.getCampanhasUserLogado(parametro)
     }
 
-    private fun carregaEventosUserLogado(parametro: String = "") {
-        viewModel.getEventosUserLogado(parametro)
+    private fun carregaEventosUserLogado(parametro: String) {
+        viewModelEvento.getEventosUserLogado(parametro)
+    }
+
+    private fun carregaDados(parametro: String = "") {
+        startLoading(activity, R.id.ongLoading)
+        if (filtroAtual.tipoFiltro == SearchType.CAMPANHAS) {
+            carregaCampanhasUserLogado(parametro)
+        } else if (filtroAtual.tipoFiltro == SearchType.EVENTOS) {
+            carregaEventosUserLogado(parametro)
+        }
+    }
+
+    override fun passaFiltro(filtro: FiltroPesquisaDto) {
+        filtroAtual = filtro
+        carregaDados()
     }
 }
 

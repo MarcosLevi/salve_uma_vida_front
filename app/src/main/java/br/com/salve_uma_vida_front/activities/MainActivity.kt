@@ -2,10 +2,13 @@ package br.com.salve_uma_vida_front.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.ActivityMainBinding
 import br.com.salve_uma_vida_front.models.UserType
@@ -29,11 +32,12 @@ class MainActivity : AppCompatActivity() {
             val username = binding.usernameText.text.toString()
             val password = binding.passwordText.text.toString()
             viewModel.doLogin(username, password)
-            startLoading(supportFragmentManager)
+            startLoading(this, R.id.mainLoading)
 //            val myIntent = Intent(this@MainActivity, OngMainActivity::class.java)
 //            startActivity(myIntent)
         }
         binding.signupButton.setOnClickListener {
+            Log.d("CadastroCampanha", "Cliquei")
             startActivity(Intent(this@MainActivity, ActivityCadastroUser::class.java))
 
         }
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         viewModel.navigate.observe(this, Observer {
-            closeLoading(supportFragmentManager)
+            closeLoading(this, R.id.mainLoading)
             when (it) {
                 UserType.COMMON -> startActivity(
                     Intent(
@@ -55,4 +59,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 }

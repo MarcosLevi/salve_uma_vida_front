@@ -3,6 +3,7 @@ package br.com.salve_uma_vida_front.endpoints
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
+import br.com.salve_uma_vida_front.dto.UserDto
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -25,4 +26,11 @@ interface EventosEndPoint {
         @Header("Authorization") token: String,
         @Query("param") parametro: String
     ): Call<ResponseDto<List<EventoDto>>>
+
+    @Headers("Content-Type: application/json")
+    @POST("/event")
+    fun novoEvento(
+        @Header("Authorization") token: String,
+        @Body body: EventoDto
+    ): Call<ResponseDto<String>>
 }
