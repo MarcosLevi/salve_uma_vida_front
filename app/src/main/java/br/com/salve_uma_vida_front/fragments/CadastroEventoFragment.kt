@@ -97,7 +97,7 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
         configuraListenerUserFoto()
 
         viewModel.novoEvento.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(context,it,Toast.LENGTH_SHORT)
+            Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
             navController!!.navigate(CadastroEventoFragmentDirections.actionCadastroEventoFragmentToOngCampanhasFragment())
         })
 

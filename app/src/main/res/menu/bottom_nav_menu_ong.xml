@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/bothMensagensFragment"
-        android:icon="@drawable/ic_outline_mail_24"
+        android:icon="@drawable/ic_outline_mail_30"
         android:title="@string/mensagens" />
 
     <item

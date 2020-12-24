@@ -31,7 +31,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/brancoTransparente"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cadastroEventoImagem" />
@@ -121,7 +121,7 @@
                         android:ems="10"
                         android:hint="Digite o endereço do Evento"
                         android:inputType="textPersonName"
-                        android:textColorHint="@color/white"
+                        android:textColorHint="@color/brancoTransparente"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelEndereco" />
@@ -134,7 +134,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="Selecione a data do evento:"
-                        android:textColor="@color/white"
+                        android:textColor="@color/brancoTransparente"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toStartOf="@+id/cadastroEventoPickDate"
                         app:layout_constraintStart_toEndOf="@+id/cadastroEventoLabelOcorrera"
@@ -152,7 +152,7 @@
                         android:inputType="textMultiLine"
                         android:maxHeight="150dp"
                         android:scrollbars="vertical"
-                        android:textColorHint="@color/white"
+                        android:textColorHint="@color/brancoTransparente"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelDescricao" />
@@ -166,7 +166,7 @@
                         android:ems="10"
                         android:hint="Digite o título do evento"
                         android:inputType="textPersonName"
-                        android:textColorHint="@color/white"
+                        android:textColorHint="@color/brancoTransparente"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelTitulo" />

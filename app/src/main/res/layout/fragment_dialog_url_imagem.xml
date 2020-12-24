@@ -45,7 +45,7 @@
             android:ems="10"
             android:hint="Digite o url da imagem"
             android:inputType="textPersonName"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/brancoTransparente"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fragmentDialogUrlImagemConfirmar"
             app:layout_constraintStart_toStartOf="parent"

@@ -22,52 +22,78 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/signupButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/corNeutraDark"
-            android:text="Cadastrar"
-            app:layout_constraintStart_toStartOf="@+id/passwordText"
-            app:layout_constraintTop_toBottomOf="@+id/passwordText" />
-
-        <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             android:background="@color/corNeutraDark"
             android:text="Login"
-            app:layout_constraintEnd_toEndOf="@+id/passwordText"
-            app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextLayout" />
 
-        <EditText
-            android:id="@+id/usernameText"
-            android:layout_width="0dp"
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/corNeutraDark"
+            android:text="Cadastrar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameTextLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textPersonName"
-            android:text="aurelio@gmail.com"
+            app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainLogoApp" />
+            app:layout_constraintTop_toBottomOf="@+id/mainLogoApp">
 
-        <EditText
-            android:id="@+id/passwordText"
-            android:layout_width="0dp"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/usernameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_outline_mail_30"
+                android:drawablePadding="9dp"
+                android:hint="Email"
+                android:inputType="text"
+                android:text="aurelio@gmail.com" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordTextLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPersonName"
-            android:text="teste"
-            app:layout_constraintEnd_toEndOf="@+id/usernameText"
-            app:layout_constraintStart_toStartOf="@+id/usernameText"
-            app:layout_constraintTop_toBottomOf="@+id/usernameText" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTextLayout"
+            app:passwordToggleDrawable="@drawable/ic_baseline_eye_24"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/passwordText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:drawableStart="@drawable/ic_outline_lock_30"
+                android:drawablePadding="9dp"
+                android:hint="Senha"
+                android:inputType="text"
+                android:text="teste" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar
             android:id="@+id/mainLoading"
