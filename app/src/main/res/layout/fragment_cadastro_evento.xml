@@ -23,153 +23,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/cadastroEventoUrlImagem"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cadastroEventoUrlImagemLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:gravity="center"
-                        android:textColor="@color/brancoTransparente"
+                        app:boxBackgroundColor="@android:color/transparent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoImagem" />
+                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoImagem">
 
-                    <TextView
-                        android:id="@+id/cadastroEventoLabelOcorrera"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Ocorrerá em: "
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="@+id/cadastroEventoData"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/cadastroEventoData" />
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/cadastroEventoUrlImagem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="Url"
+                            android:inputType="textMultiLine" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:id="@+id/cadastroEventoLabelDescricao"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Descrição:"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoData" />
-
-                    <TextView
-                        android:id="@+id/cadastroEventoLabelEndereco"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/cadastroEventoImagem"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="Endereço:"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
+                        android:contentDescription="@string/imagem_da_campanha"
+                        android:scaleType="fitXY"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoDescricao" />
-
-                    <TextView
-                        android:id="@+id/cadastroEventoLabelTitulo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Título:"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoUrlImagem" />
-
-                    <TextView
-                        android:id="@+id/cadastroEventoLabelData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Data: "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoTitulo" />
-
-                    <TextView
-                        android:id="@+id/cadastroEventoLabelImagem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Imagem Evento:"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <EditText
-                        android:id="@+id/cadastroEventoEndereco"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:ems="10"
-                        android:hint="Digite o endereço do Evento"
-                        android:inputType="textPersonName"
-                        android:textColorHint="@color/brancoTransparente"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelEndereco" />
-
-                    <TextView
-                        android:id="@+id/cadastroEventoData"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="Selecione a data do evento:"
-                        android:textColor="@color/brancoTransparente"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toStartOf="@+id/cadastroEventoPickDate"
-                        app:layout_constraintStart_toEndOf="@+id/cadastroEventoLabelOcorrera"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelData" />
-
-                    <EditText
-                        android:id="@+id/cadastroEventoDescricao"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:ems="10"
-                        android:hint="Digite uma descrição para o evento"
-                        android:inputType="textMultiLine"
-                        android:maxHeight="150dp"
-                        android:scrollbars="vertical"
-                        android:textColorHint="@color/brancoTransparente"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelDescricao" />
-
-                    <EditText
-                        android:id="@+id/cadastroEventoTitulo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:ems="10"
-                        android:hint="Digite o título do evento"
-                        android:inputType="textPersonName"
-                        android:textColorHint="@color/brancoTransparente"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelTitulo" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_dafault_photo" />
 
                     <ImageButton
                         android:id="@+id/cadastroEventoPickDate"
@@ -178,11 +68,110 @@
                         android:layout_marginEnd="8dp"
                         android:background="@null"
                         android:contentDescription="@string/selecione_uma_data"
+                        android:nextFocusForward="@+id/cadastroEventoDescricao"
                         android:tint="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@+id/cadastroEventoData"
+                        app:layout_constraintBottom_toBottomOf="@+id/cadastroEventoDataLayout"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/cadastroEventoData"
+                        app:layout_constraintTop_toTopOf="@+id/cadastroEventoDataLayout"
                         app:srcCompat="@drawable/ic_baseline_date_range_24" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cadastroEventoTituloLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="255"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoUrlImagemLayout">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/cadastroEventoTitulo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Título"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:nextFocusRight="@id/cadastroEventoPickDate" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cadastroEventoDataLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:layout_constraintEnd_toStartOf="@+id/cadastroEventoPickDate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoTituloLayout">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/cadastroEventoData"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="Data"
+                            android:inputType="date" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cadastroEventoDescricaoLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="255"
+                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoDataLayout">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/cadastroEventoDescricao"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Descrição"
+                            android:imeOptions="actionNext"
+                            android:inputType="textMultiLine"
+                            android:nextFocusRight="@id/cadastroEventoEndereco"
+                            android:scrollbars="vertical" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/cadastroEventoEnderecoLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:boxBackgroundColor="@android:color/transparent"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="255"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoDescricaoLayout">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/cadastroEventoEndereco"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Endereço"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:nextFocusRight="@id/cadastroEventoFinalizar"
+                            android:scrollbars="vertical" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton
                         android:id="@+id/cadastroEventoFinalizar"
@@ -200,21 +189,8 @@
                         android:tint="@color/corBotaoConfirmar"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoEndereco" />
+                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoEnderecoLayout" />
 
-                    <ImageView
-                        android:id="@+id/cadastroEventoImagem"
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:contentDescription="@string/imagem_da_campanha"
-                        android:scaleType="fitXY"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cadastroEventoLabelImagem"
-                        app:srcCompat="@drawable/ic_dafault_photo" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>

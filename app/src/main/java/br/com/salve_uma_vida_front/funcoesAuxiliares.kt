@@ -18,6 +18,11 @@ fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+fun Context.showKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(view, 0)
+}
+
 fun NewCalendar(dia: Int, mes: Int, ano: Int): Calendar {
     val calendar = Calendar.getInstance()
     calendar.set(ano, mes, dia)
@@ -25,12 +30,12 @@ fun NewCalendar(dia: Int, mes: Int, ano: Int): Calendar {
 }
 
 fun DateToString(calendar: Calendar): String {
-    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
     return formatter.format(calendar.time)
 }
 
 fun DateToStringBanco(calendar: Calendar): String {
-    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale("pt", "BR"))
     return formatter.format(calendar.time)
 }
 
