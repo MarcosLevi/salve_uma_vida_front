@@ -109,10 +109,9 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
                 call: Call<ResponseDto<String>>,
                 response: Response<ResponseDto<String>>
             ) {
-                val eventos = response.body()?.data
-                _novoEvento.value = eventos
+                val resposta = response.body()?.data
+                _novoEvento.value = resposta
             }
-
         })
     }
 }

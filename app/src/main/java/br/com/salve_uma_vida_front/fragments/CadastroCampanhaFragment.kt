@@ -2,11 +2,14 @@ package br.com.salve_uma_vida_front.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +20,10 @@ import br.com.salve_uma_vida_front.databinding.FragmentCadastroCampanhaBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.CampanhaItemDto
 import br.com.salve_uma_vida_front.models.DialogEditaItemNew
+import br.com.salve_uma_vida_front.models.Erros
 import br.com.salve_uma_vida_front.viewholders.itemCadastroCampanhaViewHolder
+import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
+import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -26,11 +32,13 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     var navController: NavController? = null
 
     lateinit var binding: FragmentCadastroCampanhaBinding
+    private lateinit var viewModel: CampanhasViewModel
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapterOng: RecyclerView.Adapter<itemCadastroCampanhaViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     private var campanha = CampanhaDto()
+    private var erros = Erros()
     private var isEdita = false
 
     override fun onCreateView(
@@ -39,6 +47,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCadastroCampanhaBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
         campanha.itens.add(CampanhaItemDto(descricao = "Ração", unidade = "Kg", maximo = 90F))
         campanha.itens.add(CampanhaItemDto(descricao = "Leite", unidade = "L", maximo = 90F))
         campanha.itens.add(CampanhaItemDto(descricao = "Coleira", unidade = "Un", maximo = 500F))
@@ -78,7 +87,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     }
 
     private fun configuraDatePicker(view: View) {
-        val dataCampanha = binding.cadastroEventoData
+        val dataCampanha = binding.cadastroCampanhaData
         val calendar = Calendar.getInstance()
         val escolheData = binding.cadastroCampanhaPickDate
         escolheData.setOnClickListener {
@@ -106,13 +115,51 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     private fun configuraFinalizarCampanha() {
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
         finalizaCampanha.setOnClickListener {
-    //            if(validate()){
-    //
-    //            }
             campanha.descricao = binding.cadastroCampanhaDescricao.text.toString()
             campanha.titulo = binding.cadastroCampanhaTitulo.text.toString()
-    //            viewModel.cadastraCampanha()
+            resetaErros()
+            if (validate()) {
+                novaCampanha()
+            } else {
+                mostraErros()
+            }
         }
+    }
+
+    private fun mostraErros() {
+        binding.cadastroCampanhaErros.text = erros.toString()
+        binding.cadastroCampanhaErros.visibility = View.VISIBLE
+        binding.cadastroCampanhaScrollView.fullScroll(ScrollView.FOCUS_UP);
+    }
+
+    private fun resetaErros() {
+        binding.cadastroCampanhaErros.visibility = View.GONE
+        erros.removeErros()
+    }
+
+    private fun novaCampanha() {
+        viewModel.novaCampanha(campanha)
+    }
+
+    private fun validate(): Boolean {
+        var validate = true
+        if (TextUtils.isEmpty(campanha.titulo)) {
+            erros.addErro("Título é necessário para fazer o cadastro da campanha")
+            validate = false
+        }
+        if (TextUtils.isEmpty(campanha.data)) {
+            erros.addErro("Data é necessária para fazer o cadastro da campanha")
+            validate = false
+        }
+        if (TextUtils.isEmpty(campanha.descricao)) {
+            erros.addErro("Descrição é necessária para fazer o cadastro da campanha")
+            validate = false
+        }
+        if (campanha.itens.isEmpty()) {
+            erros.addErro("Pelo menos 1 item é necessário para fazer o cadastro da campanha")
+            validate = false
+        }
+        return validate
     }
 
     private fun configuraAdicionarItem() {
@@ -131,8 +178,8 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
             .placeholder(R.drawable.ic_dafault_photo)
             .error(R.drawable.ic_baseline_report_problem_24)
             .into(binding.cadastroCampanhaImagem)
-        campanha.userImage =
-            "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
+//        campanha.userImage =
+//            "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
     }
 
     private fun configuraToolbar() {

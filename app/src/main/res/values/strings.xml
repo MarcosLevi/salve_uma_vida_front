@@ -1,8 +1,8 @@
 <resources>
     <string-array name="unidades_medida">
-        <item>Kg</item>
+        <item>KG</item>
         <item>L</item>
-        <item>Un</item>
+        <item>UN</item>
     </string-array>
     <string name="app_name">SalveUmaVida</string>
     <string name="content_description_imageButton_cardEdita">Edita a campanha atual</string>

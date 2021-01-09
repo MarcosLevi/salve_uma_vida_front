@@ -25,4 +25,11 @@ interface CampanhasEndPoint {
         @Header("Authorization") token: String,
         @Query("param") parametro: String
     ): Call<ResponseDto<List<CampanhaDto>>>
+
+    @Headers("Content-Type: application/json")
+    @POST("/campaign")
+    fun novaCampanha(
+        @Header("Authorization") token: String,
+        @Body body: CampanhaDto
+    ): Call<ResponseDto<String>>
 }

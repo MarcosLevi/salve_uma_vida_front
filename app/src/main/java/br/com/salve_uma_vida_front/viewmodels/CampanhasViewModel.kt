@@ -2,16 +2,12 @@ package br.com.salve_uma_vida_front.viewmodels
 
 import android.app.Application
 import android.util.Log
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
-import br.com.salve_uma_vida_front.models.SearchType
 import br.com.salve_uma_vida_front.repository.CampanhaRepository
 import br.com.salve_uma_vida_front.repository.EventoRepository
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
@@ -31,9 +27,12 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
     private val _campanhas = MutableLiveData<List<CampanhaDto>>()
     val campanhas: LiveData<List<CampanhaDto>> = _campanhas
 
+    private val _novaCampanha = MutableLiveData<String>()
+    val novaCampanha: LiveData<String> = _novaCampanha
+
 
     fun getCampanhasUserLogado(parametro: String) {
-        val callback = CampanhaRepository().getCampanhasUserLogado(token,parametro)
+        val callback = CampanhaRepository().getCampanhasUserLogado(token, parametro)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
                 Log.d("SearchViewModel", "Requisição falhou")
@@ -69,4 +68,22 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
 
         })
     }
+
+    fun novaCampanha(campanha: CampanhaDto) {
+        val callback = CampanhaRepository().novaCampanha(token, campanha)
+        callback.enqueue(object : Callback<ResponseDto<String>> {
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
+            ) {
+                val resposta = response.body()?.data
+                _novaCampanha.value = resposta
+            }
+        })
+    }
+
 }
