@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -23,8 +24,8 @@ import br.com.salve_uma_vida_front.models.DialogEditaItemNew
 import br.com.salve_uma_vida_front.models.Erros
 import br.com.salve_uma_vida_front.viewholders.itemCadastroCampanhaViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
-import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 import com.squareup.picasso.Picasso
+import androidx.lifecycle.Observer
 import java.util.*
 
 class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
@@ -48,9 +49,9 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         // Inflate the layout for this fragment
         binding = FragmentCadastroCampanhaBinding.inflate(inflater, container, false)
         viewModel = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
-        campanha.itens.add(CampanhaItemDto(descricao = "Ração", unidade = "Kg", maximo = 90F))
+        campanha.itens.add(CampanhaItemDto(descricao = "Ração", unidade = "KG", maximo = 90F))
         campanha.itens.add(CampanhaItemDto(descricao = "Leite", unidade = "L", maximo = 90F))
-        campanha.itens.add(CampanhaItemDto(descricao = "Coleira", unidade = "Un", maximo = 500F))
+        campanha.itens.add(CampanhaItemDto(descricao = "Coleira", unidade = "UN", maximo = 500F))
         campanha.itens.add(CampanhaItemDto(descricao = "Água", unidade = "L", maximo = 600F))
         campanha.itens.add(CampanhaItemDto(descricao = "Sabão", unidade = "L", maximo = 200F))
         return binding.root
@@ -83,6 +84,8 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         configuraDatePicker(view)
 
         configuraToolbar()
+
+        configuraObservers()
 
     }
 
@@ -139,6 +142,13 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 
     private fun novaCampanha() {
         viewModel.novaCampanha(campanha)
+    }
+
+    private fun configuraObservers() {
+        viewModel.novaCampanha.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            navController!!.navigate(CadastroCampanhaFragmentDirections.actionCadastroCampanhaFragmentToOngCampanhasFragment())
+        })
     }
 
     private fun validate(): Boolean {

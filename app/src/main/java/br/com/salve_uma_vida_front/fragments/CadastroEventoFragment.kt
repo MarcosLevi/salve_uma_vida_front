@@ -51,10 +51,10 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
         configuraDatePicker(view)
         configuraToolbar()
         configuraListenerUserFoto()
-        configuraViewModel()
+        configuraObservers()
     }
 
-    private fun configuraViewModel() {
+    private fun configuraObservers() {
         viewModel.novoEvento.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             navController!!.navigate(CadastroEventoFragmentDirections.actionCadastroEventoFragmentToOngCampanhasFragment())
