@@ -21,6 +21,7 @@ import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
+import br.com.salve_uma_vida_front.interfaces.CardEventoEditavelListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
 import br.com.salve_uma_vida_front.startLoading
@@ -31,7 +32,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
+class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEventoEditavelListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaEditavelViewHolder>
@@ -105,7 +106,6 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
         toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
         configuraSearchView(toolbar)
         toolbar?.setOnMenuItemClickListener {
-            val itemMenu = it
             when (it.itemId) {
                 R.id.bothProcurarFragmentPesquisar -> {
                     val searchView = it.actionView as SearchView
@@ -126,7 +126,7 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
 
     private fun configuraSearchView(toolbar: Toolbar?) {
         val procurar = toolbar?.menu?.findItem(R.id.bothProcurarFragmentPesquisar)
-        val searchView = procurar?.actionView as androidx.appcompat.widget.SearchView
+        val searchView = procurar?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
                 carregaDados(textoDeBusca)
@@ -155,7 +155,7 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
         }
         binding.ongCampanhasFragmentFabAddEvento.setOnClickListener {
             clicked = !clicked
-            navController!!.navigate(R.id.action_ongCampanhasFragment_to_cadastroEventoFragment)
+            navController!!.navigate(CampanhasFragmentDirections.actionOngCampanhasFragmentToCadastroEventoFragment())
 
         }
     }
@@ -221,8 +221,7 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
         mLayoutManager = LinearLayoutManager(requireContext())
         campanhaFinalAdapter =
             CardCampanhaEditavelAdapter(
-                listaCampanhas,
-                requireContext()
+                listaCampanhas
             )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = campanhaFinalAdapter
@@ -237,8 +236,7 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
             }
             campanhaFinalAdapter =
                 CardCampanhaEditavelAdapter(
-                    listaCampanhas,
-                    requireContext()
+                    listaCampanhas
                 )
             mRecyclerView.adapter = campanhaFinalAdapter
         })
@@ -251,7 +249,7 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
             eventoEditavelAdapter =
                 CardEventoEditavelAdapter(
                     listaEventos,
-                    requireContext()
+                    this
                 )
             mRecyclerView.adapter = eventoEditavelAdapter
         })
@@ -277,6 +275,18 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener {
     override fun passaFiltro(filtro: FiltroPesquisaDto) {
         filtroAtual = filtro
         carregaDados()
+    }
+
+    override fun onEditaClicked(evento: EventoDto) {
+        navController!!.navigate(CampanhasFragmentDirections.actionOngCampanhasFragmentToCadastroEventoFragment(evento))
+    }
+
+    override fun onArquivaClicked(evento: EventoDto) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFinalizaClicked(evento: EventoDto) {
+        TODO("Not yet implemented")
     }
 }
 

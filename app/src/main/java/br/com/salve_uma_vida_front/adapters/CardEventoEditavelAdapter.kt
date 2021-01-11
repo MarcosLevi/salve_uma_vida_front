@@ -1,6 +1,5 @@
 package br.com.salve_uma_vida_front.adapters
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,13 +8,12 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.FormatStringToDate
 import br.com.salve_uma_vida_front.databinding.CardEventoEditavelBinding
 import br.com.salve_uma_vida_front.dp
-import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
-import br.com.salve_uma_vida_front.databinding.CardEventoFinalBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.interfaces.CardEventoEditavelListener
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import com.squareup.picasso.Picasso
 
-class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, var contexto: Context) :
+class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, private val listener: CardEventoEditavelListener) :
     RecyclerView.Adapter<CardEventoEditavelViewHolder>() {
 
     lateinit var bindingEvento: CardEventoEditavelBinding
@@ -50,18 +48,20 @@ class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, var cont
 
         holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
-        holderFinal.textViewTimeStamp.text =
-            FormatStringToDate(currentItem.data!!)
+        holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data!!)}"
         holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.imageButtonEditar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em editar")
+            listener.onEditaClicked(currentItem)
         }
         holderFinal.imageButtonArquivar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em Arquivar")
+            listener.onArquivaClicked(currentItem)
         }
         holderFinal.imageButtonFinalizar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em Finalizar")
+            listener.onFinalizaClicked(currentItem)
         }
     }
 

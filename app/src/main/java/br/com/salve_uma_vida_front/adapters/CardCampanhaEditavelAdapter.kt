@@ -14,7 +14,7 @@ import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import com.squareup.picasso.Picasso
 
-class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>, var contexto: Context) :
+class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>) :
     RecyclerView.Adapter<CardCampanhaEditavelViewHolder>() {
 
     lateinit var bindingCampanha: CardCampanhaEditavelBinding
@@ -49,8 +49,7 @@ class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>, var 
 
         holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
-        holderFinal.textViewTimeStamp.text =
-            FormatStringToDate(currentItem.data)
+        holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data)}"
         holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.imageButtonEditar.setOnClickListener{

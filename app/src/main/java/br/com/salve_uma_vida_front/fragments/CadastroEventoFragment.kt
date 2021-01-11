@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.databinding.FragmentCadastroEventoBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
@@ -25,8 +26,9 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
     var navController: NavController? = null
 
     lateinit var binding: FragmentCadastroEventoBinding
-    private var evento = EventoDto()
+    lateinit var evento: EventoDto
     private lateinit var viewModel: EventosViewModel
+    private var isEdita = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +54,39 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
         configuraToolbar()
         configuraListenerUserFoto()
         configuraObservers()
+        setaEvento()
+    }
+
+    private fun setaEvento() {
+        val eventoRecebido = getEventoByArgs()
+        if (eventoRecebido == null) {
+            evento = EventoDto()
+        } else {
+            isEdita = true
+            evento = eventoRecebido
+            preencheCampos()
+        }
+    }
+
+    private fun preencheCampos() {
+        binding.cadastroEventoUrlImagem.setText(evento.imagem)
+        Picasso.get()
+            .load(evento.imagem)
+            .resize(110.dp, 110.dp)
+            .centerCrop()
+            .placeholder(R.drawable.ic_dafault_photo)
+            .error(R.drawable.ic_baseline_report_problem_24)
+            .into(binding.cadastroEventoImagem)
+        binding.cadastroEventoTitulo.setText(evento.titulo)
+        binding.cadastroEventoData.setText(FormatStringToDate(evento.data!!))
+        binding.cadastroEventoDescricao.setText(evento.descricao)
+        binding.cadastroEventoEndereco.setText(evento.endereco)
+    }
+
+    private fun getEventoByArgs(): EventoDto? {
+        val args: CadastroEventoFragmentArgs by navArgs()
+        val evento = args.evento
+        return evento
     }
 
     private fun configuraObservers() {
@@ -98,7 +133,10 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
             zeraErros()
             if (validate()) {
                 atribuiCamposAoEvento()
-                novoEvento()
+                if (isEdita)
+                    updateEvento()
+                else
+                    novoEvento()
             }
 
         }
@@ -156,6 +194,10 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
 
     private fun novoEvento() {
         viewModel.novoEvento(evento)
+    }
+
+    private fun updateEvento() {
+//        viewModel.novoEvento(evento)
     }
 
     private fun configuraListenerUserFoto() {

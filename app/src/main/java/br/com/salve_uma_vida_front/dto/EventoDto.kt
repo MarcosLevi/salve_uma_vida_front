@@ -1,6 +1,7 @@
 package br.com.salve_uma_vida_front.dto
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 data class EventoDto(
@@ -20,4 +21,4 @@ data class EventoDto(
     var descricao: String? = null,
     @SerializedName("date")
     var data:String? = null
-)
+) : Serializable

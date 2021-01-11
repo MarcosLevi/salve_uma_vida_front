@@ -39,20 +39,11 @@ fun DateToStringBanco(calendar: Calendar): String {
     return formatter.format(calendar.time)
 }
 
-fun StringToDate(string: String): MutableList<Int> {
-    val diaMesAno = string.split("/")
-    return mutableListOf<Int>(
-        diaMesAno.get(0).toInt(),
-        diaMesAno.get(1).toInt(),
-        diaMesAno.get(2).toInt()
-    )
-}
-
 fun FormatStringToDate(string: String): String {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
     val date = dateFormat.parse(string)
-    val formatter = SimpleDateFormat("dd/MMM/yyyy");
-    return "Ocorrerá em " + formatter.format(date)
+    val formatter = SimpleDateFormat("dd/MM/yyyy")
+    return formatter.format(date)
 }
 
 fun adressToLatLong(adress: String, applicationContext: Context): MutableList<Any> {
@@ -66,7 +57,7 @@ fun adressToLatLong(adress: String, applicationContext: Context): MutableList<An
 
 fun latLongToAdress(latitude: Float, longitude: Float, applicationContext: Context): String {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
-    var fromLocation = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
+    val fromLocation = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1)
     return fromLocation[0].getAddressLine(0)
 }
 
