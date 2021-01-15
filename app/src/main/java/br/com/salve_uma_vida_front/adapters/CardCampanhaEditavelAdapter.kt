@@ -49,7 +49,7 @@ class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>) :
 
         holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
-        holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data)}"
+        holderFinal.textViewTimeStamp.text = "Anunciado em ${FormatStringToDate(currentItem.data)}"
         holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.imageButtonEditar.setOnClickListener{

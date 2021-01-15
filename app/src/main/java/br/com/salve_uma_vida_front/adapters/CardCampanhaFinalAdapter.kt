@@ -51,7 +51,7 @@ class CardCampanhaFinalAdapter(var listaCards: MutableList<CampanhaDto>, var con
 
 //        fazer função que salve esse cara
         holderFinal.textViewTitulo.text = currentItem.titulo
-        holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data)}"
+        holderFinal.textViewTimeStamp.text = "Anunciado em ${FormatStringToDate(currentItem.data)}"
         holderFinal.textViewDescricao.text = currentItem.descricao
         holderFinal.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
         holderFinal.itemView.setOnClickListener{

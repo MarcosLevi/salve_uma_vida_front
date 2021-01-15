@@ -1,6 +1,5 @@
 package br.com.salve_uma_vida_front.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils

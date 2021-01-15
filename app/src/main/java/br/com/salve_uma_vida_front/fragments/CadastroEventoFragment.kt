@@ -149,7 +149,7 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
         evento.imagem = binding.cadastroEventoUrlImagem.text.toString()
         val (latitude, longitude, endereco) = adressToLatLong(
             evento.endereco!!,
-            requireContext()
+            activity?.applicationContext
         )
         evento.latitude = latitude as Float
         evento.longitude = longitude as Float

@@ -28,12 +28,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     val cadastro: LiveData<Responses> = _cadastro
     private val _atualiza = MutableLiveData<Responses>()
     val atualiza: LiveData<Responses> = _atualiza
+    private val _loginError = MutableLiveData<String>()
+    val loginError: LiveData<String> = _loginError
+
 
     fun doLogin(username: String, password: String) {
         val callback = UserRepository().login(username, password)
         callback.enqueue(object: Callback<ResponseDto<AuthorizationResponseDto>> {
             override fun onFailure(call: Call<ResponseDto<AuthorizationResponseDto>>, t: Throwable) {
-                Log.d("UserViewModel", "Requisição falhou")
+                loginError()
             }
 
             override fun onResponse(call: Call<ResponseDto<AuthorizationResponseDto>>, response: Response<ResponseDto<AuthorizationResponseDto>>) {
@@ -98,6 +101,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loginError() {
-
+        _loginError.value = "Requisição falhou, tente novamente mais tarde"
     }
 }

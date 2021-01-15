@@ -57,7 +57,7 @@ class GalleryAdapter(
     }
 
     fun openGallery() {
-        var dialogGallery = DialogGallery(imageUrls)
+        val dialogGallery = DialogGallery(imageUrls)
         dialogGallery.show(fragmentManager, "Gallery")
     }
 }

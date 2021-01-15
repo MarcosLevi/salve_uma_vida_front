@@ -46,14 +46,21 @@ fun FormatStringToDate(string: String): String {
     return formatter.format(date)
 }
 
-fun adressToLatLong(adress: String, applicationContext: Context): MutableList<Any> {
+fun adressToLatLong(adress: String, applicationContext: Context?): MutableList<Any> {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
-    val fromLocationName = geocoder.getFromLocationName(adress, 1)
-    val latitude = fromLocationName[0].latitude.toFloat()
-    val longitude = fromLocationName[0].longitude.toFloat()
-    val endereco = fromLocationName[0].getAddressLine(0)
-    return mutableListOf(latitude, longitude, endereco)
+    try {
+        val fromLocationName = geocoder.getFromLocationName(adress, 1)
+        val latitude = fromLocationName[0].latitude.toFloat()
+        val longitude = fromLocationName[0].longitude.toFloat()
+        val endereco = fromLocationName[0].getAddressLine(0)
+        return mutableListOf(latitude, longitude, endereco)
+    }catch (e: Exception){
+        e.printStackTrace()
+    }
+    return mutableListOf("","","")
 }
+
+
 
 fun latLongToAdress(latitude: Float, longitude: Float, applicationContext: Context): String {
     val geocoder = Geocoder(applicationContext, Locale.getDefault())
