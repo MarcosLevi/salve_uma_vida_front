@@ -20,5 +20,12 @@ data class EventoDto(
     @SerializedName("description")
     var descricao: String? = null,
     @SerializedName("date")
-    var data:String? = null
-) : Serializable
+    var data: String? = null
+) : Serializable {
+    companion object {
+        @JvmStatic
+        fun newInstance(
+            evento: EventoDto
+        ) = EventoDto(evento.id, evento.titulo, evento.endereco, evento.latitude, evento.longitude, evento.imagem, evento.descricao, evento.data)
+    }
+}

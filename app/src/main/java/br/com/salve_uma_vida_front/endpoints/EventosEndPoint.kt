@@ -33,4 +33,11 @@ interface EventosEndPoint {
         @Header("Authorization") token: String,
         @Body body: EventoDto
     ): Call<ResponseDto<String>>
+
+    @Headers("Content-Type: application/json")
+    @PUT("/event")
+    fun updateEvento(
+        @Header("Authorization") token: String,
+        @Body body: EventoDto
+    ): Call<ResponseDto<String>>
 }

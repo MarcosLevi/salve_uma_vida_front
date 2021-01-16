@@ -40,6 +40,9 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
     private val _novoEvento = MutableLiveData<String>()
     val novoEvento: LiveData<String> = _novoEvento
 
+    private val _updateEvento = MutableLiveData<String>()
+    val updateEvento: LiveData<String> = _updateEvento
+
 
     fun getEventoId(id: Int) {
         val callback = EventoRepository().getEventoId(id, token)
@@ -111,6 +114,23 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
             ) {
                 val resposta = response.body()?.data
                 _novoEvento.value = resposta
+            }
+        })
+    }
+
+    fun updateEvento(evento: EventoDto) {
+        val callback = EventoRepository().updateEvento(token, evento)
+        callback.enqueue(object : Callback<ResponseDto<String>> {
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
+            ) {
+                val resposta = response.body()?.data
+                _updateEvento.value = resposta
             }
         })
     }

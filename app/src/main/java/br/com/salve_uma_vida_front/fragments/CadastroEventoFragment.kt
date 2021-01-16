@@ -94,6 +94,11 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             navController!!.navigate(CadastroEventoFragmentDirections.actionCadastroEventoFragmentToOngCampanhasFragment())
         })
+
+        viewModel.updateEvento.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            navController!!.navigate(CadastroEventoFragmentDirections.actionCadastroEventoFragmentToOngCampanhasFragment())
+        })
     }
 
     private fun configuraDatePicker(view: View) {
@@ -197,7 +202,7 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
     }
 
     private fun updateEvento() {
-//        viewModel.novoEvento(evento)
+        viewModel.updateEvento(evento)
     }
 
     private fun configuraListenerUserFoto() {

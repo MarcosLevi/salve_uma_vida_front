@@ -53,7 +53,7 @@ class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, private 
 
         holderFinal.imageButtonEditar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em editar")
-            listener.onEditaClicked(currentItem)
+            listener.onEditaClicked(EventoDto.newInstance(currentItem))
         }
         holderFinal.imageButtonArquivar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em Arquivar")

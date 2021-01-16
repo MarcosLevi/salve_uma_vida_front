@@ -1,18 +1,17 @@
 package br.com.salve_uma_vida_front.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.*
@@ -22,6 +21,7 @@ import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
+import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
@@ -30,7 +30,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener {
+class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCampanhaFinalListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
@@ -124,7 +124,8 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener {
         campanhaFinalAdapter =
             CardCampanhaFinalAdapter(
                 listaCampanhas,
-                requireContext()
+                requireContext(),
+                this
             )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = campanhaFinalAdapter
@@ -139,7 +140,8 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener {
             campanhaFinalAdapter =
                 CardCampanhaFinalAdapter(
                     listaCampanhas,
-                    requireContext()
+                    requireContext(),
+                    this
                 )
             mRecyclerView.adapter = campanhaFinalAdapter
             closeLoading(activity, R.id.ongLoading)
@@ -181,6 +183,14 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener {
     override fun passaFiltro(filtro: FiltroPesquisaDto) {
         filtroAtual = filtro
         carregaDados()
+    }
+
+    override fun abrePerfilOng(campanha: CampanhaDto) {
+        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToPerfilOngFragment(campanha.userId!!))
+    }
+
+    override fun abreCampanha(campanha: CampanhaDto) {
+        Log.d("teste","Cliquei pra abrir a campanha")
     }
 
 

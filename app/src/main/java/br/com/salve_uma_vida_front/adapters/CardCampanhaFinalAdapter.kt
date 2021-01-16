@@ -1,20 +1,20 @@
 package br.com.salve_uma_vida_front.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.FormatStringToDate
+import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
 import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.dto.CampanhaDto
+import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
-import br.com.salve_uma_vida_front.databinding.CardCampanhaFinalBinding
 import com.squareup.picasso.Picasso
 
-class CardCampanhaFinalAdapter(var listaCards: MutableList<CampanhaDto>, var contexto: Context) :
+class CardCampanhaFinalAdapter(var listaCards: MutableList<CampanhaDto>, var contexto: Context, private val listener: CardCampanhaFinalListener) :
     RecyclerView.Adapter<CardCampanhaFinalViewHolder>() {
 
     lateinit var mRecyclerView: RecyclerView
@@ -54,8 +54,12 @@ class CardCampanhaFinalAdapter(var listaCards: MutableList<CampanhaDto>, var con
         holderFinal.textViewTimeStamp.text = "Anunciado em ${FormatStringToDate(currentItem.data)}"
         holderFinal.textViewDescricao.text = currentItem.descricao
         holderFinal.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
-        holderFinal.itemView.setOnClickListener{
-            Log.d("CardCampanhaViewHolder", currentItem.toString())
+        holderFinal.cardCampanha.setOnLongClickListener{
+            listener.abrePerfilOng(currentItem)
+            true
+        }
+        holderFinal.cardCampanha.setOnClickListener{
+            listener.abreCampanha(currentItem)
         }
 
         mRecyclerView = holderFinal.itensCampanha
