@@ -10,11 +10,12 @@ import br.com.salve_uma_vida_front.FormatStringToDate
 import br.com.salve_uma_vida_front.databinding.CardCampanhaEditavelBinding
 import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.dto.CampanhaDto
+import br.com.salve_uma_vida_front.interfaces.CardCampanhaEditavelListener
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import com.squareup.picasso.Picasso
 
-class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>) :
+class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>, private val listener: CardCampanhaEditavelListener) :
     RecyclerView.Adapter<CardCampanhaEditavelViewHolder>() {
 
     lateinit var bindingCampanha: CardCampanhaEditavelBinding
@@ -54,6 +55,7 @@ class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>) :
 
         holderFinal.imageButtonEditar.setOnClickListener{
             Log.d("CardCampanhaEditavel", "Cliquei em editar")
+            listener.onEditaClicked(CampanhaDto.newInstance(currentItem))
         }
         holderFinal.imageButtonArquivar.setOnClickListener{
             Log.d("CardCampanhaEditavel", "Cliquei em Arquivar")

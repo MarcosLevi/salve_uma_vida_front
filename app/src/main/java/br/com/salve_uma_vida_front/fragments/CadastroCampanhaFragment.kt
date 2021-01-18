@@ -26,6 +26,7 @@ import br.com.salve_uma_vida_front.viewholders.itemCadastroCampanhaViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import com.squareup.picasso.Picasso
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import java.util.*
 
 class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
@@ -38,7 +39,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapterOng: RecyclerView.Adapter<itemCadastroCampanhaViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    private var campanha = CampanhaDto()
+    lateinit var campanha: CampanhaDto
     private var erros = Erros()
     private var isEdita = false
 
@@ -49,11 +50,6 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         // Inflate the layout for this fragment
         binding = FragmentCadastroCampanhaBinding.inflate(inflater, container, false)
         viewModel = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
-        campanha.itens.add(CampanhaItemDto(descricao = "Ração", unidade = "KG", maximo = 90F))
-        campanha.itens.add(CampanhaItemDto(descricao = "Leite", unidade = "L", maximo = 90F))
-        campanha.itens.add(CampanhaItemDto(descricao = "Coleira", unidade = "UN", maximo = 500F))
-        campanha.itens.add(CampanhaItemDto(descricao = "Água", unidade = "L", maximo = 600F))
-        campanha.itens.add(CampanhaItemDto(descricao = "Sabão", unidade = "L", maximo = 200F))
         return binding.root
     }
 
@@ -61,6 +57,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        setaCampanha()
 
         atualizaQuantidadeDeItens()
 
@@ -87,6 +84,41 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 
         configuraObservers()
 
+    }
+
+    private fun setaCampanha() {
+        val campanhaRecebido = getCampanhaByArgs()
+        if (campanhaRecebido == null) {
+            campanha = CampanhaDto()
+            campanha.itens.add(CampanhaItemDto(descricao = "Ração", unidade = "KG", maximo = 90F))
+            campanha.itens.add(CampanhaItemDto(descricao = "Leite", unidade = "L", maximo = 90F))
+            campanha.itens.add(CampanhaItemDto(descricao = "Coleira", unidade = "UN", maximo = 500F))
+            campanha.itens.add(CampanhaItemDto(descricao = "Água", unidade = "L", maximo = 600F))
+            campanha.itens.add(CampanhaItemDto(descricao = "Sabão", unidade = "L", maximo = 200F))
+        } else {
+            isEdita = true
+            campanha = campanhaRecebido
+            preencheCampos()
+        }
+    }
+
+    private fun preencheCampos() {
+        Picasso.get()
+            .load(campanha.userImage)
+            .resize(110.dp, 110.dp)
+            .centerCrop()
+            .placeholder(R.drawable.ic_dafault_photo)
+            .error(R.drawable.ic_baseline_report_problem_24)
+            .into(binding.cadastroCampanhaImagem)
+        binding.cadastroCampanhaTitulo.setText(campanha.titulo)
+        binding.cadastroCampanhaData.setText(FormatStringToDate(campanha.data!!))
+        binding.cadastroCampanhaDescricao.setText(campanha.descricao)
+    }
+
+    private fun getCampanhaByArgs(): CampanhaDto? {
+        val args: CadastroCampanhaFragmentArgs by navArgs()
+        val campanha = args.campanha
+        return campanha
     }
 
     private fun configuraDatePicker(view: View) {
@@ -118,16 +150,25 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     private fun configuraFinalizarCampanha() {
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
         finalizaCampanha.setOnClickListener {
-            campanha.descricao = binding.cadastroCampanhaDescricao.text.toString()
-            campanha.titulo = binding.cadastroCampanhaTitulo.text.toString()
             resetaErros()
             if (validate()) {
-                novaCampanha()
+                atribuiCamposACampanha()
+                if (isEdita)
+                    updateCampanha()
+                else
+                    novaCampanha()
             } else {
                 mostraErros()
             }
         }
     }
+
+    private fun atribuiCamposACampanha() {
+        campanha.descricao = binding.cadastroCampanhaDescricao.text.toString()
+        campanha.titulo = binding.cadastroCampanhaTitulo.text.toString()
+    }
+
+
 
     private fun mostraErros() {
         binding.cadastroCampanhaErros.text = erros.toString()
@@ -144,8 +185,17 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         viewModel.novaCampanha(campanha)
     }
 
+    private fun updateCampanha() {
+        viewModel.updateCampanha(campanha)
+    }
+
     private fun configuraObservers() {
         viewModel.novaCampanha.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            navController!!.navigate(CadastroCampanhaFragmentDirections.actionCadastroCampanhaFragmentToOngCampanhasFragment())
+        })
+
+        viewModel.updateCampanha.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             navController!!.navigate(CadastroCampanhaFragmentDirections.actionCadastroCampanhaFragmentToOngCampanhasFragment())
         })

@@ -21,6 +21,7 @@ import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
+import br.com.salve_uma_vida_front.interfaces.CardCampanhaEditavelListener
 import br.com.salve_uma_vida_front.interfaces.CardEventoEditavelListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
@@ -32,7 +33,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEventoEditavelListener {
+class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEventoEditavelListener, CardCampanhaEditavelListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaEditavelViewHolder>
@@ -221,7 +222,8 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEv
         mLayoutManager = LinearLayoutManager(requireContext())
         campanhaFinalAdapter =
             CardCampanhaEditavelAdapter(
-                listaCampanhas
+                listaCampanhas,
+                this
             )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = campanhaFinalAdapter
@@ -236,7 +238,8 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEv
             }
             campanhaFinalAdapter =
                 CardCampanhaEditavelAdapter(
-                    listaCampanhas
+                    listaCampanhas,
+                    this
                 )
             mRecyclerView.adapter = campanhaFinalAdapter
         })
@@ -286,6 +289,18 @@ class CampanhasFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEv
     }
 
     override fun onFinalizaClicked(evento: EventoDto) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onEditaClicked(campanha: CampanhaDto) {
+        navController!!.navigate(CampanhasFragmentDirections.actionOngCampanhasFragmentToCadastroCampanhaFragment(campanha))
+    }
+
+    override fun onArquivaClicked(campanha: CampanhaDto) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFinalizaClicked(campanha: CampanhaDto) {
         TODO("Not yet implemented")
     }
 }

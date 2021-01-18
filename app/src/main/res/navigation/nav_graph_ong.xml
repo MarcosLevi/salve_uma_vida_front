@@ -48,6 +48,11 @@
         <action
             android:id="@+id/action_cadastroCampanhaFragment_to_ongCampanhasFragment"
             app:destination="@id/ongCampanhasFragment" />
+        <argument
+            android:name="campanha"
+            app:argType="br.com.salve_uma_vida_front.dto.CampanhaDto"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/bothUserLogadoFragment"

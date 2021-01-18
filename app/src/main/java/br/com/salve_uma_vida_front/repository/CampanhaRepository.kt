@@ -31,4 +31,9 @@ class CampanhaRepository {
         var endpoint = NetworkUtil.getRetrofitInstance().create(CampanhasEndPoint::class.java)
         return endpoint.novaCampanha(token, campanha)
     }
+
+    fun updateCampanha(token: String, campanha: CampanhaDto): Call<ResponseDto<String>> {
+        var endpoint = NetworkUtil.getRetrofitInstance().create(CampanhasEndPoint::class.java)
+        return endpoint.updateCampanha(token, campanha)
+    }
 }
