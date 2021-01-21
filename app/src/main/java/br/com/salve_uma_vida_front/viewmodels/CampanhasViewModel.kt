@@ -34,7 +34,7 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
     val updateCampanha: LiveData<String> = _updateCampanha
 
 
-    fun getCampanhasUserLogado(parametro: String) {
+    fun getCampanhasUserLogado(parametro: String="") {
         val callback = CampanhaRepository().getCampanhasUserLogado(token, parametro)
         callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {

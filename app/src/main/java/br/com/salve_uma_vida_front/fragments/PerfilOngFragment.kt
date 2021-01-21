@@ -31,15 +31,16 @@ class PerfilOngFragment : Fragment() {
         binding.ongPerfilFragmentViewPager.adapter = viewPagerAdapter
         binding.ongPerfilFragmentTabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                if (tab != null) {
-                    binding.ongPerfilFragmentViewPager.setCurrentItem(tab.position)
-                }
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null) {
+                    binding.ongPerfilFragmentViewPager.setCurrentItem(tab.position)
+                }
             }
         })
     }
