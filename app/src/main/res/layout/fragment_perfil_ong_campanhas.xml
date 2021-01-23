@@ -9,22 +9,14 @@
         android:background="@color/background"
         tools:context=".fragments.PerfilOngCampanhasFragment">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ongPerfilCampanhasCardsCampanhas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:visibility="visible">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ongPerfilCampanhasCardsCampanhas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:scrollbars="vertical" />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp" />
 
     </FrameLayout>
 </layout>
