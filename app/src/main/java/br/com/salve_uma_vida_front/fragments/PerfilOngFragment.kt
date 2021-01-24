@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.TabPerfilOngAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngBinding
-import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngCampanhasBinding
-import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.toolbarVazia
 import com.google.android.material.tabs.TabLayout
 
 class PerfilOngFragment : Fragment() {
@@ -27,11 +27,22 @@ class PerfilOngFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var idByArgs = getIdByArgs()
-        val viewPagerAdapter = TabPerfilOngAdapter(parentFragmentManager,binding.ongPerfilFragmentTabLayout.tabCount)
-        binding.ongPerfilFragmentViewPager.adapter = viewPagerAdapter
-        binding.ongPerfilFragmentTabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+        configuraViewPager()
+        configuraTabLayout()
+        configuraToolbar()
+    }
 
+    private fun configuraViewPager() {
+        val viewPagerAdapter =
+            TabPerfilOngAdapter(parentFragmentManager, binding.ongPerfilFragmentTabLayout.tabCount)
+        binding.ongPerfilFragmentTabLayout.setupWithViewPager(binding.ongPerfilFragmentViewPager);
+        binding.ongPerfilFragmentViewPager.adapter = viewPagerAdapter
+    }
+
+    private fun configuraTabLayout() {
+        binding.ongPerfilFragmentTabLayout.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -43,6 +54,11 @@ class PerfilOngFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
+        toolbar?.inflateMenu(R.menu.fragment_perfil_ong_menu)
     }
 
     private fun getIdByArgs(): Int? {

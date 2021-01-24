@@ -20,6 +20,15 @@ class TabPerfilOngAdapter(fm: FragmentManager, numeroDeTabs: Int) : FragmentPage
         }
     }
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when(position){
+            0 -> "Campanhas"
+            1 -> "Eventos"
+            2 -> "Galeria"
+            else -> "Info"
+        }
+    }
+
     override fun getCount(): Int {
         return numeroDeTabs
     }

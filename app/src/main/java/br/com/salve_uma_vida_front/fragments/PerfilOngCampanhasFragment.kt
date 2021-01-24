@@ -58,7 +58,6 @@ class PerfilOngCampanhasFragment : Fragment(), CardCampanhaFinalListener {
         )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = campanhaFinalAdapter
-
     }
 
     companion object {
@@ -80,11 +79,11 @@ class PerfilOngCampanhasFragment : Fragment(), CardCampanhaFinalListener {
         })
     }
 
-    override fun abrePerfilOng(campanha: CampanhaDto) {
-        Toast.makeText(requireContext(),"Você já está no perfil da ong",Toast.LENGTH_SHORT)
-    }
-
     override fun abreCampanha(campanha: CampanhaDto) {
         Log.d("teste","Cliquei pra abrir a campanha")
+    }
+
+    override fun abrePerfilOng(id: Int) {
+        Toast.makeText(requireContext(),"Você já está no perfil da ong",Toast.LENGTH_SHORT)
     }
 }

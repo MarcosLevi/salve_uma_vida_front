@@ -20,7 +20,9 @@ data class EventoDto(
     @SerializedName("description")
     var descricao: String? = null,
     @SerializedName("date")
-    var data: String? = null
+    var data: String? = null,
+    @SerializedName("userId")
+    var userId: Int? = null
 ) : Serializable {
     companion object {
         @JvmStatic

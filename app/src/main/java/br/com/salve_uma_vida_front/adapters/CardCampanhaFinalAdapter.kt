@@ -55,7 +55,7 @@ class CardCampanhaFinalAdapter(var listaCards: MutableList<CampanhaDto>, var con
         holderFinal.textViewDescricao.text = currentItem.descricao
         holderFinal.textViewQuantidadeItens.text = quantidadeDeItensString(currentItem.itens.size) //quantidadeDeItensString(currentItem.quantidadeDeItens)
         holderFinal.cardCampanha.setOnLongClickListener{
-            listener.abrePerfilOng(currentItem)
+            listener.abrePerfilOng(currentItem.userId!!)
             true
         }
         holderFinal.cardCampanha.setOnClickListener{

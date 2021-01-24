@@ -82,7 +82,7 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
         })
     }
 
-    fun getEventosUserLogado(parametro: String) {
+    fun getEventosUserLogado(parametro: String = "") {
         val callback = EventoRepository().getEventosUserLogado(token, parametro)
         callback.enqueue(object : Callback<ResponseDto<List<EventoDto>>> {
             override fun onFailure(call: Call<ResponseDto<List<EventoDto>>>, t: Throwable) {

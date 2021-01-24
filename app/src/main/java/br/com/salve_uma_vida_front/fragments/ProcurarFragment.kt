@@ -22,6 +22,7 @@ import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
+import br.com.salve_uma_vida_front.interfaces.CardEventoFinalListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
@@ -30,7 +31,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCampanhaFinalListener {
+class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCampanhaFinalListener, CardEventoFinalListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
@@ -155,7 +156,8 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
             eventoFinalAdapter =
                 CardEventoFinalAdapter(
                     listaEventos,
-                    requireContext()
+                    requireContext(),
+                    this
                 )
             mRecyclerView.adapter = eventoFinalAdapter
             closeLoading(activity, R.id.ongLoading)
@@ -185,12 +187,16 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         carregaDados()
     }
 
-    override fun abrePerfilOng(campanha: CampanhaDto) {
-        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToPerfilOngFragment(campanha.userId!!))
-    }
-
     override fun abreCampanha(campanha: CampanhaDto) {
         Log.d("teste","Cliquei pra abrir a campanha")
+    }
+
+    override fun abreEvento(evento: EventoDto) {
+        TODO("Not yet implemented")
+    }
+
+    override fun abrePerfilOng(id: Int) {
+        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToPerfilOngFragment(id))
     }
 
 
