@@ -8,8 +8,8 @@
         motion:duration="1000"
         motion:motionInterpolator="easeInOut">
         <OnSwipe
-            motion:dragDirection="dragDown"
-            motion:touchAnchorId="@id/ongPerfilFragmentViewPager" />
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/ongPerfilTabs" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
