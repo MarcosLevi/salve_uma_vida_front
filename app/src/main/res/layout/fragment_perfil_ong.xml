@@ -13,6 +13,60 @@
 
         <!-- TODO: Update blank fragment layout -->
 
+        <androidx.constraintlayout.utils.widget.ImageFilterButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:elevation="10dp"
+            app:altSrc="@drawable/ic_baseline_arrow_drop_down_30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ongPerfilFragmentTabLayout"
+            app:srcCompat="@drawable/ic_baseline_arrow_drop_up_30" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/ongPerfilFragmentViewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ongPerfilFragmentTabLayout" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/ongPerfilFragmentTabLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ongPerfilHeader">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ongPerfilFragmentTabCampanhas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Campanhas" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ongPerfilFragmentTabEventos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eventos" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ongPerfilFragmentTabGaleria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Galeria" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/ongPerfilFragmentTabInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Info" />
+        </com.google.android.material.tabs.TabLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ongPerfilHeader"
             android:layout_width="0dp"
@@ -54,59 +108,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ongPerfilDescricaoLabel" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ongPerfilTabs"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ongPerfilHeader">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/ongPerfilFragmentTabLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/ongPerfilFragmentTabCampanhas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Campanhas" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/ongPerfilFragmentTabEventos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Eventos" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/ongPerfilFragmentTabGaleria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Galeria" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/ongPerfilFragmentTabInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Info" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/ongPerfilFragmentViewPager"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ongPerfilFragmentTabLayout" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
