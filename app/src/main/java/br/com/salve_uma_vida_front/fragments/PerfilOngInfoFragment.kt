@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngGaleriaBinding
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngInfoBinding
+import br.com.salve_uma_vida_front.dto.UserDto
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class PerfilOngInfoFragment : Fragment() {
+class PerfilOngInfoFragment(val user: UserDto) : Fragment() {
 
     private lateinit var map: GoogleMap
 
@@ -37,11 +35,11 @@ class PerfilOngInfoFragment : Fragment() {
         For your information, these are the zoom levels:
         1: World, 5: Landmass/continent, 10: City, 15: Streets and 20: Buildings
          */
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        val enderecoDoUsuario = LatLng(user.addressLatitude.toDouble(), user.addressLongitude.toDouble())
+        map.addMarker(MarkerOptions().position(enderecoDoUsuario).title(user.address))
         val zoomLevel = 15f
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel))
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(enderecoDoUsuario, zoomLevel))
+        map.moveCamera(CameraUpdateFactory.newLatLng(enderecoDoUsuario))
     }
 
     lateinit var binding: FragmentPerfilOngInfoBinding
@@ -52,6 +50,8 @@ class PerfilOngInfoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPerfilOngInfoBinding.inflate(inflater, container, false)
+        binding.ongPerfilInfoDescricao.text = user.detail
+        binding.ongPerfilInfoEndereco.text = user.address
         return binding.root
     }
 
@@ -65,7 +65,7 @@ class PerfilOngInfoFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = PerfilOngInfoFragment()
+        fun newInstance(user: UserDto) = PerfilOngInfoFragment(user)
     }
 
 

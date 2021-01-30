@@ -1,43 +1,77 @@
 package br.com.salve_uma_vida_front.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.TabPerfilOngAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngBinding
+import br.com.salve_uma_vida_front.dto.UserDto
 import br.com.salve_uma_vida_front.toolbarVazia
+import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.squareup.picasso.Picasso
 
 class PerfilOngFragment : Fragment() {
 
     lateinit var binding: FragmentPerfilOngBinding
+    private lateinit var viewModel: UserViewModel
+    private lateinit var user: UserDto
+    private val titulos = mutableListOf("Info","Campanhas","Eventos","Galeria")
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPerfilOngBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        val idByArgs = getIdByArgs()
+        idByArgs?.let { viewModel.getUserById(it) }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var idByArgs = getIdByArgs()
-        configuraViewPager()
+        Log.d("teste", this.toString())
         configuraTabLayout()
         configuraToolbar()
+        viewModel.findUserById.observe(viewLifecycleOwner, Observer {
+            user = it
+            configuraInformacoesUser()
+            configuraViewPager()
+        })
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun configuraInformacoesUser() {
+        binding.ongPerfilNome.text = user.name
+        Picasso.get()
+            .load(user.image)
+            .fit()
+            .centerCrop()
+            .placeholder(R.drawable.ic_dafault_photo)
+            .error(R.drawable.ic_baseline_report_problem_24)
+            .into(binding.ongPerfilImagem)
     }
 
     private fun configuraViewPager() {
         val viewPagerAdapter =
-            TabPerfilOngAdapter(parentFragmentManager, binding.ongPerfilFragmentTabLayout.tabCount)
-        binding.ongPerfilFragmentTabLayout.setupWithViewPager(binding.ongPerfilFragmentViewPager);
+            TabPerfilOngAdapter(binding.ongPerfilFragmentTabLayout.tabCount,user, this)
+//        binding.ongPerfilFragmentTabLayout.setupWithViewPager(binding.ongPerfilFragmentViewPager);
         binding.ongPerfilFragmentViewPager.adapter = viewPagerAdapter
+        TabLayoutMediator(binding.ongPerfilFragmentTabLayout, binding.ongPerfilFragmentViewPager) { tab, position ->
+            tab.text = titulos[position]
+        }.attach()
     }
+
+
 
     private fun configuraTabLayout() {
         binding.ongPerfilFragmentTabLayout.addOnTabSelectedListener(object :

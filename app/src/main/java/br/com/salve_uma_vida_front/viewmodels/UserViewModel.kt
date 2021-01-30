@@ -5,12 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import br.com.salve_uma_vida_front.dto.*
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.UserType
-import br.com.salve_uma_vida_front.dto.AuthorizationResponseDto
-import br.com.salve_uma_vida_front.dto.ResponseDto
-import br.com.salve_uma_vida_front.dto.UserDto
-import br.com.salve_uma_vida_front.dto.UserResponseDto
+import br.com.salve_uma_vida_front.repository.CampanhaRepository
 import br.com.salve_uma_vida_front.repository.UserRepository
 import br.com.salve_uma_vida_front.repository.NetworkUtil
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
@@ -22,6 +20,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
     private val myPreferences = MyPreferences(context)
+    private val token = "Bearer " + myPreferences.getToken()
     private val _navigate = MutableLiveData<UserType>()
     val navigate: LiveData<UserType> = _navigate
     private val _cadastro = MutableLiveData<Responses>()
@@ -30,6 +29,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     val atualiza: LiveData<Responses> = _atualiza
     private val _loginError = MutableLiveData<String>()
     val loginError: LiveData<String> = _loginError
+
+    private val _findUserById = MutableLiveData<UserDto>()
+    val findUserById: LiveData<UserDto> = _findUserById
 
 
     fun doLogin(username: String, password: String) {
@@ -80,6 +82,25 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
         })
     }
+
+    fun getUserById(id: Int) {
+        val callback = UserRepository().getUserById(token, id)
+        callback.enqueue(object : Callback<ResponseDto<UserDto>> {
+            override fun onFailure(call: Call<ResponseDto<UserDto>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<UserDto>>,
+                response: Response<ResponseDto<UserDto>>
+            ) {
+                val user = response.body()?.data
+                _findUserById.value = user
+            }
+        })
+    }
+
+
 
     fun atualizar(){
 

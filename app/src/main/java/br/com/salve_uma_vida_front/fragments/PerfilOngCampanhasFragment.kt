@@ -18,12 +18,13 @@ import br.com.salve_uma_vida_front.adapters.CardEventoEditavelAdapter
 import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
+import br.com.salve_uma_vida_front.dto.UserDto
 import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 
-class PerfilOngCampanhasFragment : Fragment(), CardCampanhaFinalListener {
+class PerfilOngCampanhasFragment(val user: UserDto) : Fragment(), CardCampanhaFinalListener {
 
     lateinit var binding: FragmentPerfilOngCampanhasBinding
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
@@ -62,7 +63,7 @@ class PerfilOngCampanhasFragment : Fragment(), CardCampanhaFinalListener {
 
     companion object {
         @JvmStatic
-        fun newInstance() = PerfilOngCampanhasFragment()
+        fun newInstance(user: UserDto) = PerfilOngCampanhasFragment(user)
     }
 
     private fun carregaCampanhas() {

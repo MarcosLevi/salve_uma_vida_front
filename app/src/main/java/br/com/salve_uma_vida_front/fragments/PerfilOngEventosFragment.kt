@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngEventosBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
+import br.com.salve_uma_vida_front.dto.UserDto
 import br.com.salve_uma_vida_front.interfaces.CardEventoFinalListener
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class PerfilOngEventosFragment : Fragment(), CardEventoFinalListener {
+class PerfilOngEventosFragment(val user: UserDto) : Fragment(), CardEventoFinalListener {
     lateinit var binding: FragmentPerfilOngEventosBinding
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private lateinit var viewModel: EventosViewModel
@@ -70,7 +71,7 @@ class PerfilOngEventosFragment : Fragment(), CardEventoFinalListener {
 
     companion object {
         @JvmStatic
-        fun newInstance() = PerfilOngEventosFragment()
+        fun newInstance(user: UserDto) = PerfilOngEventosFragment(user)
     }
 
     override fun abreEvento(evento: EventoDto) {
