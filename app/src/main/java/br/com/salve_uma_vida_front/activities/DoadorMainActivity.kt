@@ -2,6 +2,7 @@ package br.com.salve_uma_vida_front.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -16,9 +17,10 @@ class DoadorMainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view_doador)
         val navController = findNavController(R.id.nav_host_fragment_doador)
+        val toolbar = findViewById<Toolbar>(R.id.ongToolbar)
 
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.bothProcurarFragment, R.id.bothFavoritosFragment, R.id.bothMensagensFragment, R.id.doadorMapaFragment))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
     }
 }

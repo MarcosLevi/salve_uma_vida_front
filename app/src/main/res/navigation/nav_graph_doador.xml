@@ -14,13 +14,34 @@
         android:name="br.com.salve_uma_vida_front.fragments.MensagensFragment"
         android:label="Mensagens"
         tools:layout="@layout/fragment_both_mensagens" />
-    <fragment
-        android:id="@+id/bothProcurarFragment"
-        android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"
-        android:label="Procurar Campanhas" />
+
     <fragment
         android:id="@+id/doadorMapaFragment"
         android:name="br.com.salve_uma_vida_front.fragments.MapaFragment"
         android:label="Mapa"
         tools:layout="@layout/fragment_doador_mapa" />
+    <fragment
+        android:id="@+id/bothProcurarFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"
+        android:label="Procurar Campanhas"
+        tools:layout="@layout/fragment_both_procurar" >
+        <argument
+            android:name="filtro"
+            app:argType="br.com.salve_uma_vida_front.dto.FiltroPesquisaDto"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_bothProcurarFragment_to_perfilOngFragment"
+            app:destination="@id/perfilOngFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilOngFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.PerfilOngFragment"
+        android:label="Perfil da Ong"
+        tools:layout="@layout/fragment_perfil_ong">
+        <argument
+            android:name="idOng"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
 </navigation>

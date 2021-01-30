@@ -192,7 +192,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     override fun abreEvento(evento: EventoDto) {
-        TODO("Not yet implemented")
+        Log.d("teste","Cliquei pra abrir o evento")
     }
 
     override fun abrePerfilOng(id: Int) {
