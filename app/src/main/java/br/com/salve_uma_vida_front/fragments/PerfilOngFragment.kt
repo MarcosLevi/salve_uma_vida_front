@@ -33,21 +33,23 @@ class PerfilOngFragment : Fragment() {
     ): View? {
         binding = FragmentPerfilOngBinding.inflate(inflater, container, false)
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
-        val idByArgs = getIdByArgs()
-        idByArgs?.let { viewModel.getUserById(it) }
+        configuraObservers()
+        carregaPerfilDoUserPeloId()
+        configuraTabLayout()
+        configuraToolbar()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("teste", this.toString())
-        configuraTabLayout()
-        configuraToolbar()
+    private fun carregaPerfilDoUserPeloId() {
+        getIdByArgs()?.let { viewModel.getUserById(it) }
+    }
+
+    private fun configuraObservers() {
         viewModel.findUserById.observe(viewLifecycleOwner, Observer {
             user = it
             configuraInformacoesUser()
             configuraViewPager()
         })
-        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun configuraInformacoesUser() {

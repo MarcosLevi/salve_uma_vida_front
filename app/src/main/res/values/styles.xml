@@ -13,6 +13,16 @@
         <item name="android:colorAccent">@color/corNeutra</item>
     </style>
 
+    <style name="Titulo" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="Subtitulo" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="Texto" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 <!--    <style name="DialogTheme" parent="@android:style/Widget.Material.Light.DatePicker">-->
 <!--        <item name="android:headerBackground">@color/corNeutra</item>-->
 <!--    </style>-->

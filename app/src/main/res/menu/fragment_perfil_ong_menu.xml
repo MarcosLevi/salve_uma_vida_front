@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/ongPerfilFragmentSendMessage"
-        android:title="Procurar"
+        android:title="Enviar mensagem"
         android:icon="@drawable/ic_outline_send_24"
         app:showAsAction="always"
         />
     <item android:id="@+id/ongPerfilFragmentFavoritar"
-        android:title="Filtros"
+        android:title="Favoritar"
         android:icon="@drawable/ic_baseline_star_border_24"
         app:showAsAction="always"
         />

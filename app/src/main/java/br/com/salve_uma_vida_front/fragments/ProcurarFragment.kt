@@ -48,21 +48,19 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
         viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
         viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
+        configuraObservers()
+        carregaDados()
+        configuraRecyclerView()
+        configuraToolbar()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        configuraRecyclerView()
-        configuraObservers()
-        carregaDados()
-        setHasOptionsMenu(true)
-        configuraToolbar()
     }
 
     fun openDialog() {
@@ -79,7 +77,6 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
         configuraSearchView(toolbar)
         toolbar?.setOnMenuItemClickListener {
-            val itemMenu = it
             when (it.itemId) {
                 R.id.bothProcurarFragmentPesquisar -> {
                     val searchView = it.actionView as SearchView
@@ -188,7 +185,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     override fun abreCampanha(campanha: CampanhaDto) {
-        Log.d("teste","Cliquei pra abrir a campanha")
+        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToCampanhaDetalhadaFragment(campanha))
     }
 
     override fun abreEvento(evento: EventoDto) {

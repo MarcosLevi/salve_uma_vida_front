@@ -1,7 +1,10 @@
 package br.com.salve_uma_vida_front.adapters
 
 import android.content.Context
+import android.gesture.GestureOverlayView
+import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
