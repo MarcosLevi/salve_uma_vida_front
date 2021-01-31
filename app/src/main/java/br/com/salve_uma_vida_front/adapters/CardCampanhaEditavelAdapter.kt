@@ -51,7 +51,6 @@ class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>, priv
         holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holderFinal.textViewTimeStamp.text = "Anunciado em ${FormatStringToDate(currentItem.data)}"
-        holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.imageButtonEditar.setOnClickListener{
             Log.d("CardCampanhaEditavel", "Cliquei em editar")

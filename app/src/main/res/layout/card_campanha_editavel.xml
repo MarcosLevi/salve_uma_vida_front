@@ -19,42 +19,25 @@
                 android:id="@+id/cardCampanhaEditavelEditar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="8dp"
                 android:background="@null"
                 android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
                 android:src="@drawable/ic_baseline_edit_30"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelFinalizar"
                 app:layout_constraintEnd_toStartOf="@+id/cardCampanhaEditavelFinalizar"
-                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaEditavelDescricao" />
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelFinalizar" />
 
             <ImageButton
                 android:id="@+id/cardCampanhaEditavelFinalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="8dp"
                 android:background="@null"
                 android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
                 android:src="@drawable/ic_baseline_done_30"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelArquivar"
                 app:layout_constraintEnd_toStartOf="@+id/cardCampanhaEditavelArquivar"
-                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaEditavelDescricao" />
-
-            <TextView
-                android:id="@+id/cardCampanhaEditavelDescricao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/text_cardDescricao"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelArquivar" />
 
             <ImageButton
                 android:id="@+id/cardCampanhaEditavelArquivar"
@@ -66,7 +49,7 @@
                 android:background="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardCampanhaEditavelDescricao"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
                 app:srcCompat="@drawable/ic_baseline_arquivar_30" />
 
             <androidx.cardview.widget.CardView

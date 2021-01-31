@@ -11,7 +11,6 @@ class CardEventoFinalViewHolder(binding: CardEventoFinalBinding) : RecyclerView.
     var imagemEvento: ImageView = binding.cardEventoFinalImagem
     var textViewTitulo: TextView = binding.cardEventoFinalTitulo
     var textViewTimeStamp: TextView = binding.cardEventoFinalData
-    var textViewDescricao: TextView = binding.cardEventoFinalDescricao
     var cardEvento: CardView = binding.cardEventoFinal
 
 }

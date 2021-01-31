@@ -12,7 +12,6 @@ class CardEventoEditavelViewHolder(binding: CardEventoEditavelBinding) : Recycle
     var imagemEvento: ImageView = binding.cardEventoEditavelImagem
     var textViewTitulo: TextView = binding.cardEventoEditavelTitulo
     var textViewTimeStamp: TextView = binding.cardEventoEditavelData
-    var textViewDescricao: TextView = binding.cardEventoEditavelDescricao
     var imageButtonEditar: ImageButton = binding.cardEventoEditavelEditar
     var imageButtonFinalizar: ImageButton = binding.cardEventoEditavelFinalizar
     var imageButtonArquivar: ImageButton = binding.cardEventoEditavelArquivar

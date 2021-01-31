@@ -49,7 +49,6 @@ class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, private 
         holderFinal.textViewTitulo.text = currentItem.titulo
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data!!)}"
-        holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.imageButtonEditar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em editar")

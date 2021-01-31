@@ -13,7 +13,6 @@ class CardCampanhaEditavelViewHolder(binding: CardCampanhaEditavelBinding) : Rec
     var imagemCampanha: ImageView = binding.cardCampanhaEditavelImagem
     var textViewTitulo: TextView = binding.cardCampanhaEditavelTitulo
     var textViewTimeStamp: TextView = binding.cardCampanhaEditavelData
-    var textViewDescricao: TextView = binding.cardCampanhaEditavelDescricao
     var imageButtonEditar: ImageButton = binding.cardCampanhaEditavelEditar
     var imageButtonFinalizar: ImageButton = binding.cardCampanhaEditavelFinalizar
     var imageButtonArquivar: ImageButton = binding.cardCampanhaEditavelArquivar

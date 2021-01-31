@@ -48,9 +48,7 @@ class CardEventoFinalAdapter(var listaCards: MutableList<EventoDto>, var context
 
 
         holderFinal.textViewTitulo.text = currentItem.titulo
-//        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data!!)}"
-        holderFinal.textViewDescricao.text = currentItem.descricao
 
         holderFinal.cardEvento.setOnLongClickListener{
             listener.abrePerfilOng(currentItem.userId!!)

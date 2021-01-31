@@ -34,9 +34,11 @@
                 android:layout_height="110dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="@color/corEventos"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -48,21 +50,6 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_dafault_photo" />
             </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/cardEventoFinalDescricao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="Esse evento vai ser muito legal, vai ter música, comida e tudo que existe de bom."
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
             <TextView
                 android:id="@+id/cardEventoFinalTitulo"
