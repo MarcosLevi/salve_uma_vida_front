@@ -57,6 +57,10 @@ class PerfilOngInfoFragment(val user: UserDto) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configuraMapa(savedInstanceState)
+    }
+
+    private fun configuraMapa(savedInstanceState: Bundle?) {
         val mapFragment = binding.ongPerfilInfoMap
         mapFragment.onCreate(savedInstanceState)
         mapFragment.onResume()

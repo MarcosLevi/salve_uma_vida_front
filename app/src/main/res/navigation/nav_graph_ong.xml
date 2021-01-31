@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_bothProcurarFragment_to_campanhaDetalhadaFragment"
             app:destination="@id/campanhaDetalhadaFragment" />
+        <action
+            android:id="@+id/action_bothProcurarFragment_to_eventoDetalhadoFragment"
+            app:destination="@id/eventoDetalhadoFragment" />
     </fragment>
     <fragment
         android:id="@+id/perfilOngFragment"
@@ -97,5 +100,17 @@
         <action
             android:id="@+id/action_campanhaDetalhadaFragment_to_perfilOngFragment"
             app:destination="@id/perfilOngFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventoDetalhadoFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.EventoDetalhadoFragment"
+        android:label="Evento Detalhado"
+        tools:layout="@layout/fragment_evento_detalhado">
+        <action
+            android:id="@+id/action_eventoDetalhadoFragment_to_perfilOngFragment"
+            app:destination="@id/perfilOngFragment" />
+        <argument
+            android:name="evento"
+            app:argType="br.com.salve_uma_vida_front.dto.EventoDto" />
     </fragment>
 </navigation>

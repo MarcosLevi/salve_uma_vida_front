@@ -57,10 +57,6 @@ class CardEventoFinalAdapter(var listaCards: MutableList<EventoDto>, var context
         holderFinal.cardEvento.setOnClickListener{
             listener.abreEvento(currentItem)
         }
-
-        holderFinal.itemView.setOnClickListener{
-            Log.d("CardEventoViewHolder", currentItem.toString())
-        }
     }
 
 }

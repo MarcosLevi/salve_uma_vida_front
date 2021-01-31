@@ -77,10 +77,10 @@ class CampanhaDetalhadaFragment : Fragment() {
 
     private fun configuraToolbar() {
         val toolbar = toolbarVazia(activity)
-        toolbar?.inflateMenu(R.menu.fragment_campanha_detalhada_menu)
+        toolbar?.inflateMenu(R.menu.fragment_campanha_ou_evento_detalhado_menu)
         toolbar?.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.campanhaDetalhadaFragmentPerfilOng -> {
+                R.id.campanhaOuEventoDetalhadoFragmentVaiParaPerfilOng -> {
                     navController!!.navigate(
                         CampanhaDetalhadaFragmentDirections.actionCampanhaDetalhadaFragmentToPerfilOngFragment(
                             campanha.userId!!

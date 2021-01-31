@@ -20,7 +20,7 @@ data class EventoDto(
     @SerializedName("description")
     var descricao: String? = null,
     @SerializedName("date")
-    var data: String? = null,
+    var data: String = "",
     @SerializedName("userId")
     var userId: Int? = null
 ) : Serializable {

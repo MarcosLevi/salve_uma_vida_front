@@ -51,10 +51,10 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
         viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
         viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
+        configuraToolbar()
         configuraObservers()
         carregaDados()
         configuraRecyclerView()
-        configuraToolbar()
         return binding.root
     }
 
@@ -189,7 +189,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     override fun abreEvento(evento: EventoDto) {
-        Log.d("teste","Cliquei pra abrir o evento")
+        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToEventoDetalhadoFragment(evento))
     }
 
     override fun abrePerfilOng(id: Int) {
