@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/corCampanhas"
-        app:layoutDescription="@xml/fragment_campanha_detalhada_xml_constraintlayout_scene"
-        tools:context=".fragments.CampanhaDetalhadaFragment">
+        app:layoutDescription="@xml/fragment_campanha_detalhada_xml_constraintlayout_scene2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/campanhaDetalhadaHeader"

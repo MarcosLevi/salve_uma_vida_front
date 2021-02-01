@@ -47,7 +47,6 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     override fun onCreate(savedInstanceState: Bundle?) {
         viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
         viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
-        configuraObservers()
         super.onCreate(savedInstanceState)
     }
 
@@ -56,6 +55,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
+        configuraObservers()
         configuraToolbar()
         configuraRecyclerView()
         return binding.root
