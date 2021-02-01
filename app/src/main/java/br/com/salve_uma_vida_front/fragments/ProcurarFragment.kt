@@ -44,22 +44,26 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
     private var filtroAtual: FiltroPesquisaDto = FiltroPesquisaDto()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
+        viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
+        configuraObservers()
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
-        viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
-        viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
         configuraToolbar()
-        configuraObservers()
-        carregaDados()
         configuraRecyclerView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        carregaDados()
         navController = Navigation.findNavController(view)
     }
 
