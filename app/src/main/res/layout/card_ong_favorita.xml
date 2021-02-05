@@ -61,17 +61,46 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/cardOngFavoritaCampanhasEventosAbertos"
+                android:id="@+id/cardOngFavoritaCampanhasAbertas"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="1 Campanha Aberta\n1 Evento Aberto"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:text="Campanhas Abertas"
+                app:layout_constraintBottom_toBottomOf="@+id/cardOngFavoritaNumeroCampanhasAbertas"
                 app:layout_constraintEnd_toEndOf="@+id/cardOngFavoritaNome"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/cardOngFavoritaNumeroCampanhasAbertas"
+                app:layout_constraintTop_toTopOf="@+id/cardOngFavoritaNumeroCampanhasAbertas" />
+
+            <TextView
+                android:id="@+id/cardOngFavoritaNumeroCampanhasAbertas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="1"
                 app:layout_constraintStart_toStartOf="@+id/cardOngFavoritaNome"
                 app:layout_constraintTop_toBottomOf="@+id/cardOngFavoritaNome" />
+
+            <TextView
+                android:id="@+id/cardOngFavoritaNumeroEventosAbertos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/cardOngFavoritaNome"
+                app:layout_constraintTop_toBottomOf="@+id/cardOngFavoritaNumeroCampanhasAbertas"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/cardOngFavoritaEventosAbertos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Eventos Abertos"
+                app:layout_constraintBottom_toBottomOf="@+id/cardOngFavoritaNumeroEventosAbertos"
+                app:layout_constraintEnd_toEndOf="@+id/cardOngFavoritaNome"
+                app:layout_constraintStart_toEndOf="@+id/cardOngFavoritaNumeroEventosAbertos"
+                app:layout_constraintTop_toTopOf="@+id/cardOngFavoritaNumeroEventosAbertos" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

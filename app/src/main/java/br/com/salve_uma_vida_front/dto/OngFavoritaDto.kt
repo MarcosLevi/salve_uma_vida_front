@@ -6,7 +6,10 @@ data class OngFavoritaDto(
     @SerializedName("name")
     var name: String,
     @SerializedName("image")
-    var image: String
+    var image: String,
+    var numeroCampanhasAbertas: Int,
+    var numeroEventosAbertos: Int
+
 ) {
 
 }

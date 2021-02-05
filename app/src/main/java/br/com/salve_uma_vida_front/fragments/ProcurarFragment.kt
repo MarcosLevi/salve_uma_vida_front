@@ -176,9 +176,14 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
 
     private fun carregaDados(parametro: String = "") {
         startLoading(activity, R.id.ongLoading)
+        val toolbar = getToolbar(activity)!!
         if (filtroAtual.tipoFiltro == SearchType.CAMPANHAS) {
+            toolbar.title = "Procurar Campanhas"
+            toolbar.setBackgroundColor(resources.getColor(R.color.corCampanhas))
             carregaCampanhas(parametro)
         } else if (filtroAtual.tipoFiltro == SearchType.EVENTOS) {
+            toolbar.title = "Procurar Eventos"
+            toolbar.setBackgroundColor(resources.getColor(R.color.corEventos))
             carregaEventos(parametro)
         }
     }

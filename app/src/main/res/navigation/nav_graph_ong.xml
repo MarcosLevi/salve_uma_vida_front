@@ -6,7 +6,7 @@
     app:startDestination="@id/bothProcurarFragment">
     <fragment
         android:id="@+id/ongCampanhasFragment"
-        android:name="br.com.salve_uma_vida_front.fragments.CampanhasFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.MinhasCampanhasEventosFragment"
         android:label="Minhas Campanhas"
         tools:layout="@layout/fragment_ong_campanhas" >
         <action

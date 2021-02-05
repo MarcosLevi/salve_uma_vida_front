@@ -88,6 +88,11 @@ fun closeLoading(activity: FragmentActivity?, id: Int) {
     progressBar?.visibility = View.GONE
 }
 
+fun getToolbar(activity: FragmentActivity?): Toolbar? {
+    val toolbar = activity?.findViewById<Toolbar>(R.id.ongToolbar)
+    return toolbar
+}
+
 fun toolbarVazia(activity: FragmentActivity?): Toolbar? {
     val toolbar = activity?.findViewById<Toolbar>(R.id.ongToolbar)
     toolbar?.setBackgroundColor(activity.resources.getColor(R.color.corNeutra))
