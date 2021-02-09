@@ -19,7 +19,7 @@
         android:id="@+id/doadorMapaFragment"
         android:name="br.com.salve_uma_vida_front.fragments.MapaFragment"
         android:label="Mapa"
-        tools:layout="@layout/fragment_doador_mapa" />
+        tools:layout="@layout/fragment_both_mapa" />
     <fragment
         android:id="@+id/bothProcurarFragment"
         android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"

@@ -1,40 +1,64 @@
 package br.com.salve_uma_vida_front.fragments
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.salve_uma_vida_front.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import br.com.salve_uma_vida_front.databinding.FragmentBothMapaBinding
+import br.com.salve_uma_vida_front.utils.LocationUtils
+import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
+import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapaFragment : Fragment() {
+    private var now: Marker? = null
+    private val PERMISSION_ID = 1000
+    var map: GoogleMap? = null
+    private lateinit var viewModelCampanha: CampanhasViewModel
+    private lateinit var viewModelEvento: EventosViewModel
+    private lateinit var binding: FragmentBothMapaBinding
+    private lateinit var locationUtils: LocationUtils
+
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        map = googleMap
+    }
+
+    fun moveCamera(endereco: LatLng){
+        val zoomLevel = 17f
+        if(now != null){
+            now!!.remove()
+        }
+        now = map!!.addMarker(MarkerOptions().position(endereco).title("Eu estou aqui"))
+        map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(endereco, zoomLevel))
+        map!!.moveCamera(CameraUpdateFactory.newLatLng(endereco))
+    }
+
+    override fun onPause() {
+        locationUtils.stopLocationUpdates()
+        super.onPause()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
+        viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
+        locationUtils = LocationUtils(requireActivity())
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -42,12 +66,40 @@ class MapaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_doador_mapa, container, false)
+        binding = FragmentBothMapaBinding.inflate(inflater, container, false)
+        locationUtils.startLocationUpdates()
+        return binding.root
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode==PERMISSION_ID){
+            if (grantResults.isNotEmpty()&&grantResults[0]==PackageManager.PERMISSION_GRANTED)
+                Log.d("Debug","Você tem a permissão")
+        }
+    }
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        configuraMapa(savedInstanceState)
+        locationUtils.myLocation.observe(viewLifecycleOwner, Observer {
+            if (map != null) {
+                val endereco = LatLng(it.latitude, it.longitude)
+                moveCamera(endereco)
+            }
+        })
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+    }
+
+
+    private fun configuraMapa(savedInstanceState: Bundle?) {
+        val mapFragment = binding.mapa
+        mapFragment.onCreate(savedInstanceState)
+        mapFragment.onResume()
+        mapFragment.getMapAsync(callback)
     }
 }

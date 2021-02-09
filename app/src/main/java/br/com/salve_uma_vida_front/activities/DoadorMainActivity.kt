@@ -19,7 +19,7 @@ class DoadorMainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_doador)
         val toolbar = findViewById<Toolbar>(R.id.ongToolbar)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.bothProcurarFragment, R.id.bothFavoritosFragment, R.id.bothMensagensFragment, R.id.doadorMapaFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.bothProcurarFragment, R.id.bothFavoritosFragment, R.id.bothMensagensFragment, R.id.bothMapaFragment))
         toolbar.setupWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
     }
