@@ -27,6 +27,7 @@ import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import com.squareup.picasso.Picasso
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 import java.util.*
 
 class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
@@ -35,6 +36,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 
     lateinit var binding: FragmentCadastroCampanhaBinding
     private lateinit var viewModel: CampanhasViewModel
+    private lateinit var viewModelUser: UserViewModel
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapterOng: RecyclerView.Adapter<itemCadastroCampanhaViewHolder>
@@ -50,6 +52,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         // Inflate the layout for this fragment
         binding = FragmentCadastroCampanhaBinding.inflate(inflater, container, false)
         viewModel = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
+        viewModelUser = ViewModelProviders.of(this).get(UserViewModel::class.java)
         return binding.root
     }
 
@@ -71,7 +74,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 //            .placeholder(R.drawable.ic_dafault_photo)
 //            .error(R.drawable.ic_baseline_report_problem_24)
 //            .into(binding.cadastroCampanhaImagem)
-        configuraImagemCampanha()
+
 
 
         configuraAdicionarItem()
@@ -90,11 +93,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         val campanhaRecebido = getCampanhaByArgs()
         if (campanhaRecebido == null) {
             campanha = CampanhaDto()
-            campanha.itens.add(CampanhaItemDto(descricao = "Ração", unidade = "KG", maximo = 90F))
-            campanha.itens.add(CampanhaItemDto(descricao = "Leite", unidade = "L", maximo = 90F))
-            campanha.itens.add(CampanhaItemDto(descricao = "Coleira", unidade = "UN", maximo = 500F))
-            campanha.itens.add(CampanhaItemDto(descricao = "Água", unidade = "L", maximo = 600F))
-            campanha.itens.add(CampanhaItemDto(descricao = "Sabão", unidade = "L", maximo = 200F))
+            viewModelUser.getProfile()
         } else {
             isEdita = true
             campanha = campanhaRecebido
@@ -105,7 +104,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     private fun preencheCampos() {
         Picasso.get()
             .load(campanha.userImage)
-            .resize(110.dp, 110.dp)
+            .fit()
             .centerCrop()
             .placeholder(R.drawable.ic_dafault_photo)
             .error(R.drawable.ic_baseline_report_problem_24)
@@ -151,8 +150,8 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
         val finalizaCampanha = binding.cadastroCampanhaFinalizar
         finalizaCampanha.setOnClickListener {
             resetaErros()
+            atribuiCamposACampanha()
             if (validate()) {
-                atribuiCamposACampanha()
                 if (isEdita)
                     updateCampanha()
                 else
@@ -199,6 +198,11 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             navController!!.navigate(CadastroCampanhaFragmentDirections.actionCadastroCampanhaFragmentToOngCampanhasFragment())
         })
+
+        viewModelUser.profile.observe(viewLifecycleOwner, Observer {
+            campanha.userImage = it.image
+            configuraImagemCampanha()
+        })
     }
 
     private fun validate(): Boolean {
@@ -232,7 +236,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
 
     private fun configuraImagemCampanha() {
         Picasso.get()
-            .load("https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg")
+            .load(campanha.userImage)
             .resize(110.dp, 110.dp)
             .centerCrop()
             .placeholder(R.drawable.ic_dafault_photo)

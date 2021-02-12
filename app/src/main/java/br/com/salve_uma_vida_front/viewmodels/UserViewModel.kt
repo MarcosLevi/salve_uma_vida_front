@@ -38,6 +38,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     private val _findUserById = MutableLiveData<UserDto>()
     val findUserById: LiveData<UserDto> = _findUserById
 
+    private val _profile = MutableLiveData<UserDto>()
+    val profile: LiveData<UserDto> = _profile
+
 
     fun doLogin(username: String, password: String) {
         val callback = UserRepository().login(username, password)
@@ -168,6 +171,24 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             }
         })
     }
+
+    fun getProfile() {
+        val callback = UserRepository().getProfile(token)
+        callback.enqueue(object : Callback<ResponseDto<UserDto>> {
+            override fun onFailure(call: Call<ResponseDto<UserDto>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<UserDto>>,
+                response: Response<ResponseDto<UserDto>>
+            ) {
+                val user = response.body()?.data
+                _profile.value = user
+            }
+        })
+    }
+
 
 
 

@@ -35,4 +35,9 @@ class UserRepository {
         var endpoint = NetworkUtil.getRetrofitInstance().create(UserEndpoint::class.java)
         return endpoint.getUserById(token, id)
     }
+
+    fun getProfile(token: String): Call<ResponseDto<UserDto>> {
+        var endpoint = NetworkUtil.getRetrofitInstance().create(UserEndpoint::class.java)
+        return endpoint.getProfile(token)
+    }
 }

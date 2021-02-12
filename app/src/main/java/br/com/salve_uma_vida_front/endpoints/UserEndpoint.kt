@@ -39,4 +39,9 @@ interface UserEndpoint {
         @Header("Authorization") token: String,
         @Path("id") id: Int
     ): Call<ResponseDto<UserDto>>
+
+    @GET("/user/profile")
+    fun getProfile(
+        @Header("Authorization") token: String
+    ): Call<ResponseDto<UserDto>>
 }
