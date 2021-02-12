@@ -47,9 +47,6 @@ class CardOngFavoritaAdapter(var listaCards: MutableList<OngFavoritaDto>, var co
 
 
         holder.textViewNome.text = currentItem.name
-//        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
-        holder.numeroCampanhasAbertas.text = currentItem.numeroCampanhasAbertas.toString()
-        holder.numeroEventosAbertos.text = currentItem.numeroEventosAbertos.toString()
 
         holder.itemView.setOnClickListener {
             Log.d("CardOngFavorita", currentItem.toString())

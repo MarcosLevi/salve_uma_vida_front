@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import br.com.salve_uma_vida_front.dto.*
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.UserType
-import br.com.salve_uma_vida_front.repository.CampanhaRepository
 import br.com.salve_uma_vida_front.repository.UserRepository
 import br.com.salve_uma_vida_front.repository.NetworkUtil
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
@@ -29,6 +28,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     val atualiza: LiveData<Responses> = _atualiza
     private val _loginError = MutableLiveData<String>()
     val loginError: LiveData<String> = _loginError
+    private val _respostaDoBancoAoFavoritar = MutableLiveData<String>()
+    val respostaDoBancoAoFavoritar: LiveData<String> = _respostaDoBancoAoFavoritar
+    private val _respostaDoBancoAoDesfavoritar = MutableLiveData<String>()
+    val respostaDoBancoAoDesfavoritar: LiveData<String> = _respostaDoBancoAoDesfavoritar
+    private val _ongsFavoritasDoUserLogado = MutableLiveData<List<OngFavoritaDto>>()
+    val ongsFavoritasDoUserLogado: LiveData<List<OngFavoritaDto>> = _ongsFavoritasDoUserLogado
 
     private val _findUserById = MutableLiveData<UserDto>()
     val findUserById: LiveData<UserDto> = _findUserById
@@ -82,6 +87,70 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
         })
     }
+
+    fun favoritarOngPorId(id: Int) {
+        val callback = UserRepository().favoritarOngPorId(token,id)
+        callback.enqueue(object : Callback<ResponseDto<String>>{
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
+                Log.d("UserViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
+            ) {
+                val code = response.code()
+                when (code) {
+                    NetworkUtil.RESPONSE_OK -> _respostaDoBancoAoFavoritar.value= response.body()?.data
+                    else -> _respostaDoBancoAoFavoritar.value = "Falha na requisição"
+                }
+            }
+
+        })
+    }
+
+    fun getOngsFavororitasDoUserLogado() {
+        val callback = UserRepository().getOngsFavororitasDoUserLogado(token)
+        callback.enqueue(object : Callback<ResponseDto<List<OngFavoritaDto>>>{
+            override fun onFailure(call: Call<ResponseDto<List<OngFavoritaDto>>>, t: Throwable) {
+                Log.d("UserViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<List<OngFavoritaDto>>>,
+                response: Response<ResponseDto<List<OngFavoritaDto>>>
+            ) {
+                val code = response.code()
+                when (code) {
+                    NetworkUtil.RESPONSE_OK -> _ongsFavoritasDoUserLogado.value= response.body()?.data
+                    else -> _ongsFavoritasDoUserLogado.value = null
+                }
+            }
+
+        })
+    }
+
+    fun desfavoritarOngPorId(id: Int) {
+        val callback = UserRepository().desfavoritarOngPorId(token,id)
+        callback.enqueue(object : Callback<ResponseDto<String>>{
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
+                Log.d("UserViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
+            ) {
+                val code = response.code()
+                when (code) {
+                    NetworkUtil.RESPONSE_OK -> _respostaDoBancoAoDesfavoritar.value= response.body()?.data
+                    else -> _respostaDoBancoAoDesfavoritar.value = "Falha na requisição"
+                }
+            }
+
+        })
+    }
+
 
     fun getUserById(id: Int) {
         val callback = UserRepository().getUserById(token, id)
