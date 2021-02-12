@@ -27,6 +27,12 @@ interface EventosEndPoint {
         @Query("param") parametro: String
     ): Call<ResponseDto<List<EventoDto>>>
 
+    @GET("/user/{id}/events")
+    fun getEventosDeUmUserPeloId(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<ResponseDto<List<EventoDto>>>
+
     @Headers("Content-Type: application/json")
     @POST("/event")
     fun novoEvento(

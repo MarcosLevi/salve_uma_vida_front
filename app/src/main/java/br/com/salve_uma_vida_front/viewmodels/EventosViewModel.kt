@@ -34,6 +34,9 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
     private val _eventos = MutableLiveData<List<EventoDto>>()
     val eventos: LiveData<List<EventoDto>> = _eventos
 
+    private val _eventosDeUmUser = MutableLiveData<List<EventoDto>>()
+    val eventosDeUmUser: LiveData<List<EventoDto>> = _eventosDeUmUser
+
     private val _meusEventos = MutableLiveData<List<EventoDto>>()
     val meusEventos: LiveData<List<EventoDto>> = _meusEventos
 
@@ -79,6 +82,23 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
 
             }
 
+        })
+    }
+
+    fun getEventosDeUmUserPeloId(id: Int) {
+        val callback = EventoRepository().getEventosDeUmUserPeloId(token, id)
+        callback.enqueue(object : Callback<ResponseDto<List<EventoDto>>> {
+            override fun onFailure(call: Call<ResponseDto<List<EventoDto>>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<List<EventoDto>>>,
+                response: Response<ResponseDto<List<EventoDto>>>
+            ) {
+                val eventos = response.body()?.data
+                _eventosDeUmUser.value = eventos
+            }
         })
     }
 

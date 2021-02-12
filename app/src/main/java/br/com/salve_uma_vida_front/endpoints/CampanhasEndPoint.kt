@@ -26,6 +26,12 @@ interface CampanhasEndPoint {
         @Query("param") parametro: String
     ): Call<ResponseDto<List<CampanhaDto>>>
 
+    @GET("/user/{id}/campaigns")
+    fun getCampanhasDeUmUserPeloId(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<ResponseDto<List<CampanhaDto>>>
+
     @Headers("Content-Type: application/json")
     @POST("/campaign")
     fun novaCampanha(

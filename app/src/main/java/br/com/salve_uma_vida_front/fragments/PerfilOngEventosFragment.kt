@@ -19,7 +19,7 @@ import br.com.salve_uma_vida_front.interfaces.CardEventoFinalListener
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class PerfilOngEventosFragment(val user: UserDto) : Fragment(), CardEventoFinalListener {
+class PerfilOngEventosFragment(val user: UserDto, val idOng: Int) : Fragment(), CardEventoFinalListener {
     lateinit var binding: FragmentPerfilOngEventosBinding
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
     private lateinit var viewModel: EventosViewModel
@@ -56,7 +56,7 @@ class PerfilOngEventosFragment(val user: UserDto) : Fragment(), CardEventoFinalL
     }
 
     private fun configuraObservers() {
-        viewModel.meusEventos.observe(viewLifecycleOwner, Observer {
+        viewModel.eventosDeUmUser.observe(viewLifecycleOwner, Observer {
             listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
@@ -66,12 +66,12 @@ class PerfilOngEventosFragment(val user: UserDto) : Fragment(), CardEventoFinalL
     }
 
     private fun carregaEventos() {
-        viewModel.getEventosUserLogado()
+        viewModel.getEventosDeUmUserPeloId(idOng)
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(user: UserDto) = PerfilOngEventosFragment(user)
+        fun newInstance(user: UserDto, idOng: Int) = PerfilOngEventosFragment(user,idOng)
     }
 
     override fun abreEvento(evento: EventoDto) {

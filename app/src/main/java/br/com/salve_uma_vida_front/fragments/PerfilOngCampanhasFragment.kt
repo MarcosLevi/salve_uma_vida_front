@@ -11,20 +11,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.adapters.CardCampanhaEditavelAdapter
 import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
-import br.com.salve_uma_vida_front.adapters.CardEventoEditavelAdapter
-import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.UserDto
 import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
-import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 
-class PerfilOngCampanhasFragment(val user: UserDto) : Fragment(), CardCampanhaFinalListener {
+class PerfilOngCampanhasFragment(
+    val user: UserDto,
+    val idOng: Int
+) : Fragment(), CardCampanhaFinalListener {
 
     lateinit var binding: FragmentPerfilOngCampanhasBinding
     private val listaCampanhas: MutableList<CampanhaDto> = mutableListOf()
@@ -63,15 +60,15 @@ class PerfilOngCampanhasFragment(val user: UserDto) : Fragment(), CardCampanhaFi
 
     companion object {
         @JvmStatic
-        fun newInstance(user: UserDto) = PerfilOngCampanhasFragment(user)
+        fun newInstance(user: UserDto, idOng: Int) = PerfilOngCampanhasFragment(user,idOng)
     }
 
     private fun carregaCampanhas() {
-        viewModelCampanha.getCampanhasUserLogado()
+        viewModelCampanha.getCampanhasDeUmUserPeloId(idOng)
     }
 
     private fun configuraObservers() {
-        viewModelCampanha.minhasCampanhas.observe(viewLifecycleOwner, Observer {
+        viewModelCampanha.campanhasDeUmUser.observe(viewLifecycleOwner, Observer {
             listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)

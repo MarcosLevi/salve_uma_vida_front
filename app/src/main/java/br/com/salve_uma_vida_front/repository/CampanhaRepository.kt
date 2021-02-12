@@ -27,6 +27,14 @@ class CampanhaRepository {
         return endpoint.getCampanhas(token, parametro)
     }
 
+    fun getCampanhasDeUmUserPeloId(
+        token: String,
+        id: Int
+    ): Call<ResponseDto<List<CampanhaDto>>> {
+        var endpoint = NetworkUtil.getRetrofitInstance().create(CampanhasEndPoint::class.java)
+        return endpoint.getCampanhasDeUmUserPeloId(token, id)
+    }
+
     fun novaCampanha(token: String, campanha: CampanhaDto): Call<ResponseDto<String>> {
         var endpoint = NetworkUtil.getRetrofitInstance().create(CampanhasEndPoint::class.java)
         return endpoint.novaCampanha(token, campanha)

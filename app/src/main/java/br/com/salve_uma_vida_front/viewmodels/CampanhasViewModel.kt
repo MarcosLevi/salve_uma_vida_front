@@ -27,6 +27,9 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
     private val _campanhas = MutableLiveData<List<CampanhaDto>>()
     val campanhas: LiveData<List<CampanhaDto>> = _campanhas
 
+    private val _campanhasDeUmUser = MutableLiveData<List<CampanhaDto>>()
+    val campanhasDeUmUser: LiveData<List<CampanhaDto>> = _campanhasDeUmUser
+
     private val _novaCampanha = MutableLiveData<String>()
     val novaCampanha: LiveData<String> = _novaCampanha
 
@@ -71,6 +74,23 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
 
         })
     }
+
+    fun getCampanhasDeUmUserPeloId(id: Int) {
+        val callback = CampanhaRepository().getCampanhasDeUmUserPeloId(token, id)
+        callback.enqueue(object : Callback<ResponseDto<List<CampanhaDto>>> {
+            override fun onFailure(call: Call<ResponseDto<List<CampanhaDto>>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+            override fun onResponse(
+                call: Call<ResponseDto<List<CampanhaDto>>>,
+                response: Response<ResponseDto<List<CampanhaDto>>>
+            ) {
+                val campanhas = response.body()?.data
+                _campanhasDeUmUser.value = campanhas
+            }
+        })
+    }
+
 
     fun novaCampanha(campanha: CampanhaDto) {
         val callback = CampanhaRepository().novaCampanha(token, campanha)

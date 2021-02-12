@@ -109,7 +109,7 @@ class PerfilOngFragment : Fragment() {
 
     private fun configuraViewPager() {
         val viewPagerAdapter =
-            TabPerfilOngAdapter(binding.ongPerfilFragmentTabLayout.tabCount,ong, this)
+            TabPerfilOngAdapter(binding.ongPerfilFragmentTabLayout.tabCount,ong, idOng!!, this)
         binding.ongPerfilFragmentViewPager.adapter = viewPagerAdapter
         TabLayoutMediator(binding.ongPerfilFragmentTabLayout, binding.ongPerfilFragmentViewPager) { tab, position ->
             tab.text = titulos[position]
