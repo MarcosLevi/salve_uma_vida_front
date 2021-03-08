@@ -10,10 +10,12 @@ import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.databinding.CardOngFavoritaBinding
 import br.com.salve_uma_vida_front.dp
 import br.com.salve_uma_vida_front.dto.OngFavoritaDto
+import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
+import br.com.salve_uma_vida_front.interfaces.CardOngFavoritaListener
 import br.com.salve_uma_vida_front.viewholders.CardOngFavoritaViewHolder
 import com.squareup.picasso.Picasso
 
-class CardOngFavoritaAdapter(var listaCards: MutableList<OngFavoritaDto>, var contexto: Context) :
+class CardOngFavoritaAdapter(var listaCards: MutableList<OngFavoritaDto>, var contexto: Context, private val listener: CardOngFavoritaListener) :
     RecyclerView.Adapter<CardOngFavoritaViewHolder>() {
 
     lateinit var bindingOngFavorita: CardOngFavoritaBinding
@@ -49,28 +51,10 @@ class CardOngFavoritaAdapter(var listaCards: MutableList<OngFavoritaDto>, var co
         holder.textViewNome.text = currentItem.name
 
         holder.itemView.setOnClickListener {
-            Log.d("CardOngFavorita", currentItem.toString())
+            listener.abrePerfilOng(currentItem.id)
         }
         holder.imageButtonFavorito.setOnClickListener {
-            if (holder.imageButtonFavorito.drawable == ContextCompat.getDrawable(
-                    contexto,
-                    R.drawable.ic_baseline_star_border_24
-                )
-            ) {
-                holder.imageButtonFavorito.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        contexto,
-                        R.drawable.ic_baseline_star_24
-                    )
-                )
-            } else {
-                holder.imageButtonFavorito.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        contexto,
-                        R.drawable.ic_baseline_star_border_24
-                    )
-                )
-            }
+            listener.desfavoritarOngPorId(currentItem.id)
         }
     }
 

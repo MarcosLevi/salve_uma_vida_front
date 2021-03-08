@@ -78,8 +78,10 @@ class PerfilOngFragment : Fragment() {
             toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_24)
         })
         viewModel.respostaDoBancoAoDesfavoritar.observe(viewLifecycleOwner, Observer {
-            isFavorita = false
-            toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_border_24)
+            if (it){
+                isFavorita = false
+                toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_border_24)
+            }
         })
         viewModel.ongsFavoritasDoUserLogado.observe(viewLifecycleOwner, Observer {
             for (ongFavorita: OngFavoritaDto in it){

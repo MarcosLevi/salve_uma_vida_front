@@ -10,8 +10,6 @@ import br.com.salve_uma_vida_front.databinding.CardOngFavoritaBinding
 class CardOngFavoritaViewHolder(binding: CardOngFavoritaBinding) : RecyclerView.ViewHolder(binding.root) {
 
     var imagemPerfil: ImageView = binding.cardOngFavoritaImagem
-    var numeroEventosAbertos: TextView = binding.cardOngFavoritaNumeroEventosAbertos
-    var numeroCampanhasAbertas: TextView = binding.cardOngFavoritaNumeroCampanhasAbertas
     var textViewNome: TextView = binding.cardOngFavoritaNome
     var imageButtonFavorito: ImageButton = binding.cardOngFavoritaBotaoFavorito
 

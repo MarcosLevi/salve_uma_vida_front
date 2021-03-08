@@ -23,7 +23,7 @@
                 android:background="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_star_border_24" />
+                app:srcCompat="@drawable/ic_baseline_star_24" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardOngFavoritaCardView"

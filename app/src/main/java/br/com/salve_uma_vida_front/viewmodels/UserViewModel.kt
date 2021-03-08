@@ -9,7 +9,7 @@ import br.com.salve_uma_vida_front.dto.*
 import br.com.salve_uma_vida_front.models.Responses
 import br.com.salve_uma_vida_front.models.UserType
 import br.com.salve_uma_vida_front.repository.UserRepository
-import br.com.salve_uma_vida_front.repository.NetworkUtil
+import br.com.salve_uma_vida_front.utils.NetworkUtils
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,8 +30,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     val loginError: LiveData<String> = _loginError
     private val _respostaDoBancoAoFavoritar = MutableLiveData<String>()
     val respostaDoBancoAoFavoritar: LiveData<String> = _respostaDoBancoAoFavoritar
-    private val _respostaDoBancoAoDesfavoritar = MutableLiveData<String>()
-    val respostaDoBancoAoDesfavoritar: LiveData<String> = _respostaDoBancoAoDesfavoritar
+    private val _respostaDoBancoAoDesfavoritar = MutableLiveData<Boolean>()
+    val respostaDoBancoAoDesfavoritar: LiveData<Boolean> = _respostaDoBancoAoDesfavoritar
     private val _ongsFavoritasDoUserLogado = MutableLiveData<List<OngFavoritaDto>>()
     val ongsFavoritasDoUserLogado: LiveData<List<OngFavoritaDto>> = _ongsFavoritasDoUserLogado
 
@@ -52,7 +52,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             override fun onResponse(call: Call<ResponseDto<AuthorizationResponseDto>>, response: Response<ResponseDto<AuthorizationResponseDto>>) {
                 val code = response.code()
                 when (code) {
-                    NetworkUtil.RESPONSE_OK -> loginOk(response.body()?.data as AuthorizationResponseDto)
+                    NetworkUtils.RESPONSE_OK -> loginOk(response.body()?.data as AuthorizationResponseDto)
                     else -> loginError()
                 }
             }
@@ -83,7 +83,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             ) {
                 val code = response.code()
                 when (code) {
-                    NetworkUtil.RESPONSE_OK -> cadastroOk()
+                    NetworkUtils.RESPONSE_OK -> cadastroOk()
                     else -> cadastroNotOk()
                 }
             }
@@ -104,7 +104,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             ) {
                 val code = response.code()
                 when (code) {
-                    NetworkUtil.RESPONSE_OK -> _respostaDoBancoAoFavoritar.value= response.body()?.data
+                    NetworkUtils.RESPONSE_OK -> _respostaDoBancoAoFavoritar.value= response.body()?.data
                     else -> _respostaDoBancoAoFavoritar.value = "Falha na requisição"
                 }
             }
@@ -125,7 +125,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             ) {
                 val code = response.code()
                 when (code) {
-                    NetworkUtil.RESPONSE_OK -> _ongsFavoritasDoUserLogado.value= response.body()?.data
+                    NetworkUtils.RESPONSE_OK -> _ongsFavoritasDoUserLogado.value= response.body()?.data
                     else -> _ongsFavoritasDoUserLogado.value = null
                 }
             }
@@ -146,8 +146,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             ) {
                 val code = response.code()
                 when (code) {
-                    NetworkUtil.RESPONSE_OK -> _respostaDoBancoAoDesfavoritar.value= response.body()?.data
-                    else -> _respostaDoBancoAoDesfavoritar.value = "Falha na requisição"
+                    NetworkUtils.RESPONSE_OK -> _respostaDoBancoAoDesfavoritar.value= true
+                    else -> _respostaDoBancoAoDesfavoritar.value = false
                 }
             }
 

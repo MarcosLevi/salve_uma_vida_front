@@ -1,4 +1,4 @@
-package br.com.salve_uma_vida_front.repository
+package br.com.salve_uma_vida_front.utils
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class NetworkUtil {
+class NetworkUtils {
 
     companion object {
 

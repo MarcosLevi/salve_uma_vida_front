@@ -20,7 +20,11 @@
         android:id="@+id/bothFavoritosFragment"
         android:name="br.com.salve_uma_vida_front.fragments.FavoritosFragment"
         android:label="Favoritos"
-        tools:layout="@layout/fragment_both_favoritos" />
+        tools:layout="@layout/fragment_both_favoritos" >
+        <action
+            android:id="@+id/action_bothFavoritosFragment_to_perfilOngFragment"
+            app:destination="@id/perfilOngFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/cadastroCampanhaFragment"
