@@ -57,8 +57,8 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
     }
 
     fun carregaOngsFavoritas(){
-        startLoading(requireActivity(), R.id.mainLoading)
         viewModel.getOngsFavororitasDoUserLogado()
+        startLoading(activity, R.id.ongLoading)
     }
 
     private fun configuraObservers() {
@@ -68,10 +68,10 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
                 listaOngsFavoritas.addAll(it)
             }
             mRecyclerView.adapter!!.notifyDataSetChanged()
-            closeLoading(requireActivity(), R.id.mainLoading)
+            closeLoading(activity, R.id.ongLoading)
         })
         viewModel.respostaDoBancoAoDesfavoritar.observe(viewLifecycleOwner, Observer {
-            closeLoading(requireActivity(),R.id.mainLoading)
+            closeLoading(activity,R.id.ongLoading)
             if (it){
                 carregaOngsFavoritas()
             }
@@ -112,8 +112,8 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
         val dialogClickListener = DialogInterface.OnClickListener{_,which ->
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
-                    startLoading(requireActivity(),R.id.mainLoading)
                     viewModel.desfavoritarOngPorId(id)
+                    startLoading(activity,R.id.ongLoading)
                 }
                 DialogInterface.BUTTON_NEGATIVE -> Toast.makeText(requireContext(),"Ação cancelada",Toast.LENGTH_SHORT)
                 DialogInterface.BUTTON_NEUTRAL -> Toast.makeText(requireContext(),"Ação cancelada",Toast.LENGTH_SHORT)
