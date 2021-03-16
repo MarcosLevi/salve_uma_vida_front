@@ -15,14 +15,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.CardOngFavoritaAdapter
-import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentBothFavoritosBinding
 import br.com.salve_uma_vida_front.dto.OngFavoritaDto
 import br.com.salve_uma_vida_front.interfaces.CardOngFavoritaListener
-import br.com.salve_uma_vida_front.startLoading
-import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardOngFavoritaViewHolder
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 
@@ -115,13 +112,10 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
                     viewModel.desfavoritarOngPorId(id)
                     startLoading(activity,R.id.ongLoading)
                 }
-                DialogInterface.BUTTON_NEGATIVE -> Toast.makeText(requireContext(),"Ação cancelada",Toast.LENGTH_SHORT)
-                DialogInterface.BUTTON_NEUTRAL -> Toast.makeText(requireContext(),"Ação cancelada",Toast.LENGTH_SHORT)
             }
         }
         builder.setPositiveButton("SIM",dialogClickListener)
         builder.setNegativeButton("NÃO",dialogClickListener)
-        builder.setNeutralButton("CANCELAR",dialogClickListener)
         dialog = builder.create()
         dialog.show()
     }

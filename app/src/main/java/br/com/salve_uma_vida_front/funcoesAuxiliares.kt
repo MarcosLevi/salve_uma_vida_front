@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
 import java.text.SimpleDateFormat
@@ -98,4 +99,8 @@ fun toolbarVazia(activity: FragmentActivity?): Toolbar? {
     toolbar?.setBackgroundColor(activity.resources.getColor(R.color.corNeutra))
     toolbar?.menu?.clear()
     return toolbar
+}
+
+fun showText(context: Context?, msg: String) {
+    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 }

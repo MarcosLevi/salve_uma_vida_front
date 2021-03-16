@@ -11,14 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
-import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.TabPerfilOngAdapter
-import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentPerfilOngBinding
 import br.com.salve_uma_vida_front.dto.OngFavoritaDto
 import br.com.salve_uma_vida_front.dto.UserDto
-import br.com.salve_uma_vida_front.startLoading
-import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewmodels.UserViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,11 +40,11 @@ class PerfilOngFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         idOng=getIdByArgs()
         startLoading(requireActivity(), R.id.ongLoading)
+        configuraToolbar()
         configuraObservers()
         getOngsFavoritas()
         carregaPerfilDoUserPeloId()
         configuraTabLayout()
-        configuraToolbar()
         return binding.root
     }
 
@@ -74,13 +71,17 @@ class PerfilOngFragment : Fragment() {
             configuraViewPager()
         })
         viewModel.respostaDoBancoAoFavoritar.observe(viewLifecycleOwner, Observer {
+            closeLoading(requireActivity(), R.id.ongLoading)
             isFavorita = true
             toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_24)
+            showText(context,"Ong favoritada")
         })
         viewModel.respostaDoBancoAoDesfavoritar.observe(viewLifecycleOwner, Observer {
             if (it){
+                closeLoading(requireActivity(), R.id.ongLoading)
                 isFavorita = false
                 toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_border_24)
+                showText(context,"Ong desfavoritada")
             }
         })
         viewModel.ongsFavoritasDoUserLogado.observe(viewLifecycleOwner, Observer {
@@ -88,10 +89,7 @@ class PerfilOngFragment : Fragment() {
                 if (ongFavorita.id == idOng){
                     isFavorita = true
                     toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_24)
-                }
-                else{
-                    isFavorita = false
-                    toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_border_24)
+                    break
                 }
             }
             closeLoading(requireActivity(), R.id.ongLoading)
@@ -145,6 +143,7 @@ class PerfilOngFragment : Fragment() {
                     true
                 }
                 R.id.ongPerfilFragmentFavoritar ->{
+                    startLoading(requireActivity(), R.id.ongLoading)
                     if (isFavorita)
                         desfavoritaOng()
                     else

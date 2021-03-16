@@ -249,6 +249,8 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     private fun configuraToolbar() {
         val toolbar = toolbarVazia(activity)
         toolbar?.setBackgroundColor(resources.getColor(R.color.corCampanhas))
+        if (isEdita)
+            toolbar?.title = "Edita Campanha"
     }
 
     private fun configuraRecyclerView() {

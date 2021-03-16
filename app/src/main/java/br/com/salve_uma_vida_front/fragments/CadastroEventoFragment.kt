@@ -49,12 +49,12 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
 
     private fun configuracoesIniciais(view: View) {
         navController = Navigation.findNavController(view)
+        setaEvento()
         configuraFinalizarEvento(view)
         configuraDatePicker(view)
         configuraToolbar()
         configuraListenerUserFoto()
         configuraObservers()
-        setaEvento()
     }
 
     private fun setaEvento() {
@@ -215,6 +215,8 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
     private fun configuraToolbar() {
         val toolbar = toolbarVazia(activity)
         toolbar?.setBackgroundColor(resources.getColor(R.color.corEventos))
+        if (isEdita)
+            toolbar?.title = "Edita Evento"
     }
 
     override fun passaUrl(url: String) {
