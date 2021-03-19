@@ -5,14 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import br.com.salve_uma_vida_front.FormatStringToDate
-import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.databinding.FragmentEventoDetalhadoBinding
 import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.toolbarVazia
+import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,21 +25,21 @@ class EventoDetalhadoFragment : Fragment() {
     var navController: NavController? = null
     private lateinit var binding: FragmentEventoDetalhadoBinding
     private lateinit var evento: EventoDto
+    private lateinit var viewModelEvento: EventosViewModel
 
     private lateinit var map: GoogleMap
 
     private val callback = OnMapReadyCallback { googleMap ->
         map= googleMap
+        getEventoPeloId()
+    }
+
+    private fun setaEventoNoMapa() {
         val enderecoDoEvento = LatLng(evento.latitude!!.toDouble(), evento.longitude!!.toDouble())
         map.addMarker(MarkerOptions().position(enderecoDoEvento).title(evento.endereco))
         val zoomLevel = 15f
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(enderecoDoEvento, zoomLevel))
         map.moveCamera(CameraUpdateFactory.newLatLng(enderecoDoEvento))
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        evento = getEventoByArgs()
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -47,7 +48,9 @@ class EventoDetalhadoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentEventoDetalhadoBinding.inflate(inflater, container, false)
-        setaCamposEvento()
+        viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
+        startLoading(activity, R.id.ongLoading)
+        configuraObservers()
         configuraToolbar()
         return binding.root
     }
@@ -56,6 +59,10 @@ class EventoDetalhadoFragment : Fragment() {
         navController = Navigation.findNavController(view)
         configuraMapa(savedInstanceState)
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun getEventoPeloId() {
+        viewModelEvento.getEventoId(getEventoByArgs())
     }
 
     private fun configuraMapa(savedInstanceState: Bundle?) {
@@ -81,10 +88,21 @@ class EventoDetalhadoFragment : Fragment() {
         binding.eventoDetalhadoEndereco.text = evento.endereco
     }
 
-    private fun getEventoByArgs(): EventoDto {
+    private fun configuraObservers() {
+        viewModelEvento.eventoPeloId.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                evento = it
+                setaCamposEvento()
+                setaEventoNoMapa()
+            }
+            closeLoading(activity, R.id.ongLoading)
+        })
+    }
+
+    private fun getEventoByArgs(): Int {
         val args: EventoDetalhadoFragmentArgs by navArgs()
-        val evento = args.evento
-        return evento
+        val idEvento = args.idEvento
+        return idEvento
     }
 
     private fun configuraToolbar() {

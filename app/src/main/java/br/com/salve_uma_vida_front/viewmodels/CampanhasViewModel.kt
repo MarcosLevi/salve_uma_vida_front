@@ -6,10 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import br.com.salve_uma_vida_front.dto.CampanhaDto
-import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
 import br.com.salve_uma_vida_front.repository.CampanhaRepository
-import br.com.salve_uma_vida_front.repository.EventoRepository
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +27,9 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val _campanhasDeUmUser = MutableLiveData<List<CampanhaDto>>()
     val campanhasDeUmUser: LiveData<List<CampanhaDto>> = _campanhasDeUmUser
+
+    private val _campanhaPeloId = MutableLiveData<CampanhaDto>()
+    val campanhaPeloId: LiveData<CampanhaDto> = _campanhaPeloId
 
     private val _novaCampanha = MutableLiveData<String>()
     val novaCampanha: LiveData<String> = _novaCampanha
@@ -74,6 +75,27 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
 
         })
     }
+
+    fun getCampanhaId(id: Int) {
+        val callback = CampanhaRepository().getCampanhaId(token, id)
+        callback.enqueue(object : Callback<ResponseDto<CampanhaDto>> {
+            override fun onFailure(call: Call<ResponseDto<CampanhaDto>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<CampanhaDto>>,
+                response: Response<ResponseDto<CampanhaDto>>
+            ) {
+                val campanha = response.body()?.data
+                _campanhaPeloId.value = campanha
+
+            }
+
+        })
+    }
+
+
 
     fun getCampanhasDeUmUserPeloId(id: Int) {
         val callback = CampanhaRepository().getCampanhasDeUmUserPeloId(token, id)

@@ -71,17 +71,17 @@ class PerfilOngFragment : Fragment() {
             configuraViewPager()
         })
         viewModel.respostaDoBancoAoFavoritar.observe(viewLifecycleOwner, Observer {
-            closeLoading(requireActivity(), R.id.ongLoading)
             isFavorita = true
             toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_24)
             showText(context,"Ong favoritada")
+            closeLoading(requireActivity(), R.id.ongLoading)
         })
         viewModel.respostaDoBancoAoDesfavoritar.observe(viewLifecycleOwner, Observer {
             if (it){
-                closeLoading(requireActivity(), R.id.ongLoading)
                 isFavorita = false
                 toolbar.menu.getItem(1).icon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_star_border_24)
                 showText(context,"Ong desfavoritada")
+                closeLoading(requireActivity(), R.id.ongLoading)
             }
         })
         viewModel.ongsFavoritasDoUserLogado.observe(viewLifecycleOwner, Observer {

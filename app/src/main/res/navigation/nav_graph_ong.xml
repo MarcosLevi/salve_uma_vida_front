@@ -94,8 +94,8 @@
         android:label="Campanha Detalhada"
         tools:layout="@layout/fragment_campanha_detalhada" >
         <argument
-            android:name="campanha"
-            app:argType="br.com.salve_uma_vida_front.dto.CampanhaDto" />
+            android:name="idCampanha"
+            app:argType="integer" />
         <action
             android:id="@+id/action_campanhaDetalhadaFragment_to_perfilOngFragment"
             app:destination="@id/perfilOngFragment" />
@@ -109,12 +109,19 @@
             android:id="@+id/action_eventoDetalhadoFragment_to_perfilOngFragment"
             app:destination="@id/perfilOngFragment" />
         <argument
-            android:name="evento"
-            app:argType="br.com.salve_uma_vida_front.dto.EventoDto" />
+            android:name="idEvento"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/bothMapaFragment"
         android:name="br.com.salve_uma_vida_front.fragments.MapaFragment"
         android:label="Mapa"
-        tools:layout="@layout/fragment_both_mapa" />
+        tools:layout="@layout/fragment_both_mapa" >
+        <action
+            android:id="@+id/action_bothMapaFragment_to_perfilOngFragment"
+            app:destination="@id/perfilOngFragment" />
+        <action
+            android:id="@+id/action_bothMapaFragment_to_eventoDetalhadoFragment"
+            app:destination="@id/eventoDetalhadoFragment" />
+    </fragment>
 </navigation>

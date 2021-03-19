@@ -194,11 +194,15 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     override fun abreCampanha(campanha: CampanhaDto) {
-        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToCampanhaDetalhadaFragment(campanha))
+        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToCampanhaDetalhadaFragment(
+            campanha.id!!
+        ))
     }
 
     override fun abreEvento(evento: EventoDto) {
-        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToEventoDetalhadoFragment(evento))
+        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToEventoDetalhadoFragment(
+            evento.id!!
+        ))
     }
 
     override fun abrePerfilOng(id: Int) {

@@ -7,21 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
-import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
-import br.com.salve_uma_vida_front.closeLoading
 import br.com.salve_uma_vida_front.databinding.FragmentBothMapaBinding
-import br.com.salve_uma_vida_front.dto.CampanhaDto
-import br.com.salve_uma_vida_front.dto.EventoDto
-import br.com.salve_uma_vida_front.hideKeyboard
+import br.com.salve_uma_vida_front.dto.ResponseMapDto
+import br.com.salve_uma_vida_front.models.MapPinType
+import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.utils.LocationUtils
-import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
-import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
+import br.com.salve_uma_vida_front.viewmodels.MapViewModel
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -29,13 +26,13 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapaFragment : Fragment() {
-    private lateinit var listaEventos: List<EventoDto>
+    private lateinit var listaMapInfo: List<ResponseMapDto>
     private lateinit var endereco: LatLng
     private var now: Marker? = null
     private val PERMISSION_ID = 1000
     var map: GoogleMap? = null
-    private lateinit var viewModelCampanha: CampanhasViewModel
-    private lateinit var viewModelEvento: EventosViewModel
+    var navController: NavController? = null
+    private lateinit var viewModelMap: MapViewModel
     private lateinit var binding: FragmentBothMapaBinding
     private lateinit var locationUtils: LocationUtils
     private var isFixado = true
@@ -51,8 +48,20 @@ class MapaFragment : Fragment() {
                 naoFixado()
             }
         }
-        carregaEventos()
+        map!!.setOnInfoWindowClickListener { marker ->
+            val mapInfo = marker.tag as ResponseMapDto
+            abrePerfilMapInfo(mapInfo)
+        }
+        carregaMapInfo()
         locationUtils.startLocationUpdates()
+    }
+
+    private fun abrePerfilMapInfo(mapInfo: ResponseMapDto) {
+        if (mapInfo.type.equals(MapPinType.NGO))
+            navController!!.navigate(MapaFragmentDirections.actionBothMapaFragmentToPerfilOngFragment(mapInfo.id))
+        else if(mapInfo.type.equals(MapPinType.EVENT))
+            navController!!.navigate(MapaFragmentDirections.actionBothMapaFragmentToEventoDetalhadoFragment(mapInfo.id))
+
     }
 
     fun atualizaPosicaoAtual(){
@@ -63,11 +72,18 @@ class MapaFragment : Fragment() {
         if (isFixado)
             moveCamera()
     }
-    fun addMarkerEvento(evento: EventoDto){
-        val endereco = LatLng(evento.latitude!!.toDouble(), evento.longitude!!.toDouble())
-        map!!.addMarker(MarkerOptions().position(endereco).title(evento.titulo).icon(
-            BitmapDescriptorFactory
-            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+    fun addMarker(mapInfo: ResponseMapDto){
+        var colorPin = BitmapDescriptorFactory.HUE_GREEN
+        if (mapInfo.type.equals(MapPinType.NGO))
+            colorPin=BitmapDescriptorFactory.HUE_VIOLET
+        val endereco = LatLng(mapInfo.latitude.toDouble(), mapInfo.longitude.toDouble())
+        val marker = map!!.addMarker(
+            MarkerOptions().position(endereco).title(mapInfo.description).icon(
+                BitmapDescriptorFactory
+                    .defaultMarker(colorPin)
+            )
+        )
+        marker.tag = mapInfo
     }
 
     fun moveCamera(){
@@ -82,17 +98,16 @@ class MapaFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
-        viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
+        viewModelMap = ViewModelProviders.of(this).get(MapViewModel::class.java)
         locationUtils = LocationUtils(requireActivity())
         super.onCreate(savedInstanceState)
     }
 
     private fun configuraObservers() {
-        viewModelEvento.eventos.observe(viewLifecycleOwner, Observer {
-            listaEventos = it
-            for (evento: EventoDto in listaEventos){
-                addMarkerEvento(evento)
+        viewModelMap.mapInfo.observe(viewLifecycleOwner, Observer {
+            listaMapInfo = it
+            for (mapInfo: ResponseMapDto in listaMapInfo){
+                addMarker(mapInfo)
             }
         })
         locationUtils.myLocation.observe(viewLifecycleOwner, Observer {
@@ -103,8 +118,8 @@ class MapaFragment : Fragment() {
         })
     }
 
-    fun carregaEventos(){
-        viewModelEvento.getEventos("")
+    fun carregaMapInfo(){
+        viewModelMap.getMapInfo()
     }
 
     override fun onCreateView(
@@ -113,6 +128,7 @@ class MapaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBothMapaBinding.inflate(inflater, container, false)
+        configuraToolbar()
         return binding.root
     }
 
@@ -154,6 +170,8 @@ class MapaFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fixado()
+        navController = Navigation.findNavController(view)
         configuraObservers()
         binding.floatingActionButton.setOnClickListener {
             fixado()
@@ -168,5 +186,9 @@ class MapaFragment : Fragment() {
         mapFragment.onCreate(savedInstanceState)
         mapFragment.onResume()
         mapFragment.getMapAsync(callback)
+    }
+
+    private fun configuraToolbar() {
+        val toolbar = toolbarVazia(activity)
     }
 }

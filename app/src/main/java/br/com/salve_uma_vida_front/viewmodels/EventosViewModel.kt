@@ -28,8 +28,8 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
     private val _listaEventos = MutableLiveData<MutableList<EventoDto>>()
     val listaEventos: LiveData<MutableList<EventoDto>> = _listaEventos
 
-    private val _evento = MutableLiveData<EventoDto>()
-    val evento: LiveData<EventoDto> = _evento
+    private val _eventoPeloId = MutableLiveData<EventoDto>()
+    val eventoPeloId: LiveData<EventoDto> = _eventoPeloId
 
     private val _eventos = MutableLiveData<List<EventoDto>>()
     val eventos: LiveData<List<EventoDto>> = _eventos
@@ -59,7 +59,7 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
                 response: Response<ResponseDto<EventoDto>>
             ) {
                 val evento = response.body()!!.data
-                _evento.value = evento
+                _eventoPeloId.value = evento
 
             }
 

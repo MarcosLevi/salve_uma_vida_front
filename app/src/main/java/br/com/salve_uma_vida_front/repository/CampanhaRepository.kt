@@ -8,7 +8,7 @@ import retrofit2.Call
 
 class CampanhaRepository {
 
-    fun getCampanhaId(id: Int, token: String): Call<ResponseDto<CampanhaDto>> {
+    fun getCampanhaId(token: String, id: Int): Call<ResponseDto<CampanhaDto>> {
         var endpoint = NetworkUtils.getRetrofitInstance().create(CampanhasEndPoint::class.java)
         return endpoint.getCampanhaId(token, id)
     }

@@ -5,14 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.salve_uma_vida_front.*
+import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
+import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
 import br.com.salve_uma_vida_front.adapters.ItemAdapterDoador
 import br.com.salve_uma_vida_front.databinding.FragmentCampanhaDetalhadaBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
+import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import com.squareup.picasso.Picasso
 
 
@@ -21,9 +26,11 @@ class CampanhaDetalhadaFragment : Fragment() {
     private lateinit var binding: FragmentCampanhaDetalhadaBinding
     private lateinit var campanha: CampanhaDto
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        campanha = getCampanhaByArgs()
-        super.onCreate(savedInstanceState)
+    private lateinit var viewModelCampanha: CampanhasViewModel
+
+    fun getCampanhasDeUmUserPeloId(){
+        startLoading(activity, R.id.ongLoading)
+        viewModelCampanha.getCampanhaId(getIdCampanhaByArgs())
     }
 
     override fun onCreateView(
@@ -32,15 +39,27 @@ class CampanhaDetalhadaFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCampanhaDetalhadaBinding.inflate(inflater, container, false)
-        setaCamposCampanha()
-        configuraRecyclerView()
+        viewModelCampanha = ViewModelProviders.of(this).get(CampanhasViewModel::class.java)
+        configuraObservers()
         configuraToolbar()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = Navigation.findNavController(view)
+        getCampanhasDeUmUserPeloId()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun configuraObservers() {
+        viewModelCampanha.campanhaPeloId.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                campanha = it
+                setaCamposCampanha()
+                configuraRecyclerView()
+            }
+            closeLoading(activity, R.id.ongLoading)
+        })
     }
 
     private fun setaCamposCampanha() {
@@ -69,10 +88,10 @@ class CampanhaDetalhadaFragment : Fragment() {
         mRecyclerView.adapter = mAdapterDoador
     }
 
-    private fun getCampanhaByArgs(): CampanhaDto {
+    private fun getIdCampanhaByArgs(): Int {
         val args: CampanhaDetalhadaFragmentArgs by navArgs()
-        val campanha = args.campanha
-        return campanha
+        val idCampanha = args.idCampanha
+        return idCampanha
     }
 
     private fun configuraToolbar() {
