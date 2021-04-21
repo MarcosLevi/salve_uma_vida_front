@@ -1,5 +1,6 @@
 package br.com.salve_uma_vida_front.dto
 
+import br.com.salve_uma_vida_front.models.UserType
 import com.google.gson.annotations.SerializedName
 
 data class UserDto(
@@ -18,7 +19,7 @@ data class UserDto(
     @SerializedName("addressLongitude")
     var addressLongitude: Float,
     @SerializedName("type")
-    var type: String,
+    var type: UserType,
     @SerializedName("image")
     var image: String
 ) {

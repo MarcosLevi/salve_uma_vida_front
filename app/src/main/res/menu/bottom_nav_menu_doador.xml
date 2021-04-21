@@ -12,6 +12,11 @@
         android:title="@string/favoritos" />
 
     <item
+        android:id="@+id/bothUserLogadoFragment"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/perfil" />
+
+    <item
         android:id="@+id/bothMapaFragment"
         android:icon="@drawable/ic_outline_map_24"
         android:title="@string/mapa" />

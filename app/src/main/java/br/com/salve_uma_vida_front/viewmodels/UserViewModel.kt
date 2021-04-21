@@ -64,7 +64,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         email: String,
         password: String,
         detail: String,
-        type: String,
+        type: UserType,
         image: String,
         address: String="",
         addressLatitude: Float = 0.0F,

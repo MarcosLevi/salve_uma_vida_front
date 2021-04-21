@@ -77,7 +77,7 @@ class UserLogadoFragment : Fragment() {
     private fun configuraViewPager() {
         var viewPagerAdapterNGO: TabPerfilOngAdapter? = null
         var viewPagerAdapterCOMMON: TabPerfilAdapter? = null
-        if (UserType.COMMON.equals(user.type)){
+        if (UserType.COMMON == user.type){
             titulos.removeAll(mutableListOf("Campanhas", "Eventos"))
             viewPagerAdapterCOMMON = TabPerfilAdapter(titulos.size, user, this)
             binding.perfilFragmentViewPager.adapter = viewPagerAdapterCOMMON
