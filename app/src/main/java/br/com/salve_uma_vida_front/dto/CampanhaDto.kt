@@ -17,12 +17,14 @@ data class CampanhaDto(
     @SerializedName("userImage")
     var userImage: String? = null,
     @SerializedName("userId")
-    var userId: Int? = null
+    var userId: Int? = null,
+    @SerializedName("open")
+    var aberta: Boolean? = null
 ) : Serializable {
     companion object {
         @JvmStatic
         fun newInstance(
             campanha: CampanhaDto
-        ) = CampanhaDto(campanha.id, campanha.data, campanha.titulo, campanha.descricao, campanha.itens, campanha.userImage, campanha.userId)
+        ) = CampanhaDto(campanha.id, campanha.data, campanha.titulo, campanha.descricao, campanha.itens, campanha.userImage, campanha.userId, campanha.aberta)
     }
 }
