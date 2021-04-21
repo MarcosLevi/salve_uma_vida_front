@@ -1,6 +1,8 @@
 package br.com.salve_uma_vida_front.fragments
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -138,14 +140,33 @@ class CadastroEventoFragment : Fragment(), DialogUrl.DialogUrlListener {
             zeraErros()
             if (validate()) {
                 atribuiCamposAoEvento()
-                if (isEdita)
-                    updateEvento()
-                else
-                    novoEvento()
+                showDialog()
             }
 
         }
     }
+
+    private fun showDialog(){
+        lateinit var dialog: AlertDialog
+        val builder = AlertDialog.Builder(requireContext(),R.style.DialogTheme)
+        builder.setTitle("Criar Evento")
+        builder.setMessage("Deseja confirmar a criação do evento? (Não será possível editá-lo depois)")
+        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
+            when(which){
+                DialogInterface.BUTTON_POSITIVE -> {
+                    if (isEdita)
+                        updateEvento()
+                    else
+                        novoEvento()
+                }
+            }
+        }
+        builder.setPositiveButton("SIM",dialogClickListener)
+        builder.setNegativeButton("NÃO",dialogClickListener)
+        dialog = builder.create()
+        dialog.show()
+    }
+
 
     private fun atribuiCamposAoEvento() {
         evento.descricao = binding.cadastroEventoDescricao.text.toString()

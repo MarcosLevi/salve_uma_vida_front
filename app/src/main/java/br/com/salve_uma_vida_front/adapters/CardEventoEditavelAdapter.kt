@@ -50,17 +50,9 @@ class CardEventoEditavelAdapter(var listaCards: MutableList<EventoDto>, private 
 //        holder.textViewTimeStamp.text = FormatStringToDate(currentItem.data)
         holderFinal.textViewTimeStamp.text = "Ocorrerá em ${FormatStringToDate(currentItem.data!!)}"
 
-        holderFinal.imageButtonEditar.setOnClickListener{
-            Log.d("CardEventoEditavel", "Cliquei em editar")
-            listener.onEditaClicked(EventoDto.newInstance(currentItem))
-        }
         holderFinal.imageButtonArquivar.setOnClickListener{
             Log.d("CardEventoEditavel", "Cliquei em Arquivar")
             listener.onArquivaClicked(currentItem)
-        }
-        holderFinal.imageButtonFinalizar.setOnClickListener{
-            Log.d("CardEventoEditavel", "Cliquei em Finalizar")
-            listener.onFinalizaClicked(currentItem)
         }
     }
 

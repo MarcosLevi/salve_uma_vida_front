@@ -1,5 +1,7 @@
 package br.com.salve_uma_vida_front.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.view.animation.Animation
@@ -283,28 +285,31 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
         carregaDados()
     }
 
-    override fun onEditaClicked(evento: EventoDto) {
-        navController!!.navigate(MinhasCampanhasEventosFragmentDirections.actionOngCampanhasFragmentToCadastroEventoFragment(evento))
+    private fun showDialog(){
+        lateinit var dialog: AlertDialog
+        val builder = AlertDialog.Builder(requireContext(),R.style.DialogTheme)
+        builder.setTitle("Arquivar Campanha")
+        builder.setMessage("Deseja arquivar a campanha? (Os doadores não poderão ver a campanha quando arquivada)")
+        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
+            when(which){
+                DialogInterface.BUTTON_POSITIVE -> {
+//                    viewModelCampanha.arquivaCampanha()
+                    showText(context,"Cliquei em arquivar campanha")
+                }
+            }
+        }
+        builder.setPositiveButton("SIM",dialogClickListener)
+        builder.setNegativeButton("NÃO",dialogClickListener)
+        dialog = builder.create()
+        dialog.show()
     }
 
     override fun onArquivaClicked(evento: EventoDto) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onFinalizaClicked(evento: EventoDto) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onEditaClicked(campanha: CampanhaDto) {
-        navController!!.navigate(MinhasCampanhasEventosFragmentDirections.actionOngCampanhasFragmentToCadastroCampanhaFragment(campanha))
+        showDialog()
     }
 
     override fun onArquivaClicked(campanha: CampanhaDto) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onFinalizaClicked(campanha: CampanhaDto) {
-        TODO("Not yet implemented")
+        showDialog()
     }
 }
 

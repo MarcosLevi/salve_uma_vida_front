@@ -16,30 +16,6 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/cardCampanhaEditavelEditar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="@null"
-                android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
-                android:src="@drawable/ic_baseline_edit_30"
-                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelFinalizar"
-                app:layout_constraintEnd_toStartOf="@+id/cardCampanhaEditavelFinalizar"
-                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelFinalizar" />
-
-            <ImageButton
-                android:id="@+id/cardCampanhaEditavelFinalizar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="@null"
-                android:contentDescription="@string/content_description_imageButton_cardFinalizaCampanha"
-                android:src="@drawable/ic_baseline_done_30"
-                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelArquivar"
-                app:layout_constraintEnd_toStartOf="@+id/cardCampanhaEditavelArquivar"
-                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelArquivar" />
-
-            <ImageButton
                 android:id="@+id/cardCampanhaEditavelArquivar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

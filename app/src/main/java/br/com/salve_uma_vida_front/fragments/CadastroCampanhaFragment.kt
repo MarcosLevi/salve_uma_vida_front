@@ -1,6 +1,8 @@
 package br.com.salve_uma_vida_front.fragments
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -152,14 +154,32 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
             resetaErros()
             atribuiCamposACampanha()
             if (validate()) {
-                if (isEdita)
-                    updateCampanha()
-                else
-                    novaCampanha()
+                showDialog()
             } else {
                 mostraErros()
             }
         }
+    }
+
+    private fun showDialog(){
+        lateinit var dialog: AlertDialog
+        val builder = AlertDialog.Builder(requireContext(),R.style.DialogTheme)
+        builder.setTitle("Criar Campanha")
+        builder.setMessage("Deseja confirmar a criação da campanha? (Não será possível editá-la depois)")
+        val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
+            when(which){
+                DialogInterface.BUTTON_POSITIVE -> {
+                    if (isEdita)
+                        updateCampanha()
+                    else
+                        novaCampanha()
+                }
+            }
+        }
+        builder.setPositiveButton("SIM",dialogClickListener)
+        builder.setNegativeButton("NÃO",dialogClickListener)
+        dialog = builder.create()
+        dialog.show()
     }
 
     private fun atribuiCamposACampanha() {
