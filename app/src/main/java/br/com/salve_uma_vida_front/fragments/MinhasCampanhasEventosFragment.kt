@@ -3,7 +3,9 @@ package br.com.salve_uma_vida_front.fragments
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
@@ -15,17 +17,20 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.*
+import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.CardCampanhaEditavelAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoEditavelAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
+import br.com.salve_uma_vida_front.getToolbar
 import br.com.salve_uma_vida_front.interfaces.CardCampanhaEditavelListener
 import br.com.salve_uma_vida_front.interfaces.CardEventoEditavelListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
+import br.com.salve_uma_vida_front.showText
+import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
@@ -35,7 +40,7 @@ import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardEventoEditavelListener, CardCampanhaEditavelListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
-    lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaEditavelViewHolder>
+    lateinit var campanhaEditavelAdapter: RecyclerView.Adapter<CardCampanhaEditavelViewHolder>
     lateinit var eventoEditavelAdapter: RecyclerView.Adapter<CardEventoEditavelViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var binding: FragmentOngCampanhasBinding
@@ -220,41 +225,34 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
         mRecyclerView = binding.cardsCampanhas
         mRecyclerView.setHasFixedSize(true)
         mLayoutManager = LinearLayoutManager(requireContext())
-        campanhaFinalAdapter =
+        campanhaEditavelAdapter =
             CardCampanhaEditavelAdapter(
                 listaCampanhas,
                 this
             )
+        eventoEditavelAdapter =
+            CardEventoEditavelAdapter(
+                listaEventos,
+                this
+            )
         mRecyclerView.layoutManager = mLayoutManager
-        mRecyclerView.adapter = campanhaFinalAdapter
+        mRecyclerView.adapter = campanhaEditavelAdapter
     }
 
     private fun configuraObservers() {
         viewModelCampanha.minhasCampanhas.observe(viewLifecycleOwner, Observer {
-            closeLoading(activity, R.id.ongLoading)
             listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
             }
-            campanhaFinalAdapter =
-                CardCampanhaEditavelAdapter(
-                    listaCampanhas,
-                    this
-                )
-            mRecyclerView.adapter = campanhaFinalAdapter
+            campanhaEditavelAdapter.notifyDataSetChanged()
         })
         viewModelEvento.meusEventos.observe(viewLifecycleOwner, Observer {
-            closeLoading(activity, R.id.ongLoading)
             listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
             }
-            eventoEditavelAdapter =
-                CardEventoEditavelAdapter(
-                    listaEventos,
-                    this
-                )
-            mRecyclerView.adapter = eventoEditavelAdapter
+            eventoEditavelAdapter.notifyDataSetChanged()
         })
     }
 
@@ -267,16 +265,17 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
     }
 
     private fun carregaDados(parametro: String = "") {
-        startLoading(activity, R.id.ongLoading)
         val toolbar = getToolbar(activity)!!
         if (filtroAtual.tipoFiltro == SearchType.CAMPANHAS) {
             toolbar.title = "Minhas Campanhas"
             toolbar.setBackgroundColor(resources.getColor(R.color.corCampanhas))
             carregaCampanhasUserLogado(parametro)
+            mRecyclerView.adapter = campanhaEditavelAdapter
         } else if (filtroAtual.tipoFiltro == SearchType.EVENTOS) {
             toolbar.title = "Meus Eventos"
             toolbar.setBackgroundColor(resources.getColor(R.color.corEventos))
             carregaEventosUserLogado(parametro)
+            mRecyclerView.adapter = eventoEditavelAdapter
         }
     }
 

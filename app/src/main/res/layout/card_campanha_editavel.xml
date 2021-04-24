@@ -15,6 +15,66 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingTitulo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelTitulo"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaEditavelTitulo"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaEditavelTitulo"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelTitulo"
+                app:layout_constraintVertical_bias="0.545">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingArquivar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelArquivar"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaEditavelArquivar"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaEditavelArquivar"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelArquivar"
+                app:layout_constraintVertical_bias="0.545">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingImagem"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView"
+                app:layout_constraintVertical_bias="0.545">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingData"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaEditavelData"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaEditavelData"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaEditavelData"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaEditavelData"
+                app:layout_constraintVertical_bias="0.545">
+
+            </FrameLayout>
+
             <ImageButton
                 android:id="@+id/cardCampanhaEditavelArquivar"
                 android:layout_width="wrap_content"
@@ -23,6 +83,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@null"
+                android:elevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -56,6 +117,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="@string/text_cardTitulo"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -69,6 +131,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:elevation="0dp"
                 android:text="@string/text_cardTimeStamp"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/cardCampanhaEditavelTitulo"
