@@ -133,7 +133,6 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         eventoFinalAdapter =
             CardEventoFinalAdapter(
                 listaEventos,
-                requireContext(),
                 this
             )
         mRecyclerView.layoutManager = mLayoutManager

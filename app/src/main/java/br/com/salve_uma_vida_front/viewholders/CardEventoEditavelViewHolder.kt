@@ -1,5 +1,6 @@
 package br.com.salve_uma_vida_front.viewholders
 
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,5 +14,9 @@ class CardEventoEditavelViewHolder(binding: CardEventoEditavelBinding) : Recycle
     var textViewTitulo: TextView = binding.cardEventoEditavelTitulo
     var textViewTimeStamp: TextView = binding.cardEventoEditavelData
     var imageButtonArquivar: ImageButton = binding.cardEventoEditavelArquivar
+    var loadingTitulo: FrameLayout = binding.cardEventoEditavelLoadingTitulo
+    var loadingData: FrameLayout = binding.cardEventoEditavelLoadingData
+    var loadingImagem: FrameLayout = binding.cardEventoEditavelLoadingImagem
+    var loadingArquivar: FrameLayout = binding.cardEventoEditavelLoadingArquivar
 
 }

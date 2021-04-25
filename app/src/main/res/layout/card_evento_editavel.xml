@@ -15,6 +15,58 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout
+                android:id="@+id/cardEventoEditavelLoadingImagem"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardEventoEditavelLoadingArquivar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardEventoEditavelArquivar"
+                app:layout_constraintEnd_toEndOf="@+id/cardEventoEditavelArquivar"
+                app:layout_constraintStart_toStartOf="@+id/cardEventoEditavelArquivar"
+                app:layout_constraintTop_toTopOf="@+id/cardEventoEditavelArquivar">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardEventoEditavelLoadingTitulo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardEventoEditavelTitulo"
+                app:layout_constraintEnd_toEndOf="@+id/cardEventoEditavelTitulo"
+                app:layout_constraintStart_toStartOf="@+id/cardEventoEditavelTitulo"
+                app:layout_constraintTop_toTopOf="@+id/cardEventoEditavelTitulo">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardEventoEditavelLoadingData"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardEventoEditavelData"
+                app:layout_constraintEnd_toEndOf="@+id/cardEventoEditavelData"
+                app:layout_constraintStart_toStartOf="@+id/cardEventoEditavelData"
+                app:layout_constraintTop_toTopOf="@+id/cardEventoEditavelData">
+
+            </FrameLayout>
+
             <ImageButton
                 android:id="@+id/cardEventoEditavelArquivar"
                 android:layout_width="wrap_content"
@@ -24,6 +76,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="@null"
                 android:contentDescription="@string/arquiva_campanha_fazendo_com_que_fique_em_estado_de_finalizada"
+                android:elevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -57,6 +110,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="Evento de comemoração"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -70,6 +124,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:elevation="0dp"
                 android:text="Ocorrerá em 23/03/2020"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/cardEventoEditavelTitulo"

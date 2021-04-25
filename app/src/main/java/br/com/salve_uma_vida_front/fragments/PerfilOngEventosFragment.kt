@@ -48,7 +48,6 @@ class PerfilOngEventosFragment(val user: UserDto, val idOng: Int) : Fragment(), 
         val mLayoutManager = LinearLayoutManager(requireContext())
         val eventoFinalAdapter = CardEventoFinalAdapter(
             listaEventos,
-            requireContext(),
             this
         )
         mRecyclerView.layoutManager = mLayoutManager

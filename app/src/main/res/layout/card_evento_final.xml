@@ -15,6 +15,45 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout
+                android:id="@+id/cardEventoFinalLoadingImagem"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardEventoFinalLoadingTitulo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardEventoFinalTitulo"
+                app:layout_constraintEnd_toEndOf="@+id/cardEventoFinalTitulo"
+                app:layout_constraintStart_toStartOf="@+id/cardEventoFinalTitulo"
+                app:layout_constraintTop_toTopOf="@+id/cardEventoFinalTitulo">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardEventoFinalLoadingData"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardEventoFinalData"
+                app:layout_constraintEnd_toEndOf="@+id/cardEventoFinalData"
+                app:layout_constraintStart_toStartOf="@+id/cardEventoFinalData"
+                app:layout_constraintTop_toTopOf="@+id/cardEventoFinalData">
+
+            </FrameLayout>
+
             <ImageButton
                 android:id="@+id/cardEventoFinalFinalizado"
                 android:layout_width="wrap_content"

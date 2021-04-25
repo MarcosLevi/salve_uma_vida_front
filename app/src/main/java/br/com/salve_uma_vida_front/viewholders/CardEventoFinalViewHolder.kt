@@ -1,5 +1,6 @@
 package br.com.salve_uma_vida_front.viewholders
 
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -12,5 +13,8 @@ class CardEventoFinalViewHolder(binding: CardEventoFinalBinding) : RecyclerView.
     var textViewTitulo: TextView = binding.cardEventoFinalTitulo
     var textViewTimeStamp: TextView = binding.cardEventoFinalData
     var cardEvento: CardView = binding.cardEventoFinal
+    var loadingTitulo: FrameLayout = binding.cardEventoFinalLoadingTitulo
+    var loadingData: FrameLayout = binding.cardEventoFinalLoadingData
+    var loadingImagem: FrameLayout = binding.cardEventoFinalLoadingImagem
 
 }
