@@ -12,9 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.salve_uma_vida_front.*
-import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
-import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
-import br.com.salve_uma_vida_front.adapters.ItemAdapterDoador
+import br.com.salve_uma_vida_front.adapters.ItemCardCampanhaFinal
 import br.com.salve_uma_vida_front.databinding.FragmentCampanhaDetalhadaBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
@@ -83,7 +81,7 @@ class CampanhaDetalhadaFragment : Fragment() {
         mRecyclerView.setHasFixedSize(true)
         val mLayoutManager = LinearLayoutManager(requireContext())
         val mAdapterDoador =
-            ItemAdapterDoador(campanha.itens)
+            ItemCardCampanhaFinal(campanha.itens)
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapterDoador
     }

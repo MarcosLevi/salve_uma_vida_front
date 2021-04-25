@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardCampanhaFinal"
+        android:id="@+id/cardCampanhaEditavel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <FrameLayout
-                android:id="@+id/cardCampanhaFinalLoadingTitulo"
+                android:id="@+id/cardCampanhaEditavelLoadingTitulo"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -31,7 +31,7 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/cardCampanhaFinalLoadingArquivar"
+                android:id="@+id/cardCampanhaEditavelLoadingArquivar"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -46,7 +46,7 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/cardCampanhaFinalLoadingImagem"
+                android:id="@+id/cardCampanhaEditavelLoadingImagem"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -61,7 +61,7 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/cardCampanhaFinalLoadingData"
+                android:id="@+id/cardCampanhaEditavelLoadingData"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"

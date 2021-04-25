@@ -15,6 +15,71 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingImagem"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingTitulo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaFinalTitulo"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaFinalTitulo"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaFinalTitulo"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaFinalTitulo">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingData"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaFinalData"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaFinalData"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaFinalData"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaFinalData">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingQuantidadeItens"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaFinalQuantidadeItens"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaFinalQuantidadeItens"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaFinalQuantidadeItens"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaFinalQuantidadeItens">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/cardCampanhaFinalLoadingItens"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardCampanhaFinalItens"
+                app:layout_constraintEnd_toEndOf="@+id/cardCampanhaFinalItens"
+                app:layout_constraintStart_toStartOf="@+id/cardCampanhaFinalItens"
+                app:layout_constraintTop_toTopOf="@+id/cardCampanhaFinalItens">
+
+            </FrameLayout>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="110dp"
@@ -43,6 +108,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="@string/text_cardTitulo"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -56,6 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:elevation="0dp"
                 android:text="@string/text_cardTimeStamp"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/cardCampanhaFinalTitulo"
@@ -68,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="@string/text_cardQuantidadeItens"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +149,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:elevation="0dp"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

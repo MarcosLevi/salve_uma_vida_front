@@ -17,20 +17,17 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.CardCampanhaEditavelAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoEditavelAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentOngCampanhasBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
-import br.com.salve_uma_vida_front.getToolbar
 import br.com.salve_uma_vida_front.interfaces.CardCampanhaEditavelListener
 import br.com.salve_uma_vida_front.interfaces.CardEventoEditavelListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
-import br.com.salve_uma_vida_front.showText
-import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaEditavelViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoEditavelViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
@@ -241,14 +238,12 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
 
     private fun configuraObservers() {
         viewModelCampanha.minhasCampanhas.observe(viewLifecycleOwner, Observer {
-            listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
             }
             campanhaEditavelAdapter.notifyDataSetChanged()
         })
         viewModelEvento.meusEventos.observe(viewLifecycleOwner, Observer {
-            listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
             }
@@ -266,17 +261,30 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
 
     private fun carregaDados(parametro: String = "") {
         val toolbar = getToolbar(activity)!!
+        view?.hideKeyboard()
         if (filtroAtual.tipoFiltro == SearchType.CAMPANHAS) {
+            setaAdapterCampanhas()
             toolbar.title = "Minhas Campanhas"
             toolbar.setBackgroundColor(resources.getColor(R.color.corCampanhas))
             carregaCampanhasUserLogado(parametro)
-            mRecyclerView.adapter = campanhaEditavelAdapter
         } else if (filtroAtual.tipoFiltro == SearchType.EVENTOS) {
+            setaAdapterEventos()
             toolbar.title = "Meus Eventos"
             toolbar.setBackgroundColor(resources.getColor(R.color.corEventos))
             carregaEventosUserLogado(parametro)
-            mRecyclerView.adapter = eventoEditavelAdapter
         }
+    }
+
+    private fun setaAdapterEventos() {
+        mRecyclerView.adapter = eventoEditavelAdapter
+        listaEventos.clear()
+        eventoEditavelAdapter.notifyDataSetChanged()
+    }
+
+    private fun setaAdapterCampanhas() {
+        mRecyclerView.adapter = campanhaEditavelAdapter
+        listaCampanhas.clear()
+        campanhaEditavelAdapter.notifyDataSetChanged()
     }
 
     override fun passaFiltro(filtro: FiltroPesquisaDto) {

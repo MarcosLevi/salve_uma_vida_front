@@ -1,7 +1,6 @@
 package br.com.salve_uma_vida_front.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,24 +13,28 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.salve_uma_vida_front.*
+import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
 import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
+import br.com.salve_uma_vida_front.getToolbar
+import br.com.salve_uma_vida_front.hideKeyboard
 import br.com.salve_uma_vida_front.interfaces.CardCampanhaFinalListener
 import br.com.salve_uma_vida_front.interfaces.CardEventoFinalListener
 import br.com.salve_uma_vida_front.models.DialogFiltros
 import br.com.salve_uma_vida_front.models.SearchType
+import br.com.salve_uma_vida_front.toolbarVazia
 import br.com.salve_uma_vida_front.viewholders.CardCampanhaFinalViewHolder
 import br.com.salve_uma_vida_front.viewholders.CardEventoFinalViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import br.com.salve_uma_vida_front.viewmodels.EventosViewModel
 
 
-class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCampanhaFinalListener, CardEventoFinalListener {
+class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCampanhaFinalListener,
+    CardEventoFinalListener {
     var navController: NavController? = null
     lateinit var mRecyclerView: RecyclerView
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
@@ -67,12 +70,10 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         navController = Navigation.findNavController(view)
     }
 
-    fun openDialog() {
+    private fun openDialog() {
 
         val dialog = DialogFiltros(this)
-        if (childFragmentManager != null) {
-            dialog.show(childFragmentManager, "FiltroDialog")
-        }
+        dialog.show(childFragmentManager, "FiltroDialog")
 
     }
 
@@ -129,40 +130,28 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
                 requireContext(),
                 this
             )
+        eventoFinalAdapter =
+            CardEventoFinalAdapter(
+                listaEventos,
+                requireContext(),
+                this
+            )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = campanhaFinalAdapter
     }
 
     private fun configuraObservers() {
         viewModelCampanha.campanhas.observe(viewLifecycleOwner, Observer {
-            listaCampanhas.clear()
             if (it != null) {
                 listaCampanhas.addAll(it)
             }
-            campanhaFinalAdapter =
-                CardCampanhaFinalAdapter(
-                    listaCampanhas,
-                    requireContext(),
-                    this
-                )
-            mRecyclerView.adapter = campanhaFinalAdapter
-            closeLoading(activity, R.id.ongLoading)
-            view?.hideKeyboard()
+            campanhaFinalAdapter.notifyDataSetChanged()
         })
         viewModelEvento.eventos.observe(viewLifecycleOwner, Observer {
-            listaEventos.clear()
             if (it != null) {
                 listaEventos.addAll(it)
             }
-            eventoFinalAdapter =
-                CardEventoFinalAdapter(
-                    listaEventos,
-                    requireContext(),
-                    this
-                )
-            mRecyclerView.adapter = eventoFinalAdapter
-            closeLoading(activity, R.id.ongLoading)
-            view?.hideKeyboard()
+            eventoFinalAdapter.notifyDataSetChanged()
         })
     }
 
@@ -175,17 +164,31 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     private fun carregaDados(parametro: String = "") {
-        startLoading(activity, R.id.ongLoading)
         val toolbar = getToolbar(activity)!!
+        view?.hideKeyboard()
         if (filtroAtual.tipoFiltro == SearchType.CAMPANHAS) {
+            setaAdapterCampanhas()
             toolbar.title = "Procurar Campanhas"
             toolbar.setBackgroundColor(resources.getColor(R.color.corCampanhas))
             carregaCampanhas(parametro)
         } else if (filtroAtual.tipoFiltro == SearchType.EVENTOS) {
+            setaAdapterEventos()
             toolbar.title = "Procurar Eventos"
             toolbar.setBackgroundColor(resources.getColor(R.color.corEventos))
             carregaEventos(parametro)
         }
+    }
+
+    private fun setaAdapterCampanhas() {
+        mRecyclerView.adapter = campanhaFinalAdapter
+        listaCampanhas.clear()
+        campanhaFinalAdapter.notifyDataSetChanged()
+    }
+
+    private fun setaAdapterEventos() {
+        mRecyclerView.adapter = eventoFinalAdapter
+        listaEventos.clear()
+        eventoFinalAdapter.notifyDataSetChanged()
     }
 
     override fun passaFiltro(filtro: FiltroPesquisaDto) {
@@ -194,19 +197,27 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     override fun abreCampanha(campanha: CampanhaDto) {
-        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToCampanhaDetalhadaFragment(
-            campanha.id!!
-        ))
+        navController!!.navigate(
+            ProcurarFragmentDirections.actionBothProcurarFragmentToCampanhaDetalhadaFragment(
+                campanha.id!!
+            )
+        )
     }
 
     override fun abreEvento(evento: EventoDto) {
-        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToEventoDetalhadoFragment(
-            evento.id!!
-        ))
+        navController!!.navigate(
+            ProcurarFragmentDirections.actionBothProcurarFragmentToEventoDetalhadoFragment(
+                evento.id!!
+            )
+        )
     }
 
     override fun abrePerfilOng(id: Int) {
-        navController!!.navigate(ProcurarFragmentDirections.actionBothProcurarFragmentToPerfilOngFragment(id))
+        navController!!.navigate(
+            ProcurarFragmentDirections.actionBothProcurarFragmentToPerfilOngFragment(
+                id
+            )
+        )
     }
 
 

@@ -24,7 +24,7 @@ import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.CampanhaItemDto
 import br.com.salve_uma_vida_front.models.DialogEditaItemNew
 import br.com.salve_uma_vida_front.models.Erros
-import br.com.salve_uma_vida_front.viewholders.itemCadastroCampanhaViewHolder
+import br.com.salve_uma_vida_front.viewholders.ItemCadastroCampanhaViewHolder
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
 import com.squareup.picasso.Picasso
 import androidx.lifecycle.Observer
@@ -41,7 +41,7 @@ class CadastroCampanhaFragment : Fragment(), ItemAdapterOng.ItemListener,
     private lateinit var viewModelUser: UserViewModel
 
     lateinit var mRecyclerView: RecyclerView
-    lateinit var mAdapterOng: RecyclerView.Adapter<itemCadastroCampanhaViewHolder>
+    lateinit var mAdapterOng: RecyclerView.Adapter<ItemCadastroCampanhaViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
     lateinit var campanha: CampanhaDto
     private var erros = Erros()

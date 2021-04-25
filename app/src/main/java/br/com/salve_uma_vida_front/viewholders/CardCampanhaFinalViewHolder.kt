@@ -1,5 +1,6 @@
 package br.com.salve_uma_vida_front.viewholders
 
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -14,5 +15,10 @@ class CardCampanhaFinalViewHolder(binding: CardCampanhaFinalBinding) : RecyclerV
     var textViewQuantidadeItens: TextView = binding.cardCampanhaFinalQuantidadeItens
     var itensCampanha: RecyclerView = binding.cardCampanhaFinalItens
     var cardCampanha: CardView = binding.cardCampanhaFinal
+    var loadingTitulo: FrameLayout = binding.cardCampanhaFinalLoadingTitulo
+    var loadingData: FrameLayout = binding.cardCampanhaFinalLoadingData
+    var loadingImagem: FrameLayout = binding.cardCampanhaFinalLoadingImagem
+    var loadingQuantidadeItens: FrameLayout = binding.cardCampanhaFinalLoadingQuantidadeItens
+    var loadingItens: FrameLayout = binding.cardCampanhaFinalLoadingItens
 
 }

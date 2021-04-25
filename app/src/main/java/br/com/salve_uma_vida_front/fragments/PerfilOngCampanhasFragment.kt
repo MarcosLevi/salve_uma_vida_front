@@ -60,16 +60,22 @@ class PerfilOngCampanhasFragment(
 
     companion object {
         @JvmStatic
-        fun newInstance(user: UserDto, idOng: Int) = PerfilOngCampanhasFragment(user,idOng)
+        fun newInstance(user: UserDto, idOng: Int) = PerfilOngCampanhasFragment(user, idOng)
     }
 
     private fun carregaCampanhas() {
+        resetarRecyclerView()
         viewModelCampanha.getCampanhasDeUmUserPeloId(idOng)
+    }
+
+    private fun resetarRecyclerView() {
+        listaCampanhas.clear()
+        mRecyclerView.adapter!!.notifyDataSetChanged()
     }
 
     private fun configuraObservers() {
         viewModelCampanha.campanhasDeUmUser.observe(viewLifecycleOwner, Observer {
-            listaCampanhas.clear()
+
             if (it != null) {
                 listaCampanhas.addAll(it)
             }
@@ -78,10 +84,10 @@ class PerfilOngCampanhasFragment(
     }
 
     override fun abreCampanha(campanha: CampanhaDto) {
-        Log.d("teste","Cliquei pra abrir a campanha")
+        Log.d("teste", "Cliquei pra abrir a campanha")
     }
 
     override fun abrePerfilOng(id: Int) {
-        Toast.makeText(requireContext(),"Você já está no perfil da ong",Toast.LENGTH_SHORT)
+        Toast.makeText(requireContext(), "Você já está no perfil da ong", Toast.LENGTH_SHORT)
     }
 }

@@ -13,8 +13,8 @@ class CardCampanhaEditavelViewHolder(binding: CardCampanhaEditavelBinding) : Rec
     var textViewTitulo: TextView = binding.cardCampanhaEditavelTitulo
     var textViewTimeStamp: TextView = binding.cardCampanhaEditavelData
     var imageButtonArquivar: ImageButton = binding.cardCampanhaEditavelArquivar
-    var loadingTitulo: FrameLayout = binding.cardCampanhaFinalLoadingTitulo
-    var loadingData: FrameLayout = binding.cardCampanhaFinalLoadingData
-    var loadingImagem: FrameLayout = binding.cardCampanhaFinalLoadingImagem
-    var loadingArquivar: FrameLayout = binding.cardCampanhaFinalLoadingArquivar
+    var loadingTitulo: FrameLayout = binding.cardCampanhaEditavelLoadingTitulo
+    var loadingData: FrameLayout = binding.cardCampanhaEditavelLoadingData
+    var loadingImagem: FrameLayout = binding.cardCampanhaEditavelLoadingImagem
+    var loadingArquivar: FrameLayout = binding.cardCampanhaEditavelLoadingArquivar
 }
