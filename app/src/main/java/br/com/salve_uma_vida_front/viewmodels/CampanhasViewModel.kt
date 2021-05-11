@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.ResponseDto
 import br.com.salve_uma_vida_front.repository.CampanhaRepository
+import br.com.salve_uma_vida_front.repository.EventoRepository
 import br.com.salve_uma_vida_front.sharedpreferences.MyPreferences
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,6 +37,9 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val _updateCampanha = MutableLiveData<String>()
     val updateCampanha: LiveData<String> = _updateCampanha
+
+    private val _closeCampanha = MutableLiveData<String>()
+    val closeCampanha: LiveData<String> = _closeCampanha
 
 
     fun getCampanhasUserLogado(parametro: String="") {
@@ -144,6 +148,23 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
             ) {
                 val resposta = response.body()?.data
                 _updateCampanha.value = resposta
+            }
+        })
+    }
+
+    fun closeCampanhaId(id: Int, token: String) {
+        val callback = CampanhaRepository().closeCampanhaId(id, token)
+        callback.enqueue(object : Callback<ResponseDto<String>> {
+            override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {
+                Log.d("SearchViewModel", "Requisição falhou")
+            }
+
+            override fun onResponse(
+                call: Call<ResponseDto<String>>,
+                response: Response<ResponseDto<String>>
+            ) {
+                val resposta = response.body()?.data
+                _closeCampanha.value = resposta
             }
         })
     }

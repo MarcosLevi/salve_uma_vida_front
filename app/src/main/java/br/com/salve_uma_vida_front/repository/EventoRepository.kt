@@ -43,4 +43,9 @@ class EventoRepository {
         val endpoint = NetworkUtils.getRetrofitInstance().create(EventosEndPoint::class.java)
         return endpoint.updateEvento(token, evento)
     }
+
+    fun closeEventoId(id: Int, token: String): Call<ResponseDto<String>> {
+        val endpoint = NetworkUtils.getRetrofitInstance().create(EventosEndPoint::class.java)
+        return endpoint.closeEventoId(id, token)
+    }
 }

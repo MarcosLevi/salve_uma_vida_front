@@ -45,4 +45,11 @@ interface CampanhasEndPoint {
         @Header("Authorization") token: String,
         @Body body: CampanhaDto
     ): Call<ResponseDto<String>>
+
+    @Headers("Content-Type: application/json")
+    @GET("campaign/close/{id}")
+    fun closeCampanhaId(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String
+    ): Call<ResponseDto<String>>
 }
