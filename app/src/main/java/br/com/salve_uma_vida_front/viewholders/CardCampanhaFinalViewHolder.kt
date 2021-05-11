@@ -20,5 +20,6 @@ class CardCampanhaFinalViewHolder(binding: CardCampanhaFinalBinding) : RecyclerV
     var loadingImagem: FrameLayout = binding.cardCampanhaFinalLoadingImagem
     var loadingQuantidadeItens: FrameLayout = binding.cardCampanhaFinalLoadingQuantidadeItens
     var loadingItens: FrameLayout = binding.cardCampanhaFinalLoadingItens
+    var campanhaFinalizada: ImageView = binding.cardCampanhaFinalFinalizada
 
 }

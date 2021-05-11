@@ -40,6 +40,7 @@ class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>, priv
             holderFinal.loadingTitulo.visibility = View.VISIBLE
             holderFinal.loadingData.visibility = View.VISIBLE
             holderFinal.loadingImagem.visibility = View.VISIBLE
+            holderFinal.campanhaFinalizada.visibility = View.GONE
         } else {
             val currentItem: CampanhaDto = listaCards[position]
             Picasso.get()
@@ -61,10 +62,16 @@ class CardCampanhaEditavelAdapter(var listaCards: MutableList<CampanhaDto>, priv
             holderFinal.textViewTimeStamp.text =
                 "Anunciado em ${FormatStringToDate(currentItem.data)}"
 
-            holderFinal.imageButtonArquivar.setOnClickListener {
-                Log.d("CardCampanhaEditavel", "Cliquei em Arquivar")
-                listener.onArquivaClicked(currentItem)
+            if (currentItem.aberta!!){
+                holderFinal.imageButtonArquivar.setOnClickListener {
+                    Log.d("CardCampanhaEditavel", "Cliquei em Arquivar")
+                    listener.onArquivaClicked(currentItem)
+                }
+            }else{
+                holderFinal.imageButtonArquivar.visibility = View.GONE
+                holderFinal.campanhaFinalizada.visibility = View.VISIBLE
             }
+
             holderFinal.loadingArquivar.visibility = View.GONE
             holderFinal.loadingTitulo.visibility = View.GONE
             holderFinal.loadingData.visibility = View.GONE

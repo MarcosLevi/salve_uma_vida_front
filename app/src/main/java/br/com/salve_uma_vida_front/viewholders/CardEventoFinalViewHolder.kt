@@ -16,5 +16,6 @@ class CardEventoFinalViewHolder(binding: CardEventoFinalBinding) : RecyclerView.
     var loadingTitulo: FrameLayout = binding.cardEventoFinalLoadingTitulo
     var loadingData: FrameLayout = binding.cardEventoFinalLoadingData
     var loadingImagem: FrameLayout = binding.cardEventoFinalLoadingImagem
+    var eventoFinalizado: ImageView = binding.cardEventoFinalFinalizado
 
 }

@@ -158,7 +158,7 @@ class EventosViewModel(application: Application) : AndroidViewModel(application)
         })
     }
 
-    fun closeEventoId(id: Int, token: String) {
+    fun closeEventoId(id: Int) {
         val callback = EventoRepository().closeEventoId(id, token)
         callback.enqueue(object : Callback<ResponseDto<String>> {
             override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {

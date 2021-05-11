@@ -1,6 +1,7 @@
 package br.com.salve_uma_vida_front.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,6 +82,8 @@ class CardCampanhaFinalAdapter(
             holderFinal.cardCampanha.setOnClickListener {
                 listener.abreCampanha(currentItem)
             }
+            if (!currentItem.aberta!!)
+                holderFinal.campanhaFinalizada.visibility = View.VISIBLE
 
             mRecyclerView = holderFinal.itensCampanha
             mRecyclerView.setHasFixedSize(true)

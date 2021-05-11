@@ -1,6 +1,5 @@
 package br.com.salve_uma_vida_front.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,9 +67,13 @@ class CardEventoEditavelAdapter(
             holderFinal.textViewTimeStamp.text =
                 "Ocorrerá em ${FormatStringToDate(currentItem.data!!)}"
 
-            holderFinal.imageButtonArquivar.setOnClickListener {
-                Log.d("CardEventoEditavel", "Cliquei em Arquivar")
-                listener.onArquivaClicked(currentItem)
+            if (currentItem.aberta!!) {
+                holderFinal.imageButtonArquivar.setOnClickListener {
+                    listener.onArquivaClicked(currentItem)
+                }
+            } else {
+                holderFinal.imageButtonArquivar.visibility = View.GONE
+                holderFinal.eventoFinalizado.visibility = View.VISIBLE
             }
             holderFinal.loadingArquivar.visibility = View.GONE
             holderFinal.loadingTitulo.visibility = View.GONE

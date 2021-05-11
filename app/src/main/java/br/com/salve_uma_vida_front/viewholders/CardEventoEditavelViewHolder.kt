@@ -18,5 +18,5 @@ class CardEventoEditavelViewHolder(binding: CardEventoEditavelBinding) : Recycle
     var loadingData: FrameLayout = binding.cardEventoEditavelLoadingData
     var loadingImagem: FrameLayout = binding.cardEventoEditavelLoadingImagem
     var loadingArquivar: FrameLayout = binding.cardEventoEditavelLoadingArquivar
-
+    var eventoFinalizado: ImageView = binding.cardEventoEditavelFinalizado
 }

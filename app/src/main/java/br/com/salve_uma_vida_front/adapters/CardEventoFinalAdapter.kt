@@ -59,6 +59,8 @@ class CardEventoFinalAdapter(
 
                 })
 
+            if (!currentItem.aberta!!)
+                holderFinal.eventoFinalizado.visibility = View.VISIBLE
 
             holderFinal.textViewTitulo.text = currentItem.titulo
             holderFinal.textViewTimeStamp.text =

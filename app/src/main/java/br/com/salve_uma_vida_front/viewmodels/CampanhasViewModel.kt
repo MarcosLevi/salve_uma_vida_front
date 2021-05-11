@@ -152,7 +152,7 @@ class CampanhasViewModel(application: Application) : AndroidViewModel(applicatio
         })
     }
 
-    fun closeCampanhaId(id: Int, token: String) {
+    fun closeCampanhaId(id: Int) {
         val callback = CampanhaRepository().closeCampanhaId(id, token)
         callback.enqueue(object : Callback<ResponseDto<String>> {
             override fun onFailure(call: Call<ResponseDto<String>>, t: Throwable) {

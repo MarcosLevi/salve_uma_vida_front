@@ -249,6 +249,18 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
             }
             eventoEditavelAdapter.notifyDataSetChanged()
         })
+        viewModelCampanha.closeCampanha.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                showText(requireContext(),"Campanha fechada")
+            }
+            carregaDados()
+        })
+        viewModelEvento.closeEvento.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                showText(requireContext(),"Evento fechado")
+            }
+            carregaDados()
+        })
     }
 
     private fun carregaCampanhasUserLogado(parametro: String) {
@@ -292,16 +304,19 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
         carregaDados()
     }
 
-    private fun showDialog(){
+    private fun showDialog(evento: EventoDto? = null, campanha: CampanhaDto? = null){
         lateinit var dialog: AlertDialog
         val builder = AlertDialog.Builder(requireContext(),R.style.DialogTheme)
-        builder.setTitle("Arquivar Campanha")
-        builder.setMessage("Deseja arquivar a campanha? (Os doadores não poderão ver a campanha quando arquivada)")
+        builder.setTitle(if (evento!=null)"Arquivar Evento" else "Arquivar Campanha")
+        builder.setMessage(if (evento!=null) "Deseja arquivar o evento? (Os doadores não poderão ver o evento quando arquivado)" else "Deseja arquivar a campanha? (Os doadores não poderão ver a campanha quando arquivada)" )
         val dialogClickListener = DialogInterface.OnClickListener{ _, which ->
             when(which){
                 DialogInterface.BUTTON_POSITIVE -> {
 //                    viewModelCampanha.arquivaCampanha()
-                    showText(context,"Cliquei em arquivar campanha")
+                    if (evento != null)
+                        viewModelEvento.closeEventoId(evento.id!!)
+                    else if (campanha!= null)
+                        viewModelCampanha.closeCampanhaId(campanha.id!!)
                 }
             }
         }
@@ -312,11 +327,11 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
     }
 
     override fun onArquivaClicked(evento: EventoDto) {
-        showDialog()
+        showDialog(evento,null)
     }
 
     override fun onArquivaClicked(campanha: CampanhaDto) {
-        showDialog()
+        showDialog(null, campanha)
     }
 }
 

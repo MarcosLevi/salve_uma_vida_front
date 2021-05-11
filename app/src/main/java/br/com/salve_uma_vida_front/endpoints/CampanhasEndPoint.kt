@@ -47,7 +47,7 @@ interface CampanhasEndPoint {
     ): Call<ResponseDto<String>>
 
     @Headers("Content-Type: application/json")
-    @GET("campaign/close/{id}")
+    @PUT("campaign/close/{id}")
     fun closeCampanhaId(
         @Path("id") id: Int,
         @Header("Authorization") token: String

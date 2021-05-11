@@ -17,4 +17,5 @@ class CardCampanhaEditavelViewHolder(binding: CardCampanhaEditavelBinding) : Rec
     var loadingData: FrameLayout = binding.cardCampanhaEditavelLoadingData
     var loadingImagem: FrameLayout = binding.cardCampanhaEditavelLoadingImagem
     var loadingArquivar: FrameLayout = binding.cardCampanhaEditavelLoadingArquivar
+    var campanhaFinalizada: ImageView = binding.cardCampanhaEditavelFinalizada
 }
