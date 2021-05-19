@@ -2,6 +2,7 @@ package br.com.salve_uma_vida_front.dto
 
 import br.com.salve_uma_vida_front.models.UserType
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class UserDto(
     @SerializedName("name")
@@ -21,7 +22,9 @@ data class UserDto(
     @SerializedName("type")
     var type: UserType,
     @SerializedName("image")
-    var image: String
-) {
+    var image: String,
+    @SerializedName("id")
+    var id: Int? = null
+) : Serializable {
 
 }

@@ -18,7 +18,7 @@
         android:title="@string/campanhas" />
     <item
         android:id="@+id/bothUserLogadoFragment"
-        android:icon="@drawable/ic_baseline_person_24"
+        android:icon="@drawable/ic_baseline_person_30"
         android:title="@string/perfil" />
 
     <item

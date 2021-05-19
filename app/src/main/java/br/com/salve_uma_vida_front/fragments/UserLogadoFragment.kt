@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.TabPerfilAdapter
 import br.com.salve_uma_vida_front.adapters.TabPerfilOngAdapter
@@ -29,6 +31,7 @@ class UserLogadoFragment : Fragment() {
     private lateinit var viewModel: UserViewModel
     private lateinit var user: UserDto
     private val titulos = mutableListOf("Info", "Campanhas", "Eventos", "Galeria")
+    var navController: NavController? = null
 
 
     override fun onCreateView(
@@ -95,6 +98,11 @@ class UserLogadoFragment : Fragment() {
         }.attach()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
     private fun configuraTabLayout() {
         binding.perfilFragmentTabLayout.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
@@ -118,10 +126,10 @@ class UserLogadoFragment : Fragment() {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.bothPerfilUserLogadoEdita -> {
-                    TODO()
-                }
-                R.id.bothPerfilUserLogadoFinaliza -> {
-                    TODO()
+                    navController!!.navigate(UserLogadoFragmentDirections.actionBothUserLogadoFragmentToEditarUserFragment(
+                        user
+                    ))
+                    true
                 }
                 else -> {
                     throw IllegalArgumentException("Item inexistente")

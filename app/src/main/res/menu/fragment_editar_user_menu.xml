@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/editarUserFragmentCancelar"
+        android:title="Cancelar"
+        android:icon="@drawable/ic_baseline_close_24"
+        app:showAsAction="always"
+        android:iconTint="@color/corBotaoCancelar"
+        />
+    <item android:id="@+id/editarUserFragmentFinalizar"
+        android:title="Finalizar"
+        android:icon="@drawable/ic_baseline_done_30"
+        app:showAsAction="always"
+        android:iconTint="@color/corBotaoConfirmar"
+        />
+
+</menu>

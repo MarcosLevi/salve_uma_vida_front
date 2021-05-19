@@ -7,11 +7,5 @@
         android:icon="@drawable/ic_baseline_edit_30"
         app:showAsAction="always"
         />
-    <item android:id="@+id/bothPerfilUserLogadoFinaliza"
-        android:title="Finalizar"
-        android:icon="@drawable/ic_baseline_done_30"
-        app:showAsAction="always"
-        android:visible="false"
-        />
 
 </menu>

@@ -4,7 +4,7 @@
 
     <item android:id="@+id/campanhaOuEventoDetalhadoFragmentVaiParaPerfilOng"
         android:title="Procurar"
-        android:icon="@drawable/ic_baseline_person_24"
+        android:icon="@drawable/ic_baseline_person_30"
         app:showAsAction="always"
         />
 

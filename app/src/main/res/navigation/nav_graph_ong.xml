@@ -44,7 +44,11 @@
         android:id="@+id/bothUserLogadoFragment"
         android:name="br.com.salve_uma_vida_front.fragments.UserLogadoFragment"
         android:label="Perfil"
-        tools:layout="@layout/fragment_perfil_user_logado"/>
+        tools:layout="@layout/fragment_perfil_user_logado">
+        <action
+            android:id="@+id/action_bothUserLogadoFragment_to_editarUserFragment"
+            app:destination="@id/editarUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cadastroEventoFragment"
         android:name="br.com.salve_uma_vida_front.fragments.CadastroEventoFragment"
@@ -123,5 +127,14 @@
         <action
             android:id="@+id/action_bothMapaFragment_to_eventoDetalhadoFragment"
             app:destination="@id/eventoDetalhadoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarUserFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.EditarUserFragment"
+        android:label="Editar Usuário"
+        tools:layout="@layout/fragment_editar_user">
+        <argument
+            android:name="user"
+            app:argType="br.com.salve_uma_vida_front.dto.UserDto" />
     </fragment>
 </navigation>
