@@ -27,7 +27,7 @@ class CampanhaDetalhadaFragment : Fragment() {
     private lateinit var viewModelCampanha: CampanhasViewModel
 
     fun getCampanhasDeUmUserPeloId(){
-        startLoading(activity, R.id.ongLoading)
+        mostraLoading()
         viewModelCampanha.getCampanhaId(getIdCampanhaByArgs())
     }
 
@@ -56,8 +56,26 @@ class CampanhaDetalhadaFragment : Fragment() {
                 setaCamposCampanha()
                 configuraRecyclerView()
             }
-            closeLoading(activity, R.id.ongLoading)
+            escondeLoading()
         })
+    }
+
+    fun mostraLoading(){
+        binding.campanhaDetalhadaCardViewLoading.visibility = View.VISIBLE
+        binding.campanhaDetalhadaDescricaoLoading.visibility = View.VISIBLE
+        binding.campanhaDetalhadaQuantidadeItensLoading.visibility = View.VISIBLE
+        binding.campanhaDetalhadaTituloLoading.visibility = View.VISIBLE
+        binding.campanhaDetalhadaDataLoading.visibility = View.VISIBLE
+        binding.campanhaDetalhadaDescricaoLabelLoading.visibility = View.VISIBLE
+    }
+
+    fun escondeLoading(){
+        binding.campanhaDetalhadaCardViewLoading.visibility = View.GONE
+        binding.campanhaDetalhadaDescricaoLoading.visibility = View.GONE
+        binding.campanhaDetalhadaQuantidadeItensLoading.visibility = View.GONE
+        binding.campanhaDetalhadaTituloLoading.visibility = View.GONE
+        binding.campanhaDetalhadaDataLoading.visibility = View.GONE
+        binding.campanhaDetalhadaDescricaoLabelLoading.visibility = View.GONE
     }
 
     private fun setaCamposCampanha() {

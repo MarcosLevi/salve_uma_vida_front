@@ -44,4 +44,10 @@ interface UserEndpoint {
     fun getProfile(
         @Header("Authorization") token: String
     ): Call<ResponseDto<UserDto>>
+
+    @PUT("/user")
+    fun updateUser(
+        @Header("Authorization") token: String,
+        @Body userDto: UserDto
+    ): Call<ResponseDto<UserDto>>
 }

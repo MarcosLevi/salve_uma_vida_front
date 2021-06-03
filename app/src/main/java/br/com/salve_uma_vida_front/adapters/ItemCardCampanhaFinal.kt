@@ -7,17 +7,18 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
+import br.com.salve_uma_vida_front.databinding.ItemCardCampanhaPesquisaBinding
 import br.com.salve_uma_vida_front.dto.CampanhaItemDto
 import br.com.salve_uma_vida_front.viewholders.ItemCardCampanhaFinalViewHolder
 
 class ItemCardCampanhaFinal(var listaItens: List<CampanhaItemDto>) :
     RecyclerView.Adapter<ItemCardCampanhaFinalViewHolder>() {
+    lateinit var binding: ItemCardCampanhaPesquisaBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemCardCampanhaFinalViewHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_card_campanha_pesquisa, parent, false)
+        binding = ItemCardCampanhaPesquisaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemCardCampanhaFinalViewHolder(
-            view
+            binding
         )
     }
 

@@ -18,8 +18,86 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <FrameLayout
+                android:id="@+id/campanhaDetalhadaCardViewLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/campanhaDetalhadaCardView"
+                app:layout_constraintEnd_toEndOf="@+id/campanhaDetalhadaCardView"
+                app:layout_constraintStart_toStartOf="@+id/campanhaDetalhadaCardView"
+                app:layout_constraintTop_toTopOf="@+id/campanhaDetalhadaCardView">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/campanhaDetalhadaDescricaoLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/campanhaDetalhadaDescricao"
+                app:layout_constraintEnd_toEndOf="@+id/campanhaDetalhadaDescricao"
+                app:layout_constraintStart_toStartOf="@+id/campanhaDetalhadaDescricao"
+                app:layout_constraintTop_toTopOf="@+id/campanhaDetalhadaDescricao">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/campanhaDetalhadaQuantidadeItensLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/campanhaDetalhadaQuantidadeItens"
+                app:layout_constraintEnd_toEndOf="@+id/campanhaDetalhadaQuantidadeItens"
+                app:layout_constraintStart_toStartOf="@+id/campanhaDetalhadaQuantidadeItens"
+                app:layout_constraintTop_toTopOf="@+id/campanhaDetalhadaQuantidadeItens">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/campanhaDetalhadaTituloLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/campanhaDetalhadaTitulo"
+                app:layout_constraintEnd_toEndOf="@+id/campanhaDetalhadaTitulo"
+                app:layout_constraintStart_toStartOf="@+id/campanhaDetalhadaTitulo"
+                app:layout_constraintTop_toTopOf="@+id/campanhaDetalhadaTitulo">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/campanhaDetalhadaDataLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/campanhaDetalhadaData"
+                app:layout_constraintEnd_toEndOf="@+id/campanhaDetalhadaData"
+                app:layout_constraintStart_toStartOf="@+id/campanhaDetalhadaData"
+                app:layout_constraintTop_toTopOf="@+id/campanhaDetalhadaData">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/campanhaDetalhadaDescricaoLabelLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/campanhaDetalhadaDescricaoLabel"
+                app:layout_constraintEnd_toEndOf="@+id/campanhaDetalhadaDescricaoLabel"
+                app:layout_constraintStart_toStartOf="@+id/campanhaDetalhadaDescricaoLabel"
+                app:layout_constraintTop_toTopOf="@+id/campanhaDetalhadaDescricaoLabel">
+
+            </FrameLayout>
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+                android:id="@+id/campanhaDetalhadaCardView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="8dp"
@@ -27,6 +105,7 @@
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/corCampanhas"
                 app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -46,11 +125,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:gravity="center"
                 android:text="Titulo da campanha"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                app:layout_constraintTop_toBottomOf="@+id/campanhaDetalhadaCardView" />
 
             <TextView
                 android:id="@+id/campanhaDetalhadaData"
@@ -60,6 +140,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:gravity="center"
                 android:text="Data de anuncio"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +155,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="Descrição"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +169,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="@string/lore_ipsum"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:elevation="0dp"
                 android:text="0 itens"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/campanhaDetalhadaDescricao" />
