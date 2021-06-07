@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/corEventos"
@@ -20,6 +20,71 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoCardLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoCard"
+                app:layout_constraintEnd_toEndOf="@+id/eventoDetalhadoCard"
+                app:layout_constraintStart_toStartOf="@+id/eventoDetalhadoCard"
+                app:layout_constraintTop_toTopOf="@+id/eventoDetalhadoCard">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoTituloLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoTitulo"
+                app:layout_constraintEnd_toEndOf="@+id/eventoDetalhadoTitulo"
+                app:layout_constraintStart_toStartOf="@+id/eventoDetalhadoTitulo"
+                app:layout_constraintTop_toTopOf="@id/eventoDetalhadoTitulo">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoDataLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoData"
+                app:layout_constraintEnd_toEndOf="@+id/eventoDetalhadoData"
+                app:layout_constraintStart_toStartOf="@+id/eventoDetalhadoData"
+                app:layout_constraintTop_toTopOf="@+id/eventoDetalhadoData">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoDescricaoLabelLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoDescricaoLabel"
+                app:layout_constraintEnd_toEndOf="@+id/eventoDetalhadoDescricaoLabel"
+                app:layout_constraintStart_toStartOf="@+id/eventoDetalhadoCard"
+                app:layout_constraintTop_toTopOf="@+id/eventoDetalhadoDescricaoLabel">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoDescricaoLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoDescricao"
+                app:layout_constraintEnd_toEndOf="@+id/eventoDetalhadoDescricao"
+                app:layout_constraintStart_toStartOf="@+id/eventoDetalhadoDescricao"
+                app:layout_constraintTop_toTopOf="@+id/eventoDetalhadoDescricao">
+
+            </FrameLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/eventoDetalhadoCard"
@@ -43,6 +108,7 @@
                 style="@style/Titulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="Titulo do evento"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +163,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/eventoDetalhadoHeader">
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoEnderecoLabelLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoEnderecoLabel"
+                app:layout_constraintEnd_toEndOf="@id/eventoDetalhadoEnderecoLabel"
+                app:layout_constraintStart_toStartOf="@id/eventoDetalhadoEnderecoLabel"
+                app:layout_constraintTop_toTopOf="@id/eventoDetalhadoEnderecoLabel">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/eventoDetalhadoEnderecoLoading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:elevation="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eventoDetalhadoEndereco"
+                app:layout_constraintEnd_toEndOf="@+id/eventoDetalhadoEndereco"
+                app:layout_constraintStart_toStartOf="@+id/eventoDetalhadoEndereco"
+                app:layout_constraintTop_toTopOf="@+id/eventoDetalhadoEndereco">
+
+            </FrameLayout>
 
             <br.com.salve_uma_vida_front.models.CustomMapView
                 android:id="@+id/eventoDetalhadoMap"

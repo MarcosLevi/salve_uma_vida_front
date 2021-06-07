@@ -49,7 +49,6 @@ class EventoDetalhadoFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentEventoDetalhadoBinding.inflate(inflater, container, false)
         viewModelEvento = ViewModelProviders.of(this).get(EventosViewModel::class.java)
-        startLoading(activity, R.id.ongLoading)
         configuraObservers()
         configuraToolbar()
         return binding.root
@@ -62,7 +61,28 @@ class EventoDetalhadoFragment : Fragment() {
     }
 
     private fun getEventoPeloId() {
+        mostraLoading()
         viewModelEvento.getEventoId(getEventoByArgs())
+    }
+
+    fun mostraLoading(){
+        binding.eventoDetalhadoCardLoading.visibility = View.VISIBLE
+        binding.eventoDetalhadoTituloLoading.visibility = View.VISIBLE
+        binding.eventoDetalhadoDataLoading.visibility = View.VISIBLE
+        binding.eventoDetalhadoDescricaoLabelLoading.visibility = View.VISIBLE
+        binding.eventoDetalhadoDescricaoLoading.visibility = View.VISIBLE
+        binding.eventoDetalhadoEnderecoLabelLoading.visibility = View.VISIBLE
+        binding.eventoDetalhadoEnderecoLoading.visibility = View.VISIBLE
+    }
+
+    fun escondeLoading(){
+        binding.eventoDetalhadoCardLoading.visibility = View.GONE
+        binding.eventoDetalhadoTituloLoading.visibility = View.GONE
+        binding.eventoDetalhadoDataLoading.visibility = View.GONE
+        binding.eventoDetalhadoDescricaoLabelLoading.visibility = View.GONE
+        binding.eventoDetalhadoDescricaoLoading.visibility = View.GONE
+        binding.eventoDetalhadoEnderecoLabelLoading.visibility = View.GONE
+        binding.eventoDetalhadoEnderecoLoading.visibility = View.GONE
     }
 
     private fun configuraMapa(savedInstanceState: Bundle?) {
@@ -95,7 +115,7 @@ class EventoDetalhadoFragment : Fragment() {
                 setaCamposEvento()
                 setaEventoNoMapa()
             }
-            closeLoading(activity, R.id.ongLoading)
+            escondeLoading()
         })
     }
 
