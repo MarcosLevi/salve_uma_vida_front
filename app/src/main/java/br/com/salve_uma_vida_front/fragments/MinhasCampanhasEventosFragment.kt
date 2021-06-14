@@ -106,17 +106,17 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
 
     private fun configuraToolbar() {
         val toolbar = toolbarVazia(activity)
-        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
+        toolbar?.inflateMenu(R.menu.fragment_procurar_menu)
         configuraSearchView(toolbar)
         toolbar?.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.bothProcurarFragmentPesquisar -> {
+                R.id.procurarFragmentPesquisar -> {
                     val searchView = it.actionView as SearchView
                     searchView.requestFocusFromTouch()
                     true
                 }
 
-                R.id.bothProcurarFragmentFiltros -> {
+                R.id.procurarFragmentFiltros -> {
                     openDialog()
                     true
                 }
@@ -128,7 +128,7 @@ class MinhasCampanhasEventosFragment : Fragment(), DialogFiltros.DialogFiltroLis
     }
 
     private fun configuraSearchView(toolbar: Toolbar?) {
-        val procurar = toolbar?.menu?.findItem(R.id.bothProcurarFragmentPesquisar)
+        val procurar = toolbar?.menu?.findItem(R.id.procurarFragmentPesquisar)
         val searchView = procurar?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {

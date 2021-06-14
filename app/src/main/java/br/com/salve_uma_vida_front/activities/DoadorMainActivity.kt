@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import br.com.salve_uma_vida_front.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,7 +18,7 @@ class DoadorMainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_doador)
         val toolbar = findViewById<Toolbar>(R.id.ongToolbar)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.bothProcurarFragment, R.id.bothFavoritosFragment, R.id.bothUserLogadoFragment, R.id.bothMapaFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.procurarFragment, R.id.favoritosFragment, R.id.userLogadoFragment, R.id.mapaFragment))
         toolbar.setupWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
     }

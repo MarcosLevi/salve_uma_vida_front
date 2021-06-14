@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.R
 import br.com.salve_uma_vida_front.adapters.CardCampanhaFinalAdapter
 import br.com.salve_uma_vida_front.adapters.CardEventoFinalAdapter
-import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarBinding
+import br.com.salve_uma_vida_front.databinding.FragmentProcurarBinding
 import br.com.salve_uma_vida_front.dto.CampanhaDto
 import br.com.salve_uma_vida_front.dto.EventoDto
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
@@ -40,7 +40,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     lateinit var campanhaFinalAdapter: RecyclerView.Adapter<CardCampanhaFinalViewHolder>
     lateinit var eventoFinalAdapter: RecyclerView.Adapter<CardEventoFinalViewHolder>
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    lateinit var binding: FragmentBothProcurarBinding
+    lateinit var binding: FragmentProcurarBinding
     private lateinit var viewModelCampanha: CampanhasViewModel
     private lateinit var viewModelEvento: EventosViewModel
     private val listaEventos: MutableList<EventoDto> = mutableListOf()
@@ -57,7 +57,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBothProcurarBinding.inflate(inflater, container, false)
+        binding = FragmentProcurarBinding.inflate(inflater, container, false)
         configuraObservers()
         configuraToolbar()
         configuraRecyclerView()
@@ -79,17 +79,17 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
 
     private fun configuraToolbar() {
         val toolbar = toolbarVazia(activity)
-        toolbar?.inflateMenu(R.menu.fragment_both_procurar_menu)
+        toolbar?.inflateMenu(R.menu.fragment_procurar_menu)
         configuraSearchView(toolbar)
         toolbar?.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.bothProcurarFragmentPesquisar -> {
+                R.id.procurarFragmentPesquisar -> {
                     val searchView = it.actionView as SearchView
                     searchView.requestFocusFromTouch()
                     true
                 }
 
-                R.id.bothProcurarFragmentFiltros -> {
+                R.id.procurarFragmentFiltros -> {
                     openDialog()
                     true
                 }
@@ -101,7 +101,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
     }
 
     private fun configuraSearchView(toolbar: Toolbar?) {
-        val procurar = toolbar?.menu?.findItem(R.id.bothProcurarFragmentPesquisar)
+        val procurar = toolbar?.menu?.findItem(R.id.procurarFragmentPesquisar)
         val searchView = procurar?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(textoDeBusca: String): Boolean {
@@ -197,7 +197,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
 
     override fun abreCampanha(campanha: CampanhaDto) {
         navController!!.navigate(
-            ProcurarFragmentDirections.actionBothProcurarFragmentToCampanhaDetalhadaFragment(
+            ProcurarFragmentDirections.actionProcurarFragmentToCampanhaDetalhadaFragment(
                 campanha.id!!
             )
         )
@@ -205,7 +205,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
 
     override fun abreEvento(evento: EventoDto) {
         navController!!.navigate(
-            ProcurarFragmentDirections.actionBothProcurarFragmentToEventoDetalhadoFragment(
+            ProcurarFragmentDirections.actionProcurarFragmentToEventoDetalhadoFragment(
                 evento.id!!
             )
         )
@@ -213,7 +213,7 @@ class ProcurarFragment : Fragment(), DialogFiltros.DialogFiltroListener, CardCam
 
     override fun abrePerfilOng(id: Int) {
         navController!!.navigate(
-            ProcurarFragmentDirections.actionBothProcurarFragmentToPerfilOngFragment(
+            ProcurarFragmentDirections.actionProcurarFragmentToPerfilOngFragment(
                 id
             )
         )

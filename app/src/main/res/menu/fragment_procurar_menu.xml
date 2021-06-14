@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/bothProcurarFragmentPesquisar"
+    <item android:id="@+id/procurarFragmentPesquisar"
         android:title="Procurar"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
-    <item android:id="@+id/bothProcurarFragmentFiltros"
+    <item android:id="@+id/procurarFragmentFiltros"
         android:title="Filtros"
         android:icon="@drawable/ic_baseline_filter_list_24"
         app:showAsAction="always"

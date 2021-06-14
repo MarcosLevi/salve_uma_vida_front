@@ -2,63 +2,35 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/bothProcurarFragment">
+    android:id="@+id/navigation" >
     <fragment
-        android:id="@+id/bothFavoritosFragment"
-        android:name="br.com.salve_uma_vida_front.fragments.FavoritosFragment"
-        android:label="Favoritos"
-        tools:layout="@layout/fragment_both_favoritos" >
-        <action
-            android:id="@+id/action_bothFavoritosFragment_to_perfilOngFragment"
-            app:destination="@id/perfilOngFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/bothUserLogadoFragment"
+        android:id="@+id/userLogadoFragment"
         android:name="br.com.salve_uma_vida_front.fragments.UserLogadoFragment"
         android:label="Perfil"
-        tools:layout="@layout/fragment_perfil_user_logado"/>
+        tools:layout="@layout/fragment_perfil_user_logado">
+        <action
+            android:id="@+id/action_userLogadoFragment_to_editarUserFragment"
+            app:destination="@id/editarUserFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/bothProcurarFragment"
+        android:id="@+id/procurarFragment"
         android:name="br.com.salve_uma_vida_front.fragments.ProcurarFragment"
         android:label="Procurar Campanhas"
-        tools:layout="@layout/fragment_both_procurar" >
+        tools:layout="@layout/fragment_procurar">
         <argument
             android:name="filtro"
+            android:defaultValue="@null"
             app:argType="br.com.salve_uma_vida_front.dto.FiltroPesquisaDto"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <action
-            android:id="@+id/action_bothProcurarFragment_to_perfilOngFragment"
+            android:id="@+id/action_procurarFragment_to_perfilOngFragment"
             app:destination="@id/perfilOngFragment" />
         <action
-            android:id="@+id/action_bothProcurarFragment_to_campanhaDetalhadaFragment"
+            android:id="@+id/action_procurarFragment_to_campanhaDetalhadaFragment"
             app:destination="@id/campanhaDetalhadaFragment" />
         <action
-            android:id="@+id/action_bothProcurarFragment_to_eventoDetalhadoFragment"
+            android:id="@+id/action_procurarFragment_to_eventoDetalhadoFragment"
             app:destination="@id/eventoDetalhadoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/perfilOngFragment"
-        android:name="br.com.salve_uma_vida_front.fragments.PerfilOngFragment"
-        android:label="Perfil da Ong"
-        tools:layout="@layout/fragment_perfil_ong">
-        <argument
-            android:name="idOng"
-            app:argType="integer" />
-    </fragment>
-    <fragment
-        android:id="@+id/campanhaDetalhadaFragment"
-        android:name="br.com.salve_uma_vida_front.fragments.CampanhaDetalhadaFragment"
-        android:label="Campanha Detalhada"
-        tools:layout="@layout/fragment_campanha_detalhada" >
-        <argument
-            android:name="idCampanha"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_campanhaDetalhadaFragment_to_perfilOngFragment"
-            app:destination="@id/perfilOngFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventoDetalhadoFragment"
@@ -73,15 +45,54 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/bothMapaFragment"
+        android:id="@+id/perfilOngFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.PerfilOngFragment"
+        android:label="Perfil da Ong"
+        tools:layout="@layout/fragment_perfil_ong">
+        <argument
+            android:name="idOng"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/campanhaDetalhadaFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.CampanhaDetalhadaFragment"
+        android:label="Campanha Detalhada"
+        tools:layout="@layout/fragment_campanha_detalhada">
+        <argument
+            android:name="idCampanha"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_campanhaDetalhadaFragment_to_perfilOngFragment"
+            app:destination="@id/perfilOngFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarUserFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.EditarUserFragment"
+        android:label="Editar Usuário"
+        tools:layout="@layout/fragment_editar_user">
+        <argument
+            android:name="user"
+            app:argType="br.com.salve_uma_vida_front.dto.UserDto" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritosFragment"
+        android:name="br.com.salve_uma_vida_front.fragments.FavoritosFragment"
+        android:label="Favoritos"
+        tools:layout="@layout/fragment_favoritos">
+        <action
+            android:id="@+id/action_favoritosFragment_to_perfilOngFragment"
+            app:destination="@id/perfilOngFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapaFragment"
         android:name="br.com.salve_uma_vida_front.fragments.MapaFragment"
         android:label="Mapa"
-        tools:layout="@layout/fragment_both_mapa" >
+        tools:layout="@layout/fragment_mapa">
         <action
-            android:id="@+id/action_bothMapaFragment_to_perfilOngFragment"
+            android:id="@+id/action_mapaFragment_to_perfilOngFragment"
             app:destination="@id/perfilOngFragment" />
         <action
-            android:id="@+id/action_bothMapaFragment_to_eventoDetalhadoFragment"
+            android:id="@+id/action_mapaFragment_to_eventoDetalhadoFragment"
             app:destination="@id/eventoDetalhadoFragment" />
     </fragment>
 </navigation>

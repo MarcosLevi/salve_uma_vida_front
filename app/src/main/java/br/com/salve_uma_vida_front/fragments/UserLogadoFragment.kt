@@ -122,11 +122,11 @@ class UserLogadoFragment : Fragment() {
 
     private fun configuraToolbar() {
         toolbar = toolbarVazia(activity)!!
-        toolbar.inflateMenu(R.menu.fragment_both_perfil_user_logado_menu)
+        toolbar.inflateMenu(R.menu.fragment_perfil_user_logado_menu)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.bothPerfilUserLogadoEdita -> {
-                    navController!!.navigate(UserLogadoFragmentDirections.actionBothUserLogadoFragmentToEditarUserFragment(
+                R.id.perfilUserLogadoEdita -> {
+                    navController!!.navigate(UserLogadoFragmentDirections.actionUserLogadoFragmentToEditarUserFragment(
                         user
                     ))
                     true

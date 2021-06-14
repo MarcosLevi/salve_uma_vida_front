@@ -10,19 +10,19 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.viewmodels.CampanhasViewModel
-import br.com.salve_uma_vida_front.databinding.FragmentBothProcurarDialogBinding
+import br.com.salve_uma_vida_front.databinding.FragmentProcurarDialogBinding
 import br.com.salve_uma_vida_front.dto.FiltroPesquisaDto
 
 class DialogFiltros(private val dialogFiltroListener: DialogFiltroListener) : DialogFragment() {
 
-    lateinit var binding: FragmentBothProcurarDialogBinding
+    lateinit var binding: FragmentProcurarDialogBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBothProcurarDialogBinding.inflate(inflater, container, false)
+        binding = FragmentProcurarDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 

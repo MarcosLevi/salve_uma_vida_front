@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.salve_uma_vida_front.*
 import br.com.salve_uma_vida_front.adapters.CardOngFavoritaAdapter
-import br.com.salve_uma_vida_front.databinding.FragmentBothFavoritosBinding
+import br.com.salve_uma_vida_front.databinding.FragmentFavoritosBinding
 import br.com.salve_uma_vida_front.dto.OngFavoritaDto
 import br.com.salve_uma_vida_front.interfaces.CardOngFavoritaListener
 import br.com.salve_uma_vida_front.viewholders.CardOngFavoritaViewHolder
@@ -30,7 +30,7 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
     private lateinit var viewModel: UserViewModel
     lateinit var mRecyclerView: RecyclerView
     lateinit var mLayoutManager: RecyclerView.LayoutManager
-    lateinit var binding: FragmentBothFavoritosBinding
+    lateinit var binding: FragmentFavoritosBinding
     lateinit var ongFavoritaAdapter: RecyclerView.Adapter<CardOngFavoritaViewHolder>
     private val listaOngsFavoritas: MutableList<OngFavoritaDto> = mutableListOf()
 
@@ -39,7 +39,7 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentBothFavoritosBinding.inflate(inflater, container, false)
+        binding = FragmentFavoritosBinding.inflate(inflater, container, false)
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
         return binding.root
     }
@@ -94,7 +94,7 @@ class FavoritosFragment : Fragment(), CardOngFavoritaListener {
     }
 
     override fun abrePerfilOng(id: Int) {
-        navController!!.navigate(FavoritosFragmentDirections.actionBothFavoritosFragmentToPerfilOngFragment(id))
+        navController!!.navigate(FavoritosFragmentDirections.actionFavoritosFragmentToPerfilOngFragment(id))
     }
 
     override fun desfavoritarOngPorId(id: Int) {

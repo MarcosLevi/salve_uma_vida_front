@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.com.salve_uma_vida_front.R
-import br.com.salve_uma_vida_front.databinding.FragmentBothMapaBinding
+import br.com.salve_uma_vida_front.databinding.FragmentMapaBinding
 import br.com.salve_uma_vida_front.dto.ResponseMapDto
 import br.com.salve_uma_vida_front.models.MapPinType
 import br.com.salve_uma_vida_front.toolbarVazia
@@ -33,7 +33,7 @@ class MapaFragment : Fragment() {
     var map: GoogleMap? = null
     var navController: NavController? = null
     private lateinit var viewModelMap: MapViewModel
-    private lateinit var binding: FragmentBothMapaBinding
+    private lateinit var binding: FragmentMapaBinding
     private lateinit var locationUtils: LocationUtils
     private var isFixado = true
 
@@ -58,9 +58,9 @@ class MapaFragment : Fragment() {
 
     private fun abrePerfilMapInfo(mapInfo: ResponseMapDto) {
         if (mapInfo.type.equals(MapPinType.NGO))
-            navController!!.navigate(MapaFragmentDirections.actionBothMapaFragmentToPerfilOngFragment(mapInfo.id))
+            navController!!.navigate(MapaFragmentDirections.actionMapaFragmentToPerfilOngFragment(mapInfo.id))
         else if(mapInfo.type.equals(MapPinType.EVENT))
-            navController!!.navigate(MapaFragmentDirections.actionBothMapaFragmentToEventoDetalhadoFragment(mapInfo.id))
+            navController!!.navigate(MapaFragmentDirections.actionMapaFragmentToEventoDetalhadoFragment(mapInfo.id))
 
     }
 
@@ -127,7 +127,7 @@ class MapaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBothMapaBinding.inflate(inflater, container, false)
+        binding = FragmentMapaBinding.inflate(inflater, container, false)
         configuraToolbar()
         return binding.root
     }
